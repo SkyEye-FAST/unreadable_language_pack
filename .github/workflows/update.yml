@@ -50,4 +50,4 @@ jobs:
           title: "${{ env.ver }}"
           prerelease: false
           files: |
-            key_language_pack.zip
+            katakana_language_pack.zip

@@ -17,7 +17,10 @@ with open(P / "source" / "en_us.json", "rb") as s:
 with open(P / "ja_kk.json", "w", encoding="utf-8") as f:
     json.dump(
         {
-            k: tk(v).katakana.replace("%ス", r"%s").replace("%ド", r"%d")
+            k: tk(v)
+            .katakana.replace("%ス", r"%s")
+            .replace("%ド", r"%d")
+            .replace("。。。", r"...")
             for k, v in source.items()
         },
         f,
