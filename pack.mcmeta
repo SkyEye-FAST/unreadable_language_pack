@@ -1,0 +1,17 @@
+{
+    "pack": {
+        "pack_format": 32,
+        "supported_formats": [
+            9,
+            99
+        ],
+        "description": "Katakana Language Resource Pack"
+    },
+    "language": {
+        "ja_kk": {
+            "name": "エングリスホ",
+            "region": "カタカナ",
+            "bidirectional": false
+        }
+    }
+}
