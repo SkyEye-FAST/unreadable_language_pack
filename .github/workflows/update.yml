@@ -1,0 +1,53 @@
+name: Update resource pack
+
+on:
+  schedule:
+    - cron: "30 16 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Update language files
+        run: |
+          python source.py
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: "Update language files"
+
+      - name: Update resource pack
+        run: |
+          python pack.py
+
+      - name: Get Minecraft version
+        run: |
+          cat version.txt
+          echo "ver=$(<version.txt)" >> "$GITHUB_ENV"
+
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ env.ver }}"
+          title: "${{ env.ver }}"
+          prerelease: false
+          files: |
+            key_language_pack.zip
