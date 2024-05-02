@@ -10,6 +10,14 @@
 
 ## 说明
 
+### 依赖项
+
+请使用下面的命令安装依赖项：
+
+``` shell
+pip install -r requirements.txt
+```
+
 ### 获取语言文件
 
 本仓库会在每天🕧00:30（UTC+8，即🕟UTC 16:30）自动检查Minecraft Java版语言文件（`en_us.json`、`zh_cn.json`、`ja_jp.json`）更新并更新资源包。使用脚本为[`source.py`](/source.py)（需要库`requests`、`romajitable`、`pypinyin`、`pypinyin_dict`）。获取到的语言文件存储在与脚本同级的`source`文件夹下。

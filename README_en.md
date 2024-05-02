@@ -10,6 +10,14 @@ It is recommended to use this resource pack with the mods [Language Reload](http
 
 ## Description
 
+## Dependencies
+
+Install dependencies using the following command:
+
+``` shell
+pip install -r requirements.txt
+```
+
 ### Obtaining Language Files
 
 This repository automatically checks for updates to Minecraft: Java Edition language file (`en_us.json`, `zh_cn.json`, `ja_jp.json`) every day at 🕧00:30 (UTC+8, equivalent to 🕟UTC 16:30) and updates the resource pack accordingly. This is done using the script [`source.py`](/source.py) (requires `requests`, `romajitable`, `pypinyin` and `pypinyin_dict`). The obtained language files are stored in the `source` folder, which is at the same level as the script.
