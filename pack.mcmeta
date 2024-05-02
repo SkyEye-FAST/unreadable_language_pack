@@ -5,12 +5,22 @@
             9,
             99
         ],
-        "description": "Katakana Language Resource Pack"
+        "description": "Unreadable Language Resource Pack"
     },
     "language": {
         "ja_kk": {
             "name": "エングリスホ",
             "region": "カタカナ",
+            "bidirectional": false
+        },
+        "zh_py": {
+            "name": "pīn yīn",
+            "region": "zhōng guó",
+            "bidirectional": false
+        },
+        "zh_ipa": {
+            "name": "pʰin˥ jin˥",
+            "region": "t͡ʂʊŋ˥ kwo˧˥",
             "bidirectional": false
         }
     }
