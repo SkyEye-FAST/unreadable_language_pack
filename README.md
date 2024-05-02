@@ -32,6 +32,10 @@ pip install -r requirements.txt
 - “pīn yīn (zhōng guó)”（即“拼音 (中国)”）。选择之后，所有字符串会变为简体中文转写而来的汉语拼音。
 - “pʰin˥ jin˥ (t͡ʂʊŋ˥ kwo˧˥)”（即“拼音 (中国)”）。选择之后，所有字符串会变为简体中文转写而来的IPA。
 
+![Sample](/sample/sample_ja_kk.png)
+![Sample](/sample/sample_zh_py.png)
+![Sample](/sample/sample_zh_ipa.png)
+
 ## 反馈
 
 遇到的问题和功能建议等可以提出议题（Issue）。

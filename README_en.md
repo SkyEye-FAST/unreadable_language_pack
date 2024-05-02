@@ -1,4 +1,4 @@
-# Minecraft Translation Key Language Resource Pack
+# Minecraft Unreadable Language Resource Pack
 
 - **[English](/README_en.md) | [中文](/README.md)**
 
@@ -31,6 +31,10 @@ The resource pack added 3 languages into the game:
 - "エングリスホ (カタカナ)" (i.e. "English (Katakana)"). Once selected, all strings will be changed to Katakana transliterated from English.
 - “pīn yīn (zhōng guó)”（i.e. “拼音 (中国)”）。Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese.
 - “pʰin˥ jin˥ (t͡ʂʊŋ˥ kwo˧˥)”（i.e. “拼音 (中国)”）。Once selected, all strings will be changed to IPA transliterated from Simp. Chinese.
+
+![Sample](/sample/sample_ja_kk.png)
+![Sample](/sample/sample_zh_py.png)
+![Sample](/sample/sample_zh_ipa.png)
 
 ## Feedback
 
