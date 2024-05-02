@@ -1,0 +1,4 @@
+pypinyin==0.51.0
+pypinyin_dict==0.8.0
+Requests==2.31.0
+romajitable==0.0.1
