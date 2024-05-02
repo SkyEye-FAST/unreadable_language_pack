@@ -31,7 +31,8 @@ def to_katakana(s: str) -> str:
         tk(s)
         .katakana.replace("%ス", r"%s")
         .replace("%ド", r"%d")
-        .replace("。。。", r"...")
+        .replace("。。。", "...")
+        .replace(":\u30fb", "：")
     )
 
 
@@ -43,7 +44,7 @@ def to_pinyin(s: str) -> str:
 
 def to_ipa(s: str) -> str:
     """转写为IPA"""
-    pinyin_list = lazy_pinyin(s, style=Style.TONE3)
+    pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
     ipa_list = []
     for pinyin in pinyin_list:
         tone = pinyin[-1]
