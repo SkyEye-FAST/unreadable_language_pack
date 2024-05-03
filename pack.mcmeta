@@ -15,16 +15,16 @@
         },
         "ja_my": {
             "name": "依尓愚煎須百",
-            "region": "加田迦名",
+            "region": "万葉仮名",
             "bidirectional": false
         },
         "zh_py": {
-            "name": "jiǎn tǐ zhōng wén pīn yīn",
+            "name": "pīn yīn jiǎn tǐ zhōng wén",
             "region": "per character, zhōng guó dà lù",
             "bidirectional": false
         },
         "zh_pyw": {
-            "name": "jiǎn tǐ zhōng wén pīn yīn",
+            "name": "pīn yīn jiǎn tǐ zhōng wén",
             "region": "per word, zhōng guó dà lù",
             "bidirectional": false
         },
