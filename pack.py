@@ -5,6 +5,7 @@ import json
 import zipfile as zf
 from pathlib import Path
 from random import choice
+from typing import Callable
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin
@@ -16,6 +17,7 @@ P = Path(__file__).resolve().parent
 
 # 初始化
 cc_cedict.load()
+jieba.load_userdict(str(P / "data" / "dict.txt"))
 with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as ipa_dict:
     pinyin_to_ipa = json.load(ipa_dict)
 tone_to_ipa = {
@@ -31,7 +33,7 @@ with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as manyo_dict:
     manyoganas_dict = json.load(manyo_dict)
 
 
-def replace_multiple(s: str, rep: dict) -> str:
+def replace_multiple(s: str, rep: dict[str, str]) -> str:
     """对字符串进行多次替换"""
     for old, new in rep.items():
         s = s.replace(old, new)
@@ -56,7 +58,7 @@ def to_katakana(s: str) -> str:
     )
 
 
-def kana_to_manyogana(s: str) -> str:
+def to_manyogana(s: str) -> str:
     """片假名转写为万叶假名"""
     s = to_katakana(s)
     result = ""
@@ -110,7 +112,9 @@ for lang_name in ["en_us", "zh_cn", "ja_jp"]:
 
 
 # 生成语言文件
-def save_to_json(input_data, output_file, func):
+def save_to_json(
+    input_data: dict[str, str], output_file: str, func: Callable[[str], str]
+):
     """保存至JSON"""
     output_dict = {k: func(v) for k, v in input_data.items()}
     with open(P / "output" / output_file, "w", encoding="utf-8") as f:
@@ -118,7 +122,7 @@ def save_to_json(input_data, output_file, func):
 
 
 save_to_json(data["en_us"], "ja_kk.json", to_katakana)
-save_to_json(data["en_us"], "ja_my.json", kana_to_manyogana)
+save_to_json(data["en_us"], "ja_my.json", to_manyogana)
 save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
 save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
