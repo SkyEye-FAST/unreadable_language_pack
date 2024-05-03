@@ -19,13 +19,18 @@
             "bidirectional": false
         },
         "zh_py": {
-            "name": "pīn yīn",
-            "region": "zhōng guó",
+            "name": "jiǎn tǐ zhōng wén pīn yīn",
+            "region": "per character, zhōng guó dà lù",
+            "bidirectional": false
+        },
+        "zh_pyw": {
+            "name": "jiǎn tǐ zhōng wén pīn yīn",
+            "region": "per word, zhōng guó dà lù",
             "bidirectional": false
         },
         "zh_ipa": {
-            "name": "pʰin˥ jin˥",
-            "region": "t͡ʂʊŋ˥ kwo˧˥",
+            "name": "t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ IPA",
+            "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
             "bidirectional": false
         }
     }

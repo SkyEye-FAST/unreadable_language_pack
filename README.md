@@ -26,11 +26,23 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](/pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](/ja_kk.json)、[`zh_py.json`](/zh_py.json)和[`zh_ipa.json`](/zh_ipa.json)，同[`pack.mcmeta`](/pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了3种语言：
+资源包向游戏内添加了4种语言：
 
-- “エングリスホ (カタカナ)”（即“English (Katakana)”）。选择之后，所有字符串会变为英文转写而来的片假名。
-- “pīn yīn (zhōng guó)”（即“拼音 (中国)”）。选择之后，所有字符串会变为简体中文转写而来的汉语拼音。
-- “pʰin˥ jin˥ (t͡ʂʊŋ˥ kwo˧˥)”（即“拼音 (中国)”）。选择之后，所有字符串会变为简体中文转写而来的IPA。
+- **“エングリスホ (カタカナ)”**
+  - 即“English (Katakana)”。
+  - 选择之后，所有字符串会变为英文转写而来的片假名。
+- **“依尓愚煎須百 (加田迦名)”**
+  - 即“English (Katakana)”。
+  - 选择之后，所有字符串会变为英文转写而来的万叶假名。由于万叶假名数量很多，每次生成都是随机选取，故每次结果都不一致。
+- **“jiǎn tǐ zhōng wén pīn yīn (per character, zhōng guó dà lù)”**
+  - 即“简体中文拼音 (分字，中国大陆)”。
+  - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以字为单位。
+- **“jiǎn tǐ zhōng wén pīn yīn (per word, zhōng guó dà lù)”**
+  - 即“简体中文拼音 (分词，中国大陆)”。
+  - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位，尝试遵循了GB/T 16159-2012。
+- **“t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”**
+  - 即“简体中文IPA (中国大陆)”。
+  - 选择之后，所有字符串会变为简体中文转写而来的IPA。
 
 ![Sample](/sample/sample_ja_kk.png)
 ![Sample](/sample/sample_zh_py.png)
