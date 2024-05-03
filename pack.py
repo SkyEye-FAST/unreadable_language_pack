@@ -8,7 +8,7 @@ from random import choice
 from typing import Callable
 
 from romajitable import to_kana as tk
-from pypinyin import Style, lazy_pinyin
+from pypinyin import Style, lazy_pinyin, load_phrases_dict
 from pypinyin_dict.phrase_pinyin_data import cc_cedict
 import jieba
 
@@ -17,6 +17,7 @@ P = Path(__file__).resolve().parent
 
 # 初始化
 cc_cedict.load()
+load_phrases_dict({'行商': [['xíng'], ['shāng']]})
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as ipa_dict:
     pinyin_to_ipa = json.load(ipa_dict)
