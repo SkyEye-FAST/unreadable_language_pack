@@ -17,9 +17,9 @@ P = Path(__file__).resolve().parent
 
 # 初始化
 cc_cedict.load()
-load_phrases_dict({'行商': [['xíng'], ['shāng']]})
-load_phrases_dict({'校频': [['jiào'], ['pín']]})
-load_phrases_dict({'藤蔓': [['téng'], ['wàn']]})
+load_phrases_dict({"行商": [["xíng"], ["shāng"]]})
+load_phrases_dict({"校频": [["jiào"], ["pín"]]})
+load_phrases_dict({"藤蔓": [["téng"], ["wàn"]]})
 
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
@@ -94,6 +94,12 @@ def to_pinyin_word(s: str) -> str:
     return result[0].upper() + result[1:]
 
 
+def to_bopomofo(s: str) -> str:
+    """转写为注音符号"""
+    bopomofo_list = lazy_pinyin(s, style=Style.BOPOMOFO)
+    return " ".join(bopomofo_list)
+
+
 def to_ipa(s: str) -> str:
     """转写为IPA"""
     pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
@@ -111,7 +117,7 @@ def to_ipa(s: str) -> str:
 
 # 读取语言文件
 data = {}
-for lang_name in ["en_us", "zh_cn", "ja_jp"]:
+for lang_name in ["en_us", "zh_cn", "zh_tw", "ja_jp"]:
     with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as l:
         data[lang_name] = json.load(l)
 
@@ -131,6 +137,7 @@ save_to_json(data["en_us"], "ja_my.json", to_manyogana)
 save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
 save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
+save_to_json(data["zh_tw"], "zh_bpmf.json", to_bopomofo)
 
 
 # 生成资源包
@@ -142,3 +149,4 @@ with zf.ZipFile(pack_dir, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as 
     z.write(P / "output" / "zh_py.json", arcname="assets/minecraft/lang/zh_py.json")
     z.write(P / "output" / "zh_pyw.json", arcname="assets/minecraft/lang/zh_pyw.json")
     z.write(P / "output" / "zh_ipa.json", arcname="assets/minecraft/lang/zh_ipa.json")
+    z.write(P / "output" / "zh_bpmf.json", arcname="assets/minecraft/lang/zh_bpmf.json")

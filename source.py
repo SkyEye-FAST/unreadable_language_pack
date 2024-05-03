@@ -92,7 +92,7 @@ print("正在删除client.jar……\n")
 client_path.unlink()
 
 # 获取语言文件
-lang_list = ["zh_cn", "ja_jp"]
+lang_list = ["zh_cn", "zh_tw", "ja_jp"]
 language_files_list = [f"{_}.json" for _ in lang_list]
 
 for lang in language_files_list:

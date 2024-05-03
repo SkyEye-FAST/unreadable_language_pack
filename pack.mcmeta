@@ -32,6 +32,11 @@
             "name": "t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ IPA",
             "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
             "bidirectional": false
+        },
+        "zh_bpmf": {
+            "name": "ㄓㄨˋ ㄧㄣ ㄈㄢˊ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ",
+            "region": "ㄊㄞˊ ㄨㄢ",
+            "bidirectional": false
         }
     }
 }
