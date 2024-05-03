@@ -18,7 +18,11 @@ P = Path(__file__).resolve().parent
 # 初始化
 cc_cedict.load()
 load_phrases_dict({'行商': [['xíng'], ['shāng']]})
+load_phrases_dict({'校频': [['jiào'], ['pín']]})
+load_phrases_dict({'藤蔓': [['téng'], ['wàn']]})
+
 jieba.load_userdict(str(P / "data" / "dict.txt"))
+
 with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as ipa_dict:
     pinyin_to_ipa = json.load(ipa_dict)
 tone_to_ipa = {
