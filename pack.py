@@ -4,6 +4,7 @@
 import json
 import zipfile as zf
 from pathlib import Path
+from random import choice
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin
@@ -14,7 +15,7 @@ P = Path(__file__).resolve().parent
 
 # 初始化
 cc_cedict.load()
-with open(P / "data" / "ipa.json", "r", encoding="utf-8") as ipa_dict:
+with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as ipa_dict:
     pinyin_to_ipa = json.load(ipa_dict)
 tone_to_ipa = {
     "1": "˥",
@@ -23,7 +24,8 @@ tone_to_ipa = {
     "4": "˥˩",
     "5": "",
 }
-
+with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as manyo_dict:
+    manyoganas_dict = json.load(manyo_dict)
 
 def replace_multiple(s: str, rep: dict) -> str:
     """对字符串进行多次替换"""
@@ -42,11 +44,23 @@ def to_katakana(s: str) -> str:
             "。。。": "...",
             ":・": "：",
             "・ー・": " ー ",
+            "・&・": " & ",
             "ク418": "C418",
             "サムエル・åベルグ": "サミュエル・オーバーグ",
             "レナ・ライネ": "レナ・レイン",
         },
     )
+
+def kana_to_manyogana(s: str) -> str:
+    """片假名转写为万叶假名"""
+    s = to_katakana(s)
+    result = ""
+    for char in s:
+        if char in manyoganas_dict:
+            result += choice(manyoganas_dict[char])
+        else:
+            result += char
+    return result
 
 
 def to_pinyin(s: str) -> str:
@@ -86,6 +100,7 @@ def save_to_json(input_data, output_file, func):
 
 
 save_to_json(data["en_us"], "ja_kk.json", to_katakana)
+save_to_json(data["en_us"], "ja_my.json", kana_to_manyogana)
 save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
 
@@ -95,5 +110,6 @@ pack_dir = P / "unreadable_language_pack.zip"
 with zf.ZipFile(pack_dir, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
     z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
     z.write(P / "output" / "ja_kk.json", arcname="assets/minecraft/lang/ja_kk.json")
+    z.write(P / "output" / "ja_my.json", arcname="assets/minecraft/lang/ja_my.json")
     z.write(P / "output" / "zh_py.json", arcname="assets/minecraft/lang/zh_py.json")
     z.write(P / "output" / "zh_ipa.json", arcname="assets/minecraft/lang/zh_ipa.json")

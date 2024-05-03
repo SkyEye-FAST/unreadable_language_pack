@@ -13,6 +13,11 @@
             "region": "カタカナ",
             "bidirectional": false
         },
+        "ja_my": {
+            "name": "依尓愚煎須百",
+            "region": "加田迦名",
+            "bidirectional": false
+        },
         "zh_py": {
             "name": "pīn yīn",
             "region": "zhōng guó",
