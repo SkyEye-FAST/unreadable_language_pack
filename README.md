@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](/pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](/ja_kk.json)、[`ja_my.json`](/ja_my.json)、[`zh_py.json`](/zh_py.json)、[`zh_pyw.json`](/zh_pyw.json)和[`zh_ipa.json`](/zh_ipa.json)，同[`pack.mcmeta`](/pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了5种语言：
+资源包向游戏内添加了6种语言：
 
 - **“エングリスホ (カタカナ)”**
   - 即“English (Katakana)”。
@@ -43,6 +43,9 @@ pip install -r requirements.txt
 - **“IPA t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”**
   - 即“IPA简体中文 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的IPA。
+- **“ㄓㄨˋ ㄧㄣ ㄈㄢˊ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ (ㄊㄞˊ ㄨㄢ)”**
+  - 即“注音繁体中文 (台湾)”。
+  - 选择之后，所有字符串会变为繁体中文 (台湾) 转写而来的注音符号。
 
 ![Sample](/sample/sample_ja_kk.png)
 ![Sample](/sample/sample_zh_py.png)
