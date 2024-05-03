@@ -2,7 +2,7 @@
 """Minecraft Unreadable Language Resource Pack Generator"""
 
 import json
-import zipfile as z
+import zipfile as zf
 from pathlib import Path
 
 from romajitable import to_kana as tk
@@ -14,8 +14,8 @@ P = Path(__file__).resolve().parent
 
 # 初始化
 cc_cedict.load()
-with open(P / "data" / "ipa.json", "r", encoding="utf-8") as f:
-    pinyin_to_ipa = json.load(f)
+with open(P / "data" / "ipa.json", "r", encoding="utf-8") as ipa_dict:
+    pinyin_to_ipa = json.load(ipa_dict)
 tone_to_ipa = {
     "1": "˥",
     "2": "˧˥",
@@ -25,14 +25,27 @@ tone_to_ipa = {
 }
 
 
+def replace_multiple(s: str, rep: dict) -> str:
+    """对字符串进行多次替换"""
+    for old, new in rep.items():
+        s = s.replace(old, new)
+    return s
+
+
 def to_katakana(s: str) -> str:
     """转写为片假名"""
-    return (
-        tk(s)
-        .katakana.replace("%ス", r"%s")
-        .replace("%ド", r"%d")
-        .replace("。。。", "...")
-        .replace(":\u30fb", "：")
+    return replace_multiple(
+        tk(s).katakana,
+        {
+            "%ス": "%s",
+            "%ド": "%d",
+            "。。。": "...",
+            ":・": "：",
+            "・ー・": " ー ",
+            "ク418": "C418",
+            "サムエル・åベルグ": "サミュエル・オーバーグ",
+            "レナ・ライネ": "レナ・レイン",
+        },
     )
 
 
@@ -60,23 +73,27 @@ def to_ipa(s: str) -> str:
 # 读取语言文件
 data = {}
 for lang_name in ["en_us", "zh_cn", "ja_jp"]:
-    with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as f:
-        data[lang_name] = json.load(f)
+    with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as l:
+        data[lang_name] = json.load(l)
+
 
 # 生成语言文件
-with open(P / "output" / "ja_kk.json", "w", encoding="utf-8") as f:
-    json.dump({k: to_katakana(v) for k, v in data["en_us"].items()}, f, indent=2)
+def save_to_json(input_data, output_file, func):
+    """保存至JSON"""
+    output_dict = {k: func(v) for k, v in input_data.items()}
+    with open(P / "output" / output_file, "w", encoding="utf-8") as f:
+        json.dump(output_dict, f, indent=2, ensure_ascii=False)
 
-with open(P / "output" / "zh_py.json", "w", encoding="utf-8") as f:
-    json.dump({k: to_pinyin(v) for k, v in data["zh_cn"].items()}, f, indent=2)
 
-with open(P / "output" / "zh_ipa.json", "w", encoding="utf-8") as f:
-    json.dump({k: to_ipa(v) for k, v in data["zh_cn"].items()}, f, indent=2)
+save_to_json(data["en_us"], "ja_kk.json", to_katakana)
+save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
+save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
+
 
 # 生成资源包
 pack_dir = P / "unreadable_language_pack.zip"
-with z.ZipFile(pack_dir, "w", compression=z.ZIP_DEFLATED, compresslevel=9) as f:
-    f.write(P / "pack.mcmeta", arcname="pack.mcmeta")
-    f.write(P / "output" / "ja_kk.json", arcname="assets/minecraft/lang/ja_kk.json")
-    f.write(P / "output" / "zh_py.json", arcname="assets/minecraft/lang/zh_py.json")
-    f.write(P / "output" / "zh_ipa.json", arcname="assets/minecraft/lang/zh_ipa.json")
+with zf.ZipFile(pack_dir, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
+    z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
+    z.write(P / "output" / "ja_kk.json", arcname="assets/minecraft/lang/ja_kk.json")
+    z.write(P / "output" / "zh_py.json", arcname="assets/minecraft/lang/zh_py.json")
+    z.write(P / "output" / "zh_ipa.json", arcname="assets/minecraft/lang/zh_ipa.json")
