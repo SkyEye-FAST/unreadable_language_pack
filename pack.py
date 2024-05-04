@@ -9,7 +9,7 @@ from typing import Callable
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
-from pypinyin_dict.phrase_pinyin_data import cc_cedict
+from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
 import jieba
 
 # 当前绝对路径
@@ -17,9 +17,20 @@ P = Path(__file__).resolve().parent
 
 # 初始化
 cc_cedict.load()
+di.load()
 load_phrases_dict({"行商": [["xíng"], ["shāng"]]})
 load_phrases_dict({"校频": [["jiào"], ["pín"]]})
 load_phrases_dict({"藤蔓": [["téng"], ["wàn"]]})
+load_phrases_dict({"方框": [["fāng"], ["kuàng"]]})
+load_phrases_dict({"切制": [["qiē"], ["zhì"]]})
+load_phrases_dict({"到了": [["dào"], ["le"]]})
+load_phrases_dict({"子串": [["zǐ"], ["chuàn"]]})
+load_phrases_dict({"结果": [["jié"], ["guǒ"]]})
+load_phrases_dict({"力量": [["lì"], ["liàng"]]})
+load_phrases_dict({"树荫": [["shù"], ["yīn"]]})
+load_phrases_dict({"看来": [["kàn"], ["lái"]]})
+load_phrases_dict({"困难": [["kùn"], ["nán"]]})
+load_phrases_dict({"运行中的": [["yùn"], ["xíng"], ["zhōng"], ["de"]]})
 
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
