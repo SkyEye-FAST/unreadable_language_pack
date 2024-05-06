@@ -32,20 +32,20 @@ The resource pack added 6 languages into the game:
   - i.e. "English (Katakana)".
   - Once selected, all strings will be changed to Katakana transliterated from English.
 - **"依尓愚煎須百 (万葉仮名)"**
-  - i.e. "English (Man'yōgana)"。
+  - i.e. "English (Man'yōgana)".
   - Once selected, all character strings will be converted into Man'yōganas translated from English. Due to the large number of Man'yōgana, each generation is randomly selected, so the results are inconsistent every time.
 - **"pīn yīn jiǎn tǐ zhōng wén (per character, zhōng guó dà lù)"**
-  - i.e. "Pinyin Simplified Chinese (per character, Chinese mainland)"。
+  - i.e. "Pinyin Simplified Chinese (per character, Chinese mainland)".
   - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of characters.
 - **"pīn yīn jiǎn tǐ zhōng wén (per word, zhōng guó dà lù)"**
-  - i.e. "Pinyin Simplified Chinese (per word, Chinese mainland)"。
+  - i.e. "Pinyin Simplified Chinese (per word, Chinese mainland)".
   - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
 - **"t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)"**
-  - i.e. “IPA Simplified Chinese (Chinese mainland)”。
+  - i.e. “IPA Simplified Chinese (Chinese mainland)”.
   - Once selected, all strings will be changed to IPA transliterated from Simp. Chinese.
-- **“ㄓㄨˋ ㄧㄣ ㄈㄢˊ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ (ㄊㄞˊ ㄨㄢ)”**
-  - i.e. "Bopomofo Traditional Chinese (Taiwan)”。
-  - Once selected, all strings will be changed to Bopomofo transliterated from Trad. Chinese (TW).
+- **"ㄓㄨˋ ㄧㄣ ㄐㄧㄢˇ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)"**
+  - i.e. "Bopomofo Simplified Chinese (Chinese mainland)”.
+  - Once selected, all strings will be changed to Bopomofo transliterated from Simp. Chinese.
 
 ![Sample](/sample/sample_ja_kk.png)
 ![Sample](/sample/sample_zh_py.png)

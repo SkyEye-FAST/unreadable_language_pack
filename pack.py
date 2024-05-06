@@ -134,7 +134,7 @@ def to_ipa(s: str) -> str:
 
 # 读取语言文件
 data = {}
-for lang_name in ["en_us", "zh_cn", "zh_tw", "ja_jp"]:
+for lang_name in ["en_us", "zh_cn"]:
     with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as l:
         data[lang_name] = json.load(l)
 
@@ -154,7 +154,7 @@ save_to_json(data["en_us"], "ja_my.json", to_manyogana)
 save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
 save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
-save_to_json(data["zh_tw"], "zh_bpmf.json", to_bopomofo)
+save_to_json(data["zh_cn"], "zh_bpmf.json", to_bopomofo)
 
 
 # 生成资源包
