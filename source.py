@@ -5,6 +5,7 @@ import hashlib
 import sys
 from zipfile import ZipFile
 from pathlib import Path
+
 import requests as r
 
 def get_response(url: str):
@@ -17,7 +18,7 @@ def get_response(url: str):
         print(f"请求发生错误: {ex}")
         sys.exit()
 
-def get_file(url: str, file_name: str, file_path: str, sha1: str):
+def get_file(url: str, file_name: str, file_path: Path, sha1: str):
     """下载文件"""
     for _ in range(3):
         with open(file_path, "wb") as f:
@@ -50,32 +51,36 @@ try:
         timeout=60,
     )
     version_manifest.raise_for_status()
-    version_manifest_json = version_manifest.json()
+    version_manifest_json: dict = version_manifest.json()
 except r.exceptions.RequestException as e:
     print("无法获取版本清单，请检查网络连接。")
     sys.exit()
 
 # 获取版本
-V = version_manifest_json["latest"]["snapshot"]
+V: str = version_manifest_json["latest"]["snapshot"]
 with open(P / "version.txt", "w", encoding="utf-8") as ver:
     ver.write(V)
-version_info = next(
-    (_ for _ in version_manifest_json["versions"] if _["id"] == V), None
+version_info: dict = next(
+    (_ for _ in version_manifest_json["versions"] if _["id"] == V), {}
 )
+if not version_info:
+    print("无法在版本清单中找到最新版本。")
+    sys.exit()
+print(f"选择的版本：{V}\n")
 
 # 获取client.json
-client_manifest_url = version_info["url"]
+client_manifest_url: str = version_info["url"]
 print(f"正在获取客户端索引文件“{client_manifest_url.rsplit('/', 1)[-1]}”的内容……")
-client_manifest = get_response(client_manifest_url).json()
+client_manifest: dict = get_response(client_manifest_url).json()
 
 # 获取资产索引文件
-asset_index_url = client_manifest["assetIndex"]["url"]
+asset_index_url: str = client_manifest["assetIndex"]["url"]
 print(f"正在获取资产索引文件“{asset_index_url.rsplit('/', 1)[-1]}”的内容……\n")
-asset_index = get_response(asset_index_url).json()["objects"]
+asset_index: dict = get_response(asset_index_url).json()["objects"]
 
 # 获取客户端JAR
-client_url = client_manifest["downloads"]["client"]["url"]
-client_sha1 = client_manifest["downloads"]["client"]["sha1"]
+client_url: str = client_manifest["downloads"]["client"]["url"]
+client_sha1: str = client_manifest["downloads"]["client"]["sha1"]
 client_path = LANG_DIR / "client.jar"
 print(f"正在下载客户端Java归档“client.jar”（{client_sha1}）……")
 get_file(client_url, "client.jar", client_path, client_sha1)
@@ -98,7 +103,7 @@ language_files_list = [f"{_}.json" for _ in lang_list]
 for lang in language_files_list:
     lang_asset = asset_index.get(f"minecraft/lang/{lang}")
     if lang_asset:
-        file_hash = lang_asset["hash"]
+        file_hash: str = lang_asset["hash"]
         print(f"正在下载语言文件“{lang}”（{file_hash}）……")
         get_file(
             f"https://resources.download.minecraft.net/{file_hash[:2]}/{file_hash}",

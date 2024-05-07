@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-"""Minecraft Unreadable Language Resource Pack Generator"""
+"""Minecraft难视语言资源包生成器"""
 
 import json
 import zipfile as zf
@@ -15,7 +15,7 @@ import jieba
 # 当前绝对路径
 P = Path(__file__).resolve().parent
 
-# 初始化
+# 初始化pypinyin
 cc_cedict.load()
 di.load()
 load_phrases_dict({"行商": [["xíng"], ["shāng"]]})
@@ -38,11 +38,13 @@ load_phrases_dict({"别人": [["bié"], ["rén"]]})
 load_phrases_dict({"位置": [["wèi"], ["zhì"]]})
 load_phrases_dict({"干海带": [["gān"], ["hǎi"], ["dài"]]})
 
+# 初始化jieba
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
+# 初始化自定义数据
 with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as ipa_dict:
-    pinyin_to_ipa = json.load(ipa_dict)
-tone_to_ipa = {
+    pinyin_to_ipa: dict[str, str] = json.load(ipa_dict)
+tone_to_ipa: dict[str, str] = {
     "1": "˥",
     "2": "˧˥",
     "3": "˨˩˦",
@@ -50,20 +52,39 @@ tone_to_ipa = {
     "5": "",
 }
 with open(P / "data" / "symbols.json", "r", encoding="utf-8") as syb_dict:
-    symbols_dict = json.load(syb_dict)
+    symbols_dict: dict[str, str] = json.load(syb_dict)
 with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as manyo_dict:
-    manyoganas_dict = json.load(manyo_dict)
+    manyoganas_dict: dict[str, str] = json.load(manyo_dict)
 
 
 def replace_multiple(s: str, rep: dict[str, str]) -> str:
-    """对字符串进行多次替换"""
+    """
+    对字符串进行多次替换。
+
+    :param s: 需要替换的字符串
+    :type s: str
+
+    :param rep: 替换的内容
+    :type rep: dict[str, str]
+
+    :return: 替换结果，字符串
+    """
+
     for old, new in rep.items():
         s = s.replace(old, new)
     return s
 
 
 def to_katakana(s: str) -> str:
-    """转写为片假名"""
+    """
+    将字符串中的英文转写为片假名。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+
     return replace_multiple(
         tk(s).katakana,
         {
@@ -81,7 +102,15 @@ def to_katakana(s: str) -> str:
 
 
 def to_manyogana(s: str) -> str:
-    """片假名转写为万叶假名"""
+    """
+    将字符串中的片假名转写为万叶假名。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+
     s = to_katakana(s)
     result = ""
     for char in s:
@@ -93,15 +122,30 @@ def to_manyogana(s: str) -> str:
 
 
 def to_pinyin(s: str) -> str:
-    """转写为拼音，分字"""
+    """
+    将字符串中的汉字转写为拼音，单字之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: 字符串
+
+    :return: 转换结果，字符串
+    """
+
     pinyin_list = lazy_pinyin(s, style=Style.TONE)
     return " ".join(pinyin_list)
 
 
 def to_pinyin_word(s: str) -> str:
-    """转写为拼音，分词"""
-    seg_list = jieba.lcut(s)
-    output_list = []
+    """
+    将字符串中的汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+    seg_list: list[str] = jieba.lcut(s)
+    output_list: list[str] = []
 
     for w in seg_list:
         pinyin_list = lazy_pinyin(w, style=Style.TONE)
@@ -112,15 +156,32 @@ def to_pinyin_word(s: str) -> str:
 
 
 def to_bopomofo(s: str) -> str:
-    """转写为注音符号"""
+    """
+    将字符串中的汉字转写为注音符号，单字之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+
     bopomofo_list = lazy_pinyin(s, style=Style.BOPOMOFO)
     return " ".join(bopomofo_list)
 
 
 def to_ipa(s: str) -> str:
-    """转写为IPA"""
+    """
+    将字符串中的汉字转写为IPA，单字之间使用空格分开。
+    IPA数据来自@UntPhesoca，宽式标音。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+
     pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
-    ipa_list = []
+    ipa_list: list[str] = []
     for pinyin in pinyin_list:
         tone = pinyin[-1]
         pinyin = pinyin[:-1]
@@ -133,7 +194,7 @@ def to_ipa(s: str) -> str:
 
 
 # 读取语言文件
-data = {}
+data: dict[str, dict[str, str]] = {}
 for lang_name in ["en_us", "zh_cn"]:
     with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as l:
         data[lang_name] = json.load(l)
@@ -143,7 +204,19 @@ for lang_name in ["en_us", "zh_cn"]:
 def save_to_json(
     input_data: dict[str, str], output_file: str, func: Callable[[str], str]
 ):
-    """保存至JSON"""
+    """
+    将生成的语言文件保存至JSON。
+
+    :param input_data: 需要保存的语言文件
+    :type s: dict[str, str]
+
+    :param output_file: 保存的文件名
+    :type rep: str
+
+    :param func: 生成语言文件所用的函数
+    :type func: Callable[[str], str]
+    """
+
     output_dict = {k: func(v) for k, v in input_data.items()}
     with open(P / "output" / output_file, "w", encoding="utf-8") as f:
         json.dump(output_dict, f, indent=2, ensure_ascii=False)
