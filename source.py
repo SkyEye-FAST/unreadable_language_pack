@@ -8,6 +8,7 @@ from pathlib import Path
 
 import requests as r
 
+
 def get_response(url: str):
     """获取响应"""
     try:
@@ -17,6 +18,7 @@ def get_response(url: str):
     except r.exceptions.RequestException as ex:
         print(f"请求发生错误: {ex}")
         sys.exit()
+
 
 def get_file(url: str, file_name: str, file_path: Path, sha1: str):
     """下载文件"""
