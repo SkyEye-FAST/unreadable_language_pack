@@ -4,7 +4,6 @@
 import json
 import zipfile as zf
 from pathlib import Path
-from random import choice
 from typing import Callable
 
 from romajitable import to_kana as tk
@@ -104,6 +103,7 @@ def to_katakana(s: str) -> str:
 def to_manyogana(s: str) -> str:
     """
     将字符串中的片假名转写为万叶假名。
+    为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
 
     :param s: 需要转换的字符串
     :type s: str
@@ -112,13 +112,7 @@ def to_manyogana(s: str) -> str:
     """
 
     s = to_katakana(s)
-    result = ""
-    for char in s:
-        if char in manyoganas_dict:
-            result += choice(manyoganas_dict[char])
-        else:
-            result += char
-    return result
+    return "".join([manyoganas_dict.get(char, char) for char in s])
 
 
 def to_pinyin(s: str) -> str:
@@ -144,6 +138,7 @@ def to_pinyin_word(s: str) -> str:
 
     :return: 转换结果，字符串
     """
+
     seg_list: list[str] = jieba.lcut(s)
     output_list: list[str] = []
 
@@ -151,8 +146,11 @@ def to_pinyin_word(s: str) -> str:
         pinyin_list = lazy_pinyin(w, style=Style.TONE)
         output_list.append("".join(pinyin_list))
     result = replace_multiple(" ".join(output_list), symbols_dict)
-
-    return result[0].upper() + result[1:]
+    if "\n" in result:
+        lines = result.splitlines()
+        capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
+        return "\n".join(capitalized_lines)
+    return result[:1].upper() + result[1:]
 
 
 def to_bopomofo(s: str) -> str:
