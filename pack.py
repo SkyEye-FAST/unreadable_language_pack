@@ -4,7 +4,9 @@
 import json
 import zipfile as zf
 from pathlib import Path
-from typing import Callable
+from typing import Callable, TypeAlias
+
+Ldata: TypeAlias = dict[str, str]
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
@@ -42,8 +44,8 @@ jieba.load_userdict(str(P / "data" / "dict.txt"))
 
 # 初始化自定义数据
 with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as f:
-    pinyin_to_ipa: dict[str, str] = json.load(f)
-tone_to_ipa: dict[str, str] = {
+    pinyin_to_ipa: Ldata = json.load(f)
+tone_to_ipa: Ldata = {
     "1": "˥",
     "2": "˧˥",
     "3": "˨˩˦",
@@ -51,14 +53,16 @@ tone_to_ipa: dict[str, str] = {
     "5": "",
 }
 with open(P / "data" / "rep_zh_pyw.json", "r", encoding="utf-8") as f:
-    rep_zh_pyw: dict[str, str] = json.load(f)
+    rep_zh_pyw: Ldata = json.load(f)
+with open(P / "data" / "fixed_zh_pyw.json", "r", encoding="utf-8") as f:
+    fixed_zh_pyw: Ldata = json.load(f)
 with open(P / "data" / "rep_ja_kk.json", "r", encoding="utf-8") as f:
-    rep_ja_kk: dict[str, str] = json.load(f)
+    rep_ja_kk: Ldata = json.load(f)
 with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as f:
-    manyoganas_dict: dict[str, str] = json.load(f)
+    manyoganas_dict: Ldata = json.load(f)
 
 
-def replace_multiple(s: str, rep: dict[str, str]) -> str:
+def replace_multiple(s: str, rep: Ldata) -> str:
     """
     对字符串进行多次替换。
 
@@ -181,7 +185,7 @@ def to_ipa(s: str) -> str:
 
 
 # 读取语言文件
-data: dict[str, dict[str, str]] = {}
+data: dict[str, Ldata] = {}
 for lang_name in ["en_us", "zh_cn"]:
     with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as f:
         data[lang_name] = json.load(f)
@@ -189,7 +193,10 @@ for lang_name in ["en_us", "zh_cn"]:
 
 # 生成语言文件
 def save_to_json(
-    input_data: dict[str, str], output_file: str, func: Callable[[str], str]
+    input_data: Ldata,
+    output_file: str,
+    func: Callable[[str], str],
+    fix_dict: Ldata = None,
 ):
     """
     将生成的语言文件保存至JSON。
@@ -205,6 +212,8 @@ def save_to_json(
     """
 
     output_dict = {k: func(v) for k, v in input_data.items()}
+    if fix_dict:
+        output_dict.update(fix_dict)
     with open(P / "output" / output_file, "w", encoding="utf-8") as j:
         json.dump(output_dict, j, indent=2, ensure_ascii=False)
 
@@ -212,7 +221,7 @@ def save_to_json(
 save_to_json(data["en_us"], "ja_kk.json", to_katakana)
 save_to_json(data["en_us"], "ja_my.json", to_manyogana)
 save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
-save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word)
+save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word, fixed_zh_pyw)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
 save_to_json(data["zh_cn"], "zh_bpmf.json", to_bopomofo)
 

@@ -4,7 +4,9 @@
 
 ----
 
-此项目用于提供将Minecraft Java版语言文件的源字符串转写为片假名、简体中文转写为汉语拼音、注音符号及IPA的资源包。
+此项目用于提供将Minecraft Java版语言文件的源字符串转写为片假名和万叶假名，并将简体中文转写为汉语拼音、注音符号及IPA的资源包。
+
+请使用模组[Modern UI](https://modrinth.com/mod/modern-ui)让游戏支持现代字体特性来保证所有字符正常显示。
 
 推荐与模组[Language Reload](https://modrinth.com/mod/language-reload)和[Untranslated Items](https://www.curseforge.com/minecraft/mc-mods/untranslated-items)一同使用。
 
@@ -48,6 +50,7 @@ pip install -r requirements.txt
   - 选择之后，所有字符串会变为简体中文转写而来的注音符号。
 
 ![Sample](sample/sample_ja_kk.png)
+![Sample](sample/sample_ja_my.png)
 ![Sample](sample/sample_zh_py.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)

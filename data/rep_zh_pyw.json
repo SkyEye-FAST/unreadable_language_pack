@@ -56,5 +56,8 @@
     ": (": ":(",
     "[F4]": "[ F4 ]",
     "'x'、'y'hé'z'": " 'x'、'y' hé 'z' ",
-    "'trigger'": " 'trigger' "
+    "'trigger'": " 'trigger' ",
+    "Lìrú/gamemode": "Lìrú /gamemode",
+    "Shǐyòng/return": "Shǐyòng /return",
+    "yòng/tp": "yòng /tp"
 }

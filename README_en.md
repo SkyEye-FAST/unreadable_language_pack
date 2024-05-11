@@ -4,7 +4,9 @@
 
 ----
 
-This project provides a resource package that converts the source strings of Minecraft: Java Edition language files into Katakana and converts Simplified Chinese into Chinese Pinyin, Bopomofo and IPA.
+This project provides a resource package that converts the source strings of Minecraft: Java Edition language files into Katakanas and Man'yōganas, and converts Simplified Chinese into Chinese Pinyin, Bopomofo and IPA.
+
+Please use the mod [Modern UI](https://modrinth.com/mod/modern-ui) to make the game support modern font features to ensure that all characters are displayed normally.
 
 It is recommended to use this resource pack with the mods [Language Reload](https://modrinth.com/mod/language-reload) and [Untranslated Items](https://www.curseforge.com/minecraft/mc-mods/untranslated-items).
 
@@ -48,6 +50,7 @@ The resource pack added 6 languages into the game:
   - Once selected, all strings will be changed to Bopomofo transliterated from Simp. Chinese.
 
 ![Sample](sample/sample_ja_kk.png)
+![Sample](sample/sample_ja_my.png)
 ![Sample](sample/sample_zh_py.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
