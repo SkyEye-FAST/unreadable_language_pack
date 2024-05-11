@@ -33,7 +33,7 @@ The resource pack added 6 languages into the game:
   - Once selected, all strings will be changed to Katakana transliterated from English.
 - **"依尓愚煎須百 (万葉仮名)"**
   - i.e. "English (Man'yōgana)".
-  - Once selected, all character strings will be converted into Man'yōganas translated from English. Due to the large number of Man'yōgana, each generation is randomly selected, so the results are inconsistent every time.
+  - Once selected, all character strings will be converted into Man'yōganas translated from English. In order to ensure that the generated results do not deviate too much, only one of the many possibilities of Man'yōganas is selected.
 - **"pīn yīn jiǎn tǐ zhōng wén (per character, zhōng guó dà lù)"**
   - i.e. "Pinyin Simplified Chinese (per character, Chinese mainland)".
   - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of characters.
