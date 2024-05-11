@@ -20,12 +20,12 @@
         },
         "zh_py": {
             "name": "pīn yīn jiǎn tǐ zhōng wén",
-            "region": "char, zhōng guó dà lù",
+            "region": "zhōng guó dà lù",
             "bidirectional": false
         },
         "zh_pyw": {
-            "name": "pīn yīn jiǎn tǐ zhōng wén",
-            "region": "word, zhōng guó dà lù",
+            "name": "Pīnyīn jiǎntǐ zhōngwén",
+            "region": "Zhōngguó dàlù",
             "bidirectional": false
         },
         "zh_ipa": {

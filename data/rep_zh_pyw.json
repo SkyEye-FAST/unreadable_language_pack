@@ -2,6 +2,7 @@
     " \n \n ": "\n\n",
     " \n ": "\n",
     "\\ ": "\\",
+    " 、 / ": "、/",
     " / ": "/",
     " _ ": "_",
     " + d": "+d",
@@ -57,7 +58,7 @@
     "[F4]": "[ F4 ]",
     "'x'、'y'hé'z'": " 'x'、'y' hé 'z' ",
     "'trigger'": " 'trigger' ",
-    "Lìrú/gamemode": "Lìrú /gamemode",
+    "/gamemode": " /gamemode",
     "Shǐyòng/return": "Shǐyòng /return",
     "yòng/tp": "yòng /tp"
 }

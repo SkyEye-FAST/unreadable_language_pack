@@ -209,6 +209,9 @@ def save_to_json(
 
     :param func: 生成语言文件所用的函数
     :type func: Callable[[str], str]
+
+    :param fix_dict: 语言文件中需要修复的内容
+    :type fix_dict: dict[str, str]
     """
 
     output_dict = {k: func(v) for k, v in input_data.items()}

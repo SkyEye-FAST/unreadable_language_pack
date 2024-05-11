@@ -5596,7 +5596,7 @@
   "selectServer.title": "Xuǎnzé fúwùqì",
   "selectWorld.access_failure": "Jiāzài shìjiè shībài",
   "selectWorld.allowCommands": "Yǔnxǔ zuòbì",
-  "selectWorld.allowCommands.info": "Lìrú/gamemode 、/experience děng mìnglìng",
+  "selectWorld.allowCommands.info": "Lìrú /gamemode、/experience děng mìnglìng",
   "selectWorld.allowCommands.new": "Yǔnxǔ mìnglìng",
   "selectWorld.backupEraseCache": "Qīngchú huǎncúnshùjù",
   "selectWorld.backupJoinConfirmButton": "Chuàngjiàn bèifèn bìng jiāzài",
