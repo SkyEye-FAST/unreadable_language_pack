@@ -43,10 +43,10 @@ jobs:
           echo "ver=$(<version.txt)" >> "$GITHUB_ENV"
 
       - name: Release
-        uses: marvinpinto/action-automatic-releases@latest
+        uses: Kir-Antipov/mc-publish@v3.3
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "${{ env.ver }}"
-          title: "${{ env.ver }}"
-          prerelease: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-tag: "${{ env.ver }}"
           files: unreadable_language_pack.zip
+          name: "${{ env.ver }}"
+          version: "${{ env.ver }}"
