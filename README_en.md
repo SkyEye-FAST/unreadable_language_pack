@@ -36,33 +36,41 @@ The resource pack added 6 languages into the game:
 - **"依尓愚煎須百 (万葉仮名)"**
   - i.e. "English (Man'yōgana)".
   - Once selected, all character strings will be converted into Man'yōganas transliterated from English. In order to ensure that the generated results do not deviate too much, only one of the many possibilities of Man'yōganas is selected.
-  > [!WARNING]
-  > English transliteration to katakana uses the mapping of [KotRikD/romajitable](https://github.com/KotRikD/romajitable). This is not a correct translation method and **may be very different from the real pronunciation in English**. **Please do not use the transliteration results outside of entertainment scenarios.**
-  >
-  > Transliterations of "Lena Raine" and "Samuel Åberg" will be fixed and "C418" will be retained in the results.
+
+> [!WARNING]
+> English transliteration to katakana uses the mapping of [KotRikD/romajitable](https://github.com/KotRikD/romajitable). This is not a correct translation method and **may be very different from the real pronunciation in English**. **Please do not use the transliteration results outside of entertainment scenarios.**
+>
+> Transliterations of "Lena Raine" and "Samuel Åberg" will be fixed and "C418" will be retained in the results.
+
 - **"pīn yīn jiǎn tǐ zhōng wén (char, zhōng guó dà lù)"**
   - i.e. "Pinyin Simplified Chinese (Chinese mainland)".
   - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of characters.
-  > [!NOTE]
-  > Transliteration of Chinese uses the libraries `pypinyin` and `pypinyin_dict`, supplements the data of [cc_cedict.org](https://cc-cedict.org/), and manually adds the pronunciation of some words.
-  >
-  > In principle, the pronunciation is based on the Putonghua phonetic system.
+
+> [!NOTE]
+> Transliteration of Chinese uses the libraries `pypinyin` and `pypinyin_dict`, supplements the data of [cc_cedict.org](https://cc-cedict.org/), and manually adds the pronunciation of some words.
+>
+> In principle, the pronunciation is based on the Putonghua phonetic system.
+
 - **"Pīnyīn jiǎntǐ zhōngwén (Zhōngguó dàlù)"**
   - i.e. "Pinyin Simplified Chinese (Chinese mainland)".
   - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
-  > [!IMPORTANT]
-  > The word segmentation of Chinese uses the library `jieba`, with configurations of the dictionaries and corrections.
-  >
-  > Although processed, the results are still not guaranteed to fully comply with the requirements of GB/T 16159-2012. Where dashes should be added, there is no suitable method to meet the requirements.
-  >
-  > Tone sandhi (such as "一" and "不") won't be marked according to the requirements of GB/T 16159-2012.
-  >
-  > **Due to the lack of complete manual review, the word segmentation accuracy of long texts cannot be guaranteed.**
+
+> [!IMPORTANT]
+> The word segmentation of Chinese uses the library `jieba`, with configurations of the dictionaries and corrections.
+>
+> Although processed, the results are still not guaranteed to fully comply with the requirements of GB/T 16159-2012. Where dashes should be added, there is no suitable method to meet the requirements.
+>
+> Tone sandhi (such as "一" and "不") won't be marked according to the requirements of GB/T 16159-2012.
+>
+> **Due to the lack of complete manual review, the word segmentation accuracy of long texts cannot be guaranteed.**
+
 - **"t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)"**
   - i.e. “IPA Simplified Chinese (Chinese mainland)”.
   - Once selected, all strings will be changed to IPA transliterated from Simp. Chinese.
-  > [!NOTE]
-  > The IPA transliteration scheme comes from the article [新老派普通话的宽严式记音（含儿化韵）](https://zhuanlan.zhihu.com/p/38258415) written by [@UntPhesoca](https://www.zhihu.com/people/UntW). Neutral tones won't be marked.
+
+> [!NOTE]
+> The IPA transliteration scheme comes from the article [新老派普通话的宽严式记音（含儿化韵）](https://zhuanlan.zhihu.com/p/38258415) written by [@UntPhesoca](https://www.zhihu.com/people/UntW). Neutral tones won't be marked.
+
 - **"ㄓㄨˋ ㄧㄣ ㄐㄧㄢˇ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)"**
   - i.e. "Bopomofo Simplified Chinese (Chinese mainland)”.
   - Once selected, all strings will be changed to Bopomofo transliterated from Simp. Chinese.
