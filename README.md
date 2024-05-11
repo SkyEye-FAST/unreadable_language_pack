@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ### 资源包
 
-资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](ja_kk.json)、[`ja_my.json`](ja_my.json)、[`zh_py.json`](zh_py.json)、[`zh_pyw.json`](zh_pyw.json)、[`zh_ipa.json`](zh_ipa.json)和[`zh_bpmf.json`](zh_bpmf.json)，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
+资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](output/ja_kk.json)、[`ja_my.json`](output/ja_my.json)、[`zh_py.json`](output/zh_py.json)、[`zh_pyw.json`](output/zh_pyw.json)、[`zh_ipa.json`](output/zh_ipa.json)和[`zh_bpmf.json`](output/zh_bpmf.json)，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
 资源包向游戏内添加了6种语言：
 
