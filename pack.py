@@ -41,8 +41,8 @@ load_phrases_dict({"干海带": [["gān"], ["hǎi"], ["dài"]]})
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
 # 初始化自定义数据
-with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as ipa_dict:
-    pinyin_to_ipa: dict[str, str] = json.load(ipa_dict)
+with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as f:
+    pinyin_to_ipa: dict[str, str] = json.load(f)
 tone_to_ipa: dict[str, str] = {
     "1": "˥",
     "2": "˧˥",
@@ -50,10 +50,12 @@ tone_to_ipa: dict[str, str] = {
     "4": "˥˩",
     "5": "",
 }
-with open(P / "data" / "symbols.json", "r", encoding="utf-8") as syb_dict:
-    symbols_dict: dict[str, str] = json.load(syb_dict)
-with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as manyo_dict:
-    manyoganas_dict: dict[str, str] = json.load(manyo_dict)
+with open(P / "data" / "rep_zh_pyw.json", "r", encoding="utf-8") as f:
+    rep_zh_pyw: dict[str, str] = json.load(f)
+with open(P / "data" / "rep_ja_kk.json", "r", encoding="utf-8") as f:
+    rep_ja_kk: dict[str, str] = json.load(f)
+with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as f:
+    manyoganas_dict: dict[str, str] = json.load(f)
 
 
 def replace_multiple(s: str, rep: dict[str, str]) -> str:
@@ -84,20 +86,7 @@ def to_katakana(s: str) -> str:
     :return: 转换结果，字符串
     """
 
-    return replace_multiple(
-        tk(s).katakana,
-        {
-            "%ス": "%s",
-            "%ド": "%d",
-            "。。。": "...",
-            ":・": "：",
-            "・ー・": " ー ",
-            "・&・": " & ",
-            "ク418": "C418",
-            "サムエル・åベルグ": "サミュエル・オーバーグ",
-            "レナ・ライネ": "レナ・レイン",
-        },
-    )
+    return replace_multiple(tk(s).katakana, rep_ja_kk)
 
 
 def to_manyogana(s: str) -> str:
@@ -145,7 +134,7 @@ def to_pinyin_word(s: str) -> str:
     for w in seg_list:
         pinyin_list = lazy_pinyin(w, style=Style.TONE)
         output_list.append("".join(pinyin_list))
-    result = replace_multiple(" ".join(output_list), symbols_dict)
+    result = replace_multiple(" ".join(output_list), rep_zh_pyw)
     if "\n" in result:
         lines = result.splitlines()
         capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
@@ -194,8 +183,8 @@ def to_ipa(s: str) -> str:
 # 读取语言文件
 data: dict[str, dict[str, str]] = {}
 for lang_name in ["en_us", "zh_cn"]:
-    with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as l:
-        data[lang_name] = json.load(l)
+    with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as f:
+        data[lang_name] = json.load(f)
 
 
 # 生成语言文件
@@ -216,8 +205,8 @@ def save_to_json(
     """
 
     output_dict = {k: func(v) for k, v in input_data.items()}
-    with open(P / "output" / output_file, "w", encoding="utf-8") as f:
-        json.dump(output_dict, f, indent=2, ensure_ascii=False)
+    with open(P / "output" / output_file, "w", encoding="utf-8") as j:
+        json.dump(output_dict, j, indent=2, ensure_ascii=False)
 
 
 save_to_json(data["en_us"], "ja_kk.json", to_katakana)

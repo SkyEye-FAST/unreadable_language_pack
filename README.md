@@ -1,10 +1,10 @@
 # Minecraft难视语言资源包
 
-- **[English](/README_en.md) | [中文](/README.md)**
+- **[English](README_en.md) | [中文](README.md)**
 
 ----
 
-此项目用于提供将Minecraft Java版语言文件的源字符串转写为片假名、简体中文转写为汉语拼音及IPA的资源包。
+此项目用于提供将Minecraft Java版语言文件的源字符串转写为片假名、简体中文转写为汉语拼音、注音符号及IPA的资源包。
 
 推荐与模组[Language Reload](https://modrinth.com/mod/language-reload)和[Untranslated Items](https://www.curseforge.com/minecraft/mc-mods/untranslated-items)一同使用。
 
@@ -20,11 +20,11 @@ pip install -r requirements.txt
 
 ### 获取语言文件
 
-本仓库会在每天🕧00:30（UTC+8，即🕟UTC 16:30）自动检查Minecraft Java版语言文件（`en_us.json`、`zh_cn.json`）更新并更新资源包。使用脚本为[`source.py`](/source.py)。获取到的语言文件存储在与脚本同级的`source`文件夹下。
+本仓库会在每天🕧00:30（UTC+8，即🕟UTC 16:30）自动检查Minecraft Java版语言文件（`en_us.json`、`zh_cn.json`）更新并更新资源包。使用脚本为[`source.py`](source.py)。获取到的语言文件存储在与脚本同级的`source`文件夹下。
 
 ### 资源包
 
-资源包使用[`pack.py`](/pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](/ja_kk.json)、[`ja_my.json`](/ja_my.json)、[`zh_py.json`](/zh_py.json)、[`zh_pyw.json`](/zh_pyw.json)和[`zh_ipa.json`](/zh_ipa.json)，同[`pack.mcmeta`](/pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
+资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](ja_kk.json)、[`ja_my.json`](ja_my.json)、[`zh_py.json`](zh_py.json)、[`zh_pyw.json`](zh_pyw.json)和[`zh_ipa.json`](zh_ipa.json)，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
 资源包向游戏内添加了6种语言：
 
@@ -34,10 +34,10 @@ pip install -r requirements.txt
 - **“依尓愚煎須百 (万葉仮名)”**
   - 即“English (Manyōgana)”。
   - 选择之后，所有字符串会变为英文转写而来的万叶假名。为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
-- **“pīn yīn jiǎn tǐ zhōng wén (per character, zhōng guó dà lù)”**
+- **“pīn yīn jiǎn tǐ zhōng wén (char, zhōng guó dà lù)”**
   - 即“拼音简体中文 (分字，中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以字为单位。
-- **“pīn yīn jiǎn tǐ zhōng wén (per word, zhōng guó dà lù)”**
+- **“pīn yīn jiǎn tǐ zhōng wén (word, zhōng guó dà lù)”**
   - 即“拼音简体中文 (分词，中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位，尝试遵循了GB/T 16159-2012。
 - **“IPA t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”**
@@ -47,9 +47,10 @@ pip install -r requirements.txt
   - 即“注音简体中文 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的注音符号。
 
-![Sample](/sample/sample_ja_kk.png)
-![Sample](/sample/sample_zh_py.png)
-![Sample](/sample/sample_zh_ipa.png)
+![Sample](sample/sample_ja_kk.png)
+![Sample](sample/sample_zh_py.png)
+![Sample](sample/sample_zh_ipa.png)
+![Sample](sample/sample_zh_bpmf.png)
 
 ## 反馈
 
