@@ -53,12 +53,5 @@
     "% 6 $ s": "%6$s",
     "% 7 $ s": "%7$s",
     "% %": "%%",
-    " …": "…",
-    ": (": ":(",
-    "[F4]": "[ F4 ]",
-    "'x'、'y'hé'z'": " 'x'、'y' hé 'z' ",
-    "'trigger'": " 'trigger' ",
-    "/gamemode": " /gamemode",
-    "Shǐyòng/return": "Shǐyòng /return",
-    "yòng/tp": "yòng /tp"
+    " …": "…"
 }
