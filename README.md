@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了8种语言：
+资源包向游戏内添加了9种语言：
 
 - **“エングリスホ (カタカナ)”** （[`ja_kk.json`](output/ja_kk.json)）
   - 即“English (Katakana)”。

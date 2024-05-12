@@ -213,9 +213,23 @@ def to_romatzyh(s: str) -> str:
     :return: 转换结果，字符串
     """
 
-    s = s.replace("不", "bu")
-    pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
-    return " ".join([pinyin_to_romatzyh.get(_, _) for _ in pinyin_list])
+    seg_list: list[str] = jieba.lcut(s)
+    output_list: list[str] = []
+
+    for seg in seg_list:
+        seg = seg.replace("不", "bu")
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
+        output_list.append("".join([pinyin_to_romatzyh.get(_, _) for _ in pinyin_list]))
+
+    # 调整格式
+    result = replace_multiple(" ".join(output_list), rep_zh_pyw)
+
+    # 处理句首大写，字符串中带换行符的单独处理
+    if "\n" in result:
+        lines = result.splitlines()
+        capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
+        return "\n".join(capitalized_lines)
+    return result[:1].upper() + result[1:]
 
 
 def to_cyrillic(s: str) -> str:
