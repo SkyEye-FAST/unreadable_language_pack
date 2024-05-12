@@ -138,10 +138,18 @@ def to_pinyin_word(s: str) -> str:
     seg_list: list[str] = jieba.lcut(s)
     output_list: list[str] = []
 
-    for w in seg_list:
-        pinyin_list = lazy_pinyin(w, style=Style.TONE)
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE)
+        # 处理零声母分隔符
+        for i, py in enumerate(pinyin_list[1:], 1):
+            if py.startswith(tuple("aāááàoōóǒòeēéěè")):
+                pinyin_list[i] = f"'{py}"
         output_list.append("".join(pinyin_list))
+
+    # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh_pyw)
+
+    # 处理句首大写，字符串中带换行符的单独处理
     if "\n" in result:
         lines = result.splitlines()
         capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
@@ -162,6 +170,7 @@ def to_ipa(s: str) -> str:
 
     pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
     ipa_list: list[str] = []
+
     for pinyin in pinyin_list:
         tone = pinyin[-1]
         pinyin = pinyin[:-1]
