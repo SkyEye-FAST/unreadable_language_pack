@@ -42,7 +42,7 @@ The resource pack added 6 languages into the game:
 >
 > Transliterations of "Lena Raine" and "Samuel Åberg" will be fixed and "C418" will be retained in the results.
 
-- **"pīn yīn (zhōng guó dà lù)"** ([`zh_py.json`](output/zh_py.json))
+- **"hàn yǔ pīn yīn (zhōng guó dà lù)"** ([`zh_py.json`](output/zh_py.json))
   - i.e. "Pinyin (Chinese mainland)".
   - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of characters.
 
@@ -51,7 +51,7 @@ The resource pack added 6 languages into the game:
 >
 > In principle, the pronunciation is based on the Putonghua phonetic system.
 
-- **"Pīnyīn (Zhōngguó dàlù)"** ([`zh_pyw.json`](output/zh_pyw.json))
+- **"Hànyǔ Pīnyīn (Zhōngguó Dàlù)"** ([`zh_pyw.json`](output/zh_pyw.json))
   - i.e. "Pinyin (Chinese mainland)".
   - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
 
@@ -64,8 +64,8 @@ The resource pack added 6 languages into the game:
 >
 > **Due to the lack of complete manual review, the word segmentation accuracy of long texts cannot be guaranteed.**
 
-- **"IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)"** ([`zh_ipa.json`](output/zh_ipa.json))
-  - i.e. “IPA (Chinese mainland)”.
+- **"Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)"** ([`zh_ipa.json`](output/zh_ipa.json))
+  - i.e. “Chinese in IPA (Chinese mainland)”.
   - Once selected, all strings will be changed to IPA transliterated from Simp. Chinese.
 
 > [!NOTE]
@@ -74,7 +74,7 @@ The resource pack added 6 languages into the game:
 - **"ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)"** ([`zh_bpmf.json`](output/zh_bpmf.json))
   - i.e. "Bopomofo (Chinese mainland)”.
   - Once selected, all strings will be changed to Bopomofo transliterated from Simp. Chinese.
-- **"Wade–Giles (chung¹ kuo² ta⁴ lu⁴)"** ([`zh_wg.json`](output/zh_wg.json))
+- **"Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)"** ([`zh_wg.json`](output/zh_wg.json))
   - i.e. "Wade–Giles (Chinese mainland)”.
   - Once selected, all strings will be changed to Wade–Giles transliterated from Simp. Chinese.
 - **"Gwoyeu Romatzyh (jong gwo dah luh)"** ([`zh_gr.json`](output/zh_gr.json))

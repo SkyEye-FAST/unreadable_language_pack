@@ -19,17 +19,17 @@
             "bidirectional": false
         },
         "zh_py": {
-            "name": "pīn yīn",
+            "name": "hàn yǔ pīn yīn",
             "region": "zhōng guó dà lù",
             "bidirectional": false
         },
         "zh_pyw": {
-            "name": "Pīnyīn",
-            "region": "Zhōngguó dàlù",
+            "name": "Hànyǔ Pīnyīn",
+            "region": "Zhōngguó Dàlù",
             "bidirectional": false
         },
         "zh_ipa": {
-            "name": "IPA",
+            "name": "Chinese in IPA",
             "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
             "bidirectional": false
         },
@@ -40,7 +40,7 @@
         },
         "zh_wg": {
             "name": "Wade–Giles",
-            "region": "chung¹ kuo² ta⁴ lu⁴",
+            "region": "Chung¹-Kuo² Ta⁴-Lu⁴",
             "bidirectional": false
         },
         "zh_gr": {
@@ -49,8 +49,8 @@
             "bidirectional": false
         },
         "zh_cy": {
-            "name": "Cyrillization of Simp. Chinese",
-            "region": "jong gwo dah luh",
+            "name": "Cyrillized Chinese",
+            "region": "чжун1 го2 да4 лу4",
             "bidirectional": false
         }
     }

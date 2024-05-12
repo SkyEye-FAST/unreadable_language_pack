@@ -42,7 +42,7 @@ pip install -r requirements.txt
 >
 > 转写结果中修复了“Lena Raine”和“Samuel Åberg”的转写，并保留了“C418”。
 
-- **“pīn yīn (zhōng guó dà lù)”** （[`zh_py.json`](output/zh_py.json)）
+- **“hàn yǔ pīn yīn (zhōng guó dà lù)”** （[`zh_py.json`](output/zh_py.json)）
   - 即“拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以字为单位。
 
@@ -51,7 +51,7 @@ pip install -r requirements.txt
 >
 > 原则上，读音以普通话音系为准。
 
-- **“Pīnyīn (Zhōngguó dàlù)”** （[`zh_pyw.json`](output/zh_pyw.json)）
+- **“Hànyǔ Pīnyīn (Zhōngguó Dàlù)”** （[`zh_pyw.json`](output/zh_pyw.json)）
   - 即“拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位，尝试遵循了GB/T 16159-2012。
 
@@ -64,8 +64,8 @@ pip install -r requirements.txt
 >
 > **由于没有经过完整的人工审核，不能保证长文本的分词准确性。**
 
-- **“IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”** （[`zh_ipa.json`](output/zh_ipa.json)）
-  - 即“IPA (中国大陆)”。
+- **“Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”** （[`zh_ipa.json`](output/zh_ipa.json)）
+  - 即“国际音标转写的中文 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的IPA。
 
 > [!NOTE]
@@ -74,7 +74,7 @@ pip install -r requirements.txt
 - **“ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)”** （[`zh_bpmf.json`](output/zh_bpmf.json)）
   - 即“注音符号 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的注音符号。
-- **“Wade–Giles (chung¹ kuo² ta⁴ lu⁴)”** （[`zh_wg.json`](output/zh_wg.json)）
+- **“Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)”** （[`zh_wg.json`](output/zh_wg.json)）
   - 即“威妥玛拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的威妥玛拼音。
 - **“Gwoyeu Romatzyh (jong gwo dah luh)”** （[`zh_gr.json`](output/zh_gr.json)）

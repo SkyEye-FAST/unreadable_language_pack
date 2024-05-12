@@ -1,6 +1,6 @@
 {
     "advancements.sad_label": ":(",
-    "arguments.swizzle.invalid": "Wúxiào de zuòbiāo zǔhé，xūyào 'x'、'y' hé 'z' de zǔhé",
+    "arguments.swizzle.invalid": "Wúxiào de zuòbiāo zǔhé, xūyào 'x'、'y' hé 'z' de zǔhé",
     "block.minecraft.banner.base.black": "Hēi dǐ",
     "block.minecraft.banner.base.blue": "Lán dǐ",
     "block.minecraft.banner.base.brown": "Zōng dǐ",
@@ -195,7 +195,7 @@
     "block.minecraft.banner.triangle_top.yellow": "Huángsè dǐng sānjiǎo",
     "commands.debug.function.noReturnRun": "Shǐyòng /return run shí wúfǎ zhuīzōng",
     "commands.trigger.failed.invalid": "Nǐ zhǐnéng chùfā 'trigger' lèixíng de jìfēn xiàng",
-    "debug.copy_location.help": "F3 + C = yòng /tp mìnglìng de xíngshì fùzhì nǐ de wèizhì，ànzhù F3 + C shǐ yóuxì bēngkuì",
+    "debug.copy_location.help": "F3 + C = yòng /tp mìnglìng de xíngshì fùzhì nǐ de wèizhì, ànzhù F3 + C shǐ yóuxì bēngkuì",
     "debug.gamemodes.press_f4": "[ F4 ]",
     "optimizeWorld.stage.failed": "Shībài le！:(",
     "selectWorld.allowCommands.info": "Lìrú /gamemode、/experience děng mìnglìng"
