@@ -56,6 +56,7 @@ pinyin_to_wadegiles = load_json("py2wg")
 pinyin_to_romatzyh = load_json("py2gr")
 rep_zh_pyw = load_json("rep_zh_pyw")
 fixed_zh_pyw = load_json("fixed_zh_pyw")
+fixed_zh_gr = load_json("fixed_zh_gr")
 rep_ja_kk = load_json("rep_ja_kk")
 manyoganas_dict = load_json("manyogana")
 
@@ -219,7 +220,12 @@ def to_romatzyh(s: str) -> str:
     for seg in seg_list:
         seg = seg.replace("不", "bu")
         pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        output_list.append("".join([pinyin_to_romatzyh.get(_, _) for _ in pinyin_list]))
+        gr_list = [pinyin_to_romatzyh.get(_, _) for _ in pinyin_list]
+        # 处理零声母分隔符
+        for i, gr in enumerate(gr_list[1:], 1):
+            if gr_list[i - 1][-1] + gr in pinyin_to_romatzyh.values():
+                gr_list[i] = f"'{gr}"
+        output_list.append("".join(gr_list).replace("''", "'"))
 
     # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh_pyw)
@@ -288,7 +294,7 @@ save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word, fixed_zh_pyw)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
 save_to_json(data["zh_cn"], "zh_bpmf.json", to_bopomofo)
 save_to_json(data["zh_cn"], "zh_wg.json", to_wadegiles)
-save_to_json(data["zh_cn"], "zh_gr.json", to_romatzyh)
+save_to_json(data["zh_cn"], "zh_gr.json", to_romatzyh, fixed_zh_gr)
 save_to_json(data["zh_cn"], "zh_cy.json", to_cyrillic)
 
 

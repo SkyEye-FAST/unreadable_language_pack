@@ -77,7 +77,7 @@ The resource pack added 9 languages into the game:
 - **"Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)"** ([`zh_wg.json`](output/zh_wg.json))
   - i.e. "Wade–Giles (Chinese mainland)”.
   - Once selected, all strings will be changed to Wade–Giles transliterated from Simp. Chinese.
-- **"Gwoyeu Romatzyh (jong gwo dah luh)"** ([`zh_gr.json`](output/zh_gr.json))
+- **"Gwoyeu Romatzyh (Jonggwo Dahluh)"** ([`zh_gr.json`](output/zh_gr.json))
   - i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
   - Once selected, all strings will be changed to Gwoyeu Romatzyh transliterated from Simp. Chinese.
 - **"Cyrillized Chinese (чжун1 го2 да4 лу4)"** ([`zh_cy.json`](output/zh_cy.json))

@@ -77,7 +77,7 @@ pip install -r requirements.txt
 - **“Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)”** （[`zh_wg.json`](output/zh_wg.json)）
   - 即“威妥玛拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的威妥玛拼音。
-- **“Gwoyeu Romatzyh (jong gwo dah luh)”** （[`zh_gr.json`](output/zh_gr.json)）
+- **“Gwoyeu Romatzyh (Jonggwo Dahluh)”** （[`zh_gr.json`](output/zh_gr.json)）
   - 即“国语罗马字 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
 - **“Cyrillized Chinese (чжун1 го2 да4 лу4)”** （[`zh_cy.json`](output/zh_cy.json)）
