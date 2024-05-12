@@ -218,6 +218,19 @@ def to_romatzyh(s: str) -> str:
     return " ".join([pinyin_to_romatzyh.get(_, _) for _ in pinyin_list])
 
 
+def to_cyrillic(s: str) -> str:
+    """
+    将字符串中的汉字转写为西里尔字母，单字之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: 字符串
+
+    :return: 转换结果，字符串
+    """
+
+    return " ".join(lazy_pinyin(s, style=Style.CYRILLIC))
+
+
 # 读取语言文件
 data: dict[str, Ldata] = {}
 for lang_name in ["en_us", "zh_cn"]:
@@ -262,6 +275,7 @@ save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
 save_to_json(data["zh_cn"], "zh_bpmf.json", to_bopomofo)
 save_to_json(data["zh_cn"], "zh_wg.json", to_wadegiles)
 save_to_json(data["zh_cn"], "zh_gr.json", to_romatzyh)
+save_to_json(data["zh_cn"], "zh_cy.json", to_cyrillic)
 
 
 # 生成资源包

@@ -47,6 +47,11 @@
             "name": "Gwoyeu Romatzyh",
             "region": "jong gwo dah luh",
             "bidirectional": false
+        },
+        "zh_cy": {
+            "name": "Cyrillization of Simp. Chinese",
+            "region": "jong gwo dah luh",
+            "bidirectional": false
         }
     }
 }
