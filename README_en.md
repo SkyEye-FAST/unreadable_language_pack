@@ -80,6 +80,9 @@ The resource pack added 6 languages into the game:
 - **"Gwoyeu Romatzyh (jong gwo dah luh)"** ([`zh_gr.json`](output/zh_gr.json))
   - i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
   - Once selected, all strings will be changed to Gwoyeu Romatzyh transliterated from Simp. Chinese.
+- **"Cyrillized Chinese (чжун1 го2 да4 лу4)"** ([`zh_cy.json`](output/zh_cy.json))
+  - i.e. "Cyrillized Chinese (Chinese mainland)”.
+  - Once selected, all strings will be changed to Cyrillized Simp. Chinese.
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)

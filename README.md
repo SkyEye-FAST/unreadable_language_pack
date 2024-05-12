@@ -80,6 +80,9 @@ pip install -r requirements.txt
 - **“Gwoyeu Romatzyh (jong gwo dah luh)”** （[`zh_gr.json`](output/zh_gr.json)）
   - 即“国语罗马字 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
+- **“Cyrillized Chinese (чжун1 го2 да4 лу4)”** （[`zh_cy.json`](output/zh_cy.json)）
+  - 即“西里尔化中文 (中国大陆)”。
+  - 选择之后，所有字符串会变为西里尔化的简体中文。
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
