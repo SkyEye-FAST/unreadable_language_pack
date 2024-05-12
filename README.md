@@ -26,14 +26,14 @@ pip install -r requirements.txt
 
 ### 资源包
 
-资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件为[`ja_kk.json`](output/ja_kk.json)、[`ja_my.json`](output/ja_my.json)、[`zh_py.json`](output/zh_py.json)、[`zh_pyw.json`](output/zh_pyw.json)、[`zh_ipa.json`](output/zh_ipa.json)和[`zh_bpmf.json`](output/zh_bpmf.json)，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
+资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了6种语言：
+资源包向游戏内添加了8种语言：
 
-- **“エングリスホ (カタカナ)”**
+- **“エングリスホ (カタカナ)”** （[`ja_kk.json`](output/ja_kk.json)）
   - 即“English (Katakana)”。
   - 选择之后，所有字符串会变为英文转写而来的片假名。
-- **“依尓愚煎須百 (万葉仮名)”**
+- **“依尓愚煎須百 (万葉仮名)”** （[`ja_my.json`](output/ja_my.json)）
   - 即“English (Man'yōgana)”。
   - 选择之后，所有字符串会变为英文转写而来的万叶假名。为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
 
@@ -42,8 +42,8 @@ pip install -r requirements.txt
 >
 > 转写结果中修复了“Lena Raine”和“Samuel Åberg”的转写，并保留了“C418”。
 
-- **“pīn yīn jiǎn tǐ zhōng wén (zhōng guó dà lù)”**
-  - 即“拼音简体中文 (中国大陆)”。
+- **“pīn yīn (zhōng guó dà lù)”** （[`zh_py.json`](output/zh_py.json)）
+  - 即“拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以字为单位。
 
 > [!NOTE]
@@ -51,8 +51,8 @@ pip install -r requirements.txt
 >
 > 原则上，读音以普通话音系为准。
 
-- **“Pīnyīn jiǎntǐ zhōngwén (Zhōngguó dàlù)”**
-  - 即“拼音简体中文 (中国大陆)”。
+- **“Pīnyīn (Zhōngguó dàlù)”** （[`zh_pyw.json`](output/zh_pyw.json)）
+  - 即“拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位，尝试遵循了GB/T 16159-2012。
 
 > [!IMPORTANT]
@@ -64,16 +64,22 @@ pip install -r requirements.txt
 >
 > **由于没有经过完整的人工审核，不能保证长文本的分词准确性。**
 
-- **“IPA t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”**
-  - 即“IPA简体中文 (中国大陆)”。
+- **“IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”** （[`zh_ipa.json`](output/zh_ipa.json)）
+  - 即“IPA (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的IPA。
 
 > [!NOTE]
 > IPA转写方案来自[@UntPhesoca](https://www.zhihu.com/people/UntW)所写文章[新老派普通话的宽严式记音（含儿化韵）](https://zhuanlan.zhihu.com/p/38258415)中的宽式标音。轻声作不标出处理。
 
-- **“ㄓㄨˋ ㄧㄣ ㄐㄧㄢˇ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)”**
-  - 即“注音简体中文 (中国大陆)”。
+- **“ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)”** （[`zh_bpmf.json`](output/zh_bpmf.json)）
+  - 即“注音符号 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的注音符号。
+- **“Wade–Giles (chung¹ kuo² ta⁴ lu⁴)”** （[`zh_wg.json`](output/zh_wg.json)）
+  - 即“威妥玛拼音 (中国大陆)”。
+  - 选择之后，所有字符串会变为简体中文转写而来的威妥玛拼音。
+- **“Gwoyeu Romatzyh (jong gwo dah luh)”** （[`zh_gr.json`](output/zh_gr.json)）
+  - 即“国语罗马字 (中国大陆)”。
+  - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
