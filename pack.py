@@ -210,7 +210,7 @@ def to_romatzyh(s: str) -> str:
     :return: 转换结果，字符串
     """
 
-    s.replace("不", "bu")
+    s = s.replace("不", "bu")
     pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
     return " ".join([pinyin_to_romatzyh.get(_, _) for _ in pinyin_list])
 
