@@ -19,23 +19,33 @@
             "bidirectional": false
         },
         "zh_py": {
-            "name": "pīn yīn jiǎn tǐ zhōng wén",
+            "name": "pīn yīn",
             "region": "zhōng guó dà lù",
             "bidirectional": false
         },
         "zh_pyw": {
-            "name": "Pīnyīn jiǎntǐ zhōngwén",
+            "name": "Pīnyīn",
             "region": "Zhōngguó dàlù",
             "bidirectional": false
         },
         "zh_ipa": {
-            "name": "t͡ɕjɛn˨˩˦ tʰi˨˩˦ t͡ʂʊŋ˥ wən˧ IPA",
+            "name": "IPA",
             "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
             "bidirectional": false
         },
         "zh_bpmf": {
-            "name": "ㄓㄨˋ ㄧㄣ ㄐㄧㄢˇ ㄊㄧˇ ㄓㄨㄥ ㄨㄣˊ",
+            "name": "ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ",
             "region": "ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ",
+            "bidirectional": false
+        },
+        "zh_wg": {
+            "name": "Wade–Giles",
+            "region": "chung¹ kuo² ta⁴ lu⁴",
+            "bidirectional": false
+        },
+        "zh_gr": {
+            "name": "Gwoyeu Romatzyh",
+            "region": "jong gwo dah luh",
             "bidirectional": false
         }
     }

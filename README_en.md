@@ -4,7 +4,7 @@
 
 ----
 
-This project provides a resource package that converts the source strings of Minecraft: Java Edition language files into Katakanas and Man'yōganas, and converts Simplified Chinese into Chinese Pinyin, Bopomofo and IPA.
+This project provides a resource package that converts the source strings of Minecraft: Java Edition language files into Katakanas and Man'yōganas, and converts Simplified Chinese into Pinyin, Bopomofo and IPA.
 
 Please use the mod [Modern UI](https://modrinth.com/mod/modern-ui) to make the game support modern font features to ensure that all characters are displayed normally.
 
@@ -44,7 +44,7 @@ The resource pack added 6 languages into the game:
 
 - **"pīn yīn jiǎn tǐ zhōng wén (char, zhōng guó dà lù)"**
   - i.e. "Pinyin Simplified Chinese (Chinese mainland)".
-  - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of characters.
+  - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of characters.
 
 > [!NOTE]
 > Transliteration of Chinese uses the libraries `pypinyin` and `pypinyin_dict`, supplements the data of [cc_cedict.org](https://cc-cedict.org/), and manually adds the pronunciation of some words.
@@ -53,7 +53,7 @@ The resource pack added 6 languages into the game:
 
 - **"Pīnyīn jiǎntǐ zhōngwén (Zhōngguó dàlù)"**
   - i.e. "Pinyin Simplified Chinese (Chinese mainland)".
-  - Once selected, all strings will be changed to Chinese Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
+  - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
 
 > [!IMPORTANT]
 > The word segmentation of Chinese uses the library `jieba`, with configurations of the dictionaries and corrections.

@@ -52,6 +52,10 @@ tone_to_ipa: Ldata = {
     "4": "˥˩",
     "5": "",
 }
+with open(P / "data" / "py2wg.json", "r", encoding="utf-8") as f:
+    pinyin_to_wadegiles: Ldata = json.load(f)
+with open(P / "data" / "py2gr.json", "r", encoding="utf-8") as f:
+    pinyin_to_romatzyh: Ldata = json.load(f)
 with open(P / "data" / "rep_zh_pyw.json", "r", encoding="utf-8") as f:
     rep_zh_pyw: Ldata = json.load(f)
 with open(P / "data" / "fixed_zh_pyw.json", "r", encoding="utf-8") as f:
@@ -118,8 +122,7 @@ def to_pinyin(s: str) -> str:
     :return: 转换结果，字符串
     """
 
-    pinyin_list = lazy_pinyin(s, style=Style.TONE)
-    return " ".join(pinyin_list)
+    return " ".join(lazy_pinyin(s, style=Style.TONE))
 
 
 def to_pinyin_word(s: str) -> str:
@@ -146,20 +149,6 @@ def to_pinyin_word(s: str) -> str:
     return result[:1].upper() + result[1:]
 
 
-def to_bopomofo(s: str) -> str:
-    """
-    将字符串中的汉字转写为注音符号，单字之间使用空格分开。
-
-    :param s: 需要转换的字符串
-    :type s: str
-
-    :return: 转换结果，字符串
-    """
-
-    bopomofo_list = lazy_pinyin(s, style=Style.BOPOMOFO)
-    return " ".join(bopomofo_list)
-
-
 def to_ipa(s: str) -> str:
     """
     将字符串中的汉字转写为IPA，单字之间使用空格分开。
@@ -182,6 +171,48 @@ def to_ipa(s: str) -> str:
         ipa_list.append(f"{ipa}{tone_ipa}")
 
     return " ".join(ipa_list)
+
+
+def to_bopomofo(s: str) -> str:
+    """
+    将字符串中的汉字转写为注音符号，单字之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+
+    return " ".join(lazy_pinyin(s, style=Style.BOPOMOFO))
+
+
+def to_wadegiles(s: str) -> str:
+    """
+    将字符串中的汉字转写为威妥玛拼音，单字之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: 字符串
+
+    :return: 转换结果，字符串
+    """
+
+    pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
+    return " ".join([pinyin_to_wadegiles.get(_, _) for _ in pinyin_list])
+
+
+def to_romatzyh(s: str) -> str:
+    """
+    将字符串中的汉字转写为国语罗马字，单字之间使用空格分开。
+
+    :param s: 需要转换的字符串
+    :type s: 字符串
+
+    :return: 转换结果，字符串
+    """
+
+    s.replace("不", "bu")
+    pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
+    return " ".join([pinyin_to_romatzyh.get(_, _) for _ in pinyin_list])
 
 
 # 读取语言文件
@@ -227,15 +258,13 @@ save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
 save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word, fixed_zh_pyw)
 save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
 save_to_json(data["zh_cn"], "zh_bpmf.json", to_bopomofo)
+save_to_json(data["zh_cn"], "zh_wg.json", to_wadegiles)
+save_to_json(data["zh_cn"], "zh_gr.json", to_romatzyh)
 
 
 # 生成资源包
 pack_dir = P / "unreadable_language_pack.zip"
 with zf.ZipFile(pack_dir, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
     z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
-    z.write(P / "output" / "ja_kk.json", arcname="assets/minecraft/lang/ja_kk.json")
-    z.write(P / "output" / "ja_my.json", arcname="assets/minecraft/lang/ja_my.json")
-    z.write(P / "output" / "zh_py.json", arcname="assets/minecraft/lang/zh_py.json")
-    z.write(P / "output" / "zh_pyw.json", arcname="assets/minecraft/lang/zh_pyw.json")
-    z.write(P / "output" / "zh_ipa.json", arcname="assets/minecraft/lang/zh_ipa.json")
-    z.write(P / "output" / "zh_bpmf.json", arcname="assets/minecraft/lang/zh_bpmf.json")
+    for l in list(P.glob("output/*.json")):
+        z.write(l, arcname=f"assets/minecraft/lang/{l.parts[-1]}")
