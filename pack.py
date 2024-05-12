@@ -16,35 +16,35 @@ import jieba
 # 当前绝对路径
 P = Path(__file__).resolve().parent
 
+
+def load_json(file: str, folder: str = "data") -> Ldata:
+    """
+    加载JSON文件。
+
+    :param file: 需要加载的文件
+    :type file: str
+
+    :param folder: 存放的文件夹
+    :type folder: str
+
+    :return: 加载结果，字典
+    """
+
+    with open(P / folder / f"{file}.json", "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
 # 初始化pypinyin
 cc_cedict.load()
 di.load()
-load_phrases_dict({"行商": [["xíng"], ["shāng"]]})
-load_phrases_dict({"校频": [["jiào"], ["pín"]]})
-load_phrases_dict({"藤蔓": [["téng"], ["wàn"]]})
-load_phrases_dict({"方框": [["fāng"], ["kuàng"]]})
-load_phrases_dict({"切制": [["qiē"], ["zhì"]]})
-load_phrases_dict({"到了": [["dào"], ["le"]]})
-load_phrases_dict({"子串": [["zǐ"], ["chuàn"]]})
-load_phrases_dict({"结果": [["jié"], ["guǒ"]]})
-load_phrases_dict({"力量": [["lì"], ["liàng"]]})
-load_phrases_dict({"树荫": [["shù"], ["yīn"]]})
-load_phrases_dict({"看来": [["kàn"], ["lái"]]})
-load_phrases_dict({"困难": [["kùn"], ["nán"]]})
-load_phrases_dict({"尺寸": [["chǐ"], ["cùn"]]})
-load_phrases_dict({"转动": [["zhuàn"], ["dòng"]]})
-load_phrases_dict({"中的": [["zhōng"], ["de"]]})
-load_phrases_dict({"拍打": [["pāi"], ["dǎ"]]})
-load_phrases_dict({"别人": [["bié"], ["rén"]]})
-load_phrases_dict({"位置": [["wèi"], ["zhì"]]})
-load_phrases_dict({"干海带": [["gān"], ["hǎi"], ["dài"]]})
+phrases = load_json("phrases")
+load_phrases_dict({k: [[_] for _ in v.split()] for k, v in phrases.items()})
 
 # 初始化jieba
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
-# 初始化自定义数据
-with open(P / "data" / "py2ipa.json", "r", encoding="utf-8") as f:
-    pinyin_to_ipa: Ldata = json.load(f)
+# 初始化其他自定义数据
+pinyin_to_ipa = load_json("py2ipa")
 tone_to_ipa: Ldata = {
     "1": "˥",
     "2": "˧˥",
@@ -52,18 +52,12 @@ tone_to_ipa: Ldata = {
     "4": "˥˩",
     "5": "",
 }
-with open(P / "data" / "py2wg.json", "r", encoding="utf-8") as f:
-    pinyin_to_wadegiles: Ldata = json.load(f)
-with open(P / "data" / "py2gr.json", "r", encoding="utf-8") as f:
-    pinyin_to_romatzyh: Ldata = json.load(f)
-with open(P / "data" / "rep_zh_pyw.json", "r", encoding="utf-8") as f:
-    rep_zh_pyw: Ldata = json.load(f)
-with open(P / "data" / "fixed_zh_pyw.json", "r", encoding="utf-8") as f:
-    fixed_zh_pyw: Ldata = json.load(f)
-with open(P / "data" / "rep_ja_kk.json", "r", encoding="utf-8") as f:
-    rep_ja_kk: Ldata = json.load(f)
-with open(P / "data" / "manyogana.json", "r", encoding="utf-8") as f:
-    manyoganas_dict: Ldata = json.load(f)
+pinyin_to_wadegiles = load_json("py2wg")
+pinyin_to_romatzyh = load_json("py2gr")
+rep_zh_pyw = load_json("rep_zh_pyw")
+fixed_zh_pyw = load_json("fixed_zh_pyw")
+rep_ja_kk = load_json("rep_ja_kk")
+manyoganas_dict = load_json("manyogana")
 
 
 def replace_multiple(s: str, rep: Ldata) -> str:
@@ -227,8 +221,7 @@ def to_romatzyh(s: str) -> str:
 # 读取语言文件
 data: dict[str, Ldata] = {}
 for lang_name in ["en_us", "zh_cn"]:
-    with open(P / "source" / f"{lang_name}.json", "r", encoding="utf-8") as f:
-        data[lang_name] = json.load(f)
+    data[lang_name] = load_json(lang_name, "source")
 
 
 # 生成语言文件
