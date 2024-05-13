@@ -33,7 +33,7 @@ The resource pack added 9 languages into the game:
 - **"エングリスホ (カタカナ)"** ([`ja_kk.json`](output/ja_kk.json))
   - i.e. "English (Katakana)".
   - Once selected, all strings will be changed to Katakana transliterated from English.
-- **"依尓愚煎須百 (万葉仮名)"** ([`ja_my.json`](output/ja_my.json))
+- **"江尓具利須保 (万葉仮名)"** ([`ja_my.json`](output/ja_my.json))
   - i.e. "English (Man'yōgana)".
   - Once selected, all character strings will be converted into Man'yōganas transliterated from English. In order to ensure that the generated results do not deviate too much, only one of the many possibilities of Man'yōganas is selected.
 

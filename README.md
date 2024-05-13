@@ -33,7 +33,7 @@ pip install -r requirements.txt
 - **“エングリスホ (カタカナ)”** （[`ja_kk.json`](output/ja_kk.json)）
   - 即“English (Katakana)”。
   - 选择之后，所有字符串会变为英文转写而来的片假名。
-- **“依尓愚煎須百 (万葉仮名)”** （[`ja_my.json`](output/ja_my.json)）
+- **“江尓具利須保 (万葉仮名)”** （[`ja_my.json`](output/ja_my.json)）
   - 即“English (Man'yōgana)”。
   - 选择之后，所有字符串会变为英文转写而来的万叶假名。为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
 

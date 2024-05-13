@@ -79,6 +79,23 @@ def replace_multiple(s: str, rep: Ldata) -> str:
     return s
 
 
+def capitalize_lines(result: str) -> str:
+    """
+    处理句首大写，字符串中带换行符的单独处理。
+
+    :param s: 需要转换的字符串
+    :type s: str
+
+    :return: 转换结果，字符串
+    """
+
+    if "\n" in result:
+        lines = result.splitlines()
+        capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
+        return "\n".join(capitalized_lines)
+    return result[:1].upper() + result[1:]
+
+
 def to_katakana(s: str) -> str:
     """
     将字符串中的英文转写为片假名。
@@ -135,7 +152,7 @@ def to_pinyin_word(s: str) -> str:
 
     for seg in seg_list:
         pinyin_list = lazy_pinyin(seg, style=Style.TONE)
-        # 处理零声母分隔符
+        # 处理隔音符号
         for i, py in enumerate(pinyin_list[1:], 1):
             if py.startswith(tuple("aāááàoōóǒòeēéěè")):
                 pinyin_list[i] = f"'{py}"
@@ -144,12 +161,7 @@ def to_pinyin_word(s: str) -> str:
     # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh_pyw)
 
-    # 处理句首大写，字符串中带换行符的单独处理
-    if "\n" in result:
-        lines = result.splitlines()
-        capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
-        return "\n".join(capitalized_lines)
-    return result[:1].upper() + result[1:]
+    return capitalize_lines(result)
 
 
 def to_ipa(s: str) -> str:
@@ -221,21 +233,22 @@ def to_romatzyh(s: str) -> str:
         seg = seg.replace("不", "bu")
         pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
         gr_list = [pinyin_to_romatzyh.get(_, _) for _ in pinyin_list]
-        # 处理零声母分隔符
-        for i, gr in enumerate(gr_list[1:], 1):
-            if gr_list[i - 1][-1] + gr in pinyin_to_romatzyh.values():
-                gr_list[i] = f"'{gr}"
+        # 处理隔音符号
+        values = set(pinyin_to_romatzyh.values())
+        for i in range(1, len(gr_list)):
+            for j in range(len(gr_list[i - 1])):
+                prefix = gr_list[i - 1][: -j - 1]
+                suffix = gr_list[i - 1][-j:]
+                if (suffix + gr_list[i] in values) and (prefix in values):
+                    gr_list[i] = f"'{gr_list[i]}"
+                    break
+
         output_list.append("".join(gr_list).replace("''", "'"))
 
     # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh_pyw)
 
-    # 处理句首大写，字符串中带换行符的单独处理
-    if "\n" in result:
-        lines = result.splitlines()
-        capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
-        return "\n".join(capitalized_lines)
-    return result[:1].upper() + result[1:]
+    return capitalize_lines(result)
 
 
 def to_cyrillic(s: str) -> str:
