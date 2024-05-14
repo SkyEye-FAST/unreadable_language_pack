@@ -204,7 +204,7 @@ def to_bopomofo(s: str) -> str:
 
 def to_wadegiles(s: str) -> str:
     """
-    将字符串中的汉字转写为威妥玛拼音，单字之间使用空格分开。
+    将字符串中的汉字转写为威妥玛拼音，单字之间使用连字符分开，词之间使用空格分开。
 
     :param s: 需要转换的字符串
     :type s: 字符串
@@ -228,7 +228,7 @@ def to_wadegiles(s: str) -> str:
 
 def to_romatzyh(s: str) -> str:
     """
-    将字符串中的汉字转写为国语罗马字，单字之间使用空格分开。
+    将字符串中的汉字转写为国语罗马字，词之间使用空格分开。
 
     :param s: 需要转换的字符串
     :type s: 字符串
