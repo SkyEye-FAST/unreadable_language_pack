@@ -212,8 +212,18 @@ def to_wadegiles(s: str) -> str:
     :return: 转换结果，字符串
     """
 
-    pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
-    return " ".join([pinyin_to_wadegiles.get(_, _) for _ in pinyin_list])
+    seg_list: list[str] = jieba.lcut(s)
+    output_list: list[str] = []
+
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
+        gr_list = [pinyin_to_wadegiles.get(_, _) for _ in pinyin_list]
+        output_list.append("-".join(gr_list))
+
+    # 调整格式
+    result = replace_multiple(" ".join(output_list), rep_zh_pyw)
+
+    return capitalize_lines(result)
 
 
 def to_romatzyh(s: str) -> str:
@@ -243,7 +253,7 @@ def to_romatzyh(s: str) -> str:
                     gr_list[i] = f"'{gr_list[i]}"
                     break
 
-        output_list.append("".join(gr_list).replace("''", "'"))
+        output_list.append("".join(gr_list))
 
     # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh_pyw)
