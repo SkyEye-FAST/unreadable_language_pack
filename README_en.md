@@ -90,6 +90,9 @@ The resource pack added 9 languages into the game:
 ![Sample](sample/sample_zh_pyw.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
+![Sample](sample/sample_zh_wg.png)
+![Sample](sample/sample_zh_gr.png)
+![Sample](sample/sample_zh_cy.png)
 
 ## Feedback
 

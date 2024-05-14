@@ -90,6 +90,9 @@ pip install -r requirements.txt
 ![Sample](sample/sample_zh_pyw.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
+![Sample](sample/sample_zh_wg.png)
+![Sample](sample/sample_zh_gr.png)
+![Sample](sample/sample_zh_cy.png)
 
 ## 反馈
 

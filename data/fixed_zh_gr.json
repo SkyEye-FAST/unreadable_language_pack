@@ -1,6 +1,5 @@
 {
     "advancements.sad_label": ":(",
-    "arguments.swizzle.invalid": "Wushiaw .de tzuohbiau tzuuher, shiuyaw 'x'、'y' her 'z' .de tzuuher",
     "block.minecraft.banner.base.black": "Hei dii",
     "block.minecraft.banner.base.blue": "Lan dii",
     "block.minecraft.banner.base.brown": "Tzong dii",
@@ -194,7 +193,6 @@
     "block.minecraft.banner.triangle_top.white": "Bairseh diing sanjeau",
     "block.minecraft.banner.triangle_top.yellow": "Hwangseh diing sanjeau",
     "commands.debug.function.noReturnRun": "Shyyyonq /return run shyr wufaa jueitzong",
-    "commands.trigger.failed.invalid": "Nii jyyneng chuhfa 'trigger' leyshyng .de jihfen shianq",
     "debug.copy_location.help": "F3 + C = yonq /tp minqlinq .de shyngshyh fuhjyh nii .de weyjyh, annjuh F3 + C shyy youshih bengkuey",
     "debug.gamemodes.press_f4": "[ F4 ]",
     "optimizeWorld.stage.failed": "Shybay .lhe！:(",
