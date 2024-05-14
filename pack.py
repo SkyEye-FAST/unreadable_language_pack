@@ -54,9 +54,11 @@ tone_to_ipa: Ldata = {
 }
 pinyin_to_wadegiles = load_json("py2wg")
 pinyin_to_romatzyh = load_json("py2gr")
+gr_values = set(pinyin_to_romatzyh.values())
 rep_zh_pyw = load_json("rep_zh_pyw")
 fixed_zh_pyw = load_json("fixed_zh_pyw")
 fixed_zh_gr = load_json("fixed_zh_gr")
+fixed_zh_wg = load_json("fixed_zh_wg")
 rep_ja_kk = load_json("rep_ja_kk")
 manyoganas_dict = load_json("manyogana")
 
@@ -244,12 +246,11 @@ def to_romatzyh(s: str) -> str:
         pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
         gr_list = [pinyin_to_romatzyh.get(_, _) for _ in pinyin_list]
         # 处理隔音符号
-        values = set(pinyin_to_romatzyh.values())
         for i in range(1, len(gr_list)):
             for j in range(len(gr_list[i - 1])):
                 prefix = gr_list[i - 1][: -j - 1]
                 suffix = gr_list[i - 1][-j:]
-                if (suffix + gr_list[i] in values) and (prefix in values):
+                if (suffix + gr_list[i] in gr_values) and (prefix in gr_values):
                     gr_list[i] = f"'{gr_list[i]}"
                     break
 
@@ -282,7 +283,7 @@ for lang_name in ["en_us", "zh_cn"]:
 
 # 生成语言文件
 def save_to_json(
-    input_data: Ldata,
+    input_lang: str,
     output_file: str,
     func: Callable[[str], str],
     fix_dict: Ldata = None,
@@ -290,10 +291,10 @@ def save_to_json(
     """
     将生成的语言文件保存至JSON。
 
-    :param input_data: 需要保存的语言文件
-    :type s: dict[str, str]
+    :param input_data: 源语言名
+    :type input_lang: str
 
-    :param output_file: 保存的文件名
+    :param output_file: 保存的文件名，无格式后缀
     :type rep: str
 
     :param func: 生成语言文件所用的函数
@@ -303,22 +304,22 @@ def save_to_json(
     :type fix_dict: dict[str, str]
     """
 
-    output_dict = {k: func(v) for k, v in input_data.items()}
+    output_dict = {k: func(v) for k, v in data[input_lang].items()}
     if fix_dict:
         output_dict.update(fix_dict)
-    with open(P / "output" / output_file, "w", encoding="utf-8") as j:
+    with open(P / "output" / f"{output_file}.json", "w", encoding="utf-8") as j:
         json.dump(output_dict, j, indent=2, ensure_ascii=False)
 
 
-save_to_json(data["en_us"], "ja_kk.json", to_katakana)
-save_to_json(data["en_us"], "ja_my.json", to_manyogana)
-save_to_json(data["zh_cn"], "zh_py.json", to_pinyin)
-save_to_json(data["zh_cn"], "zh_pyw.json", to_pinyin_word, fixed_zh_pyw)
-save_to_json(data["zh_cn"], "zh_ipa.json", to_ipa)
-save_to_json(data["zh_cn"], "zh_bpmf.json", to_bopomofo)
-save_to_json(data["zh_cn"], "zh_wg.json", to_wadegiles)
-save_to_json(data["zh_cn"], "zh_gr.json", to_romatzyh, fixed_zh_gr)
-save_to_json(data["zh_cn"], "zh_cy.json", to_cyrillic)
+save_to_json("en_us", "ja_kk", to_katakana)
+save_to_json("en_us", "ja_my", to_manyogana)
+save_to_json("zh_cn", "zh_py", to_pinyin)
+save_to_json("zh_cn", "zh_pyw", to_pinyin_word, fixed_zh_pyw)
+save_to_json("zh_cn", "zh_ipa", to_ipa)
+save_to_json("zh_cn", "zh_bpmf", to_bopomofo)
+save_to_json("zh_cn", "zh_wg", to_wadegiles, fixed_zh_wg)
+save_to_json("zh_cn", "zh_gr", to_romatzyh, fixed_zh_gr)
+save_to_json("zh_cn", "zh_cy", to_cyrillic)
 
 
 # 生成资源包
