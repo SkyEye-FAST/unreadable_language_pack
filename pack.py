@@ -44,6 +44,7 @@ load_phrases_dict({k: [[_] for _ in v.split()] for k, v in phrases.items()})
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
 # 初始化其他自定义数据
+finals = tuple("aāááàoōóǒòeēéěè")
 pinyin_to_ipa = load_json("py2ipa")
 tone_to_ipa: Ldata = {
     "1": "˥",
@@ -156,7 +157,7 @@ def to_pinyin_word(s: str) -> str:
         pinyin_list = lazy_pinyin(seg, style=Style.TONE)
         # 处理隔音符号
         for i, py in enumerate(pinyin_list[1:], 1):
-            if py.startswith(tuple("aāááàoōóǒòeēéěè")):
+            if py.startswith(finals):
                 pinyin_list[i] = f"'{py}"
         output_list.append("".join(pinyin_list))
 
