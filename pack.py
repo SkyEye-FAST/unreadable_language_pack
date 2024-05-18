@@ -17,10 +17,6 @@ P = Path(__file__).resolve().parent
 # 类型别名
 Ldata: TypeAlias = Dict[str, str]
 
-# 初始化pypinyin
-cc_cedict.load()
-di.load()
-
 
 def load_json(file: str, folder: str = "data") -> Ldata:
     """
@@ -38,7 +34,9 @@ def load_json(file: str, folder: str = "data") -> Ldata:
         return json.load(f)
 
 
-# 初始化数据
+# 初始化pypinyin
+cc_cedict.load()
+di.load()
 phrases = load_json("phrases")
 load_phrases_dict({k: [[_] for _ in v.split()] for k, v in phrases.items()})
 
