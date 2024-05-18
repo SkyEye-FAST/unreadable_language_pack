@@ -4,7 +4,7 @@
 import json
 import zipfile as zf
 from pathlib import Path
-from typing import Callable, TypeAlias, Optional, Dict, List
+from typing import Callable, TypeAlias, Optional, Dict, List, Set
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
@@ -78,7 +78,7 @@ def replace_multiple(text: str, replacements: Ldata) -> str:
         replacements (Ldata): 替换的内容
 
     Returns:
-        str: 替换结果，字符串
+        str: 替换结果
     """
 
     for old, new in replacements.items():
@@ -94,7 +94,7 @@ def capitalize_lines(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     if "\n" in text:
@@ -102,6 +102,29 @@ def capitalize_lines(text: str) -> str:
         capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
         return "\n".join(capitalized_lines)
     return text[:1].upper() + text[1:]
+
+
+def add_apostrophes(input_list: List[str], values: Set[str]) -> List[str]:
+    """
+    处理隔音符号。
+
+    Args:
+        input_list (List[str]): 需要转换的字符串
+        values (Set[str]): 有效的拼写
+
+    Returns:
+        list: 处理结果
+    """
+
+    for i in range(1, len(input_list)):
+        for j in range(len(input_list[i - 1])):
+            prefix = input_list[i - 1][: -j - 1]
+            suffix = input_list[i - 1][-j:]
+            if (suffix + input_list[i] in values) and (prefix in values):
+                input_list[i] = f"'{input_list[i]}"
+                break
+
+    return input_list
 
 
 def to_katakana(text: str) -> str:
@@ -112,7 +135,7 @@ def to_katakana(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     return replace_multiple(tk(text).katakana, rep_ja_kk)
@@ -126,7 +149,7 @@ def to_manyogana(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     text = to_katakana(text)
@@ -141,7 +164,7 @@ def to_pinyin(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     seg_list: List[str] = jieba.lcut(text)
@@ -170,7 +193,7 @@ def to_ipa(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     pinyin_list = lazy_pinyin(text, style=Style.TONE3, neutral_tone_with_five=True)
@@ -189,7 +212,7 @@ def to_bopomofo(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     return " ".join(lazy_pinyin(text, style=Style.BOPOMOFO))
@@ -203,7 +226,7 @@ def to_wadegiles(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     seg_list: List[str] = jieba.lcut(text)
@@ -228,7 +251,7 @@ def to_romatzyh(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     seg_list: List[str] = jieba.lcut(text)
@@ -238,19 +261,9 @@ def to_romatzyh(text: str) -> str:
         seg = seg.replace("不", "bu")
         pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
         gr_list = [pinyin_to_romatzyh.get(p, p) for p in pinyin_list]
-        # 处理隔音符号
-        for i in range(1, len(gr_list)):
-            for j in range(len(gr_list[i - 1])):
-                prefix = gr_list[i - 1][: -j - 1]
-                suffix = gr_list[i - 1][-j:]
-                if (suffix + gr_list[i] in gr_values) and (prefix in gr_values):
-                    gr_list[i] = f"'{gr_list[i]}"
-                    break
+        output_list.append("".join(add_apostrophes(gr_list, gr_values)))
 
-        output_list.append("".join(gr_list))
-
-    # 调整格式
-    result = replace_multiple(" ".join(output_list), rep_zh)
+    result = replace_multiple(" ".join(output_list), rep_zh)  # 调整格式
 
     return capitalize_lines(result)
 
@@ -263,7 +276,7 @@ def to_cyrillic(text: str) -> str:
         text (str): 需要转换的字符串
 
     Returns:
-        str: 转换结果，字符串
+        str: 转换结果
     """
 
     seg_list: List[str] = jieba.lcut(text)
@@ -272,18 +285,9 @@ def to_cyrillic(text: str) -> str:
     for seg in seg_list:
         pinyin_list = lazy_pinyin(seg)
         cy_list = [pinyin_to_cyrillic.get(p, p) for p in pinyin_list]
-        # 处理隔音符号
-        for i in range(1, len(cy_list)):
-            for j in range(len(cy_list[i - 1])):
-                prefix = cy_list[i - 1][: -j - 1]
-                suffix = cy_list[i - 1][-j:]
-                if (suffix + cy_list[i] in cy_values) and (prefix in cy_values):
-                    cy_list[i] = f"'{cy_list[i]}"
-                    break
-        output_list.append("".join(cy_list))
+        output_list.append("".join(add_apostrophes(cy_list, cy_values)))
 
-    # 调整格式
-    result = replace_multiple(" ".join(output_list), rep_zh)
+    result = replace_multiple(" ".join(output_list), rep_zh)  # 调整格式
 
     return capitalize_lines(result)
 
@@ -293,7 +297,7 @@ def save_to_json(
     output_file: str,
     func: Callable[[str], str],
     fix_dict: Optional[Ldata] = None,
-):
+) -> None:
     """
     将生成的语言文件保存至JSON。
 
@@ -311,7 +315,7 @@ def save_to_json(
         json.dump(output_dict, j, indent=2, ensure_ascii=False)
 
 
-def main():
+def main() -> None:
     """
     主函数，生成语言文件并打包成资源包。
     """
