@@ -4,9 +4,7 @@
 import json
 import zipfile as zf
 from pathlib import Path
-from typing import Callable, TypeAlias
-
-Ldata: TypeAlias = dict[str, str]
+from typing import Callable, TypeAlias, Optional, Dict
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
@@ -15,6 +13,13 @@ import jieba
 
 # 当前绝对路径
 P = Path(__file__).resolve().parent
+
+# 类型别名
+Ldata: TypeAlias = Dict[str, str]
+
+# 初始化pypinyin
+cc_cedict.load()
+di.load()
 
 
 def load_json(file: str, folder: str = "data") -> Ldata:
@@ -34,9 +39,7 @@ def load_json(file: str, folder: str = "data") -> Ldata:
         return json.load(f)
 
 
-# 初始化pypinyin
-cc_cedict.load()
-di.load()
+# 初始化数据
 phrases = load_json("phrases")
 load_phrases_dict({k: [[_] for _ in v.split()] for k, v in phrases.items()})
 
@@ -46,13 +49,7 @@ jieba.load_userdict(str(P / "data" / "dict.txt"))
 # 初始化其他自定义数据
 finals = tuple("aāááàoōóǒòeēéěè")
 pinyin_to_ipa = load_json("py2ipa")
-tone_to_ipa: Ldata = {
-    "1": "˥",
-    "2": "˧˥",
-    "3": "˨˩˦",
-    "4": "˥˩",
-    "5": "",
-}
+tone_to_ipa: Ldata = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}
 pinyin_to_wadegiles = load_json("py2wg")
 pinyin_to_romatzyh = load_json("py2gr")
 gr_values = set(pinyin_to_romatzyh.values())
@@ -64,7 +61,7 @@ rep_ja_kk = load_json("rep_ja_kk")
 manyoganas_dict = load_json("manyogana")
 
 
-def replace_multiple(s: str, rep: Ldata) -> str:
+def replace_multiple(text: str, replacements: Ldata) -> str:
     """
     对字符串进行多次替换。
 
@@ -77,81 +74,80 @@ def replace_multiple(s: str, rep: Ldata) -> str:
     :return: 替换结果，字符串
     """
 
-    for old, new in rep.items():
-        s = s.replace(old, new)
-    return s
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text
 
 
-def capitalize_lines(result: str) -> str:
+def capitalize_lines(text: str) -> str:
     """
     处理句首大写，字符串中带换行符的单独处理。
 
-    :param s: 需要转换的字符串
-    :type s: str
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    if "\n" in result:
-        lines = result.splitlines()
+    if "\n" in text:
+        lines = text.splitlines()
         capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
         return "\n".join(capitalized_lines)
-    return result[:1].upper() + result[1:]
+    return text[:1].upper() + text[1:]
 
 
-def to_katakana(s: str) -> str:
+def to_katakana(text: str) -> str:
     """
     将字符串中的英文转写为片假名。
 
-    :param s: 需要转换的字符串
-    :type s: str
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    return replace_multiple(tk(s).katakana, rep_ja_kk)
+    return replace_multiple(tk(text).katakana, rep_ja_kk)
 
 
-def to_manyogana(s: str) -> str:
+def to_manyogana(text: str) -> str:
     """
     将字符串中的片假名转写为万叶假名。
-    为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
 
-    :param s: 需要转换的字符串
-    :type s: str
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    s = to_katakana(s)
-    return "".join([manyoganas_dict.get(char, char) for char in s])
+    text = to_katakana(text)
+    return "".join([manyoganas_dict.get(char, char) for char in text])
 
 
-def to_pinyin(s: str) -> str:
+def to_pinyin(text: str) -> str:
     """
     将字符串中的汉字转写为拼音，单字之间使用空格分开。
 
-    :param s: 需要转换的字符串
-    :type s: 字符串
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    return " ".join(lazy_pinyin(s, style=Style.TONE))
+    return " ".join(lazy_pinyin(text, style=Style.TONE))
 
 
-def to_pinyin_word(s: str) -> str:
+def to_pinyin_word(text: str) -> str:
     """
     将字符串中的汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。
 
-    :param s: 需要转换的字符串
-    :type s: str
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    seg_list: list[str] = jieba.lcut(s)
-    output_list: list[str] = []
+    seg_list = jieba.lcut(text)
+    output_list = []
 
     for seg in seg_list:
         pinyin_list = lazy_pinyin(seg, style=Style.TONE)
@@ -167,60 +163,54 @@ def to_pinyin_word(s: str) -> str:
     return capitalize_lines(result)
 
 
-def to_ipa(s: str) -> str:
+def to_ipa(text: str) -> str:
     """
     将字符串中的汉字转写为IPA，单字之间使用空格分开。
     IPA数据来自@UntPhesoca，宽式标音。
 
-    :param s: 需要转换的字符串
-    :type s: str
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    pinyin_list = lazy_pinyin(s, style=Style.TONE3, neutral_tone_with_five=True)
-    ipa_list: list[str] = []
-
-    for pinyin in pinyin_list:
-        tone = pinyin[-1]
-        pinyin = pinyin[:-1]
-
-        ipa = pinyin_to_ipa.get(pinyin, pinyin)
-        tone_ipa = tone_to_ipa.get(tone, tone)
-        ipa_list.append(f"{ipa}{tone_ipa}")
-
+    pinyin_list = lazy_pinyin(text, style=Style.TONE3, neutral_tone_with_five=True)
+    ipa_list = [
+        f"{pinyin_to_ipa.get(p[:-1], p[:-1])}{tone_to_ipa.get(p[-1], p[-1])}"
+        for p in pinyin_list
+    ]
     return " ".join(ipa_list)
 
 
-def to_bopomofo(s: str) -> str:
+def to_bopomofo(text: str) -> str:
     """
     将字符串中的汉字转写为注音符号，单字之间使用空格分开。
 
-    :param s: 需要转换的字符串
-    :type s: str
+    :param text: 需要转换的字符串
+    :type text: str
 
     :return: 转换结果，字符串
     """
 
-    return " ".join(lazy_pinyin(s, style=Style.BOPOMOFO))
+    return " ".join(lazy_pinyin(text, style=Style.BOPOMOFO))
 
 
-def to_wadegiles(s: str) -> str:
+def to_wadegiles(text: str) -> str:
     """
     将字符串中的汉字转写为威妥玛拼音，单字之间使用连字符分开，词之间使用空格分开。
 
-    :param s: 需要转换的字符串
-    :type s: 字符串
+    :param text: 需要转换的字符串
+    :type text: 字符串
 
     :return: 转换结果，字符串
     """
 
-    seg_list: list[str] = jieba.lcut(s)
+    seg_list: list[str] = jieba.lcut(text)
     output_list: list[str] = []
 
     for seg in seg_list:
         pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        gr_list = [pinyin_to_wadegiles.get(_, _) for _ in pinyin_list]
+        gr_list = [pinyin_to_wadegiles.get(p, p) for p in pinyin_list]
         output_list.append("-".join(gr_list))
 
     # 调整格式
@@ -229,23 +219,23 @@ def to_wadegiles(s: str) -> str:
     return capitalize_lines(result)
 
 
-def to_romatzyh(s: str) -> str:
+def to_romatzyh(text: str) -> str:
     """
     将字符串中的汉字转写为国语罗马字，词之间使用空格分开。
 
-    :param s: 需要转换的字符串
-    :type s: 字符串
+    :param text: 需要转换的字符串
+    :type text: 字符串
 
     :return: 转换结果，字符串
     """
 
-    seg_list: list[str] = jieba.lcut(s)
+    seg_list: list[str] = jieba.lcut(text)
     output_list: list[str] = []
 
     for seg in seg_list:
         seg = seg.replace("不", "bu")
         pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        gr_list = [pinyin_to_romatzyh.get(_, _) for _ in pinyin_list]
+        gr_list = [pinyin_to_romatzyh.get(p, p) for p in pinyin_list]
         # 处理隔音符号
         for i in range(1, len(gr_list)):
             for j in range(len(gr_list[i - 1])):
@@ -263,31 +253,24 @@ def to_romatzyh(s: str) -> str:
     return capitalize_lines(result)
 
 
-def to_cyrillic(s: str) -> str:
+def to_cyrillic(text: str) -> str:
     """
     将字符串中的汉字转写为西里尔字母，单字之间使用空格分开。
 
-    :param s: 需要转换的字符串
-    :type s: 字符串
+    :param text: 需要转换的字符串
+    :type text: 字符串
 
     :return: 转换结果，字符串
     """
 
-    return " ".join(lazy_pinyin(s, style=Style.CYRILLIC))
+    return " ".join(lazy_pinyin(text, style=Style.CYRILLIC))
 
 
-# 读取语言文件
-data: dict[str, Ldata] = {}
-for lang_name in ["en_us", "zh_cn"]:
-    data[lang_name] = load_json(lang_name, "source")
-
-
-# 生成语言文件
 def save_to_json(
     input_lang: str,
     output_file: str,
     func: Callable[[str], str],
-    fix_dict: Ldata = None,
+    fix_dict: Optional[Ldata] = None,
 ):
     """
     将生成的语言文件保存至JSON。
@@ -302,7 +285,7 @@ def save_to_json(
     :type func: Callable[[str], str]
 
     :param fix_dict: 语言文件中需要修复的内容
-    :type fix_dict: dict[str, str]
+    :type fix_dict: Optional[dict[str, str]]
     """
 
     output_dict = {k: func(v) for k, v in data[input_lang].items()}
@@ -312,6 +295,12 @@ def save_to_json(
         json.dump(output_dict, j, indent=2, ensure_ascii=False)
 
 
+# 读取语言文件
+data: Dict[str, Ldata] = {
+    lang_name: load_json(lang_name, "source") for lang_name in ["en_us", "zh_cn"]
+}
+
+# 生成语言文件
 save_to_json("en_us", "ja_kk", to_katakana)
 save_to_json("en_us", "ja_my", to_manyogana)
 save_to_json("zh_cn", "zh_py", to_pinyin)
@@ -322,10 +311,9 @@ save_to_json("zh_cn", "zh_wg", to_wadegiles, fixed_zh_wg)
 save_to_json("zh_cn", "zh_gr", to_romatzyh, fixed_zh_gr)
 save_to_json("zh_cn", "zh_cy", to_cyrillic)
 
-
 # 生成资源包
 pack_dir = P / "unreadable_language_pack.zip"
 with zf.ZipFile(pack_dir, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
     z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
-    for l in list(P.glob("output/*.json")):
-        z.write(l, arcname=f"assets/minecraft/lang/{l.parts[-1]}")
+    for lang_file in P.glob("output/*.json"):
+        z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
