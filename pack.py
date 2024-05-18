@@ -55,8 +55,9 @@ cy_values = set(pinyin_to_cyrillic.values())  # 西里尔转写的有效拼写
 
 rep_zh = load_json("rep_zh")  # 连写的中文转写方案替换修正
 fixed_zh_py = load_json("fixed_zh_py")  # 汉语拼音修正
-fixed_zh_gr = load_json("fixed_zh_gr")  # 国语罗马字修正
 fixed_zh_wg = load_json("fixed_zh_wg")  # 威妥玛拼音修正
+fixed_zh_gr = load_json("fixed_zh_gr")  # 国语罗马字修正
+fixed_zh_cy = load_json("fixed_zh_cy")  # 西里尔转写修正
 
 rep_ja_kk = load_json("rep_ja_kk")  # 片假名替换修正
 manyoganas_dict = load_json("manyogana")  # 万叶假名
@@ -326,7 +327,7 @@ def main() -> None:
     save_to_json("zh_cn", "zh_bpmf", to_bopomofo)
     save_to_json("zh_cn", "zh_wg", to_wadegiles, fixed_zh_wg)
     save_to_json("zh_cn", "zh_gr", to_romatzyh, fixed_zh_gr)
-    save_to_json("zh_cn", "zh_cy", to_cyrillic)
+    save_to_json("zh_cn", "zh_cy", to_cyrillic, fixed_zh_cy)
 
     # 生成资源包
     pack_dir = P / "unreadable_language_pack.zip"
