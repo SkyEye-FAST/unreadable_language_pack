@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了9种语言：
+资源包向游戏内添加了8种语言：
 
 - **“エングリスホ (カタカナ)”** （[`ja_kk.json`](output/ja_kk.json)）
   - 即“English (Katakana)”。
@@ -42,20 +42,14 @@ pip install -r requirements.txt
 >
 > 转写结果中修复了“Lena Raine”和“Samuel Åberg”的转写，并保留了“C418”。
 
-- **“hàn yǔ pīn yīn (zhōng guó dà lù)”** （[`zh_py.json`](output/zh_py.json)）
-  - 即“拼音 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以字为单位。
-
-> [!NOTE]
-> 汉字标音使用了库`pypinyin`和`pypinyin_dict`，补充了[cc_cedict.org](https://cc-cedict.org/)的数据，并手动添加了某些词语的读音。
->
-> 原则上，读音以普通话音系为准。
-
-- **“Hànyǔ Pīnyīn (Zhōngguó Dàlù)”** （[`zh_pyw.json`](output/zh_pyw.json)）
+- **“Hànyǔ Pīnyīn (Zhōngguó Dàlù)”** （[`zh_py.json`](output/zh_py.json)）
   - 即“拼音 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位，尝试遵循了GB/T 16159-2012。
 
 > [!IMPORTANT]
+> 汉字标音使用了库`pypinyin`和`pypinyin_dict`，补充了[cc_cedict.org](https://cc-cedict.org/)的数据，并手动添加了某些词语的读音。
+>
+> 原则上，读音以普通话音系为准。
 > 中文分词使用了库`jieba`，配置了词库并进行了替换修正。
 >
 > 虽然经过处理，但结果仍然无法保证完全符合GB/T 16159-2012的要求。应加连接号的地方尚未有合适的方法满足要求。
@@ -80,14 +74,13 @@ pip install -r requirements.txt
 - **“Gwoyeu Romatzyh (Jonggwo Dahluh)”** （[`zh_gr.json`](output/zh_gr.json)）
   - 即“国语罗马字 (中国大陆)”。
   - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
-- **“Cyrillized Chinese (чжун1 го2 да4 лу4)”** （[`zh_cy.json`](output/zh_cy.json)）
+- **“Палладицу (Чжунго далу)”** （[`zh_cy.json`](output/zh_cy.json)）
   - 即“西里尔化中文 (中国大陆)”。
   - 选择之后，所有字符串会变为西里尔化的简体中文。
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
 ![Sample](sample/sample_zh_py.png)
-![Sample](sample/sample_zh_pyw.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
 ![Sample](sample/sample_zh_wg.png)

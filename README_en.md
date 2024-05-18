@@ -42,20 +42,15 @@ The resource pack added 9 languages into the game:
 >
 > Transliterations of "Lena Raine" and "Samuel Åberg" will be fixed and "C418" will be retained in the results.
 
-- **"hàn yǔ pīn yīn (zhōng guó dà lù)"** ([`zh_py.json`](output/zh_py.json))
-  - i.e. "Pinyin (Chinese mainland)".
-  - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of characters.
-
-> [!NOTE]
-> Transliteration of Chinese uses the libraries `pypinyin` and `pypinyin_dict`, supplements the data of [cc_cedict.org](https://cc-cedict.org/), and manually adds the pronunciation of some words.
->
-> In principle, the pronunciation is based on the Putonghua phonetic system.
-
 - **"Hànyǔ Pīnyīn (Zhōngguó Dàlù)"** ([`zh_pyw.json`](output/zh_pyw.json))
   - i.e. "Pinyin (Chinese mainland)".
   - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
 
 > [!IMPORTANT]
+> Transliteration of Chinese uses the libraries `pypinyin` and `pypinyin_dict`, supplements the data of [cc_cedict.org](https://cc-cedict.org/), and manually adds the pronunciation of some words.
+>
+> In principle, the pronunciation is based on the Putonghua phonetic system.
+>
 > The word segmentation of Chinese uses the library `jieba`, with configurations of the dictionaries and corrections.
 >
 > Although processed, the results are still not guaranteed to fully comply with the requirements of GB/T 16159-2012. Where dashes should be added, there is no suitable method to meet the requirements.
@@ -80,14 +75,13 @@ The resource pack added 9 languages into the game:
 - **"Gwoyeu Romatzyh (Jonggwo Dahluh)"** ([`zh_gr.json`](output/zh_gr.json))
   - i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
   - Once selected, all strings will be changed to Gwoyeu Romatzyh transliterated from Simp. Chinese.
-- **"Cyrillized Chinese (чжун1 го2 да4 лу4)"** ([`zh_cy.json`](output/zh_cy.json))
-  - i.e. "Cyrillized Chinese (Chinese mainland)”.
+- **"Палладицу (Чжунго далу)"** ([`zh_cy.json`](output/zh_cy.json))
+  - i.e. "Palladitsa (Chinese mainland)”.
   - Once selected, all strings will be changed to Cyrillized Simp. Chinese.
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
 ![Sample](sample/sample_zh_py.png)
-![Sample](sample/sample_zh_pyw.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
 ![Sample](sample/sample_zh_wg.png)
