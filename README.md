@@ -28,7 +28,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了8种语言：
+资源包向游戏内添加了9种语言：
 
 - **“エングリスホ (カタカナ)”** （[`ja_kk.json`](output/ja_kk.json)）
   - 即“English (Katakana)”。
@@ -77,6 +77,9 @@ pip install -r requirements.txt
 - **“Палладицу (Чжунго далу)”** （[`zh_cy.json`](output/zh_cy.json)）
   - 即“西里尔化中文 (中国大陆)”。
   - 选择之后，所有字符串会变为西里尔化的简体中文。
+- **“ثِیَوْعَرݣ‌ٍْ (جْو‌قُوَ دَا‌لُ)”** （[`zh_xj.json`](output/zh_xj.json)）
+  - 即“小儿经 (中国大陆)”。
+  - 选择之后，所有字符串会变为简体中文转写而来的小儿经。
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
@@ -86,6 +89,8 @@ pip install -r requirements.txt
 ![Sample](sample/sample_zh_wg.png)
 ![Sample](sample/sample_zh_gr.png)
 ![Sample](sample/sample_zh_cy.png)
+![Sample](sample/sample_zh_xj.png)
+
 
 ## 反馈
 

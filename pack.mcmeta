@@ -47,6 +47,11 @@
             "name": "Палладицу",
             "region": "Чжунго далу",
             "bidirectional": false
+        },
+        "zh_xj": {
+            "name": "ثِیَوْعَرݣ‌ٍْ",
+            "region": "جْو‌قُوَ دَا‌لُ",
+            "bidirectional": true
         }
     }
 }

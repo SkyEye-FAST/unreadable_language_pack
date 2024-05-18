@@ -78,6 +78,9 @@ The resource pack added 9 languages into the game:
 - **"Палладицу (Чжунго далу)"** ([`zh_cy.json`](output/zh_cy.json))
   - i.e. "Palladitsa (Chinese mainland)”.
   - Once selected, all strings will be changed to Cyrillized Simp. Chinese.
+- **"ثِیَوْعَرݣ‌ٍْ (جْو‌قُوَ دَا‌لُ)"** （[`zh_xj.json`](output/zh_xj.json)）
+  - i.e. "Xiao'erjing (Chinese mainland)”.
+  - Once selected, all strings will be changed to Xiao'erjing transliterated from Simp. Chinese.
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
@@ -87,6 +90,7 @@ The resource pack added 9 languages into the game:
 ![Sample](sample/sample_zh_wg.png)
 ![Sample](sample/sample_zh_gr.png)
 ![Sample](sample/sample_zh_cy.png)
+![Sample](sample/sample_zh_xj.png)
 
 ## Feedback
 

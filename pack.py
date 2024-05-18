@@ -52,12 +52,14 @@ pinyin_to_romatzyh = load_json("py2gr")  # 汉语拼音至国语罗马字
 gr_values = set(pinyin_to_romatzyh.values())  # 国语罗马字的有效拼写
 pinyin_to_cyrillic = load_json("py2cy")  # 汉语拼音至西里尔转写
 cy_values = set(pinyin_to_cyrillic.values())  # 西里尔转写的有效拼写
+pinyin_to_xiaojing = load_json("py2xj")  # 汉语拼音至小儿经
 
 rep_zh = load_json("rep_zh")  # 连写的中文转写方案替换修正
 fixed_zh_py = load_json("fixed_zh_py")  # 汉语拼音修正
 fixed_zh_wg = load_json("fixed_zh_wg")  # 威妥玛拼音修正
 fixed_zh_gr = load_json("fixed_zh_gr")  # 国语罗马字修正
 fixed_zh_cy = load_json("fixed_zh_cy")  # 西里尔转写修正
+fixed_zh_xj = load_json("fixed_zh_xj")  # 小儿经转写修正
 
 rep_ja_kk = load_json("rep_ja_kk")  # 片假名替换修正
 manyoganas_dict = load_json("manyogana")  # 万叶假名
@@ -291,6 +293,31 @@ def to_cyrillic(text: str) -> str:
     return capitalize_lines(result)
 
 
+def to_xiaojing(text: str) -> str:
+    """
+    将字符串中的汉字转写为小儿经，单字之间使用零宽不连字（U+200C）分开，词之间使用空格分开。
+
+    Args:
+        text (str): 需要转换的字符串
+
+    Returns:
+        str: 转换结果
+    """
+
+    seg_list: List[str] = jieba.lcut(text)
+    output_list: List[str] = []
+
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg)
+        xj_list = [pinyin_to_xiaojing.get(p, p) for p in pinyin_list]
+        output_list.append("\u200c".join(xj_list))
+
+    # 调整格式
+    result = replace_multiple(" ".join(output_list), rep_zh)
+
+    return capitalize_lines(result)
+
+
 def save_to_json(
     input_lang: str,
     output_file: str,
@@ -328,6 +355,7 @@ def main() -> None:
     save_to_json("zh_cn", "zh_wg", to_wadegiles, fixed_zh_wg)
     save_to_json("zh_cn", "zh_gr", to_romatzyh, fixed_zh_gr)
     save_to_json("zh_cn", "zh_cy", to_cyrillic, fixed_zh_cy)
+    save_to_json("zh_cn", "zh_xj", to_xiaojing, fixed_zh_xj)
 
     # 生成资源包
     pack_dir = P / "unreadable_language_pack.zip"
