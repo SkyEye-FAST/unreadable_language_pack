@@ -19,11 +19,6 @@
             "bidirectional": false
         },
         "zh_py": {
-            "name": "hàn yǔ pīn yīn",
-            "region": "zhōng guó dà lù",
-            "bidirectional": false
-        },
-        "zh_pyw": {
             "name": "Hànyǔ Pīnyīn",
             "region": "Zhōngguó Dàlù",
             "bidirectional": false
@@ -49,7 +44,7 @@
             "bidirectional": false
         },
         "zh_cy": {
-            "name": "Cyrillized Chinese",
+            "name": "Палладицу",
             "region": "чжун1 го2 да4 лу4",
             "bidirectional": false
         }
