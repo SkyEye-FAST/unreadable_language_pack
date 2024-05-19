@@ -2,9 +2,10 @@
 """Minecraft难视语言资源包生成器"""
 
 import json
+import re
 import zipfile as zf
 from pathlib import Path
-from typing import Callable, TypeAlias, Optional, Dict, List, Set
+from typing import Callable, TypeAlias, Optional, Dict, List, Set, Tuple
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
@@ -44,25 +45,25 @@ load_phrases_dict({k: [[_] for _ in v.split()] for k, v in phrases.items()})
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
 # 初始化其他自定义数据
-finals = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
-pinyin_to_ipa = load_json("py2ipa")  # 汉语拼音至IPA
+finals: Tuple[str, ...] = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
+pinyin_to_ipa: Ldata = load_json("py2ipa")  # 汉语拼音至IPA
 tone_to_ipa: Ldata = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}  # IPA声调
-pinyin_to_wadegiles = load_json("py2wg")  # 汉语拼音至威妥玛拼音
-pinyin_to_romatzyh = load_json("py2gr")  # 汉语拼音至国语罗马字
-gr_values = set(pinyin_to_romatzyh.values())  # 国语罗马字的有效拼写
-pinyin_to_cyrillic = load_json("py2cy")  # 汉语拼音至西里尔转写
-cy_values = set(pinyin_to_cyrillic.values())  # 西里尔转写的有效拼写
-pinyin_to_xiaojing = load_json("py2xj")  # 汉语拼音至小儿经
+pinyin_to_wadegiles: Ldata = load_json("py2wg")  # 汉语拼音至威妥玛拼音
+pinyin_to_romatzyh: Ldata = load_json("py2gr")  # 汉语拼音至国语罗马字
+gr_values: Set[str] = set(pinyin_to_romatzyh.values())  # 国语罗马字的有效拼写
+pinyin_to_cyrillic: Ldata = load_json("py2cy")  # 汉语拼音至西里尔转写
+cy_values: Set[str] = set(pinyin_to_cyrillic.values())  # 西里尔转写的有效拼写
+pinyin_to_xiaojing: Ldata = load_json("py2xj")  # 汉语拼音至小儿经
 
-rep_zh = load_json("rep_zh")  # 连写的中文转写方案替换修正
-fixed_zh_py = load_json("fixed_zh_py")  # 汉语拼音修正
-fixed_zh_wg = load_json("fixed_zh_wg")  # 威妥玛拼音修正
-fixed_zh_gr = load_json("fixed_zh_gr")  # 国语罗马字修正
-fixed_zh_cy = load_json("fixed_zh_cy")  # 西里尔转写修正
-fixed_zh_xj = load_json("fixed_zh_xj")  # 小儿经转写修正
+rep_zh: Ldata = load_json("rep_zh")  # 连写的中文转写方案替换修正
+fixed_zh_py: Ldata = load_json("fixed_zh_py")  # 汉语拼音修正
+fixed_zh_wg: Ldata = load_json("fixed_zh_wg")  # 威妥玛拼音修正
+fixed_zh_gr: Ldata = load_json("fixed_zh_gr")  # 国语罗马字修正
+fixed_zh_cy: Ldata = load_json("fixed_zh_cy")  # 西里尔转写修正
+fixed_zh_xj: Ldata = load_json("fixed_zh_xj")  # 小儿经转写修正
 
-rep_ja_kk = load_json("rep_ja_kk")  # 片假名替换修正
-manyoganas_dict = load_json("manyogana")  # 万叶假名
+rep_ja_kk: Ldata = load_json("rep_ja_kk")  # 片假名替换修正
+manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 # 读取语言文件
 data: Dict[str, Ldata] = {
@@ -103,6 +104,35 @@ def capitalize_lines(text: str) -> str:
         capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
         return "\n".join(capitalized_lines)
     return text[:1].upper() + text[1:]
+
+
+def capitalize_titles(text: str) -> str:
+    """
+    将字符串中书名号（《》）中的单词全部作首字母大写处理。
+
+    Args:
+        text (str): 需要转换的字符串
+
+    Returns:
+        str: 转换结果
+    """
+
+    def title_case_content(content: str) -> str:
+        """
+        将书名号中的内容首字母大写。
+
+        Args:
+            content (str): 书名号中的内容。
+
+        Returns:
+            str: 首字母大写后的书名号内容。
+        """
+
+        return " ".join(word.capitalize() for word in content.split())
+
+    return re.sub(
+        r"《(.*?)》", lambda match: f"《{title_case_content(match.group(1))}》", text
+    )
 
 
 def add_apostrophes(input_list: List[str], values: Set[str]) -> List[str]:
@@ -153,8 +183,7 @@ def to_manyogana(text: str) -> str:
         str: 转换结果
     """
 
-    text = to_katakana(text)
-    return "".join([manyoganas_dict.get(char, char) for char in text])
+    return "".join([manyoganas_dict.get(char, char) for char in to_katakana(text)])
 
 
 def to_pinyin(text: str) -> str:
@@ -182,7 +211,7 @@ def to_pinyin(text: str) -> str:
     # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh)
 
-    return capitalize_lines(result)
+    return capitalize_lines(capitalize_titles(result))
 
 
 def to_ipa(text: str) -> str:
@@ -241,7 +270,7 @@ def to_wadegiles(text: str) -> str:
     # 调整格式
     result = replace_multiple(" ".join(output_list), rep_zh)
 
-    return capitalize_lines(result)
+    return capitalize_lines(capitalize_titles(result))
 
 
 def to_romatzyh(text: str) -> str:
@@ -266,7 +295,7 @@ def to_romatzyh(text: str) -> str:
 
     result = replace_multiple(" ".join(output_list), rep_zh)  # 调整格式
 
-    return capitalize_lines(result)
+    return capitalize_lines(capitalize_titles(result))
 
 
 def to_cyrillic(text: str) -> str:
@@ -290,7 +319,7 @@ def to_cyrillic(text: str) -> str:
 
     result = replace_multiple(" ".join(output_list), rep_zh)  # 调整格式
 
-    return capitalize_lines(result)
+    return capitalize_lines(capitalize_titles(result))
 
 
 def to_xiaojing(text: str) -> str:
@@ -312,10 +341,7 @@ def to_xiaojing(text: str) -> str:
         xj_list = [pinyin_to_xiaojing.get(p, p) for p in pinyin_list]
         output_list.append("\u200c".join(xj_list))
 
-    # 调整格式
-    result = replace_multiple(" ".join(output_list), rep_zh)
-
-    return capitalize_lines(result)
+    return replace_multiple(" ".join(output_list), rep_zh)
 
 
 def save_to_json(

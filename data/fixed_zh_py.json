@@ -229,5 +229,6 @@
     "debug.gamemodes.press_f4": "[ F4 ]",
     "optimizeWorld.stage.failed": "Shībài le！:(",
     "selectWorld.allowCommands.info": "Lìrú /gamemode、/experience děng mìnglìng",
-    "language.code": "Zho-Hans_CN"
+    "language.code": "Zho-Hans_CN",
+    "painting.minecraft.sunset.title": "sunset_dense"
 }
