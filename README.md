@@ -1,5 +1,7 @@
 # Minecraft难视语言资源包
 
+[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Pylint](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml)
+
 - **[English](README_en.md) | [中文](README.md)**
 
 ----
@@ -9,6 +11,14 @@
 请使用模组[Modern UI](https://modrinth.com/mod/modern-ui)让游戏支持现代字体特性来保证所有字符正常显示。
 
 推荐与模组[Language Reload](https://modrinth.com/mod/language-reload)和[Untranslated Items](https://www.curseforge.com/minecraft/mc-mods/untranslated-items)一同使用。
+
+## 下载
+
+- [**下载最新版本资源包**](https://github.com/SkyEye-FAST/unreadable_language_pack/releases/latest/download/unreadable_language_pack.zip)
+- [查看历史版本](https://github.com/SkyEye-FAST/unreadable_language_pack/releases/)
+
+> [!TIP]
+> 由于1.19.2之后所有版本的语言文件都可以通用，不一定需要选择对应版本的标签，选择最新版本即可。
 
 ## 说明
 

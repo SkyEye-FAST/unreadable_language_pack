@@ -1,5 +1,7 @@
 # Minecraft Unreadable Language Resource Pack
 
+[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Pylint](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml)
+
 - **[English](README_en.md) | [中文](README.md)**
 
 ----
@@ -9,6 +11,14 @@ This project provides a resource package that converts the source strings of Min
 Please use the mod [Modern UI](https://modrinth.com/mod/modern-ui) to make the game support modern font features to ensure that all characters are displayed normally.
 
 It is recommended to use this resource pack with the mods [Language Reload](https://modrinth.com/mod/language-reload) and [Untranslated Items](https://www.curseforge.com/minecraft/mc-mods/untranslated-items).
+
+## Download
+
+- [**Download the latest version**](https://github.com/SkyEye-FAST/unreadable_language_pack/releases/latest/download/unreadable_language_pack.zip)
+- [View historical versions](https://github.com/SkyEye-FAST/unreadable_language_pack/releases/)
+
+> [!TIP]
+> Since all versions of language files after 1.19.2 can be used universally, you do not necessarily need to select the tag of the corresponding version, just select the latest version.
 
 ## Description
 
