@@ -91,7 +91,6 @@ pip install -r requirements.txt
 ![Sample](sample/sample_zh_cy.png)
 ![Sample](sample/sample_zh_xj.png)
 
-
 ## 反馈
 
 遇到的问题和功能建议等可以提出议题（Issue）。
