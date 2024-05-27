@@ -3,6 +3,7 @@
 
 import json
 import re
+import time
 import zipfile as zf
 from pathlib import Path
 from typing import Callable, TypeAlias, Optional, Dict, List, Set, Tuple
@@ -360,11 +361,18 @@ def save_to_json(
         fix_dict (Optional[Ldata], optional): 语言文件中需要修复的内容. 默认为None
     """
 
+    start_time = time.time()
+    full_file_name = f"{output_file}.json"
     output_dict = {k: func(v) for k, v in data[input_lang].items()}
     if fix_dict:
         output_dict.update(fix_dict)
-    with open(P / "output" / f"{output_file}.json", "w", encoding="utf-8") as j:
+    file_path = P / "output" / full_file_name
+    with open(file_path, "w", encoding="utf-8") as j:
         json.dump(output_dict, j, indent=2, ensure_ascii=False)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    size = f"{round(file_path.stat().st_size / 1024, 2)} KB"
+    print(f"已生成语言文件“{full_file_name}”，大小{size}，耗时{elapsed_time:.2f} s。")
 
 
 def main() -> None:
@@ -373,6 +381,7 @@ def main() -> None:
     """
 
     # 生成语言文件
+    main_start_time = time.time()
     save_to_json("en_us", "ja_kk", to_katakana)
     save_to_json("en_us", "ja_my", to_manyogana)
     save_to_json("zh_cn", "zh_py", to_pinyin, fixed_zh_py)
@@ -382,14 +391,22 @@ def main() -> None:
     save_to_json("zh_cn", "zh_gr", to_romatzyh, fixed_zh_gr)
     save_to_json("zh_cn", "zh_cy", to_cyrillic, fixed_zh_cy)
     save_to_json("zh_cn", "zh_xj", to_xiaojing, fixed_zh_xj)
+    main_end_time = time.time()
+    main_elapsed_time = main_end_time - main_start_time
+    print(f"\n语言文件生成完毕，共耗时{main_elapsed_time:.2f} s。")
+
 
     # 生成资源包
-    pack_dir = P / "unreadable_language_pack.zip"
-    with zf.ZipFile(pack_dir, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
+    zip_start_time = time.time()
+    pack_path = P / "unreadable_language_pack.zip"
+    with zf.ZipFile(pack_path, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
         z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
         for lang_file in P.glob("output/*.json"):
             z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
-
+    zip_end_time = time.time()
+    zip_elapsed_time = zip_end_time - zip_start_time
+    pack_size = f"{round(pack_path.stat().st_size / 1024, 2)} KB"
+    print(f"\n资源包“{pack_path.name}”打包完毕，大小{pack_size}，打包耗时{zip_elapsed_time:.2f} s。")
 
 if __name__ == "__main__":
     main()
