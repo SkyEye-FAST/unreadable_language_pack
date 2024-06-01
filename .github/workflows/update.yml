@@ -24,12 +24,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Update language files
-        run: |
-          python source.py
+        run: git submodule foreach 'git pull origin master'
 
       - name: Update resource pack
-        run: |
-          python pack.py
+        run: python pack.py
 
       - name: Commit
         uses: EndBug/add-and-commit@v9

@@ -68,7 +68,7 @@ manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 # 读取语言文件
 data: Dict[str, Ldata] = {
-    lang_name: load_json(lang_name, "source") for lang_name in ["en_us", "zh_cn"]
+    lang_name: load_json(lang_name, "mc_lang/full") for lang_name in ["en_us", "zh_cn"]
 }
 
 
