@@ -2,7 +2,7 @@ name: Update resource pack
 
 on:
   schedule:
-    - cron: "30 16 * * *"
+    - cron: "40 17 * * *"
 
 jobs:
   build:
@@ -27,7 +27,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Update language files
-        run: git submodule foreach 'git pull origin master'
+        run: |
+          git config pull.rebase false
+          git submodule foreach 'git pull origin master'
 
       - name: Update resource pack
         run: python pack.py
