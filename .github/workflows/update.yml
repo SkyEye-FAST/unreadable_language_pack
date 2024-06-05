@@ -2,7 +2,7 @@ name: Update resource pack
 
 on:
   schedule:
-    - cron: "04 18 * * *"
+    - cron: "25 18 * * *"
 
 jobs:
   build:
@@ -42,8 +42,9 @@ jobs:
 
       - name: Get Minecraft version
         run: |
-          cat mc_lang/version.txt
-          echo "ver=$(<mc_lang/version.txt)" >> "$GITHUB_ENV"
+          cd mc_lang
+          cat version.txt
+          echo "ver=$(<version.txt)" >> "$GITHUB_ENV"
 
       - name: Release
         uses: Kir-Antipov/mc-publish@v3.3
