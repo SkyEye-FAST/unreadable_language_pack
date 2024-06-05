@@ -40,7 +40,7 @@ jobs:
 
       - name: Get Minecraft version
         run: |
-          cat version.txt
+          cat mc_lang/version.txt
           echo "ver=$(<version.txt)" >> "$GITHUB_ENV"
 
       - name: Release

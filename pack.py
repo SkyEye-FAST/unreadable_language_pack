@@ -369,8 +369,7 @@ def save_to_json(
     file_path = P / "output" / full_file_name
     with open(file_path, "w", encoding="utf-8") as j:
         json.dump(output_dict, j, indent=2, ensure_ascii=False)
-    end_time = time.time()
-    elapsed_time = end_time - start_time
+    elapsed_time = time.time() - start_time
     size = f"{round(file_path.stat().st_size / 1024, 2)} KB"
     print(f"已生成语言文件“{full_file_name}”，大小{size}，耗时{elapsed_time:.2f} s。")
 
@@ -391,8 +390,7 @@ def main() -> None:
     save_to_json("zh_cn", "zh_gr", to_romatzyh, fixed_zh_gr)
     save_to_json("zh_cn", "zh_cy", to_cyrillic, fixed_zh_cy)
     save_to_json("zh_cn", "zh_xj", to_xiaojing, fixed_zh_xj)
-    main_end_time = time.time()
-    main_elapsed_time = main_end_time - main_start_time
+    main_elapsed_time = time.time() - main_start_time
     print(f"\n语言文件生成完毕，共耗时{main_elapsed_time:.2f} s。")
 
 
@@ -403,8 +401,7 @@ def main() -> None:
         z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
         for lang_file in P.glob("output/*.json"):
             z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
-    zip_end_time = time.time()
-    zip_elapsed_time = zip_end_time - zip_start_time
+    zip_elapsed_time = time.time() - zip_start_time
     pack_size = f"{round(pack_path.stat().st_size / 1024, 2)} KB"
     print(f"\n资源包“{pack_path.name}”打包完毕，大小{pack_size}，打包耗时{zip_elapsed_time:.2f} s。")
 
