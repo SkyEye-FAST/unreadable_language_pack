@@ -399,6 +399,7 @@ def main() -> None:
     pack_path = P / "unreadable_language_pack.zip"
     with zf.ZipFile(pack_path, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
         z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
+        z.write(P / "pack.png", arcname="pack.png")
         for lang_file in P.glob("output/*.json"):
             z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
     zip_elapsed_time = time.time() - zip_start_time
