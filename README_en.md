@@ -52,7 +52,7 @@ The resource pack added 9 languages into the game:
 >
 > Transliterations of "Lena Raine" and "Samuel Åberg" will be fixed and "C418" will be retained in the results.
 
-- **"Hànyǔ Pīnyīn (Zhōngguó Dàlù)"** ([`zh_pyw.json`](output/zh_pyw.json))
+- **"Hànyǔ Pīnyīn (Zhōngguó Dàlù)"** ([`zh_py.json`](output/zh_py.json))
   - i.e. "Pinyin (Chinese mainland)".
   - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of words, and try to comply with GB/T 16159-2012.
 
