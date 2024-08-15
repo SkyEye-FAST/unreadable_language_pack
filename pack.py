@@ -26,15 +26,42 @@ def main() -> None:
 
     # 生成语言文件
     main_start_time = time.time()
-    save_to_json(data["en_us"], "ja_kk", to_katakana)
-    save_to_json(data["en_us"], "ja_my", to_manyogana)
-    save_to_json(data["zh_cn"], "zh_py", to_pinyin, fixed_zh["zh_py"])
-    save_to_json(data["zh_cn"], "zh_ipa", to_ipa)
-    save_to_json(data["zh_cn"], "zh_bpmf", to_bopomofo)
-    save_to_json(data["zh_cn"], "zh_wg", to_wadegiles, fixed_zh["zh_wg"])
-    save_to_json(data["zh_cn"], "zh_gr", to_romatzyh, fixed_zh["zh_gr"])
-    save_to_json(data["zh_cn"], "zh_cy", to_cyrillic, fixed_zh["zh_cy"])
-    save_to_json(data["zh_cn"], "zh_xj", to_xiaojing, fixed_zh["zh_xj"])
+    save_to_json(
+        data["en_us"],
+        {"output_file": "ja_kk", "func": to_katakana},
+    )
+    save_to_json(
+        data["en_us"],
+        {"output_file": "ja_my", "func": to_manyogana},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_py", "func": to_pinyin, "fixed_dict": fixed_zh["zh_py"]},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_ipa", "func": to_ipa},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_bpmf", "func": to_bopomofo},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_wg", "func": to_wadegiles, "fixed_dict": fixed_zh["zh_wg"]},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_gr", "func": to_romatzyh, "fixed_dict": fixed_zh["zh_gr"]},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_cy", "func": to_cyrillic, "fixed_dict": fixed_zh["zh_cy"]},
+    )
+    save_to_json(
+        data["zh_cn"],
+        {"output_file": "zh_xj", "func": to_xiaojing, "fixed_dict": fixed_zh["zh_xj"]},
+    )
     main_elapsed_time = time.time() - main_start_time
     print(f"\n语言文件生成完毕，共耗时{main_elapsed_time:.2f} s。")
 
