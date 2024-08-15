@@ -4,6 +4,7 @@
 from base import load_json
 from converter import (
     save_to_json,
+    convert,
     to_pinyin,
     to_wadegiles,
     to_romatzyh,
@@ -15,52 +16,27 @@ rep = {"！:(": "! :(", "，": ", "}
 
 fixed_zh_source = load_json("fixed_zh_source")
 save_to_json(
-    fixed_zh_source,
-    {
-        "output_file": "fixed_zh_py",
-        "func": to_pinyin,
-        "output_folder": "data",
-        "auto_cut": False,
-        "rep": rep,
-    },
+    convert(fixed_zh_source, to_pinyin, auto_cut=False, rep=rep),
+    "fixed_zh_py",
+    "data",
 )
 save_to_json(
-    fixed_zh_source,
-    {
-        "output_file": "fixed_zh_wg",
-        "func": to_wadegiles,
-        "output_folder": "data",
-        "auto_cut": False,
-        "rep": rep,
-    },
+    convert(fixed_zh_source, to_wadegiles, auto_cut=False, rep=rep),
+    "fixed_zh_wg",
+    "data",
 )
 save_to_json(
-    fixed_zh_source,
-    {
-        "output_file": "fixed_zh_gr",
-        "func": to_romatzyh,
-        "output_folder": "data",
-        "auto_cut": False,
-        "rep": rep,
-    },
+    convert(fixed_zh_source, to_romatzyh, auto_cut=False, rep=rep),
+    "fixed_zh_gr",
+    "data",
 )
 save_to_json(
-    fixed_zh_source,
-    {
-        "output_file": "fixed_zh_cy",
-        "func": to_cyrillic,
-        "output_folder": "data",
-        "auto_cut": False,
-        "rep": rep,
-    },
+    convert(fixed_zh_source, to_cyrillic, auto_cut=False, rep=rep),
+    "fixed_zh_cy",
+    "data",
 )
 save_to_json(
-    fixed_zh_source,
-    {
-        "output_file": "fixed_zh_xj",
-        "func": to_xiaojing,
-        "output_folder": "data",
-        "auto_cut": False,
-        "rep": rep,
-    },
+    convert(fixed_zh_source, to_xiaojing, auto_cut=False, rep=rep),
+    "fixed_zh_xj",
+    "data",
 )

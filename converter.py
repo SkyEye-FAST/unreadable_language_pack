@@ -5,7 +5,7 @@ import json
 import re
 import time
 import inspect
-from typing import Dict, List, Set
+from typing import List, Set, Tuple, Callable, Optional
 
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
@@ -26,7 +26,6 @@ jieba.load_userdict(str(P / "data" / "dict.txt"))
 # 初始化其他自定义数据
 fixed_zh_u = load_json("fixed_zh_universal")
 tone_to_ipa: Ldata = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}  # IPA声调
-rep_ja_kk: Ldata = load_json("rep_ja_kk")  # 片假名替换修正
 manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 
@@ -121,32 +120,34 @@ def segment_str(text: str, auto_cut: bool = True) -> List[str]:
     return jieba.lcut(text) if auto_cut else text.split()
 
 
-def to_katakana(text: str) -> str:
+def to_katakana(text: str, rep: Ldata) -> str:
     """
     将字符串中的英文转写为片假名。
 
     Args:
         text (str): 需要转换的字符串
+        rep (Ldata): 需要替换格式的内容
 
     Returns:
         str: 转换结果
     """
 
-    return replace_multiple(tk(text).katakana, rep_ja_kk)
+    return replace_multiple(tk(text).katakana, rep)
 
 
-def to_manyogana(text: str) -> str:
+def to_manyogana(text: str, rep: Ldata) -> str:
     """
     将字符串中的片假名转写为万叶假名。
 
     Args:
         text (str): 需要转换的字符串
+        rep (Ldata): 需要替换格式的内容
 
     Returns:
         str: 转换结果
     """
 
-    return "".join(manyoganas_dict.get(char, char) for char in to_katakana(text))
+    return "".join(manyoganas_dict.get(char, char) for char in to_katakana(text, rep))
 
 
 def to_pinyin(text: str, rep: Ldata, auto_cut: bool = True) -> str:
@@ -314,22 +315,30 @@ def to_xiaojing(text: str, rep: Ldata, auto_cut: bool = True) -> str:
     return replace_multiple(" ".join(output_list), rep)
 
 
-def save_to_json(input_dict: Ldata, config: Dict) -> None:
-    """将生成的语言文件保存至JSON。
+def convert(
+    input_dict: Ldata,
+    func: Callable[[str], str],
+    fix_dict: Optional[Ldata] = None,
+    auto_cut: bool = True,
+    rep: Ldata = rep_zh,
+) -> Tuple[Ldata, float]:
+    """
+    转换语言数据。
 
     Args:
         input_dict (Ldata): 输入的数据
-        config (Dict): 含有配置的字典
+        func (Callable[[str], str]): 生成语言文件所用的函数
+        fix_dict (Optional[Ldata], optional): 语言文件中需要修复的内容. 默认为None
+        auto_cut (bool, optional): 是否自动分词，默认为True
+        rep (Ldata, optional): 需要替换的内容，默认为rep_zh的内容
+
+    Returns:
+        (Ldata, float): 转换结果及耗时
     """
 
     start_time = time.time()
 
-    func = config["func"]
-
-    auto_cut = config.get("auto_cut", True)
-    rep = config.get("rep", rep_zh)
-
-    output_dict = {}
+    output_dict: Ldata = {}
     for k, v in input_dict.items():
         func_signature = inspect.signature(func)
         kwargs = {}
@@ -339,16 +348,33 @@ def save_to_json(input_dict: Ldata, config: Dict) -> None:
             kwargs["rep"] = rep
         output_dict[k] = func(v, **kwargs)
 
-    output_dict.update(fixed_zh_u)
-    if config.get("fixed_dict"):
-        output_dict.update(config["fixed_dict"])
-    file_path = (
-        P / config.get("output_folder", "output") / f"{config['output_file']}.json"
-    )
-    with open(file_path, "w", encoding="utf-8") as j:
-        json.dump(output_dict, j, indent=2, ensure_ascii=False)
+    if rep is rep_zh:
+        output_dict.update(fixed_zh_u)
+
+    if fix_dict:
+        output_dict.update(fix_dict)
+
     elapsed_time = time.time() - start_time
+
+    return output_dict, elapsed_time
+
+
+def save_to_json(
+    input_data: Tuple[Ldata, float],
+    output_file: str,
+    output_folder: str = "output",
+) -> None:
+    """将生成的语言文件保存至JSON。
+
+    Args:
+        input_data (Tuple[Ldata, float]): 输入的数据
+        output_file (str): 保存的文件名，无格式后缀
+        output_folder (str, optional): 保存的文件夹，默认为“output”
+    """
+
+    input_dict, elapsed_time = input_data
+    file_path = P / output_folder / f"{output_file}.json"
+    with open(file_path, "w", encoding="utf-8") as j:
+        json.dump(input_dict, j, indent=2, ensure_ascii=False)
     size = f"{round(file_path.stat().st_size / 1024, 2)} KB"
-    print(
-        f"已生成语言文件“{config['output_file']}.json”，大小{size}，耗时{elapsed_time:.2f} s。"
-    )
+    print(f"已生成语言文件“{output_file}.json”，大小{size}，耗时{elapsed_time:.2f} s。")

@@ -53,3 +53,5 @@ cy_values: Set[str] = set(pinyin_to["cyrillic"].values())  # 西里尔转写的�
 
 rep_zh: Ldata = load_json("rep_zh")  # 连写的中文转写方案替换修正
 finals: Tuple[str, ...] = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
+
+rep_ja_kk: Ldata = load_json("rep_ja_kk")  # 片假名替换修正
