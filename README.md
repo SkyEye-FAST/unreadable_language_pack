@@ -38,7 +38,11 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了10种语言：
+资源包向游戏内添加了11种语言：
+
+#### i18nglish (i7h)（[`en_i7h.json`](output/en_i7h.json)）
+
+- 选择之后，所有字符串会变为保留英文单词的首尾字符，中间用字符数替代的缩写。长度为2或以下的单词保持不变。
 
 #### エングリスホ (カタカナ)（[`ja_kk.json`](output/ja_kk.json)）
 
@@ -115,8 +119,10 @@ pip install -r requirements.txt
 - 即“小儿经 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的小儿经。
 
+![Sample](sample/sample_en_i7h.png)
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
+![Sample](sample/sample_zh_hm.png)
 ![Sample](sample/sample_zh_py.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
