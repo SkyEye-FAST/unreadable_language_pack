@@ -38,28 +38,42 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了9种语言：
+资源包向游戏内添加了10种语言：
 
-- **“エングリスホ (カタカナ)”** （[`ja_kk.json`](output/ja_kk.json)）
-  - 即“English (Katakana)”。
-  - 选择之后，所有字符串会变为英文转写而来的片假名。
-- **“江尓具利須保 (万葉仮名)”** （[`ja_my.json`](output/ja_my.json)）
-  - 即“English (Man'yōgana)”。
-  - 选择之后，所有字符串会变为英文转写而来的万叶假名。为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
+#### エングリスホ (カタカナ)（[`ja_kk.json`](output/ja_kk.json)）
+
+- 即“English (Katakana)”。
+- 选择之后，所有字符串会变为英文转写而来的片假名。
 
 > [!WARNING]
 > 英文转写至片假名使用了[KotRikD/romajitable](https://github.com/KotRikD/romajitable)的映射，这不是正确的音译方式，**可能和英文的真实读音相差甚大**。**请不要将转写结果用于娱乐场景外的地方。**
 >
 > 转写结果中修复了“Lena Raine”和“Samuel Åberg”的转写，并保留了“C418”。
 
-- **“Hànyǔ Pīnyīn (Zhōngguó Dàlù)”** （[`zh_py.json`](output/zh_py.json)）
-  - 即“拼音 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位，尝试遵循了GB/T 16159-2012。
+#### 江尓具利須保 (万葉仮名)（[`ja_my.json`](output/ja_my.json)）
+
+- 即“English (Man'yōgana)”。
+- 选择之后，所有字符串会变为英文转写而来的万叶假名。为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
+
+#### 繁體中文 (中國大陸)（[`zh_hm.json`](output/zh_hm.json)）
+
+- 即“繁体中文 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文按GB/Z 40637-2021和《通用规范汉字表》转换而来的繁体中文。
+
+> [!NOTE]
+> 简繁转换使用了库`opencc`和[forFudan/GujiCC](https://github.com/forFudan/GujiCC)的“调和大陆繁体标准”。
+>
+> 汉字对应关系基本上来自GB/Z 40637-2021，少部分以《通用规范汉字表》的对应关系覆盖。
+
+#### Hànyǔ Pīnyīn (Zhōngguó Dàlù)（[`zh_py.json`](output/zh_py.json)）
+
+- 即“汉语拼音 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位。
+  - 尝试遵循了GB/T 16159-2012的正词法要求。
 
 > [!IMPORTANT]
-> 汉字标音使用了库`pypinyin`和`pypinyin_dict`，补充了[cc_cedict.org](https://cc-cedict.org/)的数据，并手动添加了某些词语的读音。
+> 汉字标音使用了库`pypinyin`和`pypinyin_dict`，补充了[cc_cedict.org](https://cc-cedict.org/)的数据，并手动添加了某些词语的读音。原则上，读音以普通话音系为准。其他根据发音转写的方案都基于此项的数据。
 >
-> 原则上，读音以普通话音系为准。
 > 中文分词使用了库`jieba`，配置了词库并进行了替换修正。
 >
 > 虽然经过处理，但结果仍然无法保证完全符合GB/T 16159-2012的要求。应加连接号的地方尚未有合适的方法满足要求。
@@ -68,28 +82,38 @@ pip install -r requirements.txt
 >
 > **由于没有经过完整的人工审核，不能保证长文本的分词准确性。**
 
-- **“Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)”** （[`zh_ipa.json`](output/zh_ipa.json)）
-  - 即“国际音标转写的中文 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的IPA。
+#### Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)（[`zh_ipa.json`](output/zh_ipa.json)）
+
+- 即“国际音标转写 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的IPA。
 
 > [!NOTE]
 > IPA转写方案来自[@UntPhesoca](https://www.zhihu.com/people/UntW)所写文章[新老派普通话的宽严式记音（含儿化韵）](https://zhuanlan.zhihu.com/p/38258415)中的宽式标音。轻声作不标出处理。
 
-- **“ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)”** （[`zh_bpmf.json`](output/zh_bpmf.json)）
-  - 即“注音符号 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的注音符号。
-- **“Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)”** （[`zh_wg.json`](output/zh_wg.json)）
-  - 即“威妥玛拼音 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的威妥玛拼音。
-- **“Gwoyeu Romatzyh (Jonggwo Dahluh)”** （[`zh_gr.json`](output/zh_gr.json)）
-  - 即“国语罗马字 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
-- **“Палладицу (Чжунго далу)”** （[`zh_cy.json`](output/zh_cy.json)）
-  - 即“西里尔化中文 (中国大陆)”。
-  - 选择之后，所有字符串会变为西里尔化的简体中文。
-- **“ثِیَوْعَرݣ‌ٍْ (جْو‌قُوَ دَا‌لُ)”** （[`zh_xj.json`](output/zh_xj.json)）
-  - 即“小儿经 (中国大陆)”。
-  - 选择之后，所有字符串会变为简体中文转写而来的小儿经。
+#### ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)（[`zh_bpmf.json`](output/zh_bpmf.json)）
+
+- 即“注音符号 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的注音符号。
+
+#### Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)（[`zh_wg.json`](output/zh_wg.json)）
+
+- 即“威妥玛拼音 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的威妥玛拼音。
+
+#### Gwoyeu Romatzyh (Jonggwo Dahluh)（[`zh_gr.json`](output/zh_gr.json)）
+
+- 即“国语罗马字 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
+
+#### Палладицу (Чжунго далу)（[`zh_cy.json`](output/zh_cy.json)）
+
+- 即“西里尔化中文 (中国大陆)”。
+- 选择之后，所有字符串会变为西里尔化的简体中文。
+
+#### ثِیَوْعَرݣ‌ٍْ (جْو‌قُوَ دَا‌لُ)（[`zh_xj.json`](output/zh_xj.json)）
+
+- 即“小儿经 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的小儿经。
 
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
