@@ -4,13 +4,14 @@
 import time
 import zipfile as zf
 
-from base import P, data, fixed_zh, rep_ja_kk
+from base import P, data, fixed_zh, rep_ja_kk, file_size
 from converter import (
     save_to_json,
     convert,
     to_bopomofo,
     to_cyrillic,
     to_harmonic,
+    to_i7h,
     to_ipa,
     to_katakana,
     to_manyogana,
@@ -28,6 +29,7 @@ def main() -> None:
 
     # 生成语言文件
     main_start_time = time.time()
+    save_to_json(convert(data["en_us"], to_i7h), "en_i7h")
     save_to_json(convert(data["en_us"], to_katakana, rep=rep_ja_kk), "ja_kk")
     save_to_json(convert(data["en_us"], to_manyogana, rep=rep_ja_kk), "ja_my")
     save_to_json(convert(data["zh_cn"], to_harmonic), "zh_hm")
@@ -50,7 +52,7 @@ def main() -> None:
         for lang_file in P.glob("output/*.json"):
             z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
     zip_elapsed_time = time.time() - zip_start_time
-    pack_size = f"{round(pack_path.stat().st_size / 1024, 2)} KB"
+    pack_size = file_size(pack_path)
     print(
         f"\n资源包“{pack_path.name}”打包完毕，大小{pack_size}，打包耗时{zip_elapsed_time:.2f} s。"
     )

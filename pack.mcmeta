@@ -8,6 +8,11 @@
         "description": "Unreadable Language Resource Pack"
     },
     "language": {
+        "en_i7h": {
+            "name": "i18nglish",
+            "region": "i7h",
+            "bidirectional": false
+        },
         "ja_kk": {
             "name": "エングリスホ",
             "region": "カタカナ",

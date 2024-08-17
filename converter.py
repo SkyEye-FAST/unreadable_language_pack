@@ -13,7 +13,17 @@ from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
 import jieba
 from opencc import OpenCC
 
-from base import P, Ldata, load_json, pinyin_to, gr_values, cy_values, finals, rep_zh
+from base import (
+    P,
+    Ldata,
+    load_json,
+    file_size,
+    pinyin_to,
+    gr_values,
+    cy_values,
+    finals,
+    rep_zh,
+)
 
 # 初始化OpenCC
 opencc_s2c = OpenCC(str(P / "GujiCC" / "opencc" / "s2c.json"))
@@ -122,6 +132,35 @@ def segment_str(text: str, auto_cut: bool = True) -> List[str]:
     """
 
     return jieba.lcut(text) if auto_cut else text.split()
+
+
+def to_i7h(text: str) -> str:
+    """
+    将字符串中的所有单词缩写。
+    保留单词的首尾字符，中间用字符数替代。
+    长度为2或以下的单词保持不变。
+
+    Args:
+        text (str): 需要转换的字符串
+
+    Returns:
+        str: 转换结果
+    """
+
+    words = re.findall(r"\w+", text)
+    results = []
+
+    for word in words:
+        if len(word) > 2:
+            result = f"{word[0]}{len(word) - 2}{word[-1]}"
+        else:
+            result = word
+        results.append(result)
+
+    for word, result in zip(words, results):
+        text = text.replace(word, result, 1)
+
+    return text
 
 
 def to_katakana(text: str, rep: Ldata) -> str:
@@ -394,5 +433,5 @@ def save_to_json(
     file_path = P / output_folder / f"{output_file}.json"
     with open(file_path, "w", encoding="utf-8") as j:
         json.dump(input_dict, j, indent=2, ensure_ascii=False)
-    size = f"{round(file_path.stat().st_size / 1024, 2)} KB"
+    size = file_size(file_path)
     print(f"已生成语言文件“{output_file}.json”，大小{size}，耗时{elapsed_time:.2f} s。")

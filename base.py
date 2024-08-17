@@ -28,6 +28,26 @@ def load_json(file: str, folder: str = "data") -> Ldata:
         return json.load(f)
 
 
+def file_size(p: Path):
+    """
+    计算文件大小。
+
+    Args:
+        p (Path): 需要计算大小的文件路径
+
+    Returns:
+        str: 文件大小
+    """
+
+    size_in_bytes = p.stat().st_size
+    size = (
+        f"{round(size_in_bytes / 1048576, 2)} MB"
+        if size_in_bytes > 1048576
+        else f"{round(size_in_bytes / 1024, 2)} KB"
+    )
+    return size
+
+
 # 读取语言文件
 data: Dict[str, Ldata] = {
     lang_name: load_json(lang_name, "mc_lang/full") for lang_name in ["en_us", "zh_cn"]
