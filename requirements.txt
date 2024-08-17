@@ -1,5 +1,5 @@
-jieba==0.42.1
-pypinyin==0.51.0
-pypinyin_dict==0.8.0
-Requests==2.31.0
-romajitable==0.0.1
+jieba>=0.42.1
+pypinyin>=0.52.0
+pypinyin_dict>=0.8.0
+Requests>=2.32.3
+romajitable>=0.0.1

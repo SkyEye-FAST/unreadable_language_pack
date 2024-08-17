@@ -10,6 +10,7 @@ from converter import (
     convert,
     to_bopomofo,
     to_cyrillic,
+    to_harmonic,
     to_ipa,
     to_katakana,
     to_manyogana,
@@ -29,6 +30,7 @@ def main() -> None:
     main_start_time = time.time()
     save_to_json(convert(data["en_us"], to_katakana, rep=rep_ja_kk), "ja_kk")
     save_to_json(convert(data["en_us"], to_manyogana, rep=rep_ja_kk), "ja_my")
+    save_to_json(convert(data["zh_cn"], to_harmonic), "zh_hm")
     save_to_json(convert(data["zh_cn"], to_pinyin, fixed_zh["zh_py"]), "zh_py")
     save_to_json(convert(data["zh_cn"], to_ipa), "zh_ipa")
     save_to_json(convert(data["zh_cn"], to_bopomofo), "zh_bpmf")

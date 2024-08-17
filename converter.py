@@ -11,8 +11,12 @@ from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
 from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
 import jieba
+from opencc import OpenCC
 
 from base import P, Ldata, load_json, pinyin_to, gr_values, cy_values, finals, rep_zh
+
+# 初始化OpenCC
+opencc_s2c = OpenCC(str(P / "GujiCC" / "opencc" / "s2c.json"))
 
 # 初始化pypinyin
 cc_cedict.load()
@@ -148,6 +152,20 @@ def to_manyogana(text: str, rep: Ldata) -> str:
     """
 
     return "".join(manyoganas_dict.get(char, char) for char in to_katakana(text, rep))
+
+
+def to_harmonic(text: str) -> str:
+    """
+    将字符串中的汉字按GB/Z 40637-2021和《通用规范汉字表》转换。
+
+    Args:
+        text (str): 需要转换的字符串
+
+    Returns:
+        str: 转换结果
+    """
+
+    return opencc_s2c.convert(text)
 
 
 def to_pinyin(text: str, rep: Ldata, auto_cut: bool = True) -> str:

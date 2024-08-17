@@ -1,6 +1,6 @@
 {
     "pack": {
-        "pack_format": 32,
+        "pack_format": 35,
         "supported_formats": [
             9,
             99
@@ -16,6 +16,11 @@
         "ja_my": {
             "name": "江尓具利須保",
             "region": "万葉仮名",
+            "bidirectional": false
+        },
+        "zh_hm": {
+            "name": "繁體中文",
+            "region": "中國大陸",
             "bidirectional": false
         },
         "zh_py": {
