@@ -1,9 +1,10 @@
 # -*- encoding: utf-8 -*-
 """基础文件"""
 
-import json
 from pathlib import Path
 from typing import TypeAlias, Dict, Set, Tuple
+
+import ujson
 
 # 当前绝对路径
 P = Path(__file__).resolve().parent
@@ -25,7 +26,7 @@ def load_json(file: str, folder: str = "data") -> Ldata:
     """
 
     with open(P / folder / f"{file}.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+        return ujson.load(f)
 
 
 def file_size(p: Path):

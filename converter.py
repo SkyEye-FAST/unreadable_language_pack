@@ -1,12 +1,12 @@
 # -*- encoding: utf-8 -*-
 """难视语言转换器"""
 
-import json
 import re
 import time
 import inspect
 from typing import List, Set, Tuple, Callable, Optional
 
+import ujson
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
 from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
@@ -432,6 +432,6 @@ def save_to_json(
     input_dict, elapsed_time = input_data
     file_path = P / output_folder / f"{output_file}.json"
     with open(file_path, "w", encoding="utf-8") as j:
-        json.dump(input_dict, j, indent=2, ensure_ascii=False)
+        ujson.dump(input_dict, j, indent=2, ensure_ascii=False)
     size = file_size(file_path)
     print(f"已生成语言文件“{output_file}.json”，大小{size}，耗时{elapsed_time:.2f} s。")

@@ -2,5 +2,6 @@ jieba>=0.42.1
 pypinyin>=0.52.0
 pypinyin_dict>=0.8.0
 Requests>=2.32.3
+rich>=13.7.1
 romajitable>=0.0.1
-opencc >= 1.1.9
+ujson>=5.10.0
