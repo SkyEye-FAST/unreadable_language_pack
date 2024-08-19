@@ -421,7 +421,8 @@ def save_to_json(
     output_file: str,
     output_folder: str = "output",
 ) -> None:
-    """将生成的语言文件保存至JSON。
+    """
+    将生成的语言文件保存至JSON。
 
     Args:
         input_data (Tuple[Ldata, float]): 输入的数据
