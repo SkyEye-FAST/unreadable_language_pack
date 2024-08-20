@@ -223,8 +223,8 @@
   "block.minecraft.banner.triangle_top.red": "دٍ خْو سًا‌ݣِیَوْ",
   "block.minecraft.banner.triangle_top.white": "دٍ بَیْ سًا‌ݣِیَوْ",
   "block.minecraft.banner.triangle_top.yellow": "دٍ خُوَانْ سًا‌ݣِیَوْ",
-  "commands.debug.function.noReturnRun": "شِ‌یٌ /return رٌ شِ وُ‌فَا جُوِ‌ظْو",
-  "debug.copy_location.help": "F3 + C = یٌ /tp مِیٍٔ‌لِیٍٔ دْ ثٍْ‌شِ فُ‌جِ نِ دْ وِ‌جِ‌, ‌اً‌جُ F3 + C شِ یُوْ‌ثِ بٍْ‌کُوِ",
+  "commands.debug.function.noReturnRun": "شِ‌یٌ \/return رٌ شِ وُ‌فَا جُوِ‌ظْو",
+  "debug.copy_location.help": "F3 + C = یٌ \/tp مِیٍٔ‌لِیٍٔ دْ ثٍْ‌شِ فُ‌جِ نِ دْ وِ‌جِ‌, ‌اً‌جُ F3 + C شِ یُوْ‌ثِ بٍْ‌کُوِ",
   "optimizeWorld.stage.failed": "شِ‌بَیْ لَ‌! :(",
-  "selectWorld.allowCommands.info": "لِ‌ژُو /gamemode、/experience دٍْ مِیٍٔ‌لِیٍٔ"
+  "selectWorld.allowCommands.info": "لِ‌ژُو \/gamemode、\/experience دٍْ مِیٍٔ‌لِیٍٔ"
 }

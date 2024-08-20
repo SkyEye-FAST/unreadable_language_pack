@@ -239,6 +239,81 @@ def to_pinyin(text: str, rep: Ldata, auto_cut: bool = True) -> str:
     return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
 
 
+def to_mps2(text: str, rep: Ldata, auto_cut: bool = True) -> str:
+    """
+    将字符串中的汉字转写为注音符号第二式，单字之间使用连字符分开，词之间使用空格分开。
+
+    Args:
+        text (str): 需要转换的字符串
+        rep (Ldata): 需要替换格式的内容
+        auto_cut (bool, optional): 是否自动分词，默认为True
+
+    Returns:
+        str: 转换结果
+    """
+
+    seg_list = segment_str(text, auto_cut)
+    output_list: List[str] = []
+
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
+        mps2_list = [pinyin_to["mps2"].get(p, p) for p in pinyin_list]
+        output_list.append("-".join(mps2_list))
+
+    result = " ".join(output_list)
+    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+
+
+def to_tongyong(text: str, rep: Ldata, auto_cut: bool = True) -> str:
+    """
+    将字符串中的汉字转写为通用拼音，单字之间使用连字符分开，词之间使用空格分开。
+
+    Args:
+        text (str): 需要转换的字符串
+        rep (Ldata): 需要替换格式的内容
+        auto_cut (bool, optional): 是否自动分词，默认为True
+
+    Returns:
+        str: 转换结果
+    """
+
+    seg_list = segment_str(text, auto_cut)
+    output_list: List[str] = []
+
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
+        typy_list = [pinyin_to["typy"].get(p, p) for p in pinyin_list]
+        output_list.append("-".join(typy_list))
+
+    result = " ".join(output_list)
+    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+
+
+def to_yale(text: str, rep: Ldata, auto_cut: bool = True) -> str:
+    """
+    将字符串中的汉字转写为耶鲁拼音，单字之间使用连字符分开，词之间使用空格分开。
+
+    Args:
+        text (str): 需要转换的字符串
+        rep (Ldata): 需要替换格式的内容
+        auto_cut (bool, optional): 是否自动分词，默认为True
+
+    Returns:
+        str: 转换结果
+    """
+
+    seg_list = segment_str(text, auto_cut)
+    output_list: List[str] = []
+
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
+        yale_list = [pinyin_to["yale"].get(p, p) for p in pinyin_list]
+        output_list.append("-".join(yale_list))
+
+    result = " ".join(output_list)
+    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+
+
 def to_ipa(text: str) -> str:
     """
     将字符串中的汉字转写为IPA，单字之间使用空格分开。
@@ -270,7 +345,9 @@ def to_bopomofo(text: str) -> str:
         str: 转换结果
     """
 
-    return " ".join(lazy_pinyin(text, style=Style.BOPOMOFO))
+    bpmf_list = lazy_pinyin(text, style=Style.BOPOMOFO)
+    bpmf_list = [f"˙{i[:-1]}" if i.endswith("˙") else i for i in bpmf_list]
+    return " ".join(bpmf_list)
 
 
 def to_wadegiles(text: str, rep: Ldata, auto_cut: bool = True) -> str:

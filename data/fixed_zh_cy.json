@@ -223,8 +223,8 @@
   "block.minecraft.banner.triangle_top.red": "Дин хун саньцзяо",
   "block.minecraft.banner.triangle_top.white": "Дин бай саньцзяо",
   "block.minecraft.banner.triangle_top.yellow": "Дин хуан саньцзяо",
-  "commands.debug.function.noReturnRun": "Шиюн /return жунь ши уфа чжуйцзун",
-  "debug.copy_location.help": "F3 + C = юн /tp минлин дэ синши фучжи ни дэ вэйчжи, аньчжу F3 + C ши юси бэнкуй",
+  "commands.debug.function.noReturnRun": "Шиюн \/return жунь ши уфа чжуйцзун",
+  "debug.copy_location.help": "F3 + C = юн \/tp минлин дэ синши фучжи ни дэ вэйчжи, аньчжу F3 + C ши юси бэнкуй",
   "optimizeWorld.stage.failed": "Шибай лэ! :(",
-  "selectWorld.allowCommands.info": "Лижу /gamemode、/experience дэн минлин"
+  "selectWorld.allowCommands.info": "Лижу \/gamemode、\/experience дэн минлин"
 }

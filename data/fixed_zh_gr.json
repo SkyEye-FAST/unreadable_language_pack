@@ -223,8 +223,8 @@
   "block.minecraft.banner.triangle_top.red": "Diing horng sanjeau",
   "block.minecraft.banner.triangle_top.white": "Diing bair sanjeau",
   "block.minecraft.banner.triangle_top.yellow": "Diing hwang sanjeau",
-  "commands.debug.function.noReturnRun": "Shyyyonq /return run shyr wufaa jueitzong",
-  "debug.copy_location.help": "F3 + C = yonq /tp minqlinq .de shyngshyh fuhjyh nii .de weyjyh, annjuh F3 + C shyy youshih bengkuey",
+  "commands.debug.function.noReturnRun": "Shyyyonq \/return run shyr wufaa jueitzong",
+  "debug.copy_location.help": "F3 + C = yonq \/tp minqlinq .de shyngshyh fuhjyh nii .de weyjyh, annjuh F3 + C shyy youshih bengkuey",
   "optimizeWorld.stage.failed": "Shybay .lhe! :(",
-  "selectWorld.allowCommands.info": "Lihru /gamemode、/experience deeng minqlinq"
+  "selectWorld.allowCommands.info": "Lihru \/gamemode、\/experience deeng minqlinq"
 }

@@ -56,6 +56,9 @@ data: Dict[str, Ldata] = {
 
 # 初始化其他自定义数据
 pinyin_to: Dict[str, Ldata] = {}
+pinyin_to["mps2"] = load_json("py2mps2")  # 汉语拼音至注音二式
+pinyin_to["typy"] = load_json("py2ty")  # 汉语拼音至通用拼音
+pinyin_to["yale"] = load_json("py2yale")  # 汉语拼音至耶鲁拼音
 pinyin_to["ipa"] = load_json("py2ipa")  # 汉语拼音至IPA
 pinyin_to["wadegiles"] = load_json("py2wg")  # 汉语拼音至威妥玛拼音
 pinyin_to["romatzyh"] = load_json("py2gr")  # 汉语拼音至国语罗马字
@@ -64,6 +67,9 @@ pinyin_to["xiaojing"] = load_json("py2xj")  # 汉语拼音至小儿经
 
 fixed_zh: Dict[str, Ldata] = {}
 fixed_zh["zh_py"] = load_json("fixed_zh_py")  # 汉语拼音修正
+fixed_zh["zh_mps2"] = load_json("fixed_zh_mps2")  # 注音二式修正
+fixed_zh["zh_ty"] = load_json("fixed_zh_ty")  # 通用拼音修正
+fixed_zh["zh_yale"] = load_json("fixed_zh_yale")  # 耶鲁拼音修正
 fixed_zh["zh_wg"] = load_json("fixed_zh_wg")  # 威妥玛拼音修正
 fixed_zh["zh_gr"] = load_json("fixed_zh_gr")  # 国语罗马字修正
 fixed_zh["zh_cy"] = load_json("fixed_zh_cy")  # 西里尔转写修正

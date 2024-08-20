@@ -15,10 +15,13 @@ from converter import (
     to_ipa,
     to_katakana,
     to_manyogana,
+    to_mps2,
     to_pinyin,
     to_romatzyh,
+    to_tongyong,
     to_wadegiles,
     to_xiaojing,
+    to_yale,
 )
 
 
@@ -34,6 +37,9 @@ def main() -> None:
     save_to_json(convert(data["en_us"], to_manyogana, rep=rep_ja_kk), "ja_my")
     save_to_json(convert(data["zh_cn"], to_harmonic), "zh_hm")
     save_to_json(convert(data["zh_cn"], to_pinyin, fixed_zh["zh_py"]), "zh_py")
+    save_to_json(convert(data["zh_cn"], to_mps2, fixed_zh), "zh_msp2")
+    save_to_json(convert(data["zh_cn"], to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
+    save_to_json(convert(data["zh_cn"], to_yale, fixed_zh["zh_yale"]), "zh_yale")
     save_to_json(convert(data["zh_cn"], to_ipa), "zh_ipa")
     save_to_json(convert(data["zh_cn"], to_bopomofo), "zh_bpmf")
     save_to_json(convert(data["zh_cn"], to_wadegiles, fixed_zh["zh_wg"]), "zh_wg")
