@@ -37,7 +37,7 @@ def main() -> None:
     save_to_json(convert(data["en_us"], to_manyogana, rep=rep_ja_kk), "ja_my")
     save_to_json(convert(data["zh_cn"], to_harmonic), "zh_hm")
     save_to_json(convert(data["zh_cn"], to_pinyin, fixed_zh["zh_py"]), "zh_py")
-    save_to_json(convert(data["zh_cn"], to_mps2, fixed_zh), "zh_msp2")
+    save_to_json(convert(data["zh_cn"], to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
     save_to_json(convert(data["zh_cn"], to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
     save_to_json(convert(data["zh_cn"], to_yale, fixed_zh["zh_yale"]), "zh_yale")
     save_to_json(convert(data["zh_cn"], to_ipa), "zh_ipa")
