@@ -114,12 +114,12 @@ pip install -r requirements.txt
 - 即“注音符号第二式 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的注音符号第二式。
 
-- #### Tong-yòng Pin-yin (Jhong-guó Dà-lù)（[`zh_ty.json`](output/zh_ty.json)）
+#### Tong-yòng Pin-yin (Jhong-guó Dà-lù)（[`zh_ty.json`](output/zh_ty.json)）
 
 - 即“通用拼音 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的通用拼音。
 
-- #### Yale romanization (Jūng-gwó Dà-lù)（[`zh_yale.json`](output/zh_yale.json)）
+#### Yale romanization (Jūng-gwó Dà-lù)（[`zh_yale.json`](output/zh_yale.json)）
 
 - 即“耶鲁拼音 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的耶鲁拼音。
