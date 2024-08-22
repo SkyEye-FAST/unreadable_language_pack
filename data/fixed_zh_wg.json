@@ -225,6 +225,6 @@
   "block.minecraft.banner.triangle_top.yellow": "Ting³ huang² san¹-chiao³",
   "commands.debug.function.noReturnRun": "Shih³-yung⁴ \/return run shih² wu²-fa³ chui¹-tsung¹",
   "debug.copy_location.help": "F3 + C = yung⁴ \/tp ming⁴-ling⁴ te⁵ hsing²-shih⁴ fu⁴-chih⁴ ni³ te⁵ wei⁴-chih⁴-, -an⁴-chu⁴ F3 + C shih³ yu²-hsi⁴ peng¹-k'uei⁴",
-  "optimizeWorld.stage.failed": "Shih¹-pai⁴ le⁵-! :(",
+  "optimizeWorld.stage.failed": "Shih¹-pai⁴ le⁵! :(",
   "selectWorld.allowCommands.info": "Li⁴-ju² \/gamemode、\/experience teng³ ming⁴-ling⁴"
 }

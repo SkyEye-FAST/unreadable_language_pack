@@ -109,6 +109,21 @@ The resource pack added 10 languages into the game:
 - i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
 - Once selected, all strings will be changed to Gwoyeu Romatzyh transliterated from Simp. Chinese.
 
+#### "Jù-yīn Fú-hàu Dì-èr Shr̀ (Jūng-guó Dà-lù)"（[`zh_mps2.json`](output/zh_mps2.json)）
+
+- i.e. "Mandarin Phonetic Symbols II (Chinese mainland)”.
+- Once selected, all strings will be changed to Mandarin Phonetic Symbols II transliterated from Simp. Chinese.
+
+#### "Tongyong Pinyin (Jhong-guó Dà-lù)"（[`zh_ty.json`](output/zh_ty.json)）
+
+- i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
+- Once selected, all strings will be changed to Tongyong Pinyin transliterated from Simp. Chinese.
+
+#### "Yale romanization (Jūng-gwó Dà-lù)"（[`zh_yale.json`](output/zh_yale.json)）
+
+- i.e. "Yale romanization (Chinese mainland)”.
+- Once selected, all strings will be changed to Yale romanization transliterated from Simp. Chinese.
+
 #### "Палладицу (Чжунго далу)" ([`zh_cy.json`](output/zh_cy.json))
 
 - i.e. "Palladitsa (Chinese mainland)”.
@@ -128,6 +143,9 @@ The resource pack added 10 languages into the game:
 ![Sample](sample/sample_zh_bpmf.png)
 ![Sample](sample/sample_zh_wg.png)
 ![Sample](sample/sample_zh_gr.png)
+![Sample](sample/sample_zh_mps2.png)
+![Sample](sample/sample_zh_ty.png)
+![Sample](sample/sample_zh_yale.png)
 ![Sample](sample/sample_zh_cy.png)
 ![Sample](sample/sample_zh_xj.png)
 

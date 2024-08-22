@@ -225,6 +225,6 @@
   "block.minecraft.banner.triangle_top.yellow": "Dǐng huáng sān-jiǎu",
   "commands.debug.function.noReturnRun": "Shř-yung4 \/return run shŕ wú-fǎ juēi-tzūng",
   "debug.copy_location.help": "F3 + C = yung4 \/tp mìng-lìng de shíng-shr̀ fù-jr̀ nǐ de wèi-jr̀-, -àn-jù F3 + C shř yóu-shì bēng-kuèi",
-  "optimizeWorld.stage.failed": "Shr̄-bài le-! :(",
+  "optimizeWorld.stage.failed": "Shr̄-bài le! :(",
   "selectWorld.allowCommands.info": "Lì-rú \/gamemode、\/experience děng mìng-lìng"
 }

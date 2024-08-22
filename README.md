@@ -109,6 +109,21 @@ pip install -r requirements.txt
 - 即“国语罗马字 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
 
+#### Jù-yīn Fú-hàu Dì-èr Shr̀ (Jūng-guó Dà-lù)（[`zh_mps2.json`](output/zh_mps2.json)）
+
+- 即“注音符号第二式 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的注音符号第二式。
+
+- #### Tong-yòng Pin-yin (Jhong-guó Dà-lù)（[`zh_ty.json`](output/zh_ty.json)）
+
+- 即“通用拼音 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的通用拼音。
+
+- #### Yale romanization (Jūng-gwó Dà-lù)（[`zh_yale.json`](output/zh_yale.json)）
+
+- 即“耶鲁拼音 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的耶鲁拼音。
+
 #### Палладицу (Чжунго далу)（[`zh_cy.json`](output/zh_cy.json)）
 
 - 即“西里尔化中文 (中国大陆)”。
@@ -128,6 +143,9 @@ pip install -r requirements.txt
 ![Sample](sample/sample_zh_bpmf.png)
 ![Sample](sample/sample_zh_wg.png)
 ![Sample](sample/sample_zh_gr.png)
+![Sample](sample/sample_zh_mps2.png)
+![Sample](sample/sample_zh_ty.png)
+![Sample](sample/sample_zh_yale.png)
 ![Sample](sample/sample_zh_cy.png)
 ![Sample](sample/sample_zh_xj.png)
 

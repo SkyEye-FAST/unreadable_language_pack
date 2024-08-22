@@ -5204,7 +5204,7 @@
   "optimizeWorld.progress.counter": "%s\/%s",
   "optimizeWorld.progress.percentage": "%s%%",
   "optimizeWorld.stage.counting": "Tǔng-jì chyū-kwài jūng…",
-  "optimizeWorld.stage.failed": "Shr̄-bài le-! :(",
+  "optimizeWorld.stage.failed": "Shr̄-bài le! :(",
   "optimizeWorld.stage.finished": "Jí-jyāng wán-chéng…",
   "optimizeWorld.stage.finished.chunks": "Jí-jyāng wán-chéng chyū-kwài de shēng-jí…",
   "optimizeWorld.stage.finished.entities": "Jí-jyāng wán-chéng shŕ-tǐ de shēng-jí…",

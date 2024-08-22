@@ -15,7 +15,7 @@ from converter import (
     to_xiaojing,
 )
 
-rep = {"！:(": "! :(", "，": ", "}
+rep = {"！:(": "! :(", "，": ", ", "-!": "!"}
 
 fixed_zh_source = load_json("fixed_zh_source")
 save_to_json(
