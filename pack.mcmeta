@@ -33,21 +33,6 @@
             "region": "Zhōngguó Dàlù",
             "bidirectional": false
         },
-        "zh_mps2": {
-            "name": "Jù-yīn Fú-hàu Dì-èr Shr̀",
-            "region": "Jūng-guó Dà-lù",
-            "bidirectional": false
-        },
-        "zh_ty": {
-            "name": "Tong-yòng Pin-yin",
-            "region": "Jhong-guó Dà-lù",
-            "bidirectional": false
-        },
-        "zh_yale": {
-            "name": "Yale romanization",
-            "region": "Jūng-gwó Dà-lù",
-            "bidirectional": false
-        },
         "zh_ipa": {
             "name": "Chinese in IPA",
             "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
@@ -66,6 +51,26 @@
         "zh_gr": {
             "name": "Gwoyeu Romatzyh",
             "region": "Jonggwo Dahluh",
+            "bidirectional": false
+        },
+        "zh_mps2": {
+            "name": "Jù-yīn Fú-hàu Dì-èr Shr̀",
+            "region": "Jūng-guó Dà-lù",
+            "bidirectional": false
+        },
+        "zh_ty": {
+            "name": "Tong-yòng Pin-yin",
+            "region": "Jhong-guó Dà-lù",
+            "bidirectional": false
+        },
+        "zh_yale": {
+            "name": "Yale romanization",
+            "region": "Jūng-gwó Dà-lù",
+            "bidirectional": false
+        },
+        "zh_kk": {
+            "name": "カタカナ",
+            "region": "ジョン グオ ダー ルー",
             "bidirectional": false
         },
         "zh_cy": {

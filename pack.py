@@ -8,6 +8,7 @@ from base import P, data, fixed_zh, rep_ja_kk, file_size
 from converter import (
     save_to_json,
     convert,
+    pinyin_to_katakana,
     to_bopomofo,
     to_cyrillic,
     to_harmonic,
@@ -37,13 +38,14 @@ def main() -> None:
     save_to_json(convert(data["en_us"], to_manyogana, rep=rep_ja_kk), "ja_my")
     save_to_json(convert(data["zh_cn"], to_harmonic), "zh_hm")
     save_to_json(convert(data["zh_cn"], to_pinyin, fixed_zh["zh_py"]), "zh_py")
-    save_to_json(convert(data["zh_cn"], to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
-    save_to_json(convert(data["zh_cn"], to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
-    save_to_json(convert(data["zh_cn"], to_yale, fixed_zh["zh_yale"]), "zh_yale")
     save_to_json(convert(data["zh_cn"], to_ipa), "zh_ipa")
     save_to_json(convert(data["zh_cn"], to_bopomofo), "zh_bpmf")
     save_to_json(convert(data["zh_cn"], to_wadegiles, fixed_zh["zh_wg"]), "zh_wg")
     save_to_json(convert(data["zh_cn"], to_romatzyh, fixed_zh["zh_gr"]), "zh_gr")
+    save_to_json(convert(data["zh_cn"], to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
+    save_to_json(convert(data["zh_cn"], to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
+    save_to_json(convert(data["zh_cn"], to_yale, fixed_zh["zh_yale"]), "zh_yale")
+    save_to_json(convert(data["zh_cn"], pinyin_to_katakana), "zh_kk")
     save_to_json(convert(data["zh_cn"], to_cyrillic, fixed_zh["zh_cy"]), "zh_cy")
     save_to_json(convert(data["zh_cn"], to_xiaojing, fixed_zh["zh_xj"]), "zh_xj")
     main_elapsed_time = time.time() - main_start_time

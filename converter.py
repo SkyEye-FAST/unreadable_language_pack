@@ -239,6 +239,39 @@ def to_pinyin(text: str, rep: Ldata, auto_cut: bool = True) -> str:
     return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
 
 
+def pinyin_to_other(
+    correspondence: Ldata,
+    text: str,
+    rep: Ldata,
+    auto_cut: bool = True,
+    delimiter: str = "-",
+) -> str:
+    """
+    将字符串中的汉字转写，单字之间使用delimiter定义的符号分开，词之间使用空格分开。
+
+    Args:
+        correspondence (Ldata): 对应关系
+        text (str): 需要转换的字符串
+        rep (Ldata): 需要替换格式的内容
+        auto_cut (bool, optional): 是否自动分词，默认为True
+        delimiter (str, optional): 分隔符，默认为'-'
+
+    Returns:
+        str: 转换结果
+    """
+
+    seg_list = segment_str(text, auto_cut)
+    output_list: List[str] = []
+
+    for seg in seg_list:
+        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
+        result_list = [correspondence.get(p, p) for p in pinyin_list]
+        output_list.append(delimiter.join(result_list))
+
+    result = " ".join(output_list)
+    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+
+
 def to_mps2(text: str, rep: Ldata, auto_cut: bool = True) -> str:
     """
     将字符串中的汉字转写为注音符号第二式，单字之间使用连字符分开，词之间使用空格分开。
@@ -252,16 +285,7 @@ def to_mps2(text: str, rep: Ldata, auto_cut: bool = True) -> str:
         str: 转换结果
     """
 
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
-
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        mps2_list = [pinyin_to["mps2"].get(p, p) for p in pinyin_list]
-        output_list.append("-".join(mps2_list))
-
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+    return pinyin_to_other(pinyin_to["mps2"], text, rep, auto_cut)
 
 
 def to_tongyong(text: str, rep: Ldata, auto_cut: bool = True) -> str:
@@ -277,16 +301,7 @@ def to_tongyong(text: str, rep: Ldata, auto_cut: bool = True) -> str:
         str: 转换结果
     """
 
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
-
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        typy_list = [pinyin_to["typy"].get(p, p) for p in pinyin_list]
-        output_list.append("-".join(typy_list))
-
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+    return pinyin_to_other(pinyin_to["tongyong"], text, rep, auto_cut)
 
 
 def to_yale(text: str, rep: Ldata, auto_cut: bool = True) -> str:
@@ -302,16 +317,7 @@ def to_yale(text: str, rep: Ldata, auto_cut: bool = True) -> str:
         str: 转换结果
     """
 
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
-
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        yale_list = [pinyin_to["yale"].get(p, p) for p in pinyin_list]
-        output_list.append("-".join(yale_list))
-
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+    return pinyin_to_other(pinyin_to["yale"], text, rep, auto_cut)
 
 
 def to_ipa(text: str) -> str:
@@ -363,16 +369,7 @@ def to_wadegiles(text: str, rep: Ldata, auto_cut: bool = True) -> str:
         str: 转换结果
     """
 
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
-
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        wg_list = [pinyin_to["wadegiles"].get(p, p) for p in pinyin_list]
-        output_list.append("-".join(wg_list))
-
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+    return pinyin_to_other(pinyin_to["wadegiles"], text, rep, auto_cut)
 
 
 def to_romatzyh(text: str, rep: Ldata, auto_cut: bool = True) -> str:
@@ -400,6 +397,22 @@ def to_romatzyh(text: str, rep: Ldata, auto_cut: bool = True) -> str:
     result = " ".join(output_list)
 
     return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+
+
+def pinyin_to_katakana(text: str) -> str:
+    """
+    将字符串中的汉字转写为片假名。
+
+    Args:
+        text (str): 需要转换的字符串
+
+    Returns:
+        str: 转换结果
+    """
+
+    pinyin_list = lazy_pinyin(text)
+    kana_list = [f"{pinyin_to['katakana'].get(p, p)}" for p in pinyin_list]
+    return " ".join(kana_list)
 
 
 def to_cyrillic(text: str, rep: Ldata, auto_cut: bool = True) -> str:
