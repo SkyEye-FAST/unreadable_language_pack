@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了11种语言：
+资源包向游戏内添加了14种语言：
 
 #### i18nglish (i7h)（[`en_i7h.json`](output/en_i7h.json)）
 
