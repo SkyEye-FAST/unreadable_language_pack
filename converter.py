@@ -21,6 +21,7 @@ from base import (
     pinyin_to,
     gr_values,
     cy_values,
+    tone_to_ipa,
     finals,
     rep_zh,
 )
@@ -39,7 +40,6 @@ jieba.load_userdict(str(P / "data" / "dict.txt"))
 
 # 初始化其他自定义数据
 fixed_zh_u = load_json("fixed_zh_universal")
-tone_to_ipa: Ldata = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}  # IPA声调
 manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 

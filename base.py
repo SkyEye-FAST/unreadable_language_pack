@@ -78,6 +78,7 @@ fixed_zh["zh_xj"] = load_json("fixed_zh_xj")  # 小儿经转写修正
 
 gr_values: Set[str] = set(pinyin_to["romatzyh"].values())  # 国语罗马字的有效拼写
 cy_values: Set[str] = set(pinyin_to["cyrillic"].values())  # 西里尔转写的有效拼写
+tone_to_ipa: Ldata = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}  # IPA声调
 
 rep_zh: Ldata = load_json("rep_zh")  # 连写的中文转写方案替换修正
 finals: Tuple[str, ...] = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
