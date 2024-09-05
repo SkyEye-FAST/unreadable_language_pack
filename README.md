@@ -32,13 +32,20 @@ pip install -r requirements.txt
 
 ### 获取语言文件
 
-本仓库会在每天🕧00:30（UTC+8，即🕟UTC 16:30）自动检查Minecraft Java版语言文件（`en_us.json`、`zh_cn.json`）更新并更新资源包。使用脚本为[`source.py`](source.py)。获取到的语言文件存储在与脚本同级的`source`文件夹下。
+本仓库会在每天🕧00:30（UTC+8，即🕟UTC 16:30）自动检查Minecraft Java版语言文件（`en_us.json`、`zh_cn.json`）更新并更新资源包。
 
 ### 资源包
 
-资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)一同打包为`unreadable_language_pack.zip`。
+资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)和[`pack.png`](pack.png)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了14种语言：
+资源包向游戏内添加了15种语言。
+
+> [!TIP]
+> 本项目使用的中文转写对照表参见下两表：
+>
+> [`comparison_table_1.tsv`](table/comparison_table_1.tsv)（带声调，注音方案）
+>
+> [`comparison_table_2.tsv`](table/comparison_table_2.tsv)（不带声调，外文转写）
 
 #### i18nglish (i7h)（[`en_i7h.json`](output/en_i7h.json)）
 
@@ -124,6 +131,11 @@ pip install -r requirements.txt
 - 即“耶鲁拼音 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的耶鲁拼音。
 
+#### カタカナ (ジョン グオ ダー ルー)（[`zh_kk.json`](output/zh_kk.json)）
+
+- 即“片假名 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的片假名。
+
 #### Палладицу (Чжунго далу)（[`zh_cy.json`](output/zh_cy.json)）
 
 - 即“西里尔化中文 (中国大陆)”。
@@ -146,6 +158,7 @@ pip install -r requirements.txt
 ![Sample](sample/sample_zh_mps2.png)
 ![Sample](sample/sample_zh_ty.png)
 ![Sample](sample/sample_zh_yale.png)
+![Sample](sample/sample_zh_kk.png)
 ![Sample](sample/sample_zh_cy.png)
 ![Sample](sample/sample_zh_xj.png)
 
