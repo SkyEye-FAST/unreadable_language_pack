@@ -116,6 +116,11 @@ The resource pack added 15 languages into the game.
 - i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
 - Once selected, all strings will be changed to Gwoyeu Romatzyh transliterated from Simp. Chinese.
 
+#### "Jiaanhuah Guoryuu Romatzyh (JJungguor Dahluh)" ([`zh_sgr.json`](output/zh_sgr.json))
+
+- i.e. "Simplified Guoryuu Romatzyh (Chinese mainland)”.
+- Once selected, all strings will be changed to Simp. Guoryuu Romatzyh transliterated from Simp. Chinese.
+
 #### "Jù-yīn Fú-hàu Dì-èr Shr̀ (Jūng-guó Dà-lù)" ([`zh_mps2.json`](output/zh_mps2.json))
 
 - i.e. "Mandarin Phonetic Symbols II (Chinese mainland)”.
@@ -155,6 +160,7 @@ The resource pack added 15 languages into the game.
 ![Sample](sample/sample_zh_bpmf.png)
 ![Sample](sample/sample_zh_wg.png)
 ![Sample](sample/sample_zh_gr.png)
+![Sample](sample/sample_zh_sgr.png)
 ![Sample](sample/sample_zh_mps2.png)
 ![Sample](sample/sample_zh_ty.png)
 ![Sample](sample/sample_zh_yale.png)

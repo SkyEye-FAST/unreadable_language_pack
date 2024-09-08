@@ -116,6 +116,11 @@ pip install -r requirements.txt
 - 即“国语罗马字 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的国语罗马字。
 
+#### Jiaanhuah Guoryuu Romatzyh (JJungguor Dahluh)（[`zh_sgr.json`](output/zh_sgr.json)）
+
+- 即“简化国语罗马字 (中国大陆)”。
+- 选择之后，所有字符串会变为简体中文转写而来的简化国语罗马字。
+
 #### Jù-yīn Fú-hàu Dì-èr Shr̀ (Jūng-guó Dà-lù)（[`zh_mps2.json`](output/zh_mps2.json)）
 
 - 即“注音符号第二式 (中国大陆)”。
@@ -155,6 +160,7 @@ pip install -r requirements.txt
 ![Sample](sample/sample_zh_bpmf.png)
 ![Sample](sample/sample_zh_wg.png)
 ![Sample](sample/sample_zh_gr.png)
+![Sample](sample/sample_zh_sgr.png)
 ![Sample](sample/sample_zh_mps2.png)
 ![Sample](sample/sample_zh_ty.png)
 ![Sample](sample/sample_zh_yale.png)
