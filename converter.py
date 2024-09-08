@@ -469,7 +469,7 @@ class ChineseConverter(BaseConverter):
             self.capitalize_titles(self.replace_multiple(result))
         )
 
-    def pinyin_to_katakana(self, text: str = "") -> str:
+    def to_katakana(self, text: str = "") -> str:
         """
         将字符串中的汉字转写为片假名。
 

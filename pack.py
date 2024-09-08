@@ -34,7 +34,7 @@ def main() -> None:
     save_to_json(zh_conv.convert(zh_conv.to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
     save_to_json(zh_conv.convert(zh_conv.to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
     save_to_json(zh_conv.convert(zh_conv.to_yale, fixed_zh["zh_yale"]), "zh_yale")
-    save_to_json(zh_conv.convert(zh_conv.pinyin_to_katakana), "zh_kk")
+    save_to_json(zh_conv.convert(zh_conv.to_katakana), "zh_kk")
     save_to_json(zh_conv.convert(zh_conv.to_cyrillic, fixed_zh["zh_cy"]), "zh_cy")
     save_to_json(zh_conv.convert(zh_conv.to_xiaojing, fixed_zh["zh_xj"]), "zh_xj")
     main_elapsed_time = time.time() - main_start_time
