@@ -248,32 +248,33 @@ class ChineseConverter(BaseConverter):
     中文转换器类。
     """
 
-    def __init__(self, data: Ldata, rep: Ldata = rep_zh) -> None:
+    def __init__(self, data: Ldata, rep: Ldata = rep_zh, auto_cut: bool = True) -> None:
         """
         初始化转换器。
 
         Args:
             data (Ldata): 输入的语言数据
             rep (Ldata, optional): 替换的格式内容，默认为rep_zh
+            auto_cut (bool, optional): 是否使用自动分词，默认为True
         """
 
         super().__init__(data, rep)
         self.data = data
         self.rep = rep
+        self.auto_cut = auto_cut
 
-    def segment_str(self, text: str, auto_cut: bool = True) -> List[str]:
+    def segment_str(self, text: str) -> List[str]:
         """
         根据设置分词或者直接拆分字符串。
 
         Args:
             text (str): 需要分割的字符串
-            auto_cut (bool, optional): 是否使用自动分词，默认为True
 
         Returns:
             List[str]: 分割后的字符串列表
         """
 
-        return jieba.lcut(text) if auto_cut else text.split()
+        return jieba.lcut(text) if self.auto_cut else text.split()
 
     def to_harmonic(self, text: str) -> str:
         """
