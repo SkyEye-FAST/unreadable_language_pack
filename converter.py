@@ -355,45 +355,6 @@ class ChineseConverter(BaseConverter):
             self.capitalize_titles(self.replace_multiple(result))
         )
 
-    def to_mps2(self, text: str) -> str:
-        """
-        将字符串中的汉字转写为注音符号第二式，单字之间使用连字符分开，词之间使用空格分开。
-
-        Args:
-            text (str): 需要转换的字符串
-
-        Returns:
-            str: 转换结果
-        """
-
-        return self.pinyin_to_other(pinyin_to["mps2"], text)
-
-    def to_tongyong(self, text: str) -> str:
-        """
-        将字符串中的汉字转写为通用拼音，单字之间使用连字符分开，词之间使用空格分开。
-
-        Args:
-            text (str): 需要转换的字符串
-
-        Returns:
-            str: 转换结果
-        """
-
-        return self.pinyin_to_other(pinyin_to["tongyong"], text)
-
-    def to_yale(self, text: str) -> str:
-        """
-        将字符串中的汉字转写为耶鲁拼音，单字之间使用连字符分开，词之间使用空格分开。
-
-        Args:
-            text (str): 需要转换的字符串
-
-        Returns:
-            str: 转换结果
-        """
-
-        return self.pinyin_to_other(pinyin_to["yale"], text)
-
     def to_ipa(self, text: str) -> str:
         """
         将字符串中的汉字转写为IPA，单字之间使用空格分开。
@@ -468,6 +429,58 @@ class ChineseConverter(BaseConverter):
         return self.capitalize_lines(
             self.capitalize_titles(self.replace_multiple(result))
         )
+
+    def to_simp_romatzyh(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为简化国语罗马字，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        self.pinyin_to_other(pinyin_to["simp_romatzyh"], text)
+
+    def to_mps2(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为注音符号第二式，单字之间使用连字符分开，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        return self.pinyin_to_other(pinyin_to["mps2"], text)
+
+    def to_tongyong(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为通用拼音，单字之间使用连字符分开，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        return self.pinyin_to_other(pinyin_to["tongyong"], text)
+
+    def to_yale(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为耶鲁拼音，单字之间使用连字符分开，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        return self.pinyin_to_other(pinyin_to["yale"], text)
 
     def to_katakana(self, text: str = "") -> str:
         """

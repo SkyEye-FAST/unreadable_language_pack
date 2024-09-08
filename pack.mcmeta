@@ -53,6 +53,11 @@
             "region": "Jonggwo Dahluh",
             "bidirectional": false
         },
+        "zh_sgr": {
+            "name": "Jiaanhuah Guoryuu Romatzyh",
+            "region": "Jungguor Dahluh",
+            "bidirectional": false
+        },
         "zh_mps2": {
             "name": "Jù-yīn Fú-hàu Dì-èr Shr̀",
             "region": "Jūng-guó Dà-lù",

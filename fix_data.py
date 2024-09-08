@@ -43,6 +43,11 @@ save_to_json(
     "data",
 )
 save_to_json(
+    conv.convert(conv.to_simp_romatzyh),
+    "fixed_zh_sgr",
+    "data",
+)
+save_to_json(
     conv.convert(conv.to_cyrillic),
     "fixed_zh_cy",
     "data",

@@ -31,6 +31,7 @@ def main() -> None:
     save_to_json(zh_conv.convert(zh_conv.to_bopomofo), "zh_bpmf")
     save_to_json(zh_conv.convert(zh_conv.to_wadegiles, fixed_zh["zh_wg"]), "zh_wg")
     save_to_json(zh_conv.convert(zh_conv.to_romatzyh, fixed_zh["zh_gr"]), "zh_gr")
+    save_to_json(zh_conv.convert(zh_conv.to_simp_romatzyh, fixed_zh["zh_sgr"]), "zh_sgr")
     save_to_json(zh_conv.convert(zh_conv.to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
     save_to_json(zh_conv.convert(zh_conv.to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
     save_to_json(zh_conv.convert(zh_conv.to_yale, fixed_zh["zh_yale"]), "zh_yale")
