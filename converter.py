@@ -441,7 +441,7 @@ class ChineseConverter(BaseConverter):
             str: 转换结果
         """
 
-        self.pinyin_to_other(pinyin_to["simp_romatzyh"], text)
+        return self.pinyin_to_other(pinyin_to["simp_romatzyh"], text, delimiter="")
 
     def to_mps2(self, text: str) -> str:
         """
