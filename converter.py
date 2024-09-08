@@ -3,7 +3,6 @@
 
 import re
 import time
-import inspect
 from typing import List, Set, Tuple, Callable, Optional
 
 import ujson
@@ -24,6 +23,7 @@ from base import (
     tone_to_ipa,
     finals,
     rep_zh,
+    rep_ja_kk,
 )
 
 # 初始化OpenCC
@@ -43,467 +43,459 @@ fixed_zh_u = load_json("fixed_zh_universal")
 manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 
-def replace_multiple(text: str, replacements: Ldata) -> str:
+class Converter:
     """
-    对字符串进行多次替换。
-
-    Args:
-        text (str): 需要替换的字符串
-        replacements (Ldata): 替换的内容
-
-    Returns:
-        str: 替换结果
+    语言转换器类。
     """
 
-    for old, new in replacements.items():
-        text = text.replace(old, new)
-    return text
+    def __init__(self, data: Ldata, auto_cut: bool = True, rep: Ldata = rep_zh) -> None:
+        """
+        初始化转换器。
 
+        Args:
+            data (Ldata): 语言数据
+            auto_cut (bool, optional): 是否自动分词，默认为True
+            rep (Ldata, optional): 需要替换格式的内容
+        """
 
-def capitalize_lines(text: str) -> str:
-    """
-    处理句首大写，字符串中带换行符的单独处理。
+        self.data = data
+        self.auto_cut = auto_cut
+        self.rep = rep
 
-    Args:
-        text (str): 需要转换的字符串
+    def replace_multiple(self, text: str) -> str:
+        """
+        对字符串进行多次替换。
 
-    Returns:
-        str: 转换结果
-    """
+        Args:
+            text (str): 需要替换的字符串
 
-    if "\n" in text:
-        lines = text.splitlines()
-        capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
-        return "\n".join(capitalized_lines)
-    return text[:1].upper() + text[1:]
+        Returns:
+            str: 替换结果
+        """
 
+        rep = self.rep
+        for old, new in rep.items():
+            text = text.replace(old, new)
+        return text
 
-def capitalize_titles(text: str) -> str:
-    """
-    将字符串中书名号（《》）中的单词全部作首字母大写处理。
+    def capitalize_lines(self, text: str) -> str:
+        """
+        处理句首大写，字符串中带换行符的单独处理。
 
-    Args:
-        text (str): 需要转换的字符串
+        Args:
+            text (str): 需要转换的字符串
 
-    Returns:
-        str: 转换结果
-    """
+        Returns:
+            str: 转换结果
+        """
 
-    return re.sub(
-        r"《(.*?)》",
-        lambda match: f"《{' '.join(word.capitalize() for word in match.group(1).split())}》",
-        text,
-    )
+        if "\n" in text:
+            lines = text.splitlines()
+            capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
+            return "\n".join(capitalized_lines)
+        return text[:1].upper() + text[1:]
 
+    def capitalize_titles(self, text: str) -> str:
+        """
+        将字符串中书名号（《》）中的单词全部作首字母大写处理。
 
-def add_apostrophes(input_list: List[str], values: Set[str]) -> List[str]:
-    """
-    处理隔音符号。
+        Args:
+            text (str): 需要转换的字符串
 
-    Args:
-        input_list (List[str]): 需要转换的字符串
-        values (Set[str]): 有效的拼写
+        Returns:
+            str: 转换结果
+        """
 
-    Returns:
-        List[str]: 处理结果
-    """
+        return re.sub(
+            r"《(.*?)》",
+            lambda m: f"《{' '.join(w.capitalize() for w in m.group(1).split())}》",
+            text,
+        )
 
-    for i in range(1, len(input_list)):
-        for j in range(len(input_list[i - 1])):
-            prefix = input_list[i - 1][: -j - 1]
-            suffix = input_list[i - 1][-j:]
-            if (suffix + input_list[i] in values) and (prefix in values):
-                input_list[i] = f"'{input_list[i]}"
-                break
+    def add_apostrophes(self, input_list: List[str], values: Set[str]) -> List[str]:
+        """
+        处理隔音符号。
 
-    return input_list
+        Args:
+            input_list (List[str]): 需要转换的字符串
+            values (Set[str]): 有效的拼写
 
+        Returns:
+            List[str]: 处理结果
+        """
 
-def segment_str(text: str, auto_cut: bool = True) -> List[str]:
-    """
-    将字符串分词。
+        for i in range(1, len(input_list)):
+            for j in range(len(input_list[i - 1])):
+                prefix = input_list[i - 1][: -j - 1]
+                suffix = input_list[i - 1][-j:]
+                if (suffix + input_list[i] in values) and (prefix in values):
+                    input_list[i] = f"'{input_list[i]}"
+                    break
 
-    Args:
-        text (str): 需要转换的字符串
-        auto_cut (bool, optional): 是否自动分词，默认为True
+        return input_list
 
-    Returns:
-        str: 转换结果
-    """
+    def segment_str(self, text: str) -> List[str]:
+        """
+        将字符串分词。
 
-    return jieba.lcut(text) if auto_cut else text.split()
+        Args:
+            text (str): 需要转换的字符串
 
+        Returns:
+            str: 转换结果
+        """
 
-def to_i7h(text: str) -> str:
-    """
-    将字符串中的所有单词缩写。
-    保留单词的首尾字符，中间用字符数替代。
-    长度为2或以下的单词保持不变。
+        auto_cut = self.auto_cut
+        return jieba.lcut(text) if auto_cut else text.split()
 
-    Args:
-        text (str): 需要转换的字符串
+    def to_i7h(self, text: str) -> str:
+        """
+        将字符串中的所有单词缩写。
+        保留单词的首尾字符，中间用字符数替代。
+        长度为2或以下的单词保持不变。
 
-    Returns:
-        str: 转换结果
-    """
+        Args:
+            text (str): 需要转换的字符串
 
-    words = re.findall(r"\w+", text)
-    results = []
+        Returns:
+            str: 转换结果
+        """
 
-    for word in words:
-        if len(word) > 2:
-            result = f"{word[0]}{len(word) - 2}{word[-1]}"
-        else:
-            result = word
-        results.append(result)
+        words = re.findall(r"\w+", text)
+        results = []
 
-    for word, result in zip(words, results):
-        text = text.replace(word, result, 1)
+        for word in words:
+            if len(word) > 2:
+                result = f"{word[0]}{len(word) - 2}{word[-1]}"
+            else:
+                result = word
+            results.append(result)
 
-    return text
+        for word, result in zip(words, results):
+            text = text.replace(word, result, 1)
 
+        return text
 
-def to_katakana(text: str, rep: Ldata) -> str:
-    """
-    将字符串中的英文转写为片假名。
+    def to_katakana(self, text: str) -> str:
+        """
+        将字符串中的英文转写为片假名。
 
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
+        Args:
+            text (str): 需要转换的字符串
+            rep (Ldata): 需要替换格式的内容
 
-    Returns:
-        str: 转换结果
-    """
+        Returns:
+            str: 转换结果
+        """
 
-    return replace_multiple(tk(text).katakana, rep)
+        self.rep = rep_ja_kk
+        return self.replace_multiple(tk(text).katakana)
 
+    def to_manyogana(self, text: str) -> str:
+        """
+        将字符串中的片假名转写为万叶假名。
 
-def to_manyogana(text: str, rep: Ldata) -> str:
-    """
-    将字符串中的片假名转写为万叶假名。
+        Args:
+            text (str): 需要转换的字符串
 
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
+        Returns:
+            str: 转换结果
+        """
 
-    Returns:
-        str: 转换结果
-    """
+        self.rep = rep_ja_kk
+        kk_dict = self.to_katakana(text)
+        return "".join(manyoganas_dict.get(char, char) for char in kk_dict)
 
-    return "".join(manyoganas_dict.get(char, char) for char in to_katakana(text, rep))
+    def to_harmonic(self, text: str) -> str:
+        """
+        将字符串中的汉字按GB/Z 40637-2021和《通用规范汉字表》转换。
 
+        Args:
+            text (str): 需要转换的字符串
 
-def to_harmonic(text: str) -> str:
-    """
-    将字符串中的汉字按GB/Z 40637-2021和《通用规范汉字表》转换。
+        Returns:
+            str: 转换结果
+        """
 
-    Args:
-        text (str): 需要转换的字符串
+        return opencc_s2c.convert(text)
 
-    Returns:
-        str: 转换结果
-    """
+    def to_pinyin(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。
 
-    return opencc_s2c.convert(text)
+        Args:
+            text (str): 需要转换的字符串
+            rep (Ldata): 需要替换格式的内容
+            auto_cut (bool, optional): 是否自动分词，默认为True
 
+        Returns:
+            str: 转换结果
+        """
 
-def to_pinyin(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。
+        seg_list = self.segment_str(text)
+        output_list: List[str] = []
 
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
+        for seg in seg_list:
+            pinyin_list = lazy_pinyin(seg, style=Style.TONE)
+            pinyin_list = [
+                (
+                    f"'{py}"
+                    if i > 0
+                    and py.startswith(finals)
+                    and pinyin_list[i - 1][-1].isalpha()
+                    else py
+                )
+                for i, py in enumerate(pinyin_list)
+            ]
+            output_list.append("".join(pinyin_list))
 
-    Returns:
-        str: 转换结果
-    """
+        result = " ".join(output_list)
+        return self.capitalize_lines(
+            self.capitalize_titles(self.replace_multiple(result))
+        )
 
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
+    def pinyin_to_other(
+        self,
+        correspondence: Ldata,
+        text: str,
+        delimiter: str = "-",
+    ) -> str:
+        """
+        将字符串中的汉字转写，单字之间使用delimiter定义的符号分开，词之间使用空格分开。
 
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE)
-        pinyin_list = [
-            (
-                f"'{py}"
-                if i > 0 and py.startswith(finals) and pinyin_list[i - 1][-1].isalpha()
-                else py
+        Args:
+            correspondence (Ldata): 对应关系
+            text (str): 需要转换的字符串
+            delimiter (str, optional): 分隔符，默认为'-'
+
+        Returns:
+            str: 转换结果
+        """
+
+        seg_list = self.segment_str(text)
+        output_list: List[str] = []
+
+        for seg in seg_list:
+            pinyin_list = lazy_pinyin(
+                seg, style=Style.TONE3, neutral_tone_with_five=True
             )
-            for i, py in enumerate(pinyin_list)
+            result_list = [correspondence.get(p, p) for p in pinyin_list]
+            output_list.append(delimiter.join(result_list))
+
+        result = " ".join(output_list)
+        return self.capitalize_lines(
+            self.capitalize_titles(self.replace_multiple(result))
+        )
+
+    def to_mps2(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为注音符号第二式，单字之间使用连字符分开，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        return self.pinyin_to_other(pinyin_to["mps2"], text)
+
+    def to_tongyong(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为通用拼音，单字之间使用连字符分开，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        return self.pinyin_to_other(pinyin_to["tongyong"], text)
+
+    def to_yale(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为耶鲁拼音，单字之间使用连字符分开，词之间使用空格分开。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        return self.pinyin_to_other(pinyin_to["yale"], text)
+
+    def to_ipa(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为IPA，单字之间使用空格分开。
+        IPA数据来自@UntPhesoca，宽式标音。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        pinyin_list = lazy_pinyin(text, style=Style.TONE3, neutral_tone_with_five=True)
+        ipa_list = [
+            f"{pinyin_to['ipa'].get(p[:-1], p[:-1])}{tone_to_ipa.get(p[-1], p[-1])}"
+            for p in pinyin_list
         ]
-        output_list.append("".join(pinyin_list))
+        return " ".join(ipa_list)
 
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+    def to_bopomofo(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为注音符号，单字之间使用空格分开。
 
+        Args:
+            text (str): 需要转换的字符串
 
-def pinyin_to_other(
-    correspondence: Ldata,
-    text: str,
-    rep: Ldata,
-    auto_cut: bool = True,
-    delimiter: str = "-",
-) -> str:
-    """
-    将字符串中的汉字转写，单字之间使用delimiter定义的符号分开，词之间使用空格分开。
+        Returns:
+            str: 转换结果
+        """
 
-    Args:
-        correspondence (Ldata): 对应关系
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
-        delimiter (str, optional): 分隔符，默认为'-'
+        bpmf_list = lazy_pinyin(text, style=Style.BOPOMOFO)
+        bpmf_list = [f"˙{i[:-1]}" if i.endswith("˙") else i for i in bpmf_list]
+        return " ".join(bpmf_list)
 
-    Returns:
-        str: 转换结果
-    """
+    def to_wadegiles(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为威妥玛拼音，单字之间使用连字符分开，词之间使用空格分开。
 
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
+        Args:
+            text (str): 需要转换的字符串
 
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        result_list = [correspondence.get(p, p) for p in pinyin_list]
-        output_list.append(delimiter.join(result_list))
+        Returns:
+            str: 转换结果
+        """
 
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
+        return self.pinyin_to_other(pinyin_to["wadegiles"], text)
 
+    def to_romatzyh(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为国语罗马字，词之间使用空格分开。
 
-def to_mps2(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为注音符号第二式，单字之间使用连字符分开，词之间使用空格分开。
+        Args:
+            text (str): 需要转换的字符串
 
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
+        Returns:
+            str: 转换结果
+        """
 
-    Returns:
-        str: 转换结果
-    """
+        seg_list = self.segment_str(text)
+        output_list = []
+
+        for seg in seg_list:
+            seg = seg.replace("不", "bu")
+            pinyin_list = lazy_pinyin(
+                seg, style=Style.TONE3, neutral_tone_with_five=True
+            )
+            gr_list = [pinyin_to["romatzyh"].get(p, p) for p in pinyin_list]
+            output_list.append("".join(self.add_apostrophes(gr_list, gr_values)))
 
-    return pinyin_to_other(pinyin_to["mps2"], text, rep, auto_cut)
+        result = " ".join(output_list)
 
+        return self.capitalize_lines(
+            self.capitalize_titles(self.replace_multiple(result))
+        )
 
-def to_tongyong(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为通用拼音，单字之间使用连字符分开，词之间使用空格分开。
+    def pinyin_to_katakana(self, text: str = "") -> str:
+        """
+        将字符串中的汉字转写为片假名。
 
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
+        Args:
+            text (str): 需要转换的字符串
 
-    Returns:
-        str: 转换结果
-    """
+        Returns:
+            str: 转换结果
+        """
 
-    return pinyin_to_other(pinyin_to["tongyong"], text, rep, auto_cut)
+        pinyin_list = lazy_pinyin(text)
+        kana_list = [f"{pinyin_to['katakana'].get(p, p)}" for p in pinyin_list]
+        return " ".join(kana_list)
 
+    def to_cyrillic(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为西里尔字母，使用帕拉季音标体系。
 
-def to_yale(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为耶鲁拼音，单字之间使用连字符分开，词之间使用空格分开。
+        Args:
+            text (str): 需要转换的字符串
 
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
+        Returns:
+            str: 转换结果
+        """
 
-    Returns:
-        str: 转换结果
-    """
+        seg_list = self.segment_str(text)
+        output_list: List[str] = []
 
-    return pinyin_to_other(pinyin_to["yale"], text, rep, auto_cut)
+        for seg in seg_list:
+            pinyin_list = lazy_pinyin(seg)
+            cy_list = [pinyin_to["cyrillic"].get(p, p) for p in pinyin_list]
+            output_list.append("".join(self.add_apostrophes(cy_list, cy_values)))
 
+        result = " ".join(output_list)
+        return self.capitalize_lines(
+            self.capitalize_titles(self.replace_multiple(result))
+        )
 
-def to_ipa(text: str) -> str:
-    """
-    将字符串中的汉字转写为IPA，单字之间使用空格分开。
-    IPA数据来自@UntPhesoca，宽式标音。
+    def to_xiaojing(self, text: str) -> str:
+        """
+        将字符串中的汉字转写为小儿经，使用零宽不连字（U+200C）分开。
 
-    Args:
-        text (str): 需要转换的字符串
-
-    Returns:
-        str: 转换结果
-    """
-
-    pinyin_list = lazy_pinyin(text, style=Style.TONE3, neutral_tone_with_five=True)
-    ipa_list = [
-        f"{pinyin_to['ipa'].get(p[:-1], p[:-1])}{tone_to_ipa.get(p[-1], p[-1])}"
-        for p in pinyin_list
-    ]
-    return " ".join(ipa_list)
-
-
-def to_bopomofo(text: str) -> str:
-    """
-    将字符串中的汉字转写为注音符号，单字之间使用空格分开。
-
-    Args:
-        text (str): 需要转换的字符串
-
-    Returns:
-        str: 转换结果
-    """
-
-    bpmf_list = lazy_pinyin(text, style=Style.BOPOMOFO)
-    bpmf_list = [f"˙{i[:-1]}" if i.endswith("˙") else i for i in bpmf_list]
-    return " ".join(bpmf_list)
-
-
-def to_wadegiles(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为威妥玛拼音，单字之间使用连字符分开，词之间使用空格分开。
-
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
-
-    Returns:
-        str: 转换结果
-    """
-
-    return pinyin_to_other(pinyin_to["wadegiles"], text, rep, auto_cut)
-
-
-def to_romatzyh(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为国语罗马字，词之间使用空格分开。
-
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
-
-    Returns:
-        str: 转换结果
-    """
-
-    seg_list = segment_str(text, auto_cut)
-    output_list = []
-
-    for seg in seg_list:
-        seg = seg.replace("不", "bu")
-        pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
-        gr_list = [pinyin_to["romatzyh"].get(p, p) for p in pinyin_list]
-        output_list.append("".join(add_apostrophes(gr_list, gr_values)))
-
-    result = " ".join(output_list)
-
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
-
-
-def pinyin_to_katakana(text: str) -> str:
-    """
-    将字符串中的汉字转写为片假名。
-
-    Args:
-        text (str): 需要转换的字符串
-
-    Returns:
-        str: 转换结果
-    """
-
-    pinyin_list = lazy_pinyin(text)
-    kana_list = [f"{pinyin_to['katakana'].get(p, p)}" for p in pinyin_list]
-    return " ".join(kana_list)
-
-
-def to_cyrillic(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为西里尔字母，使用帕拉季音标体系。
-
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
-
-    Returns:
-        str: 转换结果
-    """
-
-    seg_list = segment_str(text, auto_cut)
-    output_list: List[str] = []
-
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg)
-        cy_list = [pinyin_to["cyrillic"].get(p, p) for p in pinyin_list]
-        output_list.append("".join(add_apostrophes(cy_list, cy_values)))
-
-    result = " ".join(output_list)
-    return capitalize_lines(capitalize_titles(replace_multiple(result, rep)))
-
-
-def to_xiaojing(text: str, rep: Ldata, auto_cut: bool = True) -> str:
-    """
-    将字符串中的汉字转写为小儿经，使用零宽不连字（U+200C）分开。
-
-    Args:
-        text (str): 需要转换的字符串
-        rep (Ldata): 需要替换格式的内容
-        auto_cut (bool, optional): 是否自动分词，默认为True
-
-    Returns:
-        str: 转换结果
-    """
-
-    seg_list = segment_str(text, auto_cut)
-    output_list = []
-    for seg in seg_list:
-        pinyin_list = lazy_pinyin(seg)
-        xj_list = [pinyin_to["xiaojing"].get(p, p) for p in pinyin_list]
-        output_list.append("\u200c".join(xj_list))
-    return replace_multiple(" ".join(output_list), rep)
-
-
-def convert(
-    input_dict: Ldata,
-    func: Callable[[str], str],
-    fix_dict: Optional[Ldata] = None,
-    auto_cut: bool = True,
-    rep: Ldata = rep_zh,
-) -> Tuple[Ldata, float]:
-    """
-    转换语言数据。
-
-    Args:
-        input_dict (Ldata): 输入的数据
-        func (Callable[[str], str]): 生成语言文件所用的函数
-        fix_dict (Optional[Ldata], optional): 语言文件中需要修复的内容. 默认为None
-        auto_cut (bool, optional): 是否自动分词，默认为True
-        rep (Ldata, optional): 需要替换的内容，默认为rep_zh的内容
-
-    Returns:
-        (Ldata, float): 转换结果及耗时
-    """
-
-    start_time = time.time()
-
-    output_dict: Ldata = {}
-    for k, v in input_dict.items():
-        func_signature = inspect.signature(func)
-        kwargs = {}
-        if "auto_cut" in func_signature.parameters and auto_cut is not None:
-            kwargs["auto_cut"] = auto_cut
-        if "rep" in func_signature.parameters and rep is not None:
-            kwargs["rep"] = rep
-        output_dict[k] = func(v, **kwargs)
-
-    if rep is rep_zh:
-        output_dict.update(fixed_zh_u)
-
-    if fix_dict:
-        output_dict.update(fix_dict)
-
-    elapsed_time = time.time() - start_time
-
-    return output_dict, elapsed_time
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+
+        seg_list = self.segment_str(text)
+        output_list = []
+
+        for seg in seg_list:
+            pinyin_list = lazy_pinyin(seg)
+            xj_list = [pinyin_to["xiaojing"].get(p, p) for p in pinyin_list]
+            output_list.append("\u200c".join(xj_list))
+
+        return self.replace_multiple(" ".join(output_list))
+
+    def convert(
+        self,
+        func: Callable[[str], str],
+        fix_dict: Optional[Ldata] = None,
+        rep: Optional[Ldata] = None,
+    ) -> Tuple[Ldata, float]:
+        """
+        转换语言数据。
+
+        Args:
+            func (Callable[[str], str]): 生成语言文件所用的函数
+            fix_dict (Optional[Ldata], optional): 语言文件中需要修复的内容，默认为None
+            rep (Optional[Ldata], optional): 需要替换格式的内容
+
+        Returns:
+            (Ldata, float): 转换结果及耗时
+        """
+        if not rep:
+            rep = self.rep
+        input_dict = self.data
+        start_time = time.time()
+
+        output_dict: Ldata = {}
+        for k, v in input_dict.items():
+            output_dict[k] = func(v)
+
+        if self.rep is rep_zh:
+            output_dict.update(fixed_zh_u)
+
+        if fix_dict:
+            output_dict.update(fix_dict)
+
+        elapsed_time = time.time() - start_time
+
+        return output_dict, elapsed_time
 
 
 def save_to_json(

@@ -4,25 +4,10 @@
 import time
 import zipfile as zf
 
-from base import P, data, fixed_zh, rep_ja_kk, file_size
+from base import P, data, fixed_zh, file_size
 from converter import (
     save_to_json,
-    convert,
-    pinyin_to_katakana,
-    to_bopomofo,
-    to_cyrillic,
-    to_harmonic,
-    to_i7h,
-    to_ipa,
-    to_katakana,
-    to_manyogana,
-    to_mps2,
-    to_pinyin,
-    to_romatzyh,
-    to_tongyong,
-    to_wadegiles,
-    to_xiaojing,
-    to_yale,
+    Converter,
 )
 
 
@@ -31,23 +16,26 @@ def main() -> None:
     主函数，生成语言文件并打包成资源包。
     """
 
+    en_conv = Converter(data["en_us"])
+    zh_conv = Converter(data["zh_cn"])
+
     # 生成语言文件
     main_start_time = time.time()
-    save_to_json(convert(data["en_us"], to_i7h), "en_i7h")
-    save_to_json(convert(data["en_us"], to_katakana, rep=rep_ja_kk), "ja_kk")
-    save_to_json(convert(data["en_us"], to_manyogana, rep=rep_ja_kk), "ja_my")
-    save_to_json(convert(data["zh_cn"], to_harmonic), "zh_hm")
-    save_to_json(convert(data["zh_cn"], to_pinyin, fixed_zh["zh_py"]), "zh_py")
-    save_to_json(convert(data["zh_cn"], to_ipa), "zh_ipa")
-    save_to_json(convert(data["zh_cn"], to_bopomofo), "zh_bpmf")
-    save_to_json(convert(data["zh_cn"], to_wadegiles, fixed_zh["zh_wg"]), "zh_wg")
-    save_to_json(convert(data["zh_cn"], to_romatzyh, fixed_zh["zh_gr"]), "zh_gr")
-    save_to_json(convert(data["zh_cn"], to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
-    save_to_json(convert(data["zh_cn"], to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
-    save_to_json(convert(data["zh_cn"], to_yale, fixed_zh["zh_yale"]), "zh_yale")
-    save_to_json(convert(data["zh_cn"], pinyin_to_katakana), "zh_kk")
-    save_to_json(convert(data["zh_cn"], to_cyrillic, fixed_zh["zh_cy"]), "zh_cy")
-    save_to_json(convert(data["zh_cn"], to_xiaojing, fixed_zh["zh_xj"]), "zh_xj")
+    save_to_json(en_conv.convert(en_conv.to_i7h), "en_i7h")
+    save_to_json(en_conv.convert(en_conv.to_katakana), "ja_kk")
+    save_to_json(en_conv.convert(en_conv.to_manyogana), "ja_my")
+    save_to_json(zh_conv.convert(zh_conv.to_harmonic), "zh_hm")
+    save_to_json(zh_conv.convert(zh_conv.to_pinyin, fixed_zh["zh_py"]), "zh_py")
+    save_to_json(zh_conv.convert(zh_conv.to_ipa), "zh_ipa")
+    save_to_json(zh_conv.convert(zh_conv.to_bopomofo), "zh_bpmf")
+    save_to_json(zh_conv.convert(zh_conv.to_wadegiles, fixed_zh["zh_wg"]), "zh_wg")
+    save_to_json(zh_conv.convert(zh_conv.to_romatzyh, fixed_zh["zh_gr"]), "zh_gr")
+    save_to_json(zh_conv.convert(zh_conv.to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
+    save_to_json(zh_conv.convert(zh_conv.to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
+    save_to_json(zh_conv.convert(zh_conv.to_yale, fixed_zh["zh_yale"]), "zh_yale")
+    save_to_json(zh_conv.convert(zh_conv.pinyin_to_katakana), "zh_kk")
+    save_to_json(zh_conv.convert(zh_conv.to_cyrillic, fixed_zh["zh_cy"]), "zh_cy")
+    save_to_json(zh_conv.convert(zh_conv.to_xiaojing, fixed_zh["zh_xj"]), "zh_xj")
     main_elapsed_time = time.time() - main_start_time
     print(f"\n语言文件生成完毕，共耗时{main_elapsed_time:.2f} s。")
 
