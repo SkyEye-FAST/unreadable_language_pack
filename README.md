@@ -6,7 +6,7 @@
 
 ----
 
-此项目用于提供将Minecraft Java版语言文件的源字符串转写为片假名和万叶假名，并将简体中文转写为汉语拼音、注音符号及IPA的资源包。
+此项目提供由现有语言转换而来的新增非常规“语言”Minecraft Java版资源包。详见[#资源包](#资源包)一节。
 
 请使用模组[Modern UI](https://modrinth.com/mod/modern-ui)让游戏支持现代字体特性来保证所有字符正常显示。
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)和[`pack.png`](pack.png)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了15种语言。
+资源包向游戏内添加了16种语言。
 
 > [!TIP]
 > 本项目使用的中文转写对照表参见下两表：
