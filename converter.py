@@ -43,23 +43,21 @@ fixed_zh_u = load_json("fixed_zh_universal")
 manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 
-class Converter:
+class BaseConverter:
     """
-    语言转换器类。
+    基础转换器类，提供通用的文本操作方法。
     """
 
-    def __init__(self, data: Ldata, auto_cut: bool = True, rep: Ldata = rep_zh) -> None:
+    def __init__(self, data: Ldata, rep: Ldata) -> None:
         """
-        初始化转换器。
+        初始化基础转换器。
 
         Args:
-            data (Ldata): 语言数据
-            auto_cut (bool, optional): 是否自动分词，默认为True
-            rep (Ldata, optional): 需要替换格式的内容
+            data (Ldata): 输入的语言数据
+            rep (Ldata): 需要替换的格式内容
         """
 
         self.data = data
-        self.auto_cut = auto_cut
         self.rep = rep
 
     def replace_multiple(self, text: str) -> str:
@@ -70,11 +68,10 @@ class Converter:
             text (str): 需要替换的字符串
 
         Returns:
-            str: 替换结果
+            str: 替换后的字符串
         """
 
-        rep = self.rep
-        for old, new in rep.items():
+        for old, new in self.rep.items():
             text = text.replace(old, new)
         return text
 
@@ -97,7 +94,7 @@ class Converter:
 
     def capitalize_titles(self, text: str) -> str:
         """
-        将字符串中书名号（《》）中的单词全部作首字母大写处理。
+        将书名号《》中的单词首字母大写。
 
         Args:
             text (str): 需要转换的字符串
@@ -134,19 +131,60 @@ class Converter:
 
         return input_list
 
-    def segment_str(self, text: str) -> List[str]:
+    def convert(
+        self,
+        func: Callable[[str], str],
+        fix_dict: Optional[Ldata] = None,
+        rep: Optional[Ldata] = None,
+    ) -> Tuple[Ldata, float]:
         """
-        将字符串分词。
+        转换语言数据。
 
         Args:
-            text (str): 需要转换的字符串
+            func (Callable[[str], str]): 生成语言文件所用的函数
+            fix_dict (Optional[Ldata], optional): 语言文件中需要修复的内容，默认为None
+            rep (Optional[Ldata], optional): 需要替换格式的内容
 
         Returns:
-            str: 转换结果
+            (Ldata, float): 转换结果及耗时
+        """
+        if not rep:
+            rep = self.rep
+        input_dict = self.data
+        start_time = time.time()
+
+        output_dict: Ldata = {}
+        for k, v in input_dict.items():
+            output_dict[k] = func(v)
+
+        if self.rep is rep_zh:
+            output_dict.update(fixed_zh_u)
+
+        if fix_dict:
+            output_dict.update(fix_dict)
+
+        elapsed_time = time.time() - start_time
+
+        return output_dict, elapsed_time
+
+
+class EnglishConverter(BaseConverter):
+    """
+    英文转换器类。
+    """
+
+    def __init__(self, data: Ldata, rep: Ldata = rep_ja_kk) -> None:
+        """
+        初始化转换器。
+
+        Args:
+            data (Ldata): 输入的语言数据
+            rep (Ldata, optional): 替换的格式内容
         """
 
-        auto_cut = self.auto_cut
-        return jieba.lcut(text) if auto_cut else text.split()
+        super().__init__(data, rep)
+        self.data = data
+        self.rep = rep
 
     def to_i7h(self, text: str) -> str:
         """
@@ -161,7 +199,7 @@ class Converter:
             str: 转换结果
         """
 
-        words = re.findall(r"\w+", text)
+        words = re.findall(r"[^\W_]+", text)
         results = []
 
         for word in words:
@@ -178,14 +216,13 @@ class Converter:
 
     def to_katakana(self, text: str) -> str:
         """
-        将字符串中的英文转写为片假名。
+        将字符串转写为片假名。
 
         Args:
-            text (str): 需要转换的字符串
-            rep (Ldata): 需要替换格式的内容
+            text (str): 输入的文本
 
         Returns:
-            str: 转换结果
+            str: 转换后的片假名字符串
         """
 
         self.rep = rep_ja_kk
@@ -193,18 +230,50 @@ class Converter:
 
     def to_manyogana(self, text: str) -> str:
         """
-        将字符串中的片假名转写为万叶假名。
+        将字符串转写为万叶假名。
 
         Args:
-            text (str): 需要转换的字符串
+            text (str): 输入的文本
 
         Returns:
-            str: 转换结果
+            str: 转换后的万叶假名字符串
         """
 
-        self.rep = rep_ja_kk
         kk_dict = self.to_katakana(text)
         return "".join(manyoganas_dict.get(char, char) for char in kk_dict)
+
+
+class ChineseConverter(BaseConverter):
+    """
+    中文转换器类。
+    """
+
+    def __init__(self, data: Ldata, rep: Ldata = rep_zh) -> None:
+        """
+        初始化转换器。
+
+        Args:
+            data (Ldata): 输入的语言数据
+            rep (Ldata, optional): 替换的格式内容，默认为rep_zh
+        """
+
+        super().__init__(data, rep)
+        self.data = data
+        self.rep = rep
+
+    def segment_str(self, text: str, auto_cut: bool = True) -> List[str]:
+        """
+        根据设置分词或者直接拆分字符串。
+
+        Args:
+            text (str): 需要分割的字符串
+            auto_cut (bool, optional): 是否使用自动分词，默认为True
+
+        Returns:
+            List[str]: 分割后的字符串列表
+        """
+
+        return jieba.lcut(text) if auto_cut else text.split()
 
     def to_harmonic(self, text: str) -> str:
         """
@@ -221,12 +290,10 @@ class Converter:
 
     def to_pinyin(self, text: str) -> str:
         """
-        将字符串中的汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。
+        将汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。
 
         Args:
             text (str): 需要转换的字符串
-            rep (Ldata): 需要替换格式的内容
-            auto_cut (bool, optional): 是否自动分词，默认为True
 
         Returns:
             str: 转换结果
@@ -261,11 +328,11 @@ class Converter:
         delimiter: str = "-",
     ) -> str:
         """
-        将字符串中的汉字转写，单字之间使用delimiter定义的符号分开，词之间使用空格分开。
+        将汉字转写为其他拼音系统。
 
         Args:
-            correspondence (Ldata): 对应关系
-            text (str): 需要转换的字符串
+            correspondence (Ldata): 对应的拼音系统映射
+            text (str): 输入的文本
             delimiter (str, optional): 分隔符，默认为'-'
 
         Returns:
@@ -460,42 +527,6 @@ class Converter:
             output_list.append("\u200c".join(xj_list))
 
         return self.replace_multiple(" ".join(output_list))
-
-    def convert(
-        self,
-        func: Callable[[str], str],
-        fix_dict: Optional[Ldata] = None,
-        rep: Optional[Ldata] = None,
-    ) -> Tuple[Ldata, float]:
-        """
-        转换语言数据。
-
-        Args:
-            func (Callable[[str], str]): 生成语言文件所用的函数
-            fix_dict (Optional[Ldata], optional): 语言文件中需要修复的内容，默认为None
-            rep (Optional[Ldata], optional): 需要替换格式的内容
-
-        Returns:
-            (Ldata, float): 转换结果及耗时
-        """
-        if not rep:
-            rep = self.rep
-        input_dict = self.data
-        start_time = time.time()
-
-        output_dict: Ldata = {}
-        for k, v in input_dict.items():
-            output_dict[k] = func(v)
-
-        if self.rep is rep_zh:
-            output_dict.update(fixed_zh_u)
-
-        if fix_dict:
-            output_dict.update(fix_dict)
-
-        elapsed_time = time.time() - start_time
-
-        return output_dict, elapsed_time
 
 
 def save_to_json(

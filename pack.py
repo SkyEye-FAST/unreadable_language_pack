@@ -7,7 +7,8 @@ import zipfile as zf
 from base import P, data, fixed_zh, file_size
 from converter import (
     save_to_json,
-    Converter,
+    ChineseConverter,
+    EnglishConverter
 )
 
 
@@ -16,8 +17,8 @@ def main() -> None:
     主函数，生成语言文件并打包成资源包。
     """
 
-    en_conv = Converter(data["en_us"])
-    zh_conv = Converter(data["zh_cn"])
+    en_conv = EnglishConverter(data["en_us"])
+    zh_conv = ChineseConverter(data["zh_cn"])
 
     # 生成语言文件
     main_start_time = time.time()
