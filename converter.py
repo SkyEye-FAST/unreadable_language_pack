@@ -499,7 +499,7 @@ class ChineseConverter(BaseConverter):
 
     def to_cyrillic(self, text: str) -> str:
         """
-        将字符串中的汉字转写为西里尔字母，使用帕拉季音标体系。
+        将字符串中的汉字转写为西里尔字母，使用巴拉第音标体系。
 
         Args:
             text (str): 需要转换的字符串

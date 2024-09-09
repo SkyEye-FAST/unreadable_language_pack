@@ -148,7 +148,7 @@ The resource pack added 16 languages into the game.
 #### "Палладицу (Чжунго далу)"  ([`zh_cy.json`](output/zh_cy.json))
 
 - i.e. "Palladitsa (Chinese mainland)”.
-- Once selected, all strings will be changed to Cyrillized Simp. Chinese.
+- Once selected, all strings will be changed to the Cyrillic script transliterated from Simp. Chinese, according to the Palladius system.
 
 #### "ثِیَوْعَرݣ‌ٍْ (جْو‌قُوَ دَا‌لُ)" ([`zh_xj.json`](output/zh_xj.json))
 
