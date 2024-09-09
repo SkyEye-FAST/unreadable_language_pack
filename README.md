@@ -46,6 +46,10 @@ pip install -r requirements.txt
 > [`comparison_table_1.tsv`](table/comparison_table_1.tsv)（带声调，注音方案）
 >
 > [`comparison_table_2.tsv`](table/comparison_table_2.tsv)（不带声调，外文转写）
+>
+> 表中可能含有普通话中不存在的音节，如lüan等，仅供参考。
+>
+> 表中省略了ㆭ（ng，/ŋ̍/）、ㆬ（m，/m̩/）、ㄯ（n，/n̩/）、ㄏㆬ（hm，/xm̩/）、ㄏㆭ（hng，/xŋ̍/）的转写。大部分方案中都没有说明它们应如何拼写，本项目实际上也没有用到这些音节。
 
 #### i18nglish (i7h)（[`en_i7h.json`](output/en_i7h.json)）
 

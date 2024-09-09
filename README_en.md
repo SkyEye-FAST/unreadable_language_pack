@@ -46,6 +46,10 @@ The resource pack added 16 languages into the game.
 > [`comparison_table_1.tsv`](table/comparison_table_1.tsv) (with tones, phonetic notation scheme)
 >
 > [`comparison_table_2.tsv`](table/comparison_table_2.tsv) (without tones, foreign language transcription)
+>
+> The table may contain syllables that do not exist in Putonghua, such as lüan, etc., for reference only.
+>
+> The table omits the transliterations of ㆭ (ng, /ŋ̍/), ㆬ (m, /m̩/), ㄯ (n, /n̩/), ㄏㆬ (hm, /xm̩/), and ㄏㆭ (hng, /xŋ̍/). Most schemes do not specify how they should be spelled, and these syllables are not actually used in this project.
 
 #### "i18nglish (i7h)" ([`en_i7h.json`](output/en_i7h.json))
 

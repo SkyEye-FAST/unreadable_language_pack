@@ -1,4 +1,4 @@
-Pinyin	Bopomofo	IPA	Wade-Giles	GR	Simp.GR	MPS2	Tongyong	Yale
+Pinyin	Bopomofo	IPA	Wade-Giles	GR	Simp. GR	MPS2	Tongyong	Yale
 ā	ㄚ	a˥	a¹	a	a	ā	a	ā
 á	ㄚˊ	a˧˥	a²	ar	ar	á	á	á
 ǎ	ㄚˇ	a˨˩˦	a³	aa	aa	ǎ	ǎ	ǎ
@@ -401,7 +401,7 @@ duo	˙ㄉㄨㄛ	two	to⁵	.duo	'duo	duo	duo̊	dwo
 e	˙ㄜ	ɤ	e⁵	.e	'e	e	e̊	e
 ê̄	ㄝ	ɛ˥	eh¹	è	-e	ê̄	ê	ê̄
 ế	ㄝˊ	ɛ˧˥	eh²	èr	-e	ế	ế	ế
-ê̌	ㄝˇ	ɛ˨˩˦	eh³	èe	-e	ê̌	ê̌	ê̌
+ê̌	ㄝˇ	ɛ˨˩˦	eh³	èè	-e	ê̌	ê̌	ê̌
 ề	ㄝˋ	ɛ˥˩	eh⁴	èh	-e	ề	ề	ề
 ê	˙ㄝ	ɛ	eh⁵	.è	'-e	ê	ê̊	ê
 ēi	ㄟ	eɪ˥	ei¹	ei	ei	ēi	ei	ēi
@@ -609,16 +609,6 @@ héng	ㄏㄥˊ	xɤŋ˧˥	heng²	herng	herng	héng	héng	héng
 hěng	ㄏㄥˇ	xɤŋ˨˩˦	heng³	heeng	heeng	hěng	hěng	hěng
 hèng	ㄏㄥˋ	xɤŋ˥˩	heng⁴	henq	hehng	hèng	hèng	hèng
 heng	˙ㄏㄥ	xɤŋ	heng⁵	.heng	'heng	heng	he̊ng	heng
-hm̄	ㄏㄇ	xm̩˥	hm¹	hng	hm	hm	heng	hēng
-hḿ	ㄏㄇˊ	xm̩˧˥	hm²	hrng	hm	hm	héng	héng
-hm̌	ㄏㄇˇ	xm̩˨˩˦	hm³	heng	hm	hm	hěng	hěng
-hm̀	ㄏㄇˋ	xm̩˥˩	hm⁴	hnq	hm	hm	hèng	hèng
-hm	˙ㄏㄇ	xm̩	hm⁵	.hng	'hm	hm	he̊ng	heng
-hn̄g	ㄏㄋㄍ	xŋ̍˥	hng¹	hng	hng	hng	heng	hēng
-hńg	ㄏㄋㄍˊ	xŋ̍˧˥	hng²	hrng	hng	hng	héng	héng
-hňg	ㄏㄋㄍˇ	xŋ̍˨˩˦	hng³	heng	hng	hng	hěng	hěng
-hǹg	ㄏㄋㄍˋ	xŋ̍˥˩	hng⁴	hnq	hng	hng	hèng	hèng
-hng	˙ㄏㄋㄍ	xŋ̍	hng⁵	.hng	'hng	hng	he̊ng	heng
 hōng	ㄏㄨㄥ	xʊŋ˥	hung¹	hong	hung	hūng	hong	hūng
 hóng	ㄏㄨㄥˊ	xʊŋ˧˥	hung²	horng	hurng	húng	hóng	húng
 hǒng	ㄏㄨㄥˇ	xʊŋ˨˩˦	hung³	hoong	huung	hǔng	hǒng	hǔng
@@ -969,11 +959,6 @@ lǘn	ㄌㄩㄣˊ	lyn˧˥	lün²	liun	lyurn	liún	lyún	lyún
 lǚn	ㄌㄩㄣˇ	lyn˨˩˦	lün³	leun	lyuun	liǔn	lyǔn	lyǔn
 lǜn	ㄌㄩㄣˋ	lyn˥˩	lün⁴	liunn	lyuhn	liùn	lyùn	lyùn
 lün	˙ㄌㄩㄣ	lyn	lün⁵	.lhiun	'lvn	liun	lyůn	lyun
-m̄	ㄇ	m̩˥	m¹	m	m	m̄	m̄	m̄
-ḿ	ㄇˊ	m̩˧˥	m²	rm	m	ḿ	ḿ	ḿ
-m̌	ㄇˇ	m̩˨˩˦	m³	mm	m	m̌	m̌	m̌
-m̀	ㄇˋ	m̩˥˩	m⁴	mh	m	m̀	m̀	m̀
-m	˙ㄇ	m̩	m⁵	.m	'm	m	m̊	m
 mā	ㄇㄚ	ma˥	ma¹	mha	ma	mā	ma	mā
 má	ㄇㄚˊ	ma˧˥	ma²	ma	mar	má	má	má
 mǎ	ㄇㄚˇ	ma˨˩˦	ma³	maa	maa	mǎ	mǎ	mǎ
@@ -1069,11 +1054,6 @@ mú	ㄇㄨˊ	mu˧˥	mu²	mu	mur	mú	mú	mú
 mǔ	ㄇㄨˇ	mu˨˩˦	mu³	muu	muu	mǔ	mǔ	mǔ
 mù	ㄇㄨˋ	mu˥˩	mu⁴	muh	muh	mù	mù	mù
 mu	˙ㄇㄨ	mu	mu⁵	.mhu	'mu	mu	mů	mu
-n̄	ㄋ	n̩˥	n¹	n	n	n̄	n̄	n̄
-ń	ㄋˊ	n̩˧˥	n²	rn	n	ń	ń	ń
-ň	ㄋˇ	n̩˨˩˦	n³	nn	n	ň	ň	ň
-ǹ	ㄋˋ	n̩˥˩	n⁴	nh	n	ǹ	ǹ	ǹ
-n	˙ㄋ	n̩	n⁵	.n	'n	n	n̊	n
 nā	ㄋㄚ	na˥	na¹	nha	na	nā	na	nā
 ná	ㄋㄚˊ	na˧˥	na²	na	nar	ná	ná	ná
 nǎ	ㄋㄚˇ	na˨˩˦	na³	naa	naa	nǎ	nǎ	nǎ
@@ -1119,11 +1099,6 @@ néng	ㄋㄥˊ	nɤŋ˧˥	neng²	neng	nerng	néng	néng	néng
 něng	ㄋㄥˇ	nɤŋ˨˩˦	neng³	neeng	neeng	něng	něng	něng
 nèng	ㄋㄥˋ	nɤŋ˥˩	neng⁴	nenq	nehng	nèng	nèng	nèng
 neng	˙ㄋㄥ	nɤŋ	neng⁵	.nheng	'neng	neng	ne̊ng	neng
-n̄g	兀	ŋ̍˥	ng¹	ng	ng	n̄g	n̄g	n̄g
-ńg	兀ˊ	ŋ̍˧˥	ng²	rng	ng	ńg	ńg	ńg
-ňg	兀ˇ	ŋ̍˨˩˦	ng³	nng	ng	ňg	ňg	ňg
-ǹg	兀ˋ	ŋ̍˥˩	ng⁴	nq	ng	ǹg	ǹg	ǹg
-ng	˙兀	ŋ̍	ng⁵	.ng	'ng	ng	n̊g	ng
 nī	ㄋㄧ	ni˥	ni¹	nhi	ni	nī	ni	nī
 ní	ㄋㄧˊ	ni˧˥	ni²	ni	nir	ní	ní	ní
 nǐ	ㄋㄧˇ	ni˨˩˦	ni³	nii	nii	nǐ	nǐ	nǐ
