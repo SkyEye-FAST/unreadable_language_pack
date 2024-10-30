@@ -3178,7 +3178,7 @@
   "demo.help.jump": "按%1$s來跳躍",
   "demo.help.later": "繼續遊戲！",
   "demo.help.movement": "使用%1$s、%2$s、%3$s、%4$s以及鼠標來移動",
-  "demo.help.movementMouse": "使用鼠標來查看四周",
+  "demo.help.movementMouse": "使用鼠標來環顧四周",
   "demo.help.movementShort": "通過按下%1$s、%2$s、%3$s、%4$s來移動",
   "demo.help.title": "Minecraft試玩模式",
   "demo.remainingTime": "剩餘時間：%s",
