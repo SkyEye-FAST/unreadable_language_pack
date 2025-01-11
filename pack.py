@@ -1,60 +1,75 @@
 # -*- encoding: utf-8 -*-
 """Minecraft难视语言资源包生成器"""
-
 import time
 import zipfile as zf
+from typing import Final, Dict, Tuple, List
 
-from base import P, data, fixed_zh, file_size
-from converter import (
-    save_to_json,
-    ChineseConverter,
-    EnglishConverter
-)
+from base import P, DATA, fixed_zh, file_size
+from converter import save_to_json, ChineseConverter, EnglishConverter
+
+# 语言文件配置
+LANG_CONVERSIONS: Final[List[Tuple[str, str, Dict]]] = [
+    # (转换方法, 输出文件名, 修正字典)
+    ("to_i7h", "en_i7h", None),
+    ("to_katakana", "ja_kk", None),
+    ("to_manyogana", "ja_my", None),
+    ("to_harmonic", "zh_hm", None),
+    ("to_pinyin", "zh_py", fixed_zh["zh_py"]),
+    ("to_ipa", "zh_ipa", None),
+    ("to_bopomofo", "zh_bpmf", None),
+    ("to_wadegiles", "zh_wg", fixed_zh["zh_wg"]),
+    ("to_romatzyh", "zh_gr", fixed_zh["zh_gr"]),
+    ("to_simp_romatzyh", "zh_sgr", fixed_zh["zh_sgr"]),
+    ("to_mps2", "zh_mps2", fixed_zh["zh_mps2"]),
+    ("to_tongyong", "zh_ty", fixed_zh["zh_ty"]),
+    ("to_yale", "zh_yale", fixed_zh["zh_yale"]),
+    ("to_katakana", "zh_kk", None),
+    ("to_cyrillic", "zh_cy", fixed_zh["zh_cy"]),
+    ("to_xiaojing", "zh_xj", fixed_zh["zh_xj"]),
+]
 
 
-def main() -> None:
+def generate_language_files() -> float:
+    """生成所有语言文件。
+
+    Returns:
+        float: 生成耗时（秒）
     """
-    主函数，生成语言文件并打包成资源包。
+    start_time = time.time()
+    en_conv = EnglishConverter(DATA["en_us"])
+    zh_conv = ChineseConverter(DATA["zh_cn"])
+
+    for method, output, fix_dict in LANG_CONVERSIONS:
+        if output.startswith(("en_", "ja_")):
+            conv = en_conv
+        else:
+            conv = zh_conv
+        save_to_json(conv.convert(getattr(conv, method), fix_dict), output)
+
+    return time.time() - start_time
+
+
+def create_resource_pack() -> Tuple[str, float]:
+    """将生成的语言文件和必要的资源打包为Minecraft资源包。
+
+    Returns:
+        Tuple[str, float]: (资源包大小，打包耗时)
     """
-
-    en_conv = EnglishConverter(data["en_us"])
-    zh_conv = ChineseConverter(data["zh_cn"])
-
-    # 生成语言文件
-    main_start_time = time.time()
-    save_to_json(en_conv.convert(en_conv.to_i7h), "en_i7h")
-    save_to_json(en_conv.convert(en_conv.to_katakana), "ja_kk")
-    save_to_json(en_conv.convert(en_conv.to_manyogana), "ja_my")
-    save_to_json(zh_conv.convert(zh_conv.to_harmonic), "zh_hm")
-    save_to_json(zh_conv.convert(zh_conv.to_pinyin, fixed_zh["zh_py"]), "zh_py")
-    save_to_json(zh_conv.convert(zh_conv.to_ipa), "zh_ipa")
-    save_to_json(zh_conv.convert(zh_conv.to_bopomofo), "zh_bpmf")
-    save_to_json(zh_conv.convert(zh_conv.to_wadegiles, fixed_zh["zh_wg"]), "zh_wg")
-    save_to_json(zh_conv.convert(zh_conv.to_romatzyh, fixed_zh["zh_gr"]), "zh_gr")
-    save_to_json(zh_conv.convert(zh_conv.to_simp_romatzyh, fixed_zh["zh_sgr"]), "zh_sgr")
-    save_to_json(zh_conv.convert(zh_conv.to_mps2, fixed_zh["zh_mps2"]), "zh_mps2")
-    save_to_json(zh_conv.convert(zh_conv.to_tongyong, fixed_zh["zh_ty"]), "zh_ty")
-    save_to_json(zh_conv.convert(zh_conv.to_yale, fixed_zh["zh_yale"]), "zh_yale")
-    save_to_json(zh_conv.convert(zh_conv.to_katakana), "zh_kk")
-    save_to_json(zh_conv.convert(zh_conv.to_cyrillic, fixed_zh["zh_cy"]), "zh_cy")
-    save_to_json(zh_conv.convert(zh_conv.to_xiaojing, fixed_zh["zh_xj"]), "zh_xj")
-    main_elapsed_time = time.time() - main_start_time
-    print(f"\n语言文件生成完毕，共耗时{main_elapsed_time:.2f} s。")
-
-    # 生成资源包
-    zip_start_time = time.time()
+    start_time = time.time()
     pack_path = P / "unreadable_language_pack.zip"
+
     with zf.ZipFile(pack_path, "w", compression=zf.ZIP_DEFLATED, compresslevel=9) as z:
         z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
         z.write(P / "pack.png", arcname="pack.png")
         for lang_file in P.glob("output/*.json"):
             z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
-    zip_elapsed_time = time.time() - zip_start_time
-    pack_size = file_size(pack_path)
-    print(
-        f"\n资源包“{pack_path.name}”打包完毕，大小{pack_size}，打包耗时{zip_elapsed_time:.2f} s。"
-    )
+
+    return file_size(pack_path), time.time() - start_time
 
 
 if __name__ == "__main__":
-    main()
+    gen_time = generate_language_files()
+    print(f"\n语言文件生成完毕，共耗时{gen_time:.2f} s。")
+
+    pack_size, zip_time = create_resource_pack()
+    print(f"\n资源包打包完毕，大小{pack_size}，打包耗时{zip_time:.2f} s。")
