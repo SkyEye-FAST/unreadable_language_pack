@@ -306,7 +306,15 @@ class ChineseConverter(BaseConverter):
             str: 转换结果
         """
         rep = self.rep.copy()
-        rep.update({"了.": " 了.", "了!": " 了!", "了?": " 了?"})
+        rep.update(
+            {
+                "了.": " 了.",
+                "了!": " 了!",
+                "了?": " 了?",
+                "了…": " 了…",
+                "之物": "之 物",
+            }
+        )
         return self.replace_multiple(
             " ".join(self.segment_str(text)).replace(" 了", "了"), rep
         )
