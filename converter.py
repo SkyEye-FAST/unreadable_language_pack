@@ -62,21 +62,24 @@ class BaseConverter:
         self.data = data
         self.rep = rep
 
-    def replace_multiple(self, text: str) -> str:
+    def replace_multiple(self, text: str, replacement: Optional[Ldata] = None) -> str:
         """对字符串进行多次替换。
 
         Args:
             text (str): 需要替换的字符串
+            replacement (Optional[Dict[str, str]], optional): 替换格式字典
 
         Returns:
             str: 替换后的字符串
         """
-        for old, new in self.rep.items():
+        if not replacement:
+            replacement = self.rep
+        for old, new in replacement.items():
             text = text.replace(old, new)
         return text
 
     def capitalize_lines(self, text: str) -> str:
-        """处理句首大写，字符串中带换行符的单独处理。
+        """处理句首大写，字符串中带换行符和省略号的单独处理。
 
         Args:
             text (str): 需要转换的字符串
@@ -84,11 +87,48 @@ class BaseConverter:
         Returns:
             str: 转换结果
         """
-        if "\n" in text:
-            lines = text.splitlines()
-            capitalized_lines = [line[:1].upper() + line[1:] for line in lines]
-            return "\n".join(capitalized_lines)
-        return text[:1].upper() + text[1:]
+
+        def _capitalize_with_ellipsis(segment: str) -> str:
+            """处理带省略号的文本段落，确保每个省略号后的文本都大写。"""
+            if not segment:
+                return segment
+
+            parts = segment.split("...")
+            capitalized_parts = []
+
+            for part in parts:
+                if not part:
+                    capitalized_parts.append(part)
+                    continue
+
+                if part[0] == " ":
+                    capitalized_parts.append(
+                        " " + part[1].upper() + part[2:] if len(part) > 1 else part
+                    )
+                else:
+                    capitalized_parts.append(part[0].upper() + part[1:])
+
+            return "...".join(capitalized_parts)
+
+        if not text:
+            return text
+
+        if "\n" not in text:
+            if "..." not in text:
+                return text[0].upper() + text[1:]
+            return _capitalize_with_ellipsis(text)
+
+        lines = text.splitlines()
+        capitalized_lines = []
+
+        for line in lines:
+            if not line:
+                capitalized_lines.append(line)
+                continue
+
+            capitalized_lines.append(_capitalize_with_ellipsis(line))
+
+        return "\n".join(capitalized_lines)
 
     def capitalize_titles(self, text: str) -> str:
         """将书名号《》中的单词首字母大写。
@@ -256,6 +296,21 @@ class ChineseConverter(BaseConverter):
         """
         return jieba.lcut(text) if self.auto_cut else text.split()
 
+    def to_split(self, text: str) -> str:
+        """输出拆分后的字符串结果。
+
+        Args:
+            text (str): 需要转换的字符串
+
+        Returns:
+            str: 转换结果
+        """
+        rep = self.rep.copy()
+        rep.update({"了.": " 了.", "了!": " 了!", "了?": " 了?"})
+        return self.replace_multiple(
+            " ".join(self.segment_str(text)).replace(" 了", "了"), rep
+        )
+
     def to_harmonic(self, text: str) -> str:
         """将字符串中的汉字按GB/Z 40637-2021和《通用规范汉字表》转换。
 
@@ -277,9 +332,9 @@ class ChineseConverter(BaseConverter):
             str: 转换结果
         """
         seg_list = self.segment_str(text)
-        output_list: List[str] = []
+        result = ""
 
-        for seg in seg_list:
+        for i, seg in enumerate(seg_list):
             pinyin_list = lazy_pinyin(seg, style=Style.TONE)
             pinyin_list = [
                 (
@@ -291,11 +346,16 @@ class ChineseConverter(BaseConverter):
                 )
                 for i, py in enumerate(pinyin_list)
             ]
-            output_list.append("".join(pinyin_list))
-
-        result = " ".join(output_list)
+            result += (
+                ""
+                if seg == "了"
+                and i + 1 < len(seg_list)
+                and seg_list[i + 1] not in {"。", "！", "？", "…"}
+                else " "
+            )
+            result += "".join(pinyin_list)
         return self.capitalize_lines(
-            self.capitalize_titles(self.replace_multiple(result))
+            self.capitalize_titles(self.replace_multiple(result[1:]))
         )
 
     def pinyin_to_other(
@@ -315,18 +375,23 @@ class ChineseConverter(BaseConverter):
             str: 转换结果
         """
         seg_list = self.segment_str(text)
-        output_list: List[str] = []
+        result = ""
 
-        for seg in seg_list:
+        for i, seg in enumerate(seg_list):
             pinyin_list = lazy_pinyin(
                 seg, style=Style.TONE3, neutral_tone_with_five=True
             )
             result_list = [correspondence.get(p, p) for p in pinyin_list]
-            output_list.append(delimiter.join(result_list))
-
-        result = " ".join(output_list)
+            result += (
+                ""
+                if seg == "了"
+                and i + 1 < len(seg_list)
+                and seg_list[i + 1] not in {"。", "！", "？", "…"}
+                else " "
+            )
+            result += delimiter.join(result_list)
         return self.capitalize_lines(
-            self.capitalize_titles(self.replace_multiple(result))
+            self.capitalize_titles(self.replace_multiple(result[1:]))
         )
 
     def to_ipa(self, text: str) -> str:

@@ -13,6 +13,7 @@ LANG_CONVERSIONS: Final[List[Tuple[str, str, Dict]]] = [
     ("to_i7h", "en_i7h", None),
     ("to_katakana", "ja_kk", None),
     ("to_manyogana", "ja_my", None),
+    ("to_split", "zh_split", None),
     ("to_harmonic", "zh_hm", None),
     ("to_pinyin", "zh_py", fixed_zh["zh_py"]),
     ("to_ipa", "zh_ipa", None),
@@ -62,7 +63,8 @@ def create_resource_pack() -> Tuple[str, float]:
         z.write(P / "pack.mcmeta", arcname="pack.mcmeta")
         z.write(P / "pack.png", arcname="pack.png")
         for lang_file in P.glob("output/*.json"):
-            z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
+            if lang_file != "zh_split.json":
+                z.write(lang_file, arcname=f"assets/minecraft/lang/{lang_file.name}")
 
     return file_size(pack_path), time.time() - start_time
 
