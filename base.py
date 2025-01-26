@@ -46,8 +46,7 @@ def file_size(p: Path) -> str:
 
 # 语言文件数据
 DATA: Final[Dict[str, Ldata]] = {
-    lang_name: load_json(lang_name, "mc_lang/full")
-    for lang_name in LANG_FILES
+    lang_name: load_json(lang_name, "mc_lang/full") for lang_name in LANG_FILES
 }
 
 # 转换映射表
@@ -65,7 +64,9 @@ PINYIN_TO: Final[Dict[str, Ldata]] = {
 }
 
 fixed_zh: Dict[str, Ldata] = {}
+fixed_zh["source"] = load_json("fixed_zh_source")  # 来源修正
 fixed_zh["zh_py"] = load_json("fixed_zh_py")  # 汉语拼音修正
+fixed_zh["zh_py"].update(load_json("fixed_zh_py_manual"))  # 汉语拼音手动修正
 fixed_zh["zh_wg"] = load_json("fixed_zh_wg")  # 威妥玛拼音修正
 fixed_zh["zh_gr"] = load_json("fixed_zh_gr")  # 国语罗马字修正
 fixed_zh["zh_sgr"] = load_json("fixed_zh_sgr")  # 简化国语罗马字修正
