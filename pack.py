@@ -13,7 +13,7 @@ LANG_CONVERSIONS: Final[List[Tuple[str, str, Dict]]] = [
     ("to_i7h", "en_i7h", None),
     ("to_katakana", "ja_kk", None),
     ("to_manyogana", "ja_my", None),
-    ("to_split", "zh_split", None),
+    ("to_split", "zh_split", fixed_zh["source"]),
     ("to_harmonic", "zh_hm", None),
     ("to_pinyin", "zh_py", fixed_zh["zh_py"]),
     ("to_ipa", "zh_ipa", None),
