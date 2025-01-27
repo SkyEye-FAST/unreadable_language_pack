@@ -78,9 +78,15 @@ fixed_zh["zh_xj"] = load_json("fixed_zh_xj")  # 小儿经转写修正
 
 gr_values: Set[str] = set(PINYIN_TO["romatzyh"].values())  # 国语罗马字的有效拼写
 cy_values: Set[str] = set(PINYIN_TO["cyrillic"].values())  # 西里尔转写的有效拼写
-tone_to_ipa: Ldata = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}  # IPA声调
+TONE_TO_IPA: Final[Ldata] = {
+    "1": "˥",
+    "2": "˧˥",
+    "3": "˨˩˦",
+    "4": "˥˩",
+    "5": "",
+}  # IPA声调
 
 rep_zh: Ldata = load_json("rep_zh")  # 连写的中文转写方案替换修正
-finals: Tuple[str, ...] = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
+PINYIN_FINALS: Final[Tuple[str, ...]] = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
 
 rep_ja_kk: Ldata = load_json("rep_ja_kk")  # 片假名替换修正

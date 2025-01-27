@@ -19,8 +19,8 @@ from base import (
     PINYIN_TO,
     gr_values,
     cy_values,
-    tone_to_ipa,
-    finals,
+    TONE_TO_IPA,
+    PINYIN_FINALS,
     rep_zh,
     rep_ja_kk,
 )
@@ -348,7 +348,7 @@ class ChineseConverter(BaseConverter):
                 (
                     f"'{py}"
                     if i > 0
-                    and py.startswith(finals)
+                    and py.startswith(PINYIN_FINALS)
                     and pinyin_list[i - 1][-1].isalpha()
                     else py
                 )
@@ -414,7 +414,7 @@ class ChineseConverter(BaseConverter):
         """
         pinyin_list = lazy_pinyin(text, style=Style.TONE3, neutral_tone_with_five=True)
         ipa_list = [
-            f"{PINYIN_TO['ipa'].get(p[:-1], p[:-1])}{tone_to_ipa.get(p[-1], p[-1])}"
+            f"{PINYIN_TO['ipa'].get(p[:-1], p[:-1])}{TONE_TO_IPA.get(p[-1], p[-1])}"
             for p in pinyin_list
         ]
         return " ".join(ipa_list)
