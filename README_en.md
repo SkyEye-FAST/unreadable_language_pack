@@ -132,7 +132,7 @@ The resource pack added 16 languages into the game.
 
 #### "Tongyong Pinyin (Jhong-guó Dà-lù)" ([`zh_ty.json`](output/zh_ty.json))
 
-- i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
+- i.e. "Tongyong Pinyin (Chinese mainland)”.
 - Once selected, all strings will be changed to Tongyong Pinyin transliterated from Simp. Chinese.
 
 #### "Yale romanization (Jūng-gwó Dà-lù)" ([`zh_yale.json`](output/zh_yale.json))
