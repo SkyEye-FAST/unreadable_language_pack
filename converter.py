@@ -37,7 +37,7 @@ load_phrases_dict({k: [[_] for _ in v.split()] for k, v in phrases.items()})
 jieba.load_userdict(str(P / "data" / "dict.txt"))
 
 # 初始化其他自定义数据
-fixed_zh_u = load_json("fixed_zh_universal")
+fixed_zh_u = load_json("fixed_zh_universal", "data/fixed")
 manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
 
 
