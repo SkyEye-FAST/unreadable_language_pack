@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 """基础文件，提供通用功能和数据结构定义。"""
+
 from pathlib import Path
 from typing import TypeAlias, Dict, Set, Tuple, Final
 
@@ -24,6 +25,36 @@ def load_json(file: str, folder: str = "data") -> Ldata:
     path = P / folder / f"{file}.json"
     with path.open("r", encoding="utf-8", newline="\n") as f:
         return ujson.load(f)
+
+
+def save_to_json(
+    input_data: Tuple[Ldata, float],
+    output_file: str,
+    output_folder: str = "output",
+) -> None:
+    """
+    将生成的语言文件保存至JSON。
+
+    Args:
+        input_data (Tuple[Ldata, float]): 输入的数据
+        output_file (str): 保存的文件名，无格式后缀
+        output_folder (str, optional): 保存的文件夹，默认为“output”
+
+    Raises:
+        OSError: 文件保存失败
+    """
+    try:
+        input_dict, elapsed_time = input_data
+        (P / output_folder).mkdir(exist_ok=True)
+        file_path = P / output_folder / f"{output_file}.json"
+        with open(file_path, "w", encoding="utf-8", newline="\n") as j:
+            ujson.dump(input_dict, j, indent=2, ensure_ascii=False)
+        size = file_size(file_path)
+        print(
+            f"已生成语言文件“{output_file}.json”，大小{size}，耗时{elapsed_time:.2f} s。"
+        )
+    except Exception as e:
+        raise OSError(f"保存至JSON失败：{str(e)}") from e
 
 
 def file_size(p: Path) -> str:
@@ -63,18 +94,24 @@ PINYIN_TO: Final[Dict[str, Ldata]] = {
     "xiaojing": load_json("py2xj"),
 }
 
-fixed_zh: Dict[str, Ldata] = {}
-fixed_zh["source"] = load_json("fixed_zh_source")  # 来源修正
-fixed_zh["zh_py"] = load_json("fixed_zh_py")  # 汉语拼音修正
-fixed_zh["zh_py"].update(load_json("fixed_zh_py_manual"))  # 汉语拼音手动修正
-fixed_zh["zh_wg"] = load_json("fixed_zh_wg")  # 威妥玛拼音修正
-fixed_zh["zh_gr"] = load_json("fixed_zh_gr")  # 国语罗马字修正
-fixed_zh["zh_sgr"] = load_json("fixed_zh_sgr")  # 简化国语罗马字修正
-fixed_zh["zh_mps2"] = load_json("fixed_zh_mps2")  # 注音二式修正
-fixed_zh["zh_ty"] = load_json("fixed_zh_ty")  # 通用拼音修正
-fixed_zh["zh_yale"] = load_json("fixed_zh_yale")  # 耶鲁拼音修正
-fixed_zh["zh_cy"] = load_json("fixed_zh_cy")  # 西里尔转写修正
-fixed_zh["zh_xj"] = load_json("fixed_zh_xj")  # 小儿经转写修正
+# 修正数据
+fixed_zh: Dict[str, Ldata] = {
+    f"zh_{scheme}": load_json(f"fixed_zh_{scheme}", "data/fixed")
+    for scheme in [
+        "py",  # 汉语拼音修正
+        "wg",  # 威妥玛拼音修正
+        "gr",  # 国语罗马字修正
+        "sgr",  # 简化国语罗马字修正
+        "mps2",  # 注音二式修正
+        "ty",  # 通用拼音修正
+        "yale",  # 耶鲁拼音修正
+        "cy",  # 西里尔转写修正
+        "xj",  # 小儿经转写修正
+    ]
+}
+
+# 汉语拼音手动修正
+fixed_zh["zh_py"].update(load_json("fixed_zh_py_manual", "data/fixed"))
 
 gr_values: Set[str] = set(PINYIN_TO["romatzyh"].values())  # 国语罗马字的有效拼写
 cy_values: Set[str] = set(PINYIN_TO["cyrillic"].values())  # 西里尔转写的有效拼写
@@ -86,7 +123,7 @@ TONE_TO_IPA: Final[Ldata] = {
     "5": "",
 }  # IPA声调
 
-rep_zh: Ldata = load_json("rep_zh")  # 连写的中文转写方案替换修正
+rep_zh: Ldata = load_json("rep_zh", "data/rep")  # 连写的中文转写方案替换修正
 PINYIN_FINALS: Final[Tuple[str, ...]] = tuple("aāááàoōóǒòeēéěè")  # 可能的零声母开头
 
-rep_ja_kk: Ldata = load_json("rep_ja_kk")  # 片假名替换修正
+rep_ja_kk: Ldata = load_json("rep_ja_kk", "data/rep")  # 片假名替换修正

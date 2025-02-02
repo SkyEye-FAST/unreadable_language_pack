@@ -1,19 +1,14 @@
 # -*- encoding: utf-8 -*-
 """数据修复脚本"""
-from typing import Final
 
-from base import load_json, Ldata
-from converter import save_to_json, ChineseConverter
-
-# 定义替换规则
-REPLACEMENTS: Final[Ldata] = {"！:(": "! :(", "，": ", ", "-!": "!"}
-
+from base import load_json, save_to_json
+from converter import ChineseConverter
 
 if __name__ == "__main__":
-    fixed_zh_source = load_json("fixed_zh_source")
-    conv = ChineseConverter(fixed_zh_source, REPLACEMENTS, False)
+    conv = ChineseConverter(
+        load_json("fixed_zh_source"), {"！:(": "! :(", "，": ", ", "-!": "!"}, False
+    )
 
-    # 生成各种转换格式
     conversions = [
         ("to_pinyin", "fixed_zh_py"),
         ("to_mps2", "fixed_zh_mps2"),
@@ -27,4 +22,4 @@ if __name__ == "__main__":
     ]
 
     for method, output in conversions:
-        save_to_json(conv.convert(getattr(conv, method)), output, "data")
+        save_to_json(conv.convert(getattr(conv, method)), output, "data/fixed")

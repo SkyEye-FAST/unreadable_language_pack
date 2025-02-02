@@ -1,3 +1,6 @@
 __pycache__/
 
+word_extract.py
+data/en_words.json
+
 *.zip

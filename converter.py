@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
 """难视语言转换器"""
+
 import re
 import time
 from typing import List, Set, Tuple, Callable, Optional
 
-import ujson
 from romajitable import to_kana as tk
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
 from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
@@ -15,7 +15,6 @@ from base import (
     P,
     Ldata,
     load_json,
-    file_size,
     PINYIN_TO,
     gr_values,
     cy_values,
@@ -566,32 +565,3 @@ class ChineseConverter(BaseConverter):
             output_list.append("\u200c".join(xj_list))
 
         return self.replace_multiple(" ".join(output_list))
-
-
-def save_to_json(
-    input_data: Tuple[Ldata, float],
-    output_file: str,
-    output_folder: str = "output",
-) -> None:
-    """
-    将生成的语言文件保存至JSON。
-
-    Args:
-        input_data (Tuple[Ldata, float]): 输入的数据
-        output_file (str): 保存的文件名，无格式后缀
-        output_folder (str, optional): 保存的文件夹，默认为“output”
-
-    Raises:
-        OSError: 文件保存失败
-    """
-    try:
-        input_dict, elapsed_time = input_data
-        file_path = P / output_folder / f"{output_file}.json"
-        with open(file_path, "w", encoding="utf-8", newline="\n") as j:
-            ujson.dump(input_dict, j, indent=2, ensure_ascii=False)
-        size = file_size(file_path)
-        print(
-            f"已生成语言文件“{output_file}.json”，大小{size}，耗时{elapsed_time:.2f} s。"
-        )
-    except Exception as e:
-        raise OSError(f"保存至JSON失败：{str(e)}") from e

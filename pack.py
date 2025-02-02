@@ -1,11 +1,12 @@
 # -*- encoding: utf-8 -*-
 """Minecraft难视语言资源包生成器"""
+
 import time
 import zipfile as zf
 from typing import Final, Dict, Tuple, List
 
-from base import P, DATA, fixed_zh, file_size
-from converter import save_to_json, ChineseConverter, EnglishConverter
+from base import P, DATA, fixed_zh, file_size, save_to_json
+from converter import ChineseConverter, EnglishConverter
 
 # 语言文件配置
 LANG_CONVERSIONS: Final[List[Tuple[str, str, Dict]]] = [
@@ -13,7 +14,7 @@ LANG_CONVERSIONS: Final[List[Tuple[str, str, Dict]]] = [
     ("to_i7h", "en_i7h", None),
     ("to_katakana", "ja_kk", None),
     ("to_manyogana", "ja_my", None),
-    ("to_split", "zh_split", fixed_zh["source"]),
+    ("to_split", "zh_split", fixed_zh["zh_source"]),
     ("to_harmonic", "zh_hm", None),
     ("to_pinyin", "zh_py", fixed_zh["zh_py"]),
     ("to_ipa", "zh_ipa", None),
