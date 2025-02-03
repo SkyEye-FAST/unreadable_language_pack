@@ -39,6 +39,7 @@ jieba.load_userdict(str(P / "data" / "dict.txt"))
 # 初始化其他自定义数据
 fixed_zh_u = load_json("fixed_zh_universal", "data/fixed")
 manyoganas_dict: Ldata = load_json("manyogana")  # 万叶假名
+wei: Ldata = load_json("wei")  # 为
 
 
 class ConverterError(Exception):
@@ -283,6 +284,54 @@ class ChineseConverter(BaseConverter):
     def __init__(self, data: Ldata, rep: Ldata = rep_zh, auto_cut: bool = True) -> None:
         super().__init__(data, rep)
         self.auto_cut = auto_cut
+
+    def convert(
+        self,
+        func: Callable[[str], str],
+        fix_dict: Optional[Ldata] = None,
+        rep: Optional[Ldata] = None,
+    ) -> Tuple[Ldata, float]:
+        """转换语言数据。
+
+        Args:
+            func (Callable[[str], str): 字符串转换函数
+            fix_dict (Optional[Dict[str, str]], optional): 修复内容字典
+            rep (Optional[Dict[str, str]], optional): 替换格式字典
+
+        Returns:
+            Tuple[Dict[str, str], float): (转换结果字典，耗时秒数)
+
+        Raises:
+            ConversionError: 转换过程出错
+        """
+        try:
+            if not rep:
+                rep = self.rep
+            input_dict = self.data
+            start_time = time.time()
+
+            output_dict: Ldata = {}
+            for k, v in input_dict.items():
+                try:
+                    string = (
+                        v.replace("为", "位")
+                        if k in wei and func.__name__ != "to_split"
+                        else v
+                    )
+                    output_dict[k] = func(string)
+                except Exception as e:
+                    raise ConversionError(f"转换{k}时出现错误：{str(e)}") from e
+
+            if self.rep is rep_zh:
+                output_dict.update(fixed_zh_u)
+
+            if fix_dict:
+                output_dict.update(fix_dict)
+
+            return output_dict, time.time() - start_time
+
+        except Exception as e:
+            raise ConversionError(f"转换失败：{str(e)}") from e
 
     def segment_str(self, text: str) -> List[str]:
         """根据设置分词或者直接拆分字符串。

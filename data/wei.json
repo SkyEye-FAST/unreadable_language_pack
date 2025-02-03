@@ -1,0 +1,20 @@
+[
+    "advancements.adventure.play_jukebox_in_meadows.description",
+    "advancements.nether.charge_respawn_anchor.description",
+    "commands.attribute.modifier.add.success",
+    "commands.attribute.modifier.remove.success",
+    "commands.recipe.give.success.multiple",
+    "commands.recipe.give.success.single",
+    "commands.scoreboard.players.enable.success.multiple",
+    "commands.scoreboard.players.enable.success.single",
+    "commands.tag.add.success.multiple",
+    "commands.tag.add.success.single",
+    "commands.test.create.success",
+    "jigsaw_block.placement_priority.tooltip",
+    "jigsaw_block.selection_priority.tooltip",
+    "options.graphics.fancy.tooltip",
+    "options.japaneseGlyphVariants.tooltip",
+    "outOfMemory.message",
+    "pack.incompatible.confirm.new",
+    "pack.incompatible.confirm.old"
+]

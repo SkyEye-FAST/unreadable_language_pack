@@ -98,6 +98,7 @@ PINYIN_TO: Final[Dict[str, Ldata]] = {
 fixed_zh: Dict[str, Ldata] = {
     f"zh_{scheme}": load_json(f"fixed_zh_{scheme}", "data/fixed")
     for scheme in [
+        "source",  # 来源修正
         "py",  # 汉语拼音修正
         "wg",  # 威妥玛拼音修正
         "gr",  # 国语罗马字修正
