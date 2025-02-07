@@ -6,7 +6,9 @@ from converter import ChineseConverter
 
 if __name__ == "__main__":
     conv = ChineseConverter(
-        load_json("fixed_zh_source"), {"！:(": "! :(", "，": ", ", "-!": "!"}, False
+        load_json("fixed_zh_source", "data/fixed"),
+        {"！:(": "! :(", "，": ", ", "-!": "!"},
+        False,
     )
 
     conversions = [
