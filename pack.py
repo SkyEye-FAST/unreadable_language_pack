@@ -1,15 +1,14 @@
-# -*- encoding: utf-8 -*-
 """Minecraft难视语言资源包生成器"""
 
 import time
 import zipfile as zf
-from typing import Final, Dict, Tuple, List
+from typing import Final
 
-from base import P, DATA, fixed_zh, file_size, save_to_json
+from base import DATA, P, file_size, fixed_zh, save_to_json
 from converter import ChineseConverter, EnglishConverter
 
 # 语言文件配置
-LANG_CONVERSIONS: Final[List[Tuple[str, str, Dict]]] = [
+LANG_CONVERSIONS: Final[list[tuple[str, str, dict]]] = [
     # (转换方法, 输出文件名, 修正字典)
     ("to_i7h", "en_i7h", None),
     ("to_katakana", "ja_kk", None),
@@ -51,11 +50,11 @@ def generate_language_files() -> float:
     return time.time() - start_time
 
 
-def create_resource_pack() -> Tuple[str, float]:
+def create_resource_pack() -> tuple[str, float]:
     """将生成的语言文件和必要的资源打包为Minecraft资源包。
 
     Returns:
-        Tuple[str, float]: (资源包大小，打包耗时)
+        tuple[str, float]: (资源包大小，打包耗时)
     """
     start_time = time.time()
     pack_path = P / "unreadable_language_pack.zip"

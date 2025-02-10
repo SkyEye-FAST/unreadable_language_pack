@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 """数据修复脚本"""
 
 from base import load_json, save_to_json

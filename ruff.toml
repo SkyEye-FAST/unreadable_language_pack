@@ -1,0 +1,6 @@
+[lint]
+select = ["F", "E", "W", "UP", "I", "N", "PERF"]
+
+[lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"**/{tests,docs,tools}/*" = ["E402"]

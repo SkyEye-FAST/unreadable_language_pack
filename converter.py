@@ -1,27 +1,26 @@
-# -*- encoding: utf-8 -*-
 """难视语言转换器"""
 
 import re
 import time
-from typing import List, Set, Tuple, Callable, Optional
+from typing import Callable, Optional
 
-from romajitable import to_kana as tk
-from pypinyin import Style, lazy_pinyin, load_phrases_dict
-from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
 import jieba
 from opencc import OpenCC
+from pypinyin import Style, lazy_pinyin, load_phrases_dict
+from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
+from romajitable import to_kana as tk
 
 from base import (
-    P,
-    Ldata,
-    load_json,
-    PINYIN_TO,
-    gr_values,
-    cy_values,
-    TONE_TO_IPA,
     PINYIN_FINALS,
-    rep_zh,
+    PINYIN_TO,
+    TONE_TO_IPA,
+    Ldata,
+    P,
+    cy_values,
+    gr_values,
+    load_json,
     rep_ja_kk,
+    rep_zh,
 )
 
 # 初始化OpenCC
@@ -145,15 +144,15 @@ class BaseConverter:
             text,
         )
 
-    def add_apostrophes(self, input_list: List[str], values: Set[str]) -> List[str]:
+    def add_apostrophes(self, input_list: list[str], values: set[str]) -> list[str]:
         """处理隔音符号。
 
         Args:
-            input_list (List[str]): 需要转换的字符串
-            values (Set[str]: 有效的拼写
+            input_list (list[str]): 需要转换的字符串
+            values (set[str]: 有效的拼写
 
         Returns:
-            List[str]: 处理结果
+            list[str]: 处理结果
         """
         for i in range(1, len(input_list)):
             for j in range(len(input_list[i - 1])):
@@ -170,7 +169,7 @@ class BaseConverter:
         func: Callable[[str], str],
         fix_dict: Optional[Ldata] = None,
         rep: Optional[Ldata] = None,
-    ) -> Tuple[Ldata, float]:
+    ) -> tuple[Ldata, float]:
         """转换语言数据。
 
         Args:
@@ -179,7 +178,7 @@ class BaseConverter:
             rep (Optional[Dict[str, str]], optional): 替换格式字典
 
         Returns:
-            Tuple[Dict[str, str], float): (转换结果字典，耗时秒数)
+            tuple[Dict[str, str], float): (转换结果字典，耗时秒数)
 
         Raises:
             ConversionError: 转换过程出错
@@ -290,7 +289,7 @@ class ChineseConverter(BaseConverter):
         func: Callable[[str], str],
         fix_dict: Optional[Ldata] = None,
         rep: Optional[Ldata] = None,
-    ) -> Tuple[Ldata, float]:
+    ) -> tuple[Ldata, float]:
         """转换语言数据。
 
         Args:
@@ -299,7 +298,7 @@ class ChineseConverter(BaseConverter):
             rep (Optional[Dict[str, str]], optional): 替换格式字典
 
         Returns:
-            Tuple[Dict[str, str], float): (转换结果字典，耗时秒数)
+            tuple[Dict[str, str], float): (转换结果字典，耗时秒数)
 
         Raises:
             ConversionError: 转换过程出错
@@ -333,14 +332,14 @@ class ChineseConverter(BaseConverter):
         except Exception as e:
             raise ConversionError(f"转换失败：{str(e)}") from e
 
-    def segment_str(self, text: str) -> List[str]:
+    def segment_str(self, text: str) -> list[str]:
         """根据设置分词或者直接拆分字符串。
 
         Args:
             text (str): 需要分割的字符串
 
         Returns:
-            List[str): 分割后的字符串列表
+            list[str): 分割后的字符串列表
         """
         return jieba.lcut(text) if self.auto_cut else text.split()
 
@@ -584,7 +583,7 @@ class ChineseConverter(BaseConverter):
             str: 转换结果
         """
         seg_list = self.segment_str(text)
-        output_list: List[str] = []
+        output_list: list[str] = []
 
         for seg in seg_list:
             pinyin_list = lazy_pinyin(seg)

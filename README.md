@@ -1,6 +1,6 @@
 # Minecraft难视语言资源包
 
-[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Pylint](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml)
+[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Ruff Lint and Format](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/ruff.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/ruff.yml)
 
 - **[English](README_en.md) | [中文](README.md)**
 
