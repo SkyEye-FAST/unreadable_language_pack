@@ -1,6 +1,6 @@
 # Minecraft Unreadable Language Resource Pack
 
-[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Pylint](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/pylint.yml)
+[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Ruff](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/ruff.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/ruff.yml)
 
 - **[English](README_en.md) | [中文](README.md)**
 
