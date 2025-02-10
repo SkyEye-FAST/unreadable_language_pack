@@ -1,6 +1,16 @@
+line-length = 100
+
 [lint]
-select = ["F", "E", "W", "UP", "I", "N", "PERF"]
+select = ["F", "E", "W", "UP", "I", "N", "PERF", "D"]
+ignore = ["D415"]
 
 [lint.per-file-ignores]
 "__init__.py" = ["E402"]
 "**/{tests,docs,tools}/*" = ["E402"]
+
+[lint.pydocstyle]
+convention = "google"
+
+[format]
+line-ending = "lf"
+docstring-code-format = true

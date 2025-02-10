@@ -58,6 +58,12 @@ class BaseConverter:
     """
 
     def __init__(self, data: Ldata, rep: Ldata) -> None:
+        """初始化转换器。
+
+        Args:
+            data (Ldata): 输入的语言数据字典
+            rep (Ldata): 需要替换的格式内容字典
+        """
         self.data = data
         self.rep = rep
 
@@ -149,7 +155,7 @@ class BaseConverter:
 
         Args:
             input_list (list[str]): 需要转换的字符串
-            values (set[str]: 有效的拼写
+            values (set[str]): 有效的拼写
 
         Returns:
             list[str]: 处理结果
@@ -190,11 +196,12 @@ class BaseConverter:
             start_time = time.time()
 
             output_dict: Ldata = {}
-            for k, v in input_dict.items():
-                try:
+            try:
+                for k, v in input_dict.items():
                     output_dict[k] = func(v)
-                except Exception as e:
-                    raise ConversionError(f"转换{k}时出现错误：{str(e)}") from e
+            except Exception as e:
+                current_key = list(input_dict.keys())[len(output_dict)]
+                raise ConversionError(f"转换{current_key}时出现错误：{str(e)}") from e
 
             if self.rep is rep_zh:
                 output_dict.update(fixed_zh_u)
@@ -209,8 +216,7 @@ class BaseConverter:
 
 
 class EnglishConverter(BaseConverter):
-    """
-    英文转换器。处理英文文本到其他格式的转换。
+    """英文转换器。处理英文文本到其他格式的转换。
 
     Attributes:
         data (Ldata): 输入的英文语言数据
@@ -218,11 +224,19 @@ class EnglishConverter(BaseConverter):
     """
 
     def __init__(self, data: Ldata, rep: Ldata = rep_ja_kk) -> None:
+        """初始化英文转换器。
+
+        Args:
+            data (Ldata): 输入的英文语言数据
+            rep (Ldata, optional): 英文转写替换规则，默认为rep_ja_kk
+        """
         super().__init__(data, rep)
 
     def to_i7h(self, text: str) -> str:
         """将字符串中的所有单词缩写。
+
         保留单词的首尾字符，中间用字符数替代。
+
         长度为2或以下的单词保持不变。
 
         Args:
@@ -281,6 +295,13 @@ class ChineseConverter(BaseConverter):
     """
 
     def __init__(self, data: Ldata, rep: Ldata = rep_zh, auto_cut: bool = True) -> None:
+        """初始化中文转换器。
+
+        Args:
+            data (Ldata): 输入的中文语言数据
+            rep (Ldata, optional): 中文转写替换规则，默认为rep_zh
+            auto_cut (bool, optional): 是否使用自动分词，默认为True
+        """
         super().__init__(data, rep)
         self.auto_cut = auto_cut
 
@@ -310,16 +331,15 @@ class ChineseConverter(BaseConverter):
             start_time = time.time()
 
             output_dict: Ldata = {}
-            for k, v in input_dict.items():
-                try:
+            try:
+                for k, v in input_dict.items():
                     string = (
-                        v.replace("为", "位")
-                        if k in wei and func.__name__ != "to_split"
-                        else v
+                        v.replace("为", "位") if k in wei and func.__name__ != "to_split" else v
                     )
                     output_dict[k] = func(string)
-                except Exception as e:
-                    raise ConversionError(f"转换{k}时出现错误：{str(e)}") from e
+            except Exception as e:
+                current_key = list(input_dict.keys())[len(output_dict)]
+                raise ConversionError(f"转换{current_key}时出现错误：{str(e)}") from e
 
             if self.rep is rep_zh:
                 output_dict.update(fixed_zh_u)
@@ -362,9 +382,7 @@ class ChineseConverter(BaseConverter):
                 "之物": "之 物",
             }
         )
-        return self.replace_multiple(
-            " ".join(self.segment_str(text)).replace(" 了", "了"), rep
-        )
+        return self.replace_multiple(" ".join(self.segment_str(text)).replace(" 了", "了"), rep)
 
     def to_harmonic(self, text: str) -> str:
         """将字符串中的汉字按GB/Z 40637-2021和《通用规范汉字表》转换。
@@ -394,9 +412,7 @@ class ChineseConverter(BaseConverter):
             pinyin_list = [
                 (
                     f"'{py}"
-                    if i > 0
-                    and py.startswith(PINYIN_FINALS)
-                    and pinyin_list[i - 1][-1].isalpha()
+                    if i > 0 and py.startswith(PINYIN_FINALS) and pinyin_list[i - 1][-1].isalpha()
                     else py
                 )
                 for i, py in enumerate(pinyin_list)
@@ -409,9 +425,7 @@ class ChineseConverter(BaseConverter):
                 else " "
             )
             result += "".join(pinyin_list)
-        return self.capitalize_lines(
-            self.capitalize_titles(self.replace_multiple(result[1:]))
-        )
+        return self.capitalize_lines(self.capitalize_titles(self.replace_multiple(result[1:])))
 
     def pinyin_to_other(
         self,
@@ -433,9 +447,7 @@ class ChineseConverter(BaseConverter):
         result = ""
 
         for i, seg in enumerate(seg_list):
-            pinyin_list = lazy_pinyin(
-                seg, style=Style.TONE3, neutral_tone_with_five=True
-            )
+            pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
             result_list = [correspondence.get(p, p) for p in pinyin_list]
             result += (
                 ""
@@ -445,12 +457,11 @@ class ChineseConverter(BaseConverter):
                 else " "
             )
             result += delimiter.join(result_list)
-        return self.capitalize_lines(
-            self.capitalize_titles(self.replace_multiple(result[1:]))
-        )
+        return self.capitalize_lines(self.capitalize_titles(self.replace_multiple(result[1:])))
 
     def to_ipa(self, text: str) -> str:
         """将字符串中的汉字转写为IPA，单字之间使用空格分开。
+
         IPA数据来自@UntPhesoca，宽式标音。
 
         Args:
@@ -504,17 +515,13 @@ class ChineseConverter(BaseConverter):
 
         for seg in seg_list:
             seg = seg.replace("不", "bu")
-            pinyin_list = lazy_pinyin(
-                seg, style=Style.TONE3, neutral_tone_with_five=True
-            )
+            pinyin_list = lazy_pinyin(seg, style=Style.TONE3, neutral_tone_with_five=True)
             gr_list = [PINYIN_TO["romatzyh"].get(p, p) for p in pinyin_list]
             output_list.append("".join(self.add_apostrophes(gr_list, gr_values)))
 
         result = " ".join(output_list)
 
-        return self.capitalize_lines(
-            self.capitalize_titles(self.replace_multiple(result))
-        )
+        return self.capitalize_lines(self.capitalize_titles(self.replace_multiple(result)))
 
     def to_simp_romatzyh(self, text: str) -> str:
         """将字符串中的汉字转写为简化国语罗马字，词之间使用空格分开。
@@ -591,9 +598,7 @@ class ChineseConverter(BaseConverter):
             output_list.append("".join(self.add_apostrophes(cy_list, cy_values)))
 
         result = " ".join(output_list)
-        return self.capitalize_lines(
-            self.capitalize_titles(self.replace_multiple(result))
-        )
+        return self.capitalize_lines(self.capitalize_titles(self.replace_multiple(result)))
 
     def to_xiaojing(self, text: str) -> str:
         """将字符串中的汉字转写为小儿经，使用零宽不连字（U+200C）分开。
