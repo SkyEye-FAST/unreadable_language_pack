@@ -5214,6 +5214,7 @@
   "mount.onboard": "P3s %1$s to D6t",
   "multiplayer.applyingPack": "A6g r6e p2k",
   "multiplayer.disconnect.authservers_down": "A12n s5s a1e d2n. P4e t1y a3n l3r, s3y!",
+  "multiplayer.disconnect.bad_chat_index": "R6d m4d or r7d c2t m5e f2m s4r",
   "multiplayer.disconnect.banned": "Y1u a1e b4d f2m t2s s4r",
   "multiplayer.disconnect.banned_ip.expiration": "\nY2r b1n w2l be r5d on %s",
   "multiplayer.disconnect.banned_ip.reason": "Y2r IP a5s is b4d f2m t2s s4r.\nR4n: %s",
