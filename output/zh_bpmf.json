@@ -5214,6 +5214,7 @@
   "mount.onboard": "ㄢˋ ㄒㄧㄚˋ %1$s ㄌㄞˊ ㄊㄨㄛ ㄌㄧˊ",
   "multiplayer.applyingPack": "ㄓㄥˋ ㄗㄞˋ ㄧㄥˋ ㄩㄥˋ ㄗ ㄩㄢˊ ㄅㄠ",
   "multiplayer.disconnect.authservers_down": "ㄕㄣ ㄈㄣˋ ㄧㄢˋ ㄓㄥˋ ㄈㄨˊ ㄨˋ ㄑㄧˋ ㄇㄨˋ ㄑㄧㄢˊ ㄔㄨˇ ㄩˊ ㄉㄤˋ ㄐㄧ ㄓㄨㄤˋ ㄊㄞˋ 。 ㄑㄧㄥˇ ㄕㄠ ㄏㄡˋ ㄗㄞˋ ㄕˋ ， ㄅㄠˋ ㄑㄧㄢˋ ！",
+  "multiplayer.disconnect.bad_chat_index": "ㄘㄨㄥˊ ㄈㄨˊ ㄨˋ ㄑㄧˋ ㄐㄧㄝ ㄕㄡ ㄉㄠˋ ˙ㄌㄜ ㄉㄧㄡ ㄕ ㄏㄨㄛˋ ㄔㄨㄥˊ ㄒㄧㄣ ㄆㄞˊ ㄒㄩˋ ˙ㄉㄜ ㄌㄧㄠˊ ㄊㄧㄢ ㄒㄧㄠ ˙ㄒㄧ",
   "multiplayer.disconnect.banned": "ㄋㄧˇ ㄧˇ ㄅㄟˋ ㄘˇ ㄈㄨˊ ㄨˋ ㄑㄧˋ ㄈㄥ ㄐㄧㄣˋ",
   "multiplayer.disconnect.banned.expiration": "\n ㄋㄧˇ ˙ㄉㄜ ㄈㄥ ㄐㄧㄣˋ ㄐㄧㄤ ㄩˊ %s ㄐㄧㄝˇ ㄔㄨˊ",
   "multiplayer.disconnect.banned.reason": "ㄋㄧˇ ㄧˇ ㄅㄟˋ ㄘˇ ㄈㄨˊ ㄨˋ ㄑㄧˋ ㄈㄥ ㄐㄧㄣˋ 。\n ㄩㄢˊ ㄧㄣ ：%s",

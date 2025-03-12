@@ -5214,6 +5214,7 @@
   "mount.onboard": "Àn-sià %1$s lái tuo-lí",
   "multiplayer.applyingPack": "Jhèng-zài yìng-yòng zih-yuán-bao",
   "multiplayer.disconnect.authservers_down": "Shen-fèn yàn-jhèng fú-wù-cì mù-cián chǔ-yú dàng-ji jhuàng-tài. cǐng shao-hòu zài-shìh, bào-ciàn! ",
+  "multiplayer.disconnect.bad_chat_index": "Cóng fú-wù-cì jie-shou dàole̊ diou-shih huò chóng-sin pái-syù de̊ liáo-tian siao-si̊",
   "multiplayer.disconnect.banned": "Nǐ yǐ bèi cǐh fú-wù-cì fong-jìn",
   "multiplayer.disconnect.banned.expiration": "\n Nǐ de̊ fong-jìn jiang yú %s jiě-chú",
   "multiplayer.disconnect.banned.reason": "Nǐ yǐ bèi cǐh fú-wù-cì fong-jìn. \nYuán-yin: %s",

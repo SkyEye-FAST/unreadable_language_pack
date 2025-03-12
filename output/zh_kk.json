@@ -5214,6 +5214,7 @@
   "mount.onboard": "アン シャー %1$s ライ トゥオ リー",
   "multiplayer.applyingPack": "ジョン ザイ イン ヨン ズー ユエン バオ",
   "multiplayer.disconnect.authservers_down": "シェン フェン イエン ジョン フー ウー チー ムー チエン チュー イー ダン ジー ジュワン タイ 。 チン シャオ ホウ ザイ シー ， バオ チエン ！",
+  "multiplayer.disconnect.bad_chat_index": "ツォン フー ウー チー ジエ ショウ ダオ ラー デュー シー フオ チョン シン パイ シー ドー リャオ ティエン シャオ シー",
   "multiplayer.disconnect.banned": "ニー イー ベイ ツー フー ウー チー フォン ジン",
   "multiplayer.disconnect.banned.expiration": "\n ニー ドー フォン ジン ジャン イー %s ジエ チュー",
   "multiplayer.disconnect.banned.reason": "ニー イー ベイ ツー フー ウー チー フォン ジン 。\n ユエン イン ：%s",
