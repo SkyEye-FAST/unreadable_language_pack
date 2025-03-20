@@ -5214,7 +5214,7 @@
   "mount.onboard": "プレッス・%1$s・ト・ディスモーント",
   "multiplayer.applyingPack": "アップリィング・レソールクエ・パック",
   "multiplayer.disconnect.authservers_down": "アウトヘンチクアチオン・セルヴェルス・アレ・ドワン。プレアセ・トルユ・アガイン・ラテル、ソッルユ!",
-  "multiplayer.disconnect.bad_chat_index": "レクエイヴェド・ミッセド・オル・レオルデレド・チャト・メッサゲ・フロム・セルヴェル",
+  "multiplayer.disconnect.bad_chat_index": "デテクテド・ミッセド・オル・レオルデレド・チャト・メッサゲ・フロム・セルヴェル",
   "multiplayer.disconnect.banned": "ヨー・アレ・バンネド・フロム・トヒス・セルヴェル",
   "multiplayer.disconnect.banned_ip.expiration": "\nヨール・バン・ヰッル・ベ・レモヴェド・オン・%s",
   "multiplayer.disconnect.banned_ip.reason": "ヨール・イプ・アッドレッス・イス・バンネド・フロム・トヒス・セルヴェル。\nレアソン：%s",
