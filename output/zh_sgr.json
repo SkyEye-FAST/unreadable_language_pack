@@ -5214,7 +5214,7 @@
   "mount.onboard": "Ahnshiah %1$s lair tuolir",
   "multiplayer.applyingPack": "Jehngtzaih yihngyuhng tzyyuarnbau",
   "multiplayer.disconnect.authservers_down": "Shenfehn yahnjehng furwuhchih muhchiarn chuuyur dahngji juahngtaih. chiing shauhouh tzaihshyh, bauhchiahn! ",
-  "multiplayer.disconnect.bad_chat_index": "Tsurng furwuhchih jieshou dauh'le diushy huoh churngshin pairshuh'de liaurtian shiau'shi",
+  "multiplayer.disconnect.bad_chat_index": "Jiaantseh dauh lairtzyh furwuhchih'de liaurtian shiau'shi buh'fen chueshy huoh yii beih churngshin pairshuh",
   "multiplayer.disconnect.banned": "Nii yii beih tsyy furwuhchih fengjihn",
   "multiplayer.disconnect.banned.expiration": "\n Nii'de fengjihn jiang yur %s jieechur",
   "multiplayer.disconnect.banned.reason": "Nii yii beih tsyy furwuhchih fengjihn. \nYuarnyin: %s",

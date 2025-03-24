@@ -5214,7 +5214,7 @@
   "mount.onboard": "按下%1$s來脱離",
   "multiplayer.applyingPack": "正在應用資源包",
   "multiplayer.disconnect.authservers_down": "身份驗證服務器目前處於宕機狀態。請稍後再試，抱歉！",
-  "multiplayer.disconnect.bad_chat_index": "從服務器接收到了丢失或重新排序的聊天消息",
+  "multiplayer.disconnect.bad_chat_index": "檢測到來自服務器的聊天消息部分缺失或已被重新排序",
   "multiplayer.disconnect.banned": "你已被此服務器封禁",
   "multiplayer.disconnect.banned.expiration": "\n你的封禁將於%s解除",
   "multiplayer.disconnect.banned.reason": "你已被此服務器封禁。\n原因：%s",

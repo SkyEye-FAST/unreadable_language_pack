@@ -5214,7 +5214,7 @@
   "mount.onboard": "an˥˩ ɕja˥˩ %1$s laɪ˧˥ tʰwo˥ li˧˥",
   "multiplayer.applyingPack": "t͡ʂɤŋ˥˩ t͡saɪ˥˩ jiŋ˥˩ jʊŋ˥˩ t͡sɹ̩˥ ɥæn˧˥ pɑʊ˥",
   "multiplayer.disconnect.authservers_down": "ʂən˥ fən˥˩ jan˥˩ t͡ʂɤŋ˥˩ fʋ̩˧˥ wu˥˩ t͡ɕʰi˥˩ mu˥˩ t͡ɕʰjɛn˧˥ t͡ʂʰu˨˩˦ y˧˥ tɑŋ˥˩ t͡ɕi˥ t͡ʂwɑŋ˥˩ tʰaɪ˥˩ 。 t͡ɕʰiŋ˨˩˦ ʂɑʊ˥ xoʊ˥˩ t͡saɪ˥˩ ʂɻ̍˥˩ ， pɑʊ˥˩ t͡ɕʰjɛn˥˩ ！",
-  "multiplayer.disconnect.bad_chat_index": "t͡sʰʊŋ˧˥ fʋ̩˧˥ wu˥˩ t͡ɕʰi˥˩ t͡ɕjɛ˥ ʂoʊ˥ tɑʊ˥˩ lɤ tjoʊ˥ ʂɻ̍˥ xwo˥˩ t͡ʂʰʊŋ˧˥ ɕin˥ pʰaɪ˧˥ ɕy˥˩ tɤ ljɑʊ˧˥ tʰjɛn˥ ɕjɑʊ˥ ɕi",
+  "multiplayer.disconnect.bad_chat_index": "t͡ɕjɛn˨˩˦ t͡sʰɤ˥˩ tɑʊ˥˩ laɪ˧˥ t͡sɹ̩˥˩ fʋ̩˧˥ wu˥˩ t͡ɕʰi˥˩ tɤ ljɑʊ˧˥ tʰjɛn˥ ɕjɑʊ˥ ɕi pu˥˩ fən t͡ɕʰɥɛ˥ ʂɻ̍˥ xwo˥˩ ji˨˩˦ peɪ˥˩ t͡ʂʰʊŋ˧˥ ɕin˥ pʰaɪ˧˥ ɕy˥˩",
   "multiplayer.disconnect.banned": "ni˨˩˦ ji˨˩˦ peɪ˥˩ t͡sʰɹ̩˨˩˦ fʋ̩˧˥ wu˥˩ t͡ɕʰi˥˩ fɤŋ˥ t͡ɕin˥˩",
   "multiplayer.disconnect.banned.expiration": "\n ni˨˩˦ tɤ fɤŋ˥ t͡ɕin˥˩ t͡ɕjɑŋ˥ y˧˥ %s t͡ɕjɛ˨˩˦ t͡ʂʰu˧˥",
   "multiplayer.disconnect.banned.reason": "ni˨˩˦ ji˨˩˦ peɪ˥˩ t͡sʰɹ̩˨˩˦ fʋ̩˧˥ wu˥˩ t͡ɕʰi˥˩ fɤŋ˥ t͡ɕin˥˩ 。\n ɥæn˧˥ jin˥ ：%s",

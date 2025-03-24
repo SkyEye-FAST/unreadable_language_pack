@@ -5214,7 +5214,7 @@
   "mount.onboard": "Annshiah %1$s lai tuoli",
   "multiplayer.applyingPack": "Jenqtzay yinqyonq tzyyuanbau",
   "multiplayer.disconnect.authservers_down": "Shenfenn yannjenq fwuwuhchih muhchyan chuuyu danqji juanqtay. chiing shauhow tzayshyh, bawchiann! ",
-  "multiplayer.disconnect.bad_chat_index": "Tsorng fwuwuhchih jieshou daw .lhe dioushy huoh chorngshin pairshiuh .de liautian shiau.shi",
+  "multiplayer.disconnect.bad_chat_index": "Jeantseh daw laitzyh fwuwuhchih .de liautian shiau.shi buh.fen chiueshy huoh yii bey chorngshin pairshiuh",
   "multiplayer.disconnect.banned": "Nii yii bey tsyy fwuwuhchih fengjinn",
   "multiplayer.disconnect.banned.expiration": "\n Nii .de fengjinn jiang yu %s jieechwu",
   "multiplayer.disconnect.banned.reason": "Nii yii bey tsyy fwuwuhchih fengjinn. \nYuan'in: %s",

@@ -5214,7 +5214,7 @@
   "mount.onboard": "按下 %1$s 来 脱离",
   "multiplayer.applyingPack": "正在 应用 资源包",
   "multiplayer.disconnect.authservers_down": "身份 验证 服务器 目前 处于 宕机 状态. 请 稍后 再试, 抱歉! ",
-  "multiplayer.disconnect.bad_chat_index": "从 服务器 接收 到了 丢失 或 重新 排序 的 聊天 消息",
+  "multiplayer.disconnect.bad_chat_index": "检测 到 来自 服务器 的 聊天 消息 部分 缺失 或 已 被 重新 排序",
   "multiplayer.disconnect.banned": "你 已 被 此 服务器 封禁",
   "multiplayer.disconnect.banned.expiration": "\n 你 的 封禁 将 于 %s 解除",
   "multiplayer.disconnect.banned.reason": "你 已 被 此 服务器 封禁. \n原因: %s",

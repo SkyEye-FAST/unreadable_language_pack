@@ -5214,7 +5214,7 @@
   "mount.onboard": "اً‌ثِیَا %1$s لَیْ طُوَ‌لِ",
   "multiplayer.applyingPack": "جٍْ‌زَیْ یٍ‌یٌ زِ‌یُوًا‌بَوْ",
   "multiplayer.disconnect.authservers_down": "شٍ‌فٌ یًا‌جٍْ فُ‌وُ‌کِ مُ‌کِیًا چُ‌یُوِ دَانْ‌ݣِ جُوَانْ‌تَیْ. کٍْ شَوْ‌خِوْ زَیْ‌شِ, بَوْ‌کِیًا! ",
-  "multiplayer.disconnect.bad_chat_index": "ڞْو فُ‌وُ‌کِ ݣِیَ‌شِوْ دَوْ لَ دِیُوْ‌شِ خُوَ چْو‌ثٍ پَیْ‌ثِیُوِ دْ لِیَوْ‌تِیًا ثِیَوْ‌ثِ",
+  "multiplayer.disconnect.bad_chat_index": "ݣِیًا‌ڞَ دَوْ لَیْ‌زِ فُ‌وُ‌کِ دْ لِیَوْ‌تِیًا ثِیَوْ‌ثِ بُ‌فٌ کِیُوَ‌شِ خُوَ ءِ بُوِ چْو‌ثٍ پَیْ‌ثِیُوِ",
   "multiplayer.disconnect.banned": "نِ ءِ بُوِ ڞِ فُ‌وُ‌کِ فٍْ‌ݣٍ",
   "multiplayer.disconnect.banned.expiration": "\n نِ دْ فٍْ‌ݣٍ ݣِیَانْ یُوِ %s ݣِیَ‌چُ",
   "multiplayer.disconnect.banned.reason": "نِ ءِ بُوِ ڞِ فُ‌وُ‌کِ فٍْ‌ݣٍ. \nیُوًا‌ءٍ: %s",

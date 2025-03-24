@@ -5214,7 +5214,7 @@
   "mount.onboard": "Анься %1$s лай толи",
   "multiplayer.applyingPack": "Чжэнцзай инюн цзыюаньбао",
   "multiplayer.disconnect.authservers_down": "Шэньфэнь яньчжэн фууци муцянь чуюй данцзи чжуантай. цин шаохоу цзайши, баоцянь! ",
-  "multiplayer.disconnect.bad_chat_index": "Цун фууци цзешоу дао лэ дюши хо чунсинь пайсюй дэ ляотянь сяоси",
+  "multiplayer.disconnect.bad_chat_index": "Цзяньцэ дао лайцзы фууци дэ ляотянь сяоси буфэнь цюэши хо и бэй чунсинь пайсюй",
   "multiplayer.disconnect.banned": "Ни и бэй цы фууци фэнцзинь",
   "multiplayer.disconnect.banned.expiration": "\n Ни дэ фэнцзинь цзян юй %s цзечу",
   "multiplayer.disconnect.banned.reason": "Ни и бэй цы фууци фэнцзинь. \nЮаньинь: %s",
