@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "イー ジー イー %2$s ミン ワン ジャー %1$s ディエン ジン イエン",
   "commands.experience.add.points.success.single": "イー ジー イー %2$s %1$s ディエン ジン イエン",
   "commands.experience.query.levels": "%s ヨン ヨウ %s ジー ジン イエン",
-  "commands.experience.query.points": "%s ヨン ヨウ %s ディエン ジン イエン ジー",
+  "commands.experience.query.points": "%s ヨン ヨウ %s ディエン ジン イエン",
   "commands.experience.set.levels.success.multiple": "イー ジャン %2$s ミン ワン ジャー ドー ジン イエン ドン ジー ショー ウェイ %1$s",
   "commands.experience.set.levels.success.single": "イー ジャン %2$s ドー ジン イエン ドン ジー ショー ウェイ %1$s",
   "commands.experience.set.points.invalid": "ウー ファー ジャン ツー ワン ジャー ドー ジン イエン ジー ショー ジー ウェイ チャオ グオ シエン ヨウ ドン ジー ドー ズイ ダー ジー",

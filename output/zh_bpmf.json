@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "ㄧˇ ㄐㄧˇ ㄩˇ %2$s ㄇㄧㄥˊ ㄨㄢˊ ㄐㄧㄚ %1$s ㄉㄧㄢˇ ㄐㄧㄥ ㄧㄢˋ",
   "commands.experience.add.points.success.single": "ㄧˇ ㄐㄧˇ ㄩˇ %2$s %1$s ㄉㄧㄢˇ ㄐㄧㄥ ㄧㄢˋ",
   "commands.experience.query.levels": "%s ㄩㄥ ㄧㄡˇ %s ㄐㄧˊ ㄐㄧㄥ ㄧㄢˋ",
-  "commands.experience.query.points": "%s ㄩㄥ ㄧㄡˇ %s ㄉㄧㄢˇ ㄐㄧㄥ ㄧㄢˋ ㄓˊ",
+  "commands.experience.query.points": "%s ㄩㄥ ㄧㄡˇ %s ㄉㄧㄢˇ ㄐㄧㄥ ㄧㄢˋ",
   "commands.experience.set.levels.success.multiple": "ㄧˇ ㄐㄧㄤ %2$s ㄇㄧㄥˊ ㄨㄢˊ ㄐㄧㄚ ˙ㄉㄜ ㄐㄧㄥ ㄧㄢˋ ㄉㄥˇ ㄐㄧˊ ㄕㄜˋ ㄨㄟˊ %1$s",
   "commands.experience.set.levels.success.single": "ㄧˇ ㄐㄧㄤ %2$s ˙ㄉㄜ ㄐㄧㄥ ㄧㄢˋ ㄉㄥˇ ㄐㄧˊ ㄕㄜˋ ㄨㄟˊ %1$s",
   "commands.experience.set.points.invalid": "ㄨˊ ㄈㄚˇ ㄐㄧㄤ ㄘˇ ㄨㄢˊ ㄐㄧㄚ ˙ㄉㄜ ㄐㄧㄥ ㄧㄢˋ ㄓˊ ㄕㄜˋ ㄓˋ ㄨㄟˊ ㄔㄠ ㄍㄨㄛˋ ㄒㄧㄢˋ ㄧㄡˇ ㄉㄥˇ ㄐㄧˊ ˙ㄉㄜ ㄗㄨㄟˋ ㄉㄚˋ ㄓˊ",

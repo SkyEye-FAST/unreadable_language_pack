@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "Yii jiiyeu %2$s ming wanjia %1$s dean jingyann",
   "commands.experience.add.points.success.single": "Yii jiiyeu %2$s %1$s dean jingyann",
   "commands.experience.query.levels": "%s iongyeou %s jyi jingyann",
-  "commands.experience.query.points": "%s iongyeou %s dean jingyannjyr",
+  "commands.experience.query.points": "%s iongyeou %s dean jingyann",
   "commands.experience.set.levels.success.multiple": "Yii jiang %2$s ming wanjia .de jingyann deengjyi shehwei %1$s",
   "commands.experience.set.levels.success.single": "Yii jiang %2$s .de jingyann deengjyi shehwei %1$s",
   "commands.experience.set.points.invalid": "Wufaa jiang tsyy wanjia .de jingyannjyr shehjyh wei chauguoh shiannyeou deengjyi .de tzueydahjyr",

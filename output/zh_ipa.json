@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "ji˨˩˦ t͡ɕi˨˩˦ y˨˩˦ %2$s miŋ˧˥ wan˧˥ t͡ɕja˥ %1$s tjɛn˨˩˦ t͡ɕiŋ˥ jan˥˩",
   "commands.experience.add.points.success.single": "ji˨˩˦ t͡ɕi˨˩˦ y˨˩˦ %2$s %1$s tjɛn˨˩˦ t͡ɕiŋ˥ jan˥˩",
   "commands.experience.query.levels": "%s jʊŋ˥ joʊ˨˩˦ %s t͡ɕi˧˥ t͡ɕiŋ˥ jan˥˩",
-  "commands.experience.query.points": "%s jʊŋ˥ joʊ˨˩˦ %s tjɛn˨˩˦ t͡ɕiŋ˥ jan˥˩ t͡ʂɻ̍˧˥",
+  "commands.experience.query.points": "%s jʊŋ˥ joʊ˨˩˦ %s tjɛn˨˩˦ t͡ɕiŋ˥ jan˥˩",
   "commands.experience.set.levels.success.multiple": "ji˨˩˦ t͡ɕjɑŋ˥ %2$s miŋ˧˥ wan˧˥ t͡ɕja˥ tɤ t͡ɕiŋ˥ jan˥˩ tɤŋ˨˩˦ t͡ɕi˧˥ ʂɤ˥˩ weɪ˧˥ %1$s",
   "commands.experience.set.levels.success.single": "ji˨˩˦ t͡ɕjɑŋ˥ %2$s tɤ t͡ɕiŋ˥ jan˥˩ tɤŋ˨˩˦ t͡ɕi˧˥ ʂɤ˥˩ weɪ˧˥ %1$s",
   "commands.experience.set.points.invalid": "wu˧˥ fa˨˩˦ t͡ɕjɑŋ˥ t͡sʰɹ̩˨˩˦ wan˧˥ t͡ɕja˥ tɤ t͡ɕiŋ˥ jan˥˩ t͡ʂɻ̍˧˥ ʂɤ˥˩ t͡ʂɻ̍˥˩ weɪ˧˥ t͡ʂʰɑʊ˥ kwo˥˩ ɕjɛn˥˩ joʊ˨˩˦ tɤŋ˨˩˦ t͡ɕi˧˥ tɤ t͡sweɪ˥˩ ta˥˩ t͡ʂɻ̍˧˥",

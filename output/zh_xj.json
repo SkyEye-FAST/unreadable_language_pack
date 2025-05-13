@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "ءِ ݣِ‌یُوِ %2$s مِیٍٔ وًا‌ݣِیَا %1$s دِیًا ݣٍْ‌یًا",
   "commands.experience.add.points.success.single": "ءِ ݣِ‌یُوِ %2$s %1$s دِیًا ݣٍْ‌یًا",
   "commands.experience.query.levels": "%s یٌ‌یُوْ %s ݣِ ݣٍْ‌یًا",
-  "commands.experience.query.points": "%s یٌ‌یُوْ %s دِیًا ݣٍْ‌یًا‌جِ",
+  "commands.experience.query.points": "%s یٌ‌یُوْ %s دِیًا ݣٍْ‌یًا",
   "commands.experience.set.levels.success.multiple": "ءِ ݣِیَانْ %2$s مِیٍٔ وًا‌ݣِیَا دْ ݣٍْ‌یًا دٍْ‌ݣِ شَ‌وِ %1$s",
   "commands.experience.set.levels.success.single": "ءِ ݣِیَانْ %2$s دْ ݣٍْ‌یًا دٍْ‌ݣِ شَ‌وِ %1$s",
   "commands.experience.set.points.invalid": "وُ‌فَا ݣِیَانْ ڞِ وًا‌ݣِیَا دْ ݣٍْ‌یًا‌جِ شَ‌جِ وِ چَوْ‌قُوَ ثِیًا‌یُوْ دٍْ‌ݣِ دْ ظُوِ‌دَا‌جِ",

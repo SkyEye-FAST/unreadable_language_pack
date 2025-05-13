@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "I³ chi³-yü³ %2$s ming² wan²-chia¹ %1$s tien³ ching¹-yan⁴",
   "commands.experience.add.points.success.single": "I³ chi³-yü³ %2$s %1$s tien³ ching¹-yan⁴",
   "commands.experience.query.levels": "%s yung¹-yu³ %s chi² ching¹-yan⁴",
-  "commands.experience.query.points": "%s yung¹-yu³ %s tien³ ching¹-yan⁴-chih²",
+  "commands.experience.query.points": "%s yung¹-yu³ %s tien³ ching¹-yan⁴",
   "commands.experience.set.levels.success.multiple": "I³ chiang¹ %2$s ming² wan²-chia¹ te⁵ ching¹-yan⁴ teng³-chi² she⁴-wei² %1$s",
   "commands.experience.set.levels.success.single": "I³ chiang¹ %2$s te⁵ ching¹-yan⁴ teng³-chi² she⁴-wei² %1$s",
   "commands.experience.set.points.invalid": "Wu²-fa³ chiang¹ tz'u³ wan²-chia¹ te⁵ ching¹-yan⁴-chih² she⁴-chih⁴ wei² ch'ao¹-kuo⁴ hsien⁴-yu³ teng³-chi² te⁵ tsui⁴-ta⁴-chih²",

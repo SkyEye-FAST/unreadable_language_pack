@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "Yii jiiyuu %2$s mirng warnjia %1$s diaan jingyahn",
   "commands.experience.add.points.success.single": "Yii jiiyuu %2$s %1$s diaan jingyahn",
   "commands.experience.query.levels": "%s yungyoou %s jir jingyahn",
-  "commands.experience.query.points": "%s yungyoou %s diaan jingyahnjyr",
+  "commands.experience.query.points": "%s yungyoou %s diaan jingyahn",
   "commands.experience.set.levels.success.multiple": "Yii jiang %2$s mirng warnjia'de jingyahn deengjir shehweir %1$s",
   "commands.experience.set.levels.success.single": "Yii jiang %2$s'de jingyahn deengjir shehweir %1$s",
   "commands.experience.set.points.invalid": "Wurfaa jiang tsyy warnjia'de jingyahnjyr shehjyh weir chauguoh shiahnyoou deengjir'de tzuihdahjyr",

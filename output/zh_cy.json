@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "И цзиюй %2$s мин ваньцзя %1$s дянь цзинянь",
   "commands.experience.add.points.success.single": "И цзиюй %2$s %1$s дянь цзинянь",
   "commands.experience.query.levels": "%s юню %s цзи цзинянь",
-  "commands.experience.query.points": "%s юню %s дянь цзиняньчжи",
+  "commands.experience.query.points": "%s юню %s дянь цзинянь",
   "commands.experience.set.levels.success.multiple": "И цзян %2$s мин ваньцзя дэ цзинянь дэнцзи шэвэй %1$s",
   "commands.experience.set.levels.success.single": "И цзян %2$s дэ цзинянь дэнцзи шэвэй %1$s",
   "commands.experience.set.points.invalid": "Уфа цзян цы ваньцзя дэ цзиняньчжи шэчжи вэй чаого сянью дэнцзи дэ цзуйдачжи",

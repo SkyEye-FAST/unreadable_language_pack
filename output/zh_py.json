@@ -2617,7 +2617,7 @@
   "commands.experience.add.points.success.multiple": "Yǐ jǐyǔ %2$s míng wánjiā %1$s diǎn jīngyàn",
   "commands.experience.add.points.success.single": "Yǐ jǐyǔ %2$s %1$s diǎn jīngyàn",
   "commands.experience.query.levels": "%s yōngyǒu %s jí jīngyàn",
-  "commands.experience.query.points": "%s yōngyǒu %s diǎn jīngyànzhí",
+  "commands.experience.query.points": "%s yōngyǒu %s diǎn jīngyàn",
   "commands.experience.set.levels.success.multiple": "Yǐ jiāng %2$s míng wánjiā de jīngyàn děngjí shèwéi %1$s",
   "commands.experience.set.levels.success.single": "Yǐ jiāng %2$s de jīngyàn děngjí shèwéi %1$s",
   "commands.experience.set.points.invalid": "Wúfǎ jiāng cǐ wánjiā de jīngyànzhí shèzhì wéi chāoguò xiànyǒu děngjí de zuìdàzhí",
