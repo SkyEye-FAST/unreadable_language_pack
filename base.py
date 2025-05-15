@@ -1,12 +1,12 @@
 """基础文件，提供通用功能和数据结构定义。"""
 
 from pathlib import Path
-from typing import Final, TypeAlias
+from typing import Final
 
 import ujson
 
 # 类型别名和常量定义
-Ldata: TypeAlias = dict[str, str]
+type Ldata = dict[str, str]
 P: Final[Path] = Path(__file__).resolve().parent
 LANG_FILES: Final[tuple[str, ...]] = ("en_us", "zh_cn")
 
