@@ -47,6 +47,18 @@ jobs:
           cat version.txt
           echo "ver=$(<version.txt)" >> "$GITHUB_ENV"
 
+      - name: Check if Modrinth version exists
+        run: |
+          set -e
+          url="https://api.modrinth.com/v2/project/atOcnEWk/version/${{ env.ver }}"
+          if curl --fail --silent --head "$url" > /dev/null; then
+            echo "MODRINTH_EXISTS=true" >> "$GITHUB_ENV"
+            echo "Modrinth version exists, will skip upload."
+          else
+            echo "MODRINTH_EXISTS=false" >> "$GITHUB_ENV"
+            echo "Modrinth version does not exist, will upload."
+          fi
+
       - name: Release
         uses: Kir-Antipov/mc-publish@v3.3
         with:
@@ -57,6 +69,7 @@ jobs:
           version: "${{ env.ver }}"
 
       - name: Upload to Modrinth
+        if: env.MODRINTH_EXISTS != 'true'
         uses: cloudnode-pro/modrinth-publish@v2
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
