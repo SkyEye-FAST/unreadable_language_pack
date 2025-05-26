@@ -4,7 +4,7 @@
 
 - **[English](README_en.md) | [中文](README.md)**
 
-----
+---
 
 此项目提供由现有语言转换而来的新增非常规“语言”Minecraft Java版资源包。详见[#资源包](#资源包)一节。
 
@@ -26,7 +26,7 @@
 
 请使用下面的命令安装依赖项：
 
-``` shell
+```shell
 pip install -r requirements.txt
 ```
 
@@ -176,7 +176,7 @@ pip install -r requirements.txt
 
 资源包在[Apache 2.0协议](LICENSE)下发布。
 
-``` text
+```text
   Copyright 2024-2025 SkyEye_FAST
 
   Licensed under the Apache License, Version 2.0 (the "License");

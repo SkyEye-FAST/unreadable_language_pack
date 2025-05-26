@@ -4,7 +4,7 @@
 
 - **[English](README_en.md) | [中文](README.md)**
 
-----
+---
 
 This project provides a Minecraft: Java Edition resource pack which contains new non-standard "languages" converted from existing languages. See the section [#Resource Pack](#resource-pack) for more information.
 
@@ -26,7 +26,7 @@ It is recommended to use this resource pack with the mods [Language Reload](http
 
 Install dependencies using the following command:
 
-``` shell
+```shell
 pip install -r requirements.txt
 ```
 
@@ -55,7 +55,7 @@ The resource pack added 16 languages into the game.
 
 - Once selected, all strings will be changed to abbreviations with the first and last characters of the English word retained and the number of characters in the middle replaced. Words with a length of 2 or less will remain unchanged.
 
-#### "エングリスホ (カタカナ)"  ([`ja_kk.json`](output/ja_kk.json))
+#### "エングリスホ (カタカナ)" ([`ja_kk.json`](output/ja_kk.json))
 
 - i.e. "English (Katakana)".
 - Once selected, all strings will be changed to Katakana transliterated from English.
@@ -65,22 +65,22 @@ The resource pack added 16 languages into the game.
 >
 > Transliterations of "Lena Raine" and "Samuel Åberg" will be fixed and "C418" will be retained in the results.
 
-#### "江尓具利須保 (万葉仮名)"  ([`ja_my.json`](output/ja_my.json))
+#### "江尓具利須保 (万葉仮名)" ([`ja_my.json`](output/ja_my.json))
 
 - i.e. "English (Man'yōgana)".
 - Once selected, all character strings will be converted into Man'yōganas transliterated from English. In order to ensure that the generated results do not deviate too much, only one of the many possibilities of Man'yōganas is selected.
 
-#### "繁體中文 (中國大陸)"  ([`zh_hm.json`](output/zh_hm.json))
+#### "繁體中文 (中國大陸)" ([`zh_hm.json`](output/zh_hm.json))
 
 - i.e. "Traditional Chinese (Chinese mainland)".
-- Once selected, all strings will be converted from Simplified Chinese to Traditional Chinese according to GB/Z 40637-2021 and *List of Commonly Used Standard Chinese Characters* (《通用规范汉字表》).
+- Once selected, all strings will be converted from Simplified Chinese to Traditional Chinese according to GB/Z 40637-2021 and _List of Commonly Used Standard Chinese Characters_ (《通用规范汉字表》).
 
 > [!NOTE]
 > The conversion between Simplified and Traditional Chinese uses the library `opencc` and the "Harmonic Mainland Traditional Chinese Standard" (調和大陸繁體標準) of [forFudan/GujiCC](https://github.com/forFudan/GujiCC).
 >
-> The correspondence between Chinese characters is basically from GB/Z 40637-2021, and a small part is covered by the correspondence in *List of Commonly Used Standard Chinese Characters*.
+> The correspondence between Chinese characters is basically from GB/Z 40637-2021, and a small part is covered by the correspondence in _List of Commonly Used Standard Chinese Characters_.
 
-#### "Hànyǔ Pīnyīn (Zhōngguó Dàlù)"  ([`zh_py.json`](output/zh_py.json))
+#### "Hànyǔ Pīnyīn (Zhōngguó Dàlù)" ([`zh_py.json`](output/zh_py.json))
 
 - i.e. "Pinyin (Chinese mainland)".
 - Once selected, all strings will be changed to Pinyin transliterated from Simp. Chinese, in units of words.
@@ -97,7 +97,7 @@ The resource pack added 16 languages into the game.
 >
 > **Due to the lack of complete manual review, the word segmentation accuracy of long texts cannot be guaranteed.**
 
-#### "Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)"  ([`zh_ipa.json`](output/zh_ipa.json))
+#### "Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)" ([`zh_ipa.json`](output/zh_ipa.json))
 
 - i.e. “Chinese in IPA (Chinese mainland)”.
 - Once selected, all strings will be changed to IPA transliterated from Simp. Chinese.
@@ -105,17 +105,17 @@ The resource pack added 16 languages into the game.
 > [!NOTE]
 > The IPA transliteration scheme comes from the article [新老派普通话的宽严式记音（含儿化韵）](https://zhuanlan.zhihu.com/p/38258415) written by [@UntPhesoca](https://www.zhihu.com/people/UntW). Neutral tones won't be marked.
 
-#### "ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)"  ([`zh_bpmf.json`](output/zh_bpmf.json))
+#### "ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ (ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ)" ([`zh_bpmf.json`](output/zh_bpmf.json))
 
 - i.e. "Bopomofo (Chinese mainland)”.
 - Once selected, all strings will be changed to Bopomofo transliterated from Simp. Chinese.
 
-#### "Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)"  ([`zh_wg.json`](output/zh_wg.json))
+#### "Wade–Giles (Chung¹-Kuo² Ta⁴-Lu⁴)" ([`zh_wg.json`](output/zh_wg.json))
 
 - i.e. "Wade–Giles (Chinese mainland)”.
 - Once selected, all strings will be changed to Wade–Giles transliterated from Simp. Chinese.
 
-#### "Gwoyeu Romatzyh (Jonggwo Dahluh)"  ([`zh_gr.json`](output/zh_gr.json))
+#### "Gwoyeu Romatzyh (Jonggwo Dahluh)" ([`zh_gr.json`](output/zh_gr.json))
 
 - i.e. "Gwoyeu Romatzyh (Chinese mainland)”.
 - Once selected, all strings will be changed to Gwoyeu Romatzyh transliterated from Simp. Chinese.
@@ -145,7 +145,7 @@ The resource pack added 16 languages into the game.
 - i.e. "Katakana (Chinese mainland)”.
 - Once selected, all strings will be changed to Katakana transliterated from Simp. Chinese.
 
-#### "Палладицу (Чжунго далу)"  ([`zh_cy.json`](output/zh_cy.json))
+#### "Палладицу (Чжунго далу)" ([`zh_cy.json`](output/zh_cy.json))
 
 - i.e. "Palladitsa (Chinese mainland)”.
 - Once selected, all strings will be changed to the Cyrillic script transliterated from Simp. Chinese, according to the Palladius system.
@@ -176,7 +176,7 @@ The resource pack added 16 languages into the game.
 
 The resource pack is released under the [Apache 2.0 license](LICENSE).
 
-``` text
+```text
   Copyright 2024-2025 SkyEye_FAST
 
   Licensed under the Apache License, Version 2.0 (the "License");

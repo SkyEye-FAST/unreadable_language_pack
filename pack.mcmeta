@@ -1,92 +1,89 @@
 {
-    "pack": {
-        "pack_format": 49,
-        "supported_formats": [
-            9,
-            99
-        ],
-        "description": "Unreadable Language Resource Pack"
+  "pack": {
+    "pack_format": 49,
+    "supported_formats": [9, 99],
+    "description": "Unreadable Language Resource Pack"
+  },
+  "language": {
+    "en_i7h": {
+      "name": "i18nglish",
+      "region": "i7h",
+      "bidirectional": false
     },
-    "language": {
-        "en_i7h": {
-            "name": "i18nglish",
-            "region": "i7h",
-            "bidirectional": false
-        },
-        "ja_kk": {
-            "name": "エングリスホ",
-            "region": "カタカナ",
-            "bidirectional": false
-        },
-        "ja_my": {
-            "name": "江尓具利須保",
-            "region": "万葉仮名",
-            "bidirectional": false
-        },
-        "zh_hm": {
-            "name": "繁體中文",
-            "region": "中國大陸",
-            "bidirectional": false
-        },
-        "zh_py": {
-            "name": "Hànyǔ Pīnyīn",
-            "region": "Zhōngguó Dàlù",
-            "bidirectional": false
-        },
-        "zh_ipa": {
-            "name": "Chinese in IPA",
-            "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
-            "bidirectional": false
-        },
-        "zh_bpmf": {
-            "name": "ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ",
-            "region": "ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ",
-            "bidirectional": false
-        },
-        "zh_wg": {
-            "name": "Wade–Giles",
-            "region": "Chung¹-Kuo² Ta⁴-Lu⁴",
-            "bidirectional": false
-        },
-        "zh_gr": {
-            "name": "Gwoyeu Romatzyh",
-            "region": "Jonggwo Dahluh",
-            "bidirectional": false
-        },
-        "zh_sgr": {
-            "name": "Jiaanhuah Guoryuu Romatzyh",
-            "region": "Jungguor Dahluh",
-            "bidirectional": false
-        },
-        "zh_mps2": {
-            "name": "Jù-yīn Fú-hàu Dì-èr Shr̀",
-            "region": "Jūng-guó Dà-lù",
-            "bidirectional": false
-        },
-        "zh_ty": {
-            "name": "Tong-yòng Pin-yin",
-            "region": "Jhong-guó Dà-lù",
-            "bidirectional": false
-        },
-        "zh_yale": {
-            "name": "Yale romanization",
-            "region": "Jūng-gwó Dà-lù",
-            "bidirectional": false
-        },
-        "zh_kk": {
-            "name": "カタカナ",
-            "region": "ジョン グオ ダー ルー",
-            "bidirectional": false
-        },
-        "zh_cy": {
-            "name": "Палладицу",
-            "region": "Чжунго далу",
-            "bidirectional": false
-        },
-        "zh_xj": {
-            "name": "ثِیَوْعَرݣ‌ٍْ",
-            "region": "جْو‌قُوَ دَا‌لُ",
-            "bidirectional": true
-        }
+    "ja_kk": {
+      "name": "エングリスホ",
+      "region": "カタカナ",
+      "bidirectional": false
+    },
+    "ja_my": {
+      "name": "江尓具利須保",
+      "region": "万葉仮名",
+      "bidirectional": false
+    },
+    "zh_hm": {
+      "name": "繁體中文",
+      "region": "中國大陸",
+      "bidirectional": false
+    },
+    "zh_py": {
+      "name": "Hànyǔ Pīnyīn",
+      "region": "Zhōngguó Dàlù",
+      "bidirectional": false
+    },
+    "zh_ipa": {
+      "name": "Chinese in IPA",
+      "region": "t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩",
+      "bidirectional": false
+    },
+    "zh_bpmf": {
+      "name": "ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ",
+      "region": "ㄓㄨㄥ ㄍㄨㄛˊ ㄉㄚˋ ㄌㄨˋ",
+      "bidirectional": false
+    },
+    "zh_wg": {
+      "name": "Wade–Giles",
+      "region": "Chung¹-Kuo² Ta⁴-Lu⁴",
+      "bidirectional": false
+    },
+    "zh_gr": {
+      "name": "Gwoyeu Romatzyh",
+      "region": "Jonggwo Dahluh",
+      "bidirectional": false
+    },
+    "zh_sgr": {
+      "name": "Jiaanhuah Guoryuu Romatzyh",
+      "region": "Jungguor Dahluh",
+      "bidirectional": false
+    },
+    "zh_mps2": {
+      "name": "Jù-yīn Fú-hàu Dì-èr Shr̀",
+      "region": "Jūng-guó Dà-lù",
+      "bidirectional": false
+    },
+    "zh_ty": {
+      "name": "Tong-yòng Pin-yin",
+      "region": "Jhong-guó Dà-lù",
+      "bidirectional": false
+    },
+    "zh_yale": {
+      "name": "Yale romanization",
+      "region": "Jūng-gwó Dà-lù",
+      "bidirectional": false
+    },
+    "zh_kk": {
+      "name": "カタカナ",
+      "region": "ジョン グオ ダー ルー",
+      "bidirectional": false
+    },
+    "zh_cy": {
+      "name": "Палладицу",
+      "region": "Чжунго далу",
+      "bidirectional": false
+    },
+    "zh_xj": {
+      "name": "ثِیَوْعَرݣ‌ٍْ",
+      "region": "جْو‌قُوَ دَا‌لُ",
+      "bidirectional": true
     }
+  }
 }
