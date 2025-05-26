@@ -1,6 +1,9 @@
 name: Update resource pack
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: "30 16 * * *"
 
@@ -52,3 +55,17 @@ jobs:
           files: unreadable_language_pack.zip
           name: "${{ env.ver }}"
           version: "${{ env.ver }}"
+
+      - name: Upload to Modrinth
+        uses: cloudnode-pro/modrinth-publish@v2
+        with:
+          token: ${{ secrets.MODRINTH_TOKEN }}
+          project: atOcnEWk
+          version: ${{ env.ver }}
+          loaders: minecraft
+          game-versions: |-
+            1.21.x
+            1.20.x
+            1.19.4
+            1.19.3
+          files: unreadable_language_pack.zip
