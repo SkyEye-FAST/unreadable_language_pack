@@ -49,7 +49,7 @@ jobs:
 
       - name: Check if Modrinth version exists
         run: |
-          url="https://api.modrinth.com/v2/project/atOcnEWk/version/$ver"
+          url="https://api.modrinth.com/v2/project/atOcnEWk/version/${{ env.ver }}"
           resp=$(curl --silent "$url")
           if echo "$resp" | grep -q '"version_number"'; then
             echo "MODRINTH_EXISTS=true" >> "$GITHUB_ENV"
