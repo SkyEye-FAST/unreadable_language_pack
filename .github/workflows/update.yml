@@ -1,9 +1,6 @@
 name: Update resource pack
 
 on:
-  push:
-    branches:
-      - master
   schedule:
     - cron: "30 16 * * *"
 
