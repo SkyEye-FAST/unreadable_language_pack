@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Final
 
-import ujson
+import orjson
 
 # 类型别名和常量定义
 type Ldata = dict[str, str]
@@ -22,8 +22,8 @@ def load_json(file: str, folder: str = "data") -> Ldata:
         dict[str, str]: 加载的JSON内容
     """
     path = P / folder / f"{file}.json"
-    with path.open("r", encoding="utf-8", newline="\n") as f:
-        return ujson.load(f)
+    with path.open("rb") as f:
+        return orjson.loads(f.read())
 
 
 def save_to_json(
@@ -45,8 +45,9 @@ def save_to_json(
         input_dict, elapsed_time = input_data
         (P / output_folder).mkdir(exist_ok=True)
         file_path = P / output_folder / f"{output_file}.json"
-        with open(file_path, "w", encoding="utf-8", newline="\n") as j:
-            ujson.dump(input_dict, j, indent=2, ensure_ascii=False)
+        json_bytes = orjson.dumps(input_dict, option=orjson.OPT_INDENT_2 | orjson.OPT_NON_STR_KEYS)
+        with open(file_path, "wb") as j:
+            j.write(json_bytes)
         size = file_size(file_path)
         print(f"已生成语言文件“{output_file}.json”，大小{size}，耗时{elapsed_time:.2f} s。")
     except Exception as e:
