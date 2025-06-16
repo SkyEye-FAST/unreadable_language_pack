@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "无法 找到 测试 结构 %s",
   "commands.test.error.test_instance_not_found": "无法 找到 测试 实例 方块 实体",
   "commands.test.error.test_instance_not_found.position": "无法 在 %s, %s, %s 处 找到 测试 实例 方块 实体",
-  "commands.test.error.too_large": "结构 在 每 条轴上 的 尺寸 必须 小于 %s 个 方块",
+  "commands.test.error.too_large": "结构 在 每 条轴上 的 大小 必须 小于 %s 个 方块",
   "commands.test.locate.done": "定位 完成, 找到 %s 个 结构",
   "commands.test.locate.found": "在 以下 位置 找到 结构: %s (距离: %s) ",
   "commands.test.locate.started": "已 开始 定位 测试 结构, 这 可能 需要 一点 时间…",

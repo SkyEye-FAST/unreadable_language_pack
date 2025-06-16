@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "Wurfaa jaaudauh tsehshyh jiergouh %s",
   "commands.test.error.test_instance_not_found": "Wurfaa jaaudauh tsehshyh shyrlih fangkuaih shyrtii",
   "commands.test.error.test_instance_not_found.position": "Wurfaa tzaih %s, %s, %s chuh jaaudauh tsehshyh shyrlih fangkuaih shyrtii",
-  "commands.test.error.too_large": "Jiergouh tzaih meii tiaurjourshahng'de chyytsuhn bihshu shiaauyur %s geh fangkuaih",
+  "commands.test.error.too_large": "Jiergouh tzaih meii tiaurjourshahng'de dahshiaau bihshu shiaauyur %s geh fangkuaih",
   "commands.test.locate.done": "Dihngweih warncherng, jaaudauh %s geh jiergouh",
   "commands.test.locate.found": "Tzaih yiishiah weihjyh jaaudauh jiergouh: %s (juhlir: %s) ",
   "commands.test.locate.started": "Yii kaishyy dihngweih tsehshyh jiergouh, jeh keenerng shuyauh yidiaan shyrjian…",

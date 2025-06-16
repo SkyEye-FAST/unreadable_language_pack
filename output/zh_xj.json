@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "وُ‌فَا جَوْ‌دَوْ ڞَ‌شِ ݣِیَ‌قِوْ %s",
   "commands.test.error.test_instance_not_found": "وُ‌فَا جَوْ‌دَوْ ڞَ‌شِ شِ‌لِ فَانْ‌کُوَیْ شِ‌تِ",
   "commands.test.error.test_instance_not_found.position": "وُ‌فَا زَیْ %s, %s, %s چُ جَوْ‌دَوْ ڞَ‌شِ شِ‌لِ فَانْ‌کُوَیْ شِ‌تِ",
-  "commands.test.error.too_large": "ݣِیَ‌قِوْ زَیْ مُوِ تِیَوْ‌جِوْ‌شَانْ دْ چِ‌ڞٌ بِ‌ثِیُوِ ثِیَوْ‌یُوِ %s قْ فَانْ‌کُوَیْ",
+  "commands.test.error.too_large": "ݣِیَ‌قِوْ زَیْ مُوِ تِیَوْ‌جِوْ‌شَانْ دْ دَا‌ثِیَوْ بِ‌ثِیُوِ ثِیَوْ‌یُوِ %s قْ فَانْ‌کُوَیْ",
   "commands.test.locate.done": "دٍ‌وِ وًا‌چٍْ, جَوْ‌دَوْ %s قْ ݣِیَ‌قِوْ",
   "commands.test.locate.found": "زَیْ ءِ‌ثِیَا وِ‌جِ جَوْ‌دَوْ ݣِیَ‌قِوْ: %s (ݣِیُوِ‌لِ: %s) ",
   "commands.test.locate.started": "ءِ کَیْ‌شِ دٍ‌وِ ڞَ‌شِ ݣِیَ‌قِوْ, جَ کْ‌نٍْ ثِیُوِ‌یَوْ ءِ‌دِیًا شِ‌ݣِیًا…",

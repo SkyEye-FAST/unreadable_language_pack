@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "Уфа чжаодао цэши цзегоу %s",
   "commands.test.error.test_instance_not_found": "Уфа чжаодао цэши шили фанкуай шити",
   "commands.test.error.test_instance_not_found.position": "Уфа цзай %s, %s, %s чу чжаодао цэши шили фанкуай шити",
-  "commands.test.error.too_large": "Цзегоу цзай мэй тяочжоушан дэ чицунь бисюй сяоюй %s гэ фанкуай",
+  "commands.test.error.too_large": "Цзегоу цзай мэй тяочжоушан дэ дасяо бисюй сяоюй %s гэ фанкуай",
   "commands.test.locate.done": "Динвэй ваньчэн, чжаодао %s гэ цзегоу",
   "commands.test.locate.found": "Цзай ися вэйчжи чжаодао цзегоу: %s (цзюйли: %s) ",
   "commands.test.locate.started": "И кайши динвэй цэши цзегоу, чжэ кэнэн сюйяо идянь шицзянь…",

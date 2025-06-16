@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "無法找到測試結構%s",
   "commands.test.error.test_instance_not_found": "無法找到測試實例方塊實體",
   "commands.test.error.test_instance_not_found.position": "無法在%s, %s, %s處找到測試實例方塊實體",
-  "commands.test.error.too_large": "結構在每條軸上的尺寸必須小於%s個方塊",
+  "commands.test.error.too_large": "結構在每條軸上的大小必須小於%s個方塊",
   "commands.test.locate.done": "定位完成，找到%s個結構",
   "commands.test.locate.found": "在以下位置找到結構：%s（距離：%s）",
   "commands.test.locate.started": "已開始定位測試結構，這可能需要一點時間…",

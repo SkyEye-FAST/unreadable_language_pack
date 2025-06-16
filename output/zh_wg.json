@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "Wu²-fa³ chao³-tao⁴ ts'e⁴-shih⁴ chieh²-kou⁴ %s",
   "commands.test.error.test_instance_not_found": "Wu²-fa³ chao³-tao⁴ ts'e⁴-shih⁴ shih²-li⁴ fang¹-k'uai⁴ shih²-t'i³",
   "commands.test.error.test_instance_not_found.position": "Wu²-fa³ tsai⁴ %s, %s, %s ch'u⁴ chao³-tao⁴ ts'e⁴-shih⁴ shih²-li⁴ fang¹-k'uai⁴ shih²-t'i³",
-  "commands.test.error.too_large": "Chieh²-kou⁴ tsai⁴ mei³ t'iao²-chou²-shang⁴ te⁵ ch'ih³-ts'un⁴ pi⁴-hsü¹ hsiao³-yü² %s ko⁴ fang¹-k'uai⁴",
+  "commands.test.error.too_large": "Chieh²-kou⁴ tsai⁴ mei³ t'iao²-chou²-shang⁴ te⁵ ta⁴-hsiao³ pi⁴-hsü¹ hsiao³-yü² %s ko⁴ fang¹-k'uai⁴",
   "commands.test.locate.done": "Ting⁴-wei⁴ wan²-ch'eng², chao³-tao⁴ %s ko⁴ chieh²-kou⁴",
   "commands.test.locate.found": "Tsai⁴ i³-hsia⁴ wei⁴-chih⁴ chao³-tao⁴ chieh²-kou⁴: %s (chü⁴-li²: %s) ",
   "commands.test.locate.started": "I³ k'ai¹-shih³ ting⁴-wei⁴ ts'e⁴-shih⁴ chieh²-kou⁴, che⁴ k'o³-neng² hsü¹-yao⁴ i¹-tien³ shih²-chien¹…",

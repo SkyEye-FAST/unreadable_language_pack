@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "ㄨˊ ㄈㄚˇ ㄓㄠˇ ㄉㄠˋ ㄘㄜˋ ㄕˋ ㄐㄧㄝˊ ㄍㄡˋ %s",
   "commands.test.error.test_instance_not_found": "ㄨˊ ㄈㄚˇ ㄓㄠˇ ㄉㄠˋ ㄘㄜˋ ㄕˋ ㄕˊ ㄌㄧˋ ㄈㄤ ㄎㄨㄞˋ ㄕˊ ㄊㄧˇ",
   "commands.test.error.test_instance_not_found.position": "ㄨˊ ㄈㄚˇ ㄗㄞˋ %s, %s, %s ㄔㄨˋ ㄓㄠˇ ㄉㄠˋ ㄘㄜˋ ㄕˋ ㄕˊ ㄌㄧˋ ㄈㄤ ㄎㄨㄞˋ ㄕˊ ㄊㄧˇ",
-  "commands.test.error.too_large": "ㄐㄧㄝˊ ㄍㄡˋ ㄗㄞˋ ㄇㄟˇ ㄊㄧㄠˊ ㄓㄡˊ ㄕㄤˋ ˙ㄉㄜ ㄔˇ ㄘㄨㄣˋ ㄅㄧˋ ㄒㄩ ㄒㄧㄠˇ ㄩˊ %s ㄍㄜˋ ㄈㄤ ㄎㄨㄞˋ",
+  "commands.test.error.too_large": "ㄐㄧㄝˊ ㄍㄡˋ ㄗㄞˋ ㄇㄟˇ ㄊㄧㄠˊ ㄓㄡˊ ㄕㄤˋ ˙ㄉㄜ ㄉㄚˋ ㄒㄧㄠˇ ㄅㄧˋ ㄒㄩ ㄒㄧㄠˇ ㄩˊ %s ㄍㄜˋ ㄈㄤ ㄎㄨㄞˋ",
   "commands.test.locate.done": "ㄉㄧㄥˋ ㄨㄟˋ ㄨㄢˊ ㄔㄥˊ ， ㄓㄠˇ ㄉㄠˋ %s ㄍㄜˋ ㄐㄧㄝˊ ㄍㄡˋ",
   "commands.test.locate.found": "ㄗㄞˋ ㄧˇ ㄒㄧㄚˋ ㄨㄟˋ ㄓˋ ㄓㄠˇ ㄉㄠˋ ㄐㄧㄝˊ ㄍㄡˋ ：%s（ ㄐㄩˋ ㄌㄧˊ ：%s）",
   "commands.test.locate.started": "ㄧˇ ㄎㄞ ㄕˇ ㄉㄧㄥˋ ㄨㄟˋ ㄘㄜˋ ㄕˋ ㄐㄧㄝˊ ㄍㄡˋ ， ㄓㄜˋ ㄎㄜˇ ㄋㄥˊ ㄒㄩ ㄧㄠˋ ㄧ ㄉㄧㄢˇ ㄕˊ ㄐㄧㄢ …",

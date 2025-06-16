@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "Wú-fǎ jǎu-dàu tsè-shr̀ jié-gòu %s",
   "commands.test.error.test_instance_not_found": "Wú-fǎ jǎu-dàu tsè-shr̀ shŕ-lì fāng-kuài shŕ-tǐ",
   "commands.test.error.test_instance_not_found.position": "Wú-fǎ tzài %s, %s, %s chù jǎu-dàu tsè-shr̀ shŕ-lì fāng-kuài shŕ-tǐ",
-  "commands.test.error.too_large": "Jié-gòu tzài měi tiáu-jóu-shàng de chř-tsuèn bì-shū shiǎu-yú %s gè fāng-kuài",
+  "commands.test.error.too_large": "Jié-gòu tzài měi tiáu-jóu-shàng de dà-shiǎu bì-shū shiǎu-yú %s gè fāng-kuài",
   "commands.test.locate.done": "Dìng-wèi wán-chéng, jǎu-dàu %s gè jié-gòu",
   "commands.test.locate.found": "Tzài yǐ-shià wèi-jr̀ jǎu-dàu jié-gòu: %s (jiù-lí: %s) ",
   "commands.test.locate.started": "Yǐ kāi-shř dìng-wèi tsè-shr̀ jié-gòu, jè kě-néng shū-yàu yī-diǎn shŕ-jiān…",

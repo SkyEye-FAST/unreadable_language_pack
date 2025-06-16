@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "Wúfǎ zhǎodào cèshì jiégòu %s",
   "commands.test.error.test_instance_not_found": "Wúfǎ zhǎodào cèshì shílì fāngkuài shítǐ",
   "commands.test.error.test_instance_not_found.position": "Wúfǎ zài %s, %s, %s chù zhǎodào cèshì shílì fāngkuài shítǐ",
-  "commands.test.error.too_large": "Jiégòu zài měi tiáozhóushàng de chǐcùn bìxū xiǎoyú %s gè fāngkuài",
+  "commands.test.error.too_large": "Jiégòu zài měi tiáozhóushàng de dàxiǎo bìxū xiǎoyú %s gè fāngkuài",
   "commands.test.locate.done": "Dìngwèi wánchéng, zhǎodào %s gè jiégòu",
   "commands.test.locate.found": "Zài yǐxià wèizhì zhǎodào jiégòu: %s (jùlí: %s) ",
   "commands.test.locate.started": "Yǐ kāishǐ dìngwèi cèshì jiégòu, zhè kěnéng xūyào yīdiǎn shíjiān…",

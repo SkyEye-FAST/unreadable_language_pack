@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "wu˧˥ fa˨˩˦ t͡ʂɑʊ˨˩˦ tɑʊ˥˩ t͡sʰɤ˥˩ ʂɻ̍˥˩ t͡ɕjɛ˧˥ koʊ˥˩ %s",
   "commands.test.error.test_instance_not_found": "wu˧˥ fa˨˩˦ t͡ʂɑʊ˨˩˦ tɑʊ˥˩ t͡sʰɤ˥˩ ʂɻ̍˥˩ ʂɻ̍˧˥ li˥˩ fɑŋ˥ kʰwaɪ˥˩ ʂɻ̍˧˥ tʰi˨˩˦",
   "commands.test.error.test_instance_not_found.position": "wu˧˥ fa˨˩˦ t͡saɪ˥˩ %s, %s, %s t͡ʂʰu˥˩ t͡ʂɑʊ˨˩˦ tɑʊ˥˩ t͡sʰɤ˥˩ ʂɻ̍˥˩ ʂɻ̍˧˥ li˥˩ fɑŋ˥ kʰwaɪ˥˩ ʂɻ̍˧˥ tʰi˨˩˦",
-  "commands.test.error.too_large": "t͡ɕjɛ˧˥ koʊ˥˩ t͡saɪ˥˩ meɪ˨˩˦ tʰjɑʊ˧˥ t͡ʂoʊ˧˥ ʂɑŋ˥˩ tɤ t͡ʂʰɻ̍˨˩˦ t͡sʰwən˥˩ pi˥˩ ɕy˥ ɕjɑʊ˨˩˦ y˧˥ %s kɤ˥˩ fɑŋ˥ kʰwaɪ˥˩",
+  "commands.test.error.too_large": "t͡ɕjɛ˧˥ koʊ˥˩ t͡saɪ˥˩ meɪ˨˩˦ tʰjɑʊ˧˥ t͡ʂoʊ˧˥ ʂɑŋ˥˩ tɤ ta˥˩ ɕjɑʊ˨˩˦ pi˥˩ ɕy˥ ɕjɑʊ˨˩˦ y˧˥ %s kɤ˥˩ fɑŋ˥ kʰwaɪ˥˩",
   "commands.test.locate.done": "tiŋ˥˩ weɪ˥˩ wan˧˥ t͡ʂʰɤŋ˧˥ ， t͡ʂɑʊ˨˩˦ tɑʊ˥˩ %s kɤ˥˩ t͡ɕjɛ˧˥ koʊ˥˩",
   "commands.test.locate.found": "t͡saɪ˥˩ ji˨˩˦ ɕja˥˩ weɪ˥˩ t͡ʂɻ̍˥˩ t͡ʂɑʊ˨˩˦ tɑʊ˥˩ t͡ɕjɛ˧˥ koʊ˥˩ ：%s（ t͡ɕy˥˩ li˧˥ ：%s）",
   "commands.test.locate.started": "ji˨˩˦ kʰaɪ˥ ʂɻ̍˨˩˦ tiŋ˥˩ weɪ˥˩ t͡sʰɤ˥˩ ʂɻ̍˥˩ t͡ɕjɛ˧˥ koʊ˥˩ ， t͡ʂɤ˥˩ kʰɤ˨˩˦ nɤŋ˧˥ ɕy˥ jɑʊ˥˩ ji˥ tjɛn˨˩˦ ʂɻ̍˧˥ t͡ɕjɛn˥ …",

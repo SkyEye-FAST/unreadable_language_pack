@@ -2901,7 +2901,7 @@
   "commands.test.error.structure_not_found": "ウー ファー ジャオ ダオ ツォー シー ジエ ゴウ %s",
   "commands.test.error.test_instance_not_found": "ウー ファー ジャオ ダオ ツォー シー シー リー ファン クワイ シー ティー",
   "commands.test.error.test_instance_not_found.position": "ウー ファー ザイ %s, %s, %s チュー ジャオ ダオ ツォー シー シー リー ファン クワイ シー ティー",
-  "commands.test.error.too_large": "ジエ ゴウ ザイ メイ テャオ ジョウ シャン ドー チー ツン ビー シー シャオ イー %s ゴー ファン クワイ",
+  "commands.test.error.too_large": "ジエ ゴウ ザイ メイ テャオ ジョウ シャン ドー ダー シャオ ビー シー シャオ イー %s ゴー ファン クワイ",
   "commands.test.locate.done": "ディン ウェイ ワン チョン ， ジャオ ダオ %s ゴー ジエ ゴウ",
   "commands.test.locate.found": "ザイ イー シャー ウェイ ジー ジャオ ダオ ジエ ゴウ ：%s（ ジー リー ：%s）",
   "commands.test.locate.started": "イー カイ シー ディン ウェイ ツォー シー ジエ ゴウ ， ジョー コー ノン シー ヤオ イー ディエン シー ジエン …",
