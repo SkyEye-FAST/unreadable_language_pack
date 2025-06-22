@@ -4,11 +4,11 @@ import time
 import zipfile as zf
 from typing import Final
 
-from base import DATA, P, file_size, fixed_zh, save_to_json
+from base import DATA, Ldata, P, file_size, fixed_zh, save_to_json
 from converter import ChineseConverter, EnglishConverter
 
 # 语言文件配置
-LANG_CONVERSIONS: Final[list[tuple[str, str, dict]]] = [
+LANG_CONVERSIONS: Final[list[tuple[str, str, Ldata | None]]] = [
     # (转换方法, 输出文件名, 修正字典)
     ("to_i7h", "en_i7h", None),
     ("to_katakana", "ja_kk", None),

@@ -2,7 +2,7 @@
 
 import re
 import time
-from typing import Callable, Optional
+from collections.abc import Callable
 
 import jieba
 from opencc import OpenCC
@@ -67,7 +67,7 @@ class BaseConverter:
         self.data = data
         self.rep = rep
 
-    def replace_multiple(self, text: str, replacement: Optional[Ldata] = None) -> str:
+    def replace_multiple(self, text: str, replacement: Ldata | None = None) -> str:
         """对字符串进行多次替换。
 
         Args:
@@ -173,8 +173,8 @@ class BaseConverter:
     def convert(
         self,
         func: Callable[[str], str],
-        fix_dict: Optional[Ldata] = None,
-        rep: Optional[Ldata] = None,
+        fix_dict: Ldata | None = None,
+        rep: Ldata | None = None,
     ) -> tuple[Ldata, float]:
         """转换语言数据。
 
@@ -308,8 +308,8 @@ class ChineseConverter(BaseConverter):
     def convert(
         self,
         func: Callable[[str], str],
-        fix_dict: Optional[Ldata] = None,
-        rep: Optional[Ldata] = None,
+        fix_dict: Ldata | None = None,
+        rep: Ldata | None = None,
     ) -> tuple[Ldata, float]:
         """转换语言数据。
 
