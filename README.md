@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)和[`pack.png`](pack.png)一同打包为`unreadable_language_pack.zip`。
 
-资源包向游戏内添加了16种语言。
+资源包向游戏内添加了15种语言。
 
 > [!TIP]
 > 本项目使用的中文转写对照表参见下两表：
@@ -69,16 +69,6 @@ pip install -r requirements.txt
 
 - 即“English (Man'yōgana)”。
 - 选择之后，所有字符串会变为英文转写而来的万叶假名。为保证生成结果不偏差过大，仅选择万叶假名多种可能中的某一种。
-
-#### 繁體中文 (中國大陸)（[`zh_hm.json`](output/zh_hm.json)）
-
-- 即“繁体中文 (中国大陆)”。
-- 选择之后，所有字符串会变为简体中文按GB/Z 40637-2021和《通用规范汉字表》转换而来的繁体中文。
-
-> [!NOTE]
-> 简繁转换使用了库`opencc`和[forFudan/GujiCC](https://github.com/forFudan/GujiCC)的“调和大陆繁体标准”。
->
-> 汉字对应关系基本上来自GB/Z 40637-2021，少部分以《通用规范汉字表》的对应关系覆盖。
 
 #### Hànyǔ Pīnyīn (Zhōngguó Dàlù)（[`zh_py.json`](output/zh_py.json)）
 

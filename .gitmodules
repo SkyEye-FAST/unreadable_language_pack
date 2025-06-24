@@ -1,6 +1,3 @@
 [submodule "mc_lang"]
 	path = mc_lang
 	url = https://github.com/SkyEye-FAST/mc_lang
-[submodule "GujiCC"]
-	path = GujiCC
-	url = https://github.com/forFudan/GujiCC

@@ -5,7 +5,6 @@ import time
 from collections.abc import Callable
 
 import jieba
-from opencc import OpenCC
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
 from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
 from romajitable import to_kana as tk
@@ -22,9 +21,6 @@ from base import (
     rep_ja_kk,
     rep_zh,
 )
-
-# 初始化OpenCC
-opencc_s2c = OpenCC(str(P / "GujiCC" / "opencc" / "s2c.json"))
 
 # 初始化pypinyin
 cc_cedict.load()
@@ -383,17 +379,6 @@ class ChineseConverter(BaseConverter):
             }
         )
         return self.replace_multiple(" ".join(self.segment_str(text)).replace(" 了", "了"), rep)
-
-    def to_harmonic(self, text: str) -> str:
-        """将字符串中的汉字按GB/Z 40637-2021和《通用规范汉字表》转换。
-
-        Args:
-            text (str): 需要转换的字符串
-
-        Returns:
-            str: 转换结果
-        """
-        return opencc_s2c.convert(text)
 
     def to_pinyin(self, text: str) -> str:
         """将汉字转写为拼音，尝试遵循GB/T 16159-2012分词，词之间使用空格分开。

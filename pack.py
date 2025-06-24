@@ -14,7 +14,6 @@ LANG_CONVERSIONS: Final[list[tuple[str, str, Ldata | None]]] = [
     ("to_katakana", "ja_kk", None),
     ("to_manyogana", "ja_my", None),
     ("to_split", "zh_split", fixed_zh["zh_source"]),
-    ("to_harmonic", "zh_hm", None),
     ("to_pinyin", "zh_py", fixed_zh["zh_py"]),
     ("to_ipa", "zh_ipa", None),
     ("to_bopomofo", "zh_bpmf", None),
