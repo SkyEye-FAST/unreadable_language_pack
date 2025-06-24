@@ -1,7 +1,10 @@
 {
   "pack": {
     "pack_format": 49,
-    "supported_formats": [9, 99],
+    "supported_formats": [
+      9,
+      99
+    ],
     "description": "Unreadable Language Resource Pack"
   },
   "language": {
@@ -18,11 +21,6 @@
     "ja_my": {
       "name": "江尓具利須保",
       "region": "万葉仮名",
-      "bidirectional": false
-    },
-    "zh_hm": {
-      "name": "繁體中文",
-      "region": "中國大陸",
       "bidirectional": false
     },
     "zh_py": {
