@@ -148,7 +148,6 @@ pip install -r requirements.txt
 ![Sample](sample/sample_en_i7h.png)
 ![Sample](sample/sample_ja_kk.png)
 ![Sample](sample/sample_ja_my.png)
-![Sample](sample/sample_zh_hm.png)
 ![Sample](sample/sample_zh_py.png)
 ![Sample](sample/sample_zh_ipa.png)
 ![Sample](sample/sample_zh_bpmf.png)
