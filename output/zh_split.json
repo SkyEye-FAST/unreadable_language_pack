@@ -3338,7 +3338,7 @@
   "debug.inspect.server.entity": "服务端 实体 数据 已 复制到 剪贴板",
   "debug.options.category.renderer": "调试 渲染器",
   "debug.options.category.text": "调试 屏幕 文本",
-  "debug.options.help": "F3 + F5 = 编辑 调试 选项",
+  "debug.options.help": "F3 + F6 = 编辑 调试 选项",
   "debug.options.notAllowed.tooltip": "简化 调试信息 时 隐藏",
   "debug.options.profile.default": "默认 配置",
   "debug.options.profile.performance": "性能 监控 配置",

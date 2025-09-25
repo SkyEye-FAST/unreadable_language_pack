@@ -3338,7 +3338,7 @@
   "debug.inspect.server.entity": "ㄈㄨˊ ㄨˋ ㄉㄨㄢ ㄕˊ ㄊㄧˇ ㄕㄨˋ ㄐㄩˋ ㄧˇ ㄈㄨˋ ㄓˋ ㄉㄠˋ ㄐㄧㄢˇ ㄊㄧㄝ ㄅㄢˇ",
   "debug.options.category.renderer": "ㄊㄧㄠˊ ㄕˋ ㄒㄩㄢˋ ㄖㄢˇ ㄑㄧˋ",
   "debug.options.category.text": "ㄊㄧㄠˊ ㄕˋ ㄆㄧㄥˊ ㄇㄨˋ ㄨㄣˊ ㄅㄣˇ",
-  "debug.options.help": "F3 + F5 =  ㄅㄧㄢ ㄐㄧˊ ㄊㄧㄠˊ ㄕˋ ㄒㄩㄢˇ ㄒㄧㄤˋ",
+  "debug.options.help": "F3 + F6 =  ㄅㄧㄢ ㄐㄧˊ ㄊㄧㄠˊ ㄕˋ ㄒㄩㄢˇ ㄒㄧㄤˋ",
   "debug.options.notAllowed.tooltip": "ㄐㄧㄢˇ ㄏㄨㄚˋ ㄊㄧㄠˊ ㄕˋ ㄒㄧㄣˋ ㄒㄧ ㄕˊ ㄧㄣˇ ㄘㄤˊ",
   "debug.options.profile.default": "ㄇㄛˋ ㄖㄣˋ ㄆㄟˋ ㄓˋ",
   "debug.options.profile.performance": "ㄒㄧㄥˋ ㄋㄥˊ ㄐㄧㄢ ㄎㄨㄥˋ ㄆㄟˋ ㄓˋ",

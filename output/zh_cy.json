@@ -3338,7 +3338,7 @@
   "debug.inspect.server.entity": "Фуудуань шити шуцзюй и фучжидао цзяньтебань",
   "debug.options.category.renderer": "Тяоши сюаньжаньци",
   "debug.options.category.text": "Тяоши пинму вэньбэнь",
-  "debug.options.help": "F3 + F5 = бяньцзи тяоши сюаньсян",
+  "debug.options.help": "F3 + F6 = бяньцзи тяоши сюаньсян",
   "debug.options.notAllowed.tooltip": "Цзяньхуа тяошисиньси ши иньцан",
   "debug.options.profile.default": "Можэнь пэйчжи",
   "debug.options.profile.performance": "Синнэн цзянькун пэйчжи",

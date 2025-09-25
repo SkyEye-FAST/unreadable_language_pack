@@ -3338,7 +3338,7 @@
   "debug.inspect.server.entity": "Fú-wù-dwān shŕ-tǐ shù-jyù yǐ fù-jr̀-dàu jyǎn-tyē-bǎn",
   "debug.options.category.renderer": "Tyáu-shr̀ sywàn-rǎn-chì",
   "debug.options.category.text": "Tyáu-shr̀ píng-mù wén-běn",
-  "debug.options.help": "F3 + F5 = byān-jí tyáu-shr̀ sywǎn-syàng",
+  "debug.options.help": "F3 + F6 = byān-jí tyáu-shr̀ sywǎn-syàng",
   "debug.options.notAllowed.tooltip": "Jyǎn-hwà tyáu-shr̀-syìn-syī shŕ yǐn-tsáng",
   "debug.options.profile.default": "Mwò-rèn pèi-jr̀",
   "debug.options.profile.performance": "Syìng-néng jyān-kùng pèi-jr̀",
