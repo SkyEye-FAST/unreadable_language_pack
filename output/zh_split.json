@@ -5842,7 +5842,7 @@
   "options.controls": "按键 控制…",
   "options.credits_and_attribution": "鸣谢 与 著作权 说明…",
   "options.cutoutLeaves": "可 透视 树叶",
-  "options.cutoutLeaves.tooltip": "允许 透过 树叶 间隙 观察. 禁用 此 功能 可能 会 提高 性能. ",
+  "options.cutoutLeaves.tooltip": "允许 透过 树叶 间隙 观察. 禁用 此 功能 可以 提高 性能. ",
   "options.damageTiltStrength": "受伤 抖动 效果",
   "options.damageTiltStrength.tooltip": "受到 伤害 导致 的 游戏 视角 晃动 程度. ",
   "options.darkMojangStudiosBackgroundColor": "黑白 徽标",
