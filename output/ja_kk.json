@@ -7725,6 +7725,7 @@
   "test.error.sequence.condition_already_triggered": "クオンディチオン・アルレアドユ・トリッゲレド・アト・%s",
   "test.error.sequence.condition_not_triggered": "クオンディチオン・ノト・トリッゲレド",
   "test.error.sequence.invalid_tick": "スックエーデド・イン・インヴァリド・チック：エクスペクテド・%s",
+  "test.error.sequence.minimum_tick": "スックエーデド・ベフォレ・エクスペクテド・チック：エクスペクテド・ト・ワイト・%s",
   "test.error.sequence.not_completed": "テスト・チメド・オート・ベフォレ・セクェンクエ・クオンプレテド",
   "test.error.set_biome": "ファイレド・ト・セト・ビオメ・フォル・テスト",
   "test.error.spawn_failure": "ファイレド・ト・クレアテ・エンチトユ・%s",

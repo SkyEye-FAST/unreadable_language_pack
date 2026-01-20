@@ -7725,6 +7725,7 @@
   "test.error.sequence.condition_already_triggered": "C7n a5y t7d at %s",
   "test.error.sequence.condition_not_triggered": "C7n n1t t7d",
   "test.error.sequence.invalid_tick": "S7d in i5d t2k: e6d %s",
+  "test.error.sequence.minimum_tick": "S7d b4e e6d t2k: e6d to w2t %s",
   "test.error.sequence.not_completed": "T2t t3d o1t b4e s6e c7d",
   "test.error.set_biome": "F4d to s1t b3e f1r t2t",
   "test.error.spawn_failure": "F4d to c4e e4y %s",
