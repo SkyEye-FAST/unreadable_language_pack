@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "تِیَوْ‌ݣِیًا ءِ زَیْ %s کْ‌شِ چُ‌فَا",
   "test.error.sequence.condition_not_triggered": "تِیَوْ‌ݣِیًا وِ چُ‌فَا",
   "test.error.sequence.invalid_tick": "چٍْ‌قْو یُوِ وُ‌ثِیَوْ دْ کْ: یٍ وِ %s",
+  "test.error.sequence.minimum_tick": "چٍْ‌قْو یُوِ یُوِ‌کِ دْ کْ جِ‌کِیًا: یٍ دٍْ‌دَیْ %s",
   "test.error.sequence.not_completed": "ڞَ‌شِ زَیْ ثِیُوِ‌لِیَ وًا‌چٍْ کِیًا چَوْ‌شِ",
   "test.error.set_biome": "شَ‌جِ ڞَ‌شِ شٍْ‌وُ‌کٌ‌ثِ شِ‌بَیْ",
   "test.error.spawn_failure": "چُوَانْ‌ݣِیًا شِ‌تِ %s شِ‌بَیْ",

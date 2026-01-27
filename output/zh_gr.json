@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "Tyaujiann yii tzay %s kehshyr chuhfa",
   "test.error.sequence.condition_not_triggered": "Tyaujiann wey chuhfa",
   "test.error.sequence.invalid_tick": "Chernggong yu wushiaw .de keh: ing wei %s",
+  "test.error.sequence.minimum_tick": "Chernggong yu yuhchi .de keh jychyan: ing deengday %s",
   "test.error.sequence.not_completed": "Tsehshyh tzay shiuhlieh wancherng chyan chaushyr",
   "test.error.set_biome": "Shehjyh tsehshyh shengwuhchyunshih shybay",
   "test.error.spawn_failure": "Chuanqjiann shyrtii %s shybay",

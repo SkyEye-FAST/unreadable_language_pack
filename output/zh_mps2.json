@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "Tiáu-jiàn yǐ tzài %s kè-shŕ chù-fā",
   "test.error.sequence.condition_not_triggered": "Tiáu-jiàn wèi chù-fā",
   "test.error.sequence.invalid_tick": "Chéng-gūng yú wú-shiàu de kè: yīng wéi %s",
+  "test.error.sequence.minimum_tick": "Chéng-gūng yú yù-chī de kè jr̄-chián: yīng děng-dài %s",
   "test.error.sequence.not_completed": "Tsè-shr̀ tzài shù-liè wán-chéng chián chāu-shŕ",
   "test.error.set_biome": "Shè-jr̀ tsè-shr̀ shēng-wù-chiún-shì shr̄-bài",
   "test.error.spawn_failure": "Chuàng-jiàn shŕ-tǐ %s shr̄-bài",

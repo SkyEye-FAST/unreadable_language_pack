@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "tʰjɑʊ˧˥ t͡ɕjɛn˥˩ ji˨˩˦ t͡saɪ˥˩ %s kʰɤ˥˩ ʂɻ̍˧˥ t͡ʂʰu˥˩ fa˥",
   "test.error.sequence.condition_not_triggered": "tʰjɑʊ˧˥ t͡ɕjɛn˥˩ weɪ˥˩ t͡ʂʰu˥˩ fa˥",
   "test.error.sequence.invalid_tick": "t͡ʂʰɤŋ˧˥ kʊŋ˥ y˧˥ wu˧˥ ɕjɑʊ˥˩ tɤ kʰɤ˥˩ ： jiŋ˥ weɪ˧˥ %s",
+  "test.error.sequence.minimum_tick": "t͡ʂʰɤŋ˧˥ kʊŋ˥ y˧˥ y˥˩ t͡ɕʰi˥ tɤ kʰɤ˥˩ t͡ʂɻ̍˥ t͡ɕʰjɛn˧˥ ： jiŋ˥ tɤŋ˨˩˦ taɪ˥˩ %s",
   "test.error.sequence.not_completed": "t͡sʰɤ˥˩ ʂɻ̍˥˩ t͡saɪ˥˩ ɕy˥˩ ljɛ˥˩ wan˧˥ t͡ʂʰɤŋ˧˥ t͡ɕʰjɛn˧˥ t͡ʂʰɑʊ˥ ʂɻ̍˧˥",
   "test.error.set_biome": "ʂɤ˥˩ t͡ʂɻ̍˥˩ t͡sʰɤ˥˩ ʂɻ̍˥˩ ʂɤŋ˥ wu˥˩ t͡ɕʰyn˧˥ ɕi˥˩ ʂɻ̍˥ paɪ˥˩",
   "test.error.spawn_failure": "t͡ʂʰwɑŋ˥˩ t͡ɕjɛn˥˩ ʂɻ̍˧˥ tʰi˨˩˦ %s ʂɻ̍˥ paɪ˥˩",

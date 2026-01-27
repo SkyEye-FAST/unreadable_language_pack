@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "条件 已 在 %s 刻时 触发",
   "test.error.sequence.condition_not_triggered": "条件 未 触发",
   "test.error.sequence.invalid_tick": "成功 于 无效 的 刻: 应 为 %s",
+  "test.error.sequence.minimum_tick": "成功 于 预期 的 刻 之前: 应 等待 %s",
   "test.error.sequence.not_completed": "测试 在 序列 完成 前 超时",
   "test.error.set_biome": "设置 测试 生物群系 失败",
   "test.error.spawn_failure": "创建 实体 %s 失败",

@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "T'iao²-chien⁴ i³ tsai⁴ %s k'o⁴-shih² ch'u⁴-fa¹",
   "test.error.sequence.condition_not_triggered": "T'iao²-chien⁴ wei⁴ ch'u⁴-fa¹",
   "test.error.sequence.invalid_tick": "Ch'eng²-kung¹ yü² wu²-hsiao⁴ te⁵ k'o⁴: ying¹ wei² %s",
+  "test.error.sequence.minimum_tick": "Ch'eng²-kung¹ yü² yü⁴-ch'i¹ te⁵ k'o⁴ chih¹-ch'ien²: ying¹ teng³-tai⁴ %s",
   "test.error.sequence.not_completed": "Ts'e⁴-shih⁴ tsai⁴ hsü⁴-lieh⁴ wan²-ch'eng² ch'ien² ch'ao¹-shih²",
   "test.error.set_biome": "She⁴-chih⁴ ts'e⁴-shih⁴ sheng¹-wu⁴-ch'ün²-hsi⁴ shih¹-pai⁴",
   "test.error.spawn_failure": "Ch'uang⁴-chien⁴ shih²-t'i³ %s shih¹-pai⁴",

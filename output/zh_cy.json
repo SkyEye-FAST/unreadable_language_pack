@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "Тяоцзянь и цзай %s кэши чуфа",
   "test.error.sequence.condition_not_triggered": "Тяоцзянь вэй чуфа",
   "test.error.sequence.invalid_tick": "Чэнгун юй усяо дэ кэ: ин вэй %s",
+  "test.error.sequence.minimum_tick": "Чэнгун юй юйци дэ кэ чжицянь: ин дэндай %s",
   "test.error.sequence.not_completed": "Цэши цзай сюйле ваньчэн цянь чаоши",
   "test.error.set_biome": "Шэчжи цэши шэнуцюньси шибай",
   "test.error.spawn_failure": "Чуанцзянь шити %s шибай",

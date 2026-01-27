@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "テャオ ジエン イー ザイ %s コー シー チュー ファー",
   "test.error.sequence.condition_not_triggered": "テャオ ジエン ウェイ チュー ファー",
   "test.error.sequence.invalid_tick": "チョン ゴン イー ウー シャオ ドー コー ： イン ウェイ %s",
+  "test.error.sequence.minimum_tick": "チョン ゴン イー イー チー ドー コー ジー チエン ： イン ドン ダイ %s",
   "test.error.sequence.not_completed": "ツォー シー ザイ シー リエ ワン チョン チエン チャオ シー",
   "test.error.set_biome": "ショー ジー ツォー シー ション ウー チン シー シー バイ",
   "test.error.spawn_failure": "チュワン ジエン シー ティー %s シー バイ",

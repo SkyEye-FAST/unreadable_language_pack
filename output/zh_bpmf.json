@@ -7689,6 +7689,7 @@
   "test.error.sequence.condition_already_triggered": "ㄊㄧㄠˊ ㄐㄧㄢˋ ㄧˇ ㄗㄞˋ %s ㄎㄜˋ ㄕˊ ㄔㄨˋ ㄈㄚ",
   "test.error.sequence.condition_not_triggered": "ㄊㄧㄠˊ ㄐㄧㄢˋ ㄨㄟˋ ㄔㄨˋ ㄈㄚ",
   "test.error.sequence.invalid_tick": "ㄔㄥˊ ㄍㄨㄥ ㄩˊ ㄨˊ ㄒㄧㄠˋ ˙ㄉㄜ ㄎㄜˋ ： ㄧㄥ ㄨㄟˊ %s",
+  "test.error.sequence.minimum_tick": "ㄔㄥˊ ㄍㄨㄥ ㄩˊ ㄩˋ ㄑㄧ ˙ㄉㄜ ㄎㄜˋ ㄓ ㄑㄧㄢˊ ： ㄧㄥ ㄉㄥˇ ㄉㄞˋ %s",
   "test.error.sequence.not_completed": "ㄘㄜˋ ㄕˋ ㄗㄞˋ ㄒㄩˋ ㄌㄧㄝˋ ㄨㄢˊ ㄔㄥˊ ㄑㄧㄢˊ ㄔㄠ ㄕˊ",
   "test.error.set_biome": "ㄕㄜˋ ㄓˋ ㄘㄜˋ ㄕˋ ㄕㄥ ㄨˋ ㄑㄩㄣˊ ㄒㄧˋ ㄕ ㄅㄞˋ",
   "test.error.spawn_failure": "ㄔㄨㄤˋ ㄐㄧㄢˋ ㄕˊ ㄊㄧˇ %s ㄕ ㄅㄞˋ",
