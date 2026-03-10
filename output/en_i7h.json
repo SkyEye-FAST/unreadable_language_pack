@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "T1e g2e t2e is %s t2k(s)",
   "commands.time.query.timeline": "T6e %s is at %s t2k(s)",
   "commands.time.query.timeline.repetitions": "T6e %s h1s p4d %s r8n(s)",
+  "commands.time.rate": "C3k %s w2l n1w a5e at %sx n4l r2e",
   "commands.time.resume": "R5d c3k %s",
   "commands.time.set": "S1t t1e t2e to %s",
   "commands.time.set.absolute": "S1t %s to %s t2k(s)",

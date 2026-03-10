@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "トヘ・ガメ・チメ・イス・%s・チック(ス)",
   "commands.time.query.timeline": "チメリネ・%s・イス・アト・%s・チック(ス)",
   "commands.time.query.timeline.repetitions": "チメリネ・%s・ハス・パッセド・%s・レペチチオン(ス)",
+  "commands.time.rate": "クロック・%s・ヰッル・ノワ・アドヴァンクエ・アト・%sクス・ノルマル・ラテ",
   "commands.time.resume": "レスメド・クロック・%s",
   "commands.time.set": "セト・トヘ・チメ・ト・%s",
   "commands.time.set.absolute": "セト・%s・ト・%s・チック(ス)",

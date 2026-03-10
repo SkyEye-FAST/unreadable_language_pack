@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "止部・賀女・千女・伊須・%s・千川久(須)",
   "commands.time.query.timeline": "千女利祢・%s・伊須・阿止・%s・千川久(須)",
   "commands.time.query.timeline.repetitions": "千女利祢・%s・八須・八川世特・%s・礼部千千於尓(須)",
+  "commands.time.rate": "久呂川久・%s・井川流・乃和・阿特无阿尓久江・阿止・%s久須・乃流末流・良天",
   "commands.time.resume": "礼須女特・久呂川久・%s",
   "commands.time.set": "世止・止部・千女・止・%s",
   "commands.time.set.absolute": "世止・%s・止・%s・千川久(須)",
