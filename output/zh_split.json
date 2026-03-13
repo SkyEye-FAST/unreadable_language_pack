@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "游戏 时间 为 %s 刻",
   "commands.time.query.timeline": "时间 线 %s 处于 %s 刻",
   "commands.time.query.timeline.repetitions": "时间 线 %s 已 重复 %s 次",
+  "commands.time.rate": "时钟 %s 现在 以 正常 速度 的 %s 倍 步进",
   "commands.time.resume": "已 恢复 时钟 %s",
   "commands.time.set": "已 将 时间 设为 %s",
   "commands.time.set.absolute": "已 将 %s 设为 %s 刻",

@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "یُوْ‌ثِ شِ‌ݣِیًا وِ %s کْ",
   "commands.time.query.timeline": "شِ‌ݣِیًا ثِیًا %s چُ‌یُوِ %s کْ",
   "commands.time.query.timeline.repetitions": "شِ‌ݣِیًا ثِیًا %s ءِ چْو‌فُ %s ڞِ",
+  "commands.time.rate": "شِ‌جْو %s ثِیًا‌زَیْ ءِ جٍْ‌چَانْ سُ‌دُو دْ %s بُوِ بُ‌ݣٍ",
   "commands.time.resume": "ءِ خُوِ‌فُ شِ‌جْو %s",
   "commands.time.set": "ءِ ݣِیَانْ شِ‌ݣِیًا شَ‌وِ %s",
   "commands.time.set.absolute": "ءِ ݣِیَانْ %s شَ‌وِ %s کْ",

@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "Юси шицзянь вэй %s кэ",
   "commands.time.query.timeline": "Шицзянь сянь %s чуюй %s кэ",
   "commands.time.query.timeline.repetitions": "Шицзянь сянь %s и чунфу %s цы",
+  "commands.time.rate": "Шичжун %s сяньцзай и чжэнчан суду дэ %s бэй буцзинь",
   "commands.time.resume": "И хуэйфу шичжун %s",
   "commands.time.set": "И цзян шицзянь шэвэй %s",
   "commands.time.set.absolute": "И цзян %s шэвэй %s кэ",

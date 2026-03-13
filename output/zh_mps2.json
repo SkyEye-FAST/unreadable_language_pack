@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "Yóu-shì shŕ-jiān wéi %s kè",
   "commands.time.query.timeline": "Shŕ-jiān shiàn %s chǔ-yú %s kè",
   "commands.time.query.timeline.repetitions": "Shŕ-jiān shiàn %s yǐ chúng-fù %s tsz̄",
+  "commands.time.rate": "Shŕ-jūng %s shiàn-tzài yǐ jèng-cháng sù-dù de %s bèi bù-jìn",
   "commands.time.resume": "Yǐ huēi-fù shŕ-jūng %s",
   "commands.time.set": "Yǐ jiāng shŕ-jiān shè-wéi %s",
   "commands.time.set.absolute": "Yǐ jiāng %s shè-wéi %s kè",

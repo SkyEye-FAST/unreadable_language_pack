@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "joʊ˧˥ ɕi˥˩ ʂɻ̍˧˥ t͡ɕjɛn˥ weɪ˧˥ %s kʰɤ˥˩",
   "commands.time.query.timeline": "ʂɻ̍˧˥ t͡ɕjɛn˥ ɕjɛn˥˩ %s t͡ʂʰu˨˩˦ y˧˥ %s kʰɤ˥˩",
   "commands.time.query.timeline.repetitions": "ʂɻ̍˧˥ t͡ɕjɛn˥ ɕjɛn˥˩ %s ji˨˩˦ t͡ʂʰʊŋ˧˥ fʋ̩˥˩ %s t͡sʰɹ̩˥˩",
+  "commands.time.rate": "ʂɻ̍˧˥ t͡ʂʊŋ˥ %s ɕjɛn˥˩ t͡saɪ˥˩ ji˨˩˦ t͡ʂɤŋ˥˩ t͡ʂʰɑŋ˧˥ su˥˩ tu˥˩ tɤ %s peɪ˥˩ pu˥˩ t͡ɕin˥˩",
   "commands.time.resume": "ji˨˩˦ xweɪ˥ fʋ̩˥˩ ʂɻ̍˧˥ t͡ʂʊŋ˥ %s",
   "commands.time.set": "ji˨˩˦ t͡ɕjɑŋ˥ ʂɻ̍˧˥ t͡ɕjɛn˥ ʂɤ˥˩ weɪ˧˥ %s",
   "commands.time.set.absolute": "ji˨˩˦ t͡ɕjɑŋ˥ %s ʂɤ˥˩ weɪ˧˥ %s kʰɤ˥˩",

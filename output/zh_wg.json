@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "Yu²-hsi⁴ shih²-chien¹ wei² %s k'o⁴",
   "commands.time.query.timeline": "Shih²-chien¹ hsien⁴ %s ch'u³-yü² %s k'o⁴",
   "commands.time.query.timeline.repetitions": "Shih²-chien¹ hsien⁴ %s i³ ch'ung²-fu⁴ %s tz'u⁴",
+  "commands.time.rate": "Shih²-chung¹ %s hsien⁴-tsai⁴ i³ cheng⁴-ch'ang² su⁴-tu⁴ te⁵ %s pei⁴ pu⁴-chin⁴",
   "commands.time.resume": "I³ hui¹-fu⁴ shih²-chung¹ %s",
   "commands.time.set": "I³ chiang¹ shih²-chien¹ she⁴-wei² %s",
   "commands.time.set.absolute": "I³ chiang¹ %s she⁴-wei² %s k'o⁴",

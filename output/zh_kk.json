@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "ヨウ シー シー ジエン ウェイ %s コー",
   "commands.time.query.timeline": "シー ジエン シエン %s チュー イー %s コー",
   "commands.time.query.timeline.repetitions": "シー ジエン シエン %s イー チョン フー %s ツー",
+  "commands.time.rate": "シー ジョン %s シエン ザイ イー ジョン チャン スー ドゥー ドー %s ベイ ブー ジン",
   "commands.time.resume": "イー フイ フー シー ジョン %s",
   "commands.time.set": "イー ジャン シー ジエン ショー ウェイ %s",
   "commands.time.set.absolute": "イー ジャン %s ショー ウェイ %s コー",

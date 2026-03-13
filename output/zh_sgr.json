@@ -3051,6 +3051,7 @@
   "commands.time.query.gametime": "Yourshih shyrjian weir %s keh",
   "commands.time.query.timeline": "Shyrjian shiahn %s chuuyur %s keh",
   "commands.time.query.timeline.repetitions": "Shyrjian shiahn %s yii churngfuh %s tsyh",
+  "commands.time.rate": "Shyrjung %s shiahntzaih yii jehngcharng suhduh'de %s beih buhjihn",
   "commands.time.resume": "Yii huifuh shyrjung %s",
   "commands.time.set": "Yii jiang shyrjian shehweir %s",
   "commands.time.set.absolute": "Yii jiang %s shehweir %s keh",
