@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "Nii shahng wurfaa chuhfa jeh'ge jihfen shiahng",
   "commands.trigger.set.success": "Yii chuhfa %s (shuhjyr yiisheh weir %s) ",
   "commands.trigger.simple.success": "Yii chuhfa %s",
-  "commands.unpublish.notPublished": "Muhchiarn shahngweih kaifahng guoh duorern yourshih",
+  "commands.unpublish.notPublished": "Muhchiarn shahngweih kaifahng duorern yourshih",
   "commands.unpublish.success": "Duorern yourshih yii chuushiau kaifahng",
   "commands.version.build_time": "Build_time = %s",
   "commands.version.data": "Data = %s",

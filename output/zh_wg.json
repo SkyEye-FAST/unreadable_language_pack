@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "Ni³ shang⁴ wu²-fa³ ch'u⁴-fa¹ che⁴-ko⁵ chi⁴-fen¹ hsiang⁴",
   "commands.trigger.set.success": "I³ ch'u⁴-fa¹ %s (shu⁴-chih² i³-she⁴ wei² %s) ",
   "commands.trigger.simple.success": "I³ ch'u⁴-fa¹ %s",
-  "commands.unpublish.notPublished": "Mu⁴-ch'ien² shang⁴-wei⁴ k'ai¹-fang⁴ kuo⁴ to¹-jen² yu²-hsi⁴",
+  "commands.unpublish.notPublished": "Mu⁴-ch'ien² shang⁴-wei⁴ k'ai¹-fang⁴ to¹-jen² yu²-hsi⁴",
   "commands.unpublish.success": "To¹-jen² yu²-hsi⁴ i³ ch'ü³-hsiao¹ k'ai¹-fang⁴",
   "commands.version.build_time": "Build_time = %s",
   "commands.version.data": "Data = %s",

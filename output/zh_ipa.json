@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "ni˨˩˦ ʂɑŋ˥˩ wu˧˥ fa˨˩˦ t͡ʂʰu˥˩ fa˥ t͡ʂɤ˥˩ kɤ t͡ɕi˥˩ fən˥ ɕjɑŋ˥˩",
   "commands.trigger.set.success": "ji˨˩˦ t͡ʂʰu˥˩ fa˥ %s（ ʂu˥˩ t͡ʂɻ̍˧˥ ji˨˩˦ ʂɤ˥˩ weɪ˧˥ %s）",
   "commands.trigger.simple.success": "ji˨˩˦ t͡ʂʰu˥˩ fa˥ %s",
-  "commands.unpublish.notPublished": "mu˥˩ t͡ɕʰjɛn˧˥ ʂɑŋ˥˩ weɪ˥˩ kʰaɪ˥ fɑŋ˥˩ kwo˥˩ two˥ ɻən˧˥ joʊ˧˥ ɕi˥˩",
+  "commands.unpublish.notPublished": "mu˥˩ t͡ɕʰjɛn˧˥ ʂɑŋ˥˩ weɪ˥˩ kʰaɪ˥ fɑŋ˥˩ two˥ ɻən˧˥ joʊ˧˥ ɕi˥˩",
   "commands.unpublish.success": "two˥ ɻən˧˥ joʊ˧˥ ɕi˥˩ ji˨˩˦ t͡ɕʰy˨˩˦ ɕjɑʊ˥ kʰaɪ˥ fɑŋ˥˩",
   "commands.version.build_time": "build_time = %s",
   "commands.version.data": "data = %s",

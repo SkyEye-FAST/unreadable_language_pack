@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "نِ شَانْ وُ‌فَا چُ‌فَا جَ‌قْ ݣِ‌فٌ ثِیَانْ",
   "commands.trigger.set.success": "ءِ چُ‌فَا %s (شُ‌جِ ءِ‌شَ وِ %s) ",
   "commands.trigger.simple.success": "ءِ چُ‌فَا %s",
-  "commands.unpublish.notPublished": "مُ‌کِیًا شَانْ‌وِ کَیْ‌فَانْ قُوَ دُوَ‌ژٍ یُوْ‌ثِ",
+  "commands.unpublish.notPublished": "مُ‌کِیًا شَانْ‌وِ کَیْ‌فَانْ دُوَ‌ژٍ یُوْ‌ثِ",
   "commands.unpublish.success": "دُوَ‌ژٍ یُوْ‌ثِ ءِ کِیُوِ‌ثِیَوْ کَیْ‌فَانْ",
   "commands.version.build_time": "build_time = %s",
   "commands.version.data": "data = %s",

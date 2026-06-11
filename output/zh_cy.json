@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "Ни шан уфа чуфа чжэгэ цзифэнь сян",
   "commands.trigger.set.success": "И чуфа %s (шучжи ишэ вэй %s) ",
   "commands.trigger.simple.success": "И чуфа %s",
-  "commands.unpublish.notPublished": "Муцянь шанвэй кайфан го дожэнь юси",
+  "commands.unpublish.notPublished": "Муцянь шанвэй кайфан дожэнь юси",
   "commands.unpublish.success": "Дожэнь юси и цюйсяо кайфан",
   "commands.version.build_time": "Build_time = %s",
   "commands.version.data": "Data = %s",

@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "Nǐ shàng wú-fǎ chù-fa jhè-ge̊ jì-fen siàng",
   "commands.trigger.set.success": "Yǐ chù-fa %s (shù-jhíh yǐ-shè wéi %s) ",
   "commands.trigger.simple.success": "Yǐ chù-fa %s",
-  "commands.unpublish.notPublished": "Mù-cián shàng-wèi kai-fàng guò duo-rén yóu-sì",
+  "commands.unpublish.notPublished": "Mù-cián shàng-wèi kai-fàng duo-rén yóu-sì",
   "commands.unpublish.success": "Duo-rén yóu-sì yǐ cyǔ-siao kai-fàng",
   "commands.version.build_time": "Build_time = %s",
   "commands.version.data": "Data = %s",

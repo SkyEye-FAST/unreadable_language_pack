@@ -3120,7 +3120,7 @@
   "commands.trigger.failed.unprimed": "ニー シャン ウー ファー チュー ファー ジョー ゴー ジー フェン シャン",
   "commands.trigger.set.success": "イー チュー ファー %s（ シュー ジー イー ショー ウェイ %s）",
   "commands.trigger.simple.success": "イー チュー ファー %s",
-  "commands.unpublish.notPublished": "ムー チエン シャン ウェイ カイ ファン グオ ドゥオ レン ヨウ シー",
+  "commands.unpublish.notPublished": "ムー チエン シャン ウェイ カイ ファン ドゥオ レン ヨウ シー",
   "commands.unpublish.success": "ドゥオ レン ヨウ シー イー チー シャオ カイ ファン",
   "commands.version.build_time": "build_time = %s",
   "commands.version.data": "data = %s",
