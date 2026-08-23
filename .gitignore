@@ -14,5 +14,6 @@ venv.bak/
 
 word_extract.py
 data/en_words.json
+tmp/
 
 *.zip

@@ -17,7 +17,6 @@
   "advancements.story.enter_the_nether.title": "Yung³-wang³-chih²-hsia⁴",
   "advancements.story.follow_ender_eye.title": "Ko²-ch'iang²-yu³-yan³",
   "advancements.story.obtain_armor.title": "Cheng³-chuang¹-shang⁴-chen⁴",
-  "argument.block.property.unclosed": "Fang¹-k'uai⁴ shu³-hsing⁴ ying¹ i³ ] chieh²-shu⁴",
   "block.minecraft.bamboo_button": "Chu²-an⁴-niu³",
   "block.minecraft.bamboo_door": "Chu²-men²",
   "block.minecraft.bamboo_fence": "Chu²-cha⁴-lan²",
@@ -259,12 +258,6 @@
   "block.minecraft.banner.triangle_top.red": "Ting³ hung² san¹-chiao³",
   "block.minecraft.banner.triangle_top.white": "Ting³ pai² san¹-chiao³",
   "block.minecraft.banner.triangle_top.yellow": "Ting³ huang² san¹-chiao³",
-  "block.minecraft.bed.too_far_away": "Ni³ hsien⁴-tsai⁴ pu⁴ neng² hsiu¹-hsi⁵-, ch'uang² t'ai⁴ yüan³ le⁵",
-  "commands.debug.function.noReturnRun": "Shih³-yung⁴ \/return run shih² wu²-fa³ chui¹-tsung¹",
-  "debug.copy_location.help": "F3 + C = yung⁴ \/tp ming⁴-ling⁴ te⁵ hsing²-shih⁴ fu⁴-chih⁴ ni³ te⁵ wei⁴-chih⁴-, -an⁴-chu⁴ F3 + C shih³ yu²-hsi⁴ peng¹-k'uei⁴",
-  "demo.day.2": "Ti⁴-erh⁴ t'ien¹",
-  "demo.day.3": "Ti⁴-san¹ t'ien¹",
-  "demo.day.4": "Ti⁴-ssu⁴ t'ien¹",
   "entity.minecraft.tropical_fish.predefined.0": "Hai³-k'uei²-yü²",
   "entity.minecraft.tropical_fish.predefined.1": "Hei¹-tz'u⁴-wei³-tiao¹",
   "entity.minecraft.tropical_fish.predefined.10": "Lien²-yü²",
@@ -298,7 +291,5 @@
   "entity.minecraft.tropical_fish.type.snooper": "K'uei¹-ssu⁴-lei⁴",
   "entity.minecraft.tropical_fish.type.spotty": "To¹-pan¹-lei⁴",
   "entity.minecraft.tropical_fish.type.stripey": "T'iao²-wen²-lei⁴",
-  "entity.minecraft.tropical_fish.type.sunstreak": "Jih⁴-wen²-lei⁴",
-  "optimizeWorld.stage.failed": "Shih¹-pai⁴ le⁵! :(",
-  "selectWorld.allowCommands.info": "Li⁴-ju² \/gamemode、\/experience teng³ ming⁴-ling⁴"
+  "entity.minecraft.tropical_fish.type.sunstreak": "Jih⁴-wen²-lei⁴"
 }

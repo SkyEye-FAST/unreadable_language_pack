@@ -17,7 +17,6 @@
   "advancements.story.enter_the_nether.title": "Yǒng-wǎng-jhíh-sià",
   "advancements.story.follow_ender_eye.title": "Gé-ciáng-yǒu-yǎn",
   "advancements.story.obtain_armor.title": "Jhěng-jhuang-shàng-jhèn",
-  "argument.block.property.unclosed": "Fang-kuài shǔ-sìng ying yǐ ] jié-shù",
   "block.minecraft.bamboo_button": "Jhú-àn-niǒu",
   "block.minecraft.bamboo_door": "Jhú-mén",
   "block.minecraft.bamboo_fence": "Jhú-jhà-lán",
@@ -259,12 +258,6 @@
   "block.minecraft.banner.triangle_top.red": "Dǐng hóng san-jiǎo",
   "block.minecraft.banner.triangle_top.white": "Dǐng bái san-jiǎo",
   "block.minecraft.banner.triangle_top.yellow": "Dǐng huáng san-jiǎo",
-  "block.minecraft.bed.too_far_away": "Nǐ siàn-zài bù néng siou-si̊-, chuáng tài yuǎn le̊",
-  "commands.debug.function.noReturnRun": "Shǐh-yòng \/return run shíh wú-fǎ jhuei-zong",
-  "debug.copy_location.help": "F3 + C = yòng \/tp mìng-lìng de̊ síng-shìh fù-jhìh nǐ de̊ wèi-jhìh-, -àn-jhù F3 + C shǐh yóu-sì beng-kuèi",
-  "demo.day.2": "Dì-èr tian",
-  "demo.day.3": "Dì-san tian",
-  "demo.day.4": "Dì-sìh tian",
   "entity.minecraft.tropical_fish.predefined.0": "Hǎi-kuéi-yú",
   "entity.minecraft.tropical_fish.predefined.1": "Hei-cìh-wěi-diao",
   "entity.minecraft.tropical_fish.predefined.10": "Lián-yú",
@@ -298,7 +291,5 @@
   "entity.minecraft.tropical_fish.type.snooper": "Kuei-sìh-lèi",
   "entity.minecraft.tropical_fish.type.spotty": "Duo-ban-lèi",
   "entity.minecraft.tropical_fish.type.stripey": "Tiáo-wún-lèi",
-  "entity.minecraft.tropical_fish.type.sunstreak": "Rìh-wún-lèi",
-  "optimizeWorld.stage.failed": "Shih-bài le̊! :(",
-  "selectWorld.allowCommands.info": "Lì-rú \/gamemode、\/experience děng mìng-lìng"
+  "entity.minecraft.tropical_fish.type.sunstreak": "Rìh-wún-lèi"
 }

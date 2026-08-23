@@ -17,7 +17,6 @@
   "advancements.story.enter_the_nether.title": "Yuungwaangjyrshiah",
   "advancements.story.follow_ender_eye.title": "Gerchiarngyoouyaan",
   "advancements.story.obtain_armor.title": "Jeengjuangshahngjehn",
-  "argument.block.property.unclosed": "Fangkuaih shuushihng ying yii ] jiershuh",
   "block.minecraft.bamboo_button": "Jurahnniuu",
   "block.minecraft.bamboo_door": "Jurmern",
   "block.minecraft.bamboo_fence": "Jurjahlarn",
@@ -259,12 +258,6 @@
   "block.minecraft.banner.triangle_top.red": "Diing hurng sanjiaau",
   "block.minecraft.banner.triangle_top.white": "Diing bair sanjiaau",
   "block.minecraft.banner.triangle_top.yellow": "Diing huarng sanjiaau",
-  "block.minecraft.bed.too_far_away": "Nii shiahntzaih buh nerng shiu'shi, chuarng taih yuaan 'le",
-  "commands.debug.function.noReturnRun": "Shyyyuhng \/return run shyr wurfaa juitzung",
-  "debug.copy_location.help": "F3 + C = yuhng \/tp mihnglihng 'de shirngshyh fuhjyh nii 'de weihjyh, ahnjuh F3 + C shyy yourshih bengkuih",
-  "demo.day.2": "Dihehl tian",
-  "demo.day.3": "Dihsan tian",
-  "demo.day.4": "Dihsyh tian",
   "entity.minecraft.tropical_fish.predefined.0": "Haiikuiryur",
   "entity.minecraft.tropical_fish.predefined.1": "Heitsyhweiidiau",
   "entity.minecraft.tropical_fish.predefined.10": "Liarnyur",
@@ -298,7 +291,5 @@
   "entity.minecraft.tropical_fish.type.snooper": "Kuisyhleih",
   "entity.minecraft.tropical_fish.type.spotty": "Duobanleih",
   "entity.minecraft.tropical_fish.type.stripey": "Tiaurwernleih",
-  "entity.minecraft.tropical_fish.type.sunstreak": "Ryhwernleih",
-  "optimizeWorld.stage.failed": "Shybaih 'le! :(",
-  "selectWorld.allowCommands.info": "Lihrur \/gamemode、\/experience deeng mihnglihng"
+  "entity.minecraft.tropical_fish.type.sunstreak": "Ryhwernleih"
 }
