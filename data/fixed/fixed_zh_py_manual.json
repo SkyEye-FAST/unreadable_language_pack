@@ -20,8 +20,12 @@
   "advancements.story.enter_the_nether.title": "Yǒngwǎng-zhíxià",
   "advancements.story.follow_ender_eye.title": "Géqiáng-yǒuyǎn",
   "advancements.story.obtain_armor.title": "Zhěngzhuāng-shàngzhèn",
+  "block.minecraft.attached_melon_stem": "Jiēguǒ de xīguājīng",
+  "block.minecraft.attached_pumpkin_stem": "Jiēguǒ de nánguājīng",
   "book.generation.3": "Pòlàn-bùkān",
   "demo.day.2": "Dì-èr tiān",
   "demo.day.3": "Dì-sān tiān",
-  "demo.day.4": "Dì-sì tiān"
+  "demo.day.4": "Dì-sì tiān",
+  "selectWorld.futureworld.error.text": "Shìtú jiāzài láizì wèilái bǎnběn de shìjiè shí fāshēng cuòwù. Zhè běn jiù bìngfēi wànwú-yīshī, hěn bàoqiàn méi néng chénggōng.",
+  "selectWorld.gameMode.creative.info": "Wújū-wúshù dì tànsuǒ chuàngzào. Kěyǐ fēixíng, cáiliào qǔzhī-bùjìn, qiě bù shòu guàiwu shānghài."
 }
