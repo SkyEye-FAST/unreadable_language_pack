@@ -30,7 +30,7 @@ jobs:
           git submodule update --remote --recursive --force
 
       - name: Update resource pack
-        run: uv run pack.py
+        run: uv run language-pack build
 
       - name: Commit
         uses: EndBug/add-and-commit@v9

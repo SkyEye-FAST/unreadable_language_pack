@@ -1,7 +1,7 @@
 [project]
 name = "unreadable-language-pack"
-version = "1.0.0"
-description = "A Python project for generating unreadable language resource pack."
+version = "2.0.0"
+description = "Generate unconventional Minecraft language resource packs."
 readme = "README.md"
 authors = [{ name = "SkyEye_FAST", email = "skyeyefast@foxmail.com" }]
 maintainers = [{ name = "SkyEye_FAST", email = "skyeyefast@foxmail.com" }]
@@ -11,12 +11,51 @@ requires-python = ">=3.12"
 dependencies = [
     "jieba>=0.42.1",
     "orjson>=3.10.18",
-    "pypinyin>=0.52.0",
-    "pypinyin-dict>=0.8.0",
-    "requests>=2.32.3",
+    "pypinyin>=0.55.0",
+    "pypinyin-dict>=0.9.0",
     "romajitable>=0.0.1",
 ]
 
+[project.scripts]
+language-pack = "unreadable_language_pack.cli:main"
+
 [project.urls]
-Repository = "https://github.com/SkyEye_FAST/unreadable-language-pack"
-Issues = "https://github.com/SkyEye_FAST/unreadable-language-pack/issues"
+Repository = "https://github.com/SkyEye-FAST/unreadable-language-pack"
+Issues = "https://github.com/SkyEye-FAST/unreadable-language-pack/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/unreadable_language_pack"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "ruff>=0.12.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+
+[tool.ruff]
+exclude = ["mc_lang"]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["B", "D", "E", "F", "I", "N", "PERF", "SIM", "UP", "W"]
+ignore = ["D415"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/unreadable_language_pack/__init__.py" = ["F401"]
+"tests/**/*.py" = ["D"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+line-ending = "lf"
+docstring-code-format = true
