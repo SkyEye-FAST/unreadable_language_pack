@@ -148,9 +148,9 @@ class DataRepository:
         """Load manually reviewed Mandarin phrase pronunciations."""
         return self.data_map("phrases")
 
-    def pinyin_splits(self) -> StringMap:
-        """Load Pinyin-only word-boundary corrections for Minecraft text."""
-        return self.data_map("pinyin_splits")
+    def word_splits(self) -> StringMap:
+        """Load shared word-boundary corrections for Minecraft text."""
+        return self.data_map("word_splits")
 
     def force_wei_keys(self) -> frozenset[str]:
         """Load language keys where U+4E3A must use the falling-tone reading."""

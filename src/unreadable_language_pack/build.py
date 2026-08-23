@@ -15,7 +15,6 @@ from unreadable_language_pack.converters import ChineseConverter, EnglishConvert
 from unreadable_language_pack.repository import (
     DataRepository,
     ProjectLayout,
-    StringMap,
     format_file_size,
     write_json,
 )
@@ -95,11 +94,9 @@ class PackBuilder:
 
     def generate_fix_data(self) -> None:
         """Regenerate scheme-specific fixes from the manually segmented source."""
-        replacements: StringMap = {"！:(": "! :(", "，": ", ", "-!": "!"}
         converter = ChineseConverter(
             self.repository,
             auto_segment=False,
-            replacements=replacements,
         )
         source = self.repository.fixes("source")
         tasks: tuple[tuple[str, TextTransform], ...] = (

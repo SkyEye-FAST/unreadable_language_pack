@@ -17,7 +17,6 @@
   "advancements.story.enter_the_nether.title": "勇往直下",
   "advancements.story.follow_ender_eye.title": "隔墙有眼",
   "advancements.story.obtain_armor.title": "整装上阵",
-  "argument.block.property.unclosed": "方块 属性 应 以 ] 结束",
   "block.minecraft.bamboo_button": "竹按钮",
   "block.minecraft.bamboo_door": "竹门",
   "block.minecraft.bamboo_fence": "竹栅栏",
@@ -259,12 +258,6 @@
   "block.minecraft.banner.triangle_top.red": "顶 红 三角",
   "block.minecraft.banner.triangle_top.white": "顶 白 三角",
   "block.minecraft.banner.triangle_top.yellow": "顶 黄 三角",
-  "block.minecraft.bed.too_far_away": "你 现在 不 能 休息, 床 太 远 了",
-  "commands.debug.function.noReturnRun": "使用 /return run 时 无法 追踪",
-  "debug.copy_location.help": "F3 + C = 用 /tp 命令 的 形式 复制 你 的 位置，按住 F3 + C 使 游戏 崩溃",
-  "demo.day.2": "第二 天",
-  "demo.day.3": "第三 天",
-  "demo.day.4": "第四 天",
   "entity.minecraft.tropical_fish.predefined.0": "海葵鱼",
   "entity.minecraft.tropical_fish.predefined.1": "黑刺尾鲷",
   "entity.minecraft.tropical_fish.predefined.10": "镰鱼",
@@ -298,7 +291,5 @@
   "entity.minecraft.tropical_fish.type.snooper": "窥伺类",
   "entity.minecraft.tropical_fish.type.spotty": "多斑类",
   "entity.minecraft.tropical_fish.type.stripey": "条纹类",
-  "entity.minecraft.tropical_fish.type.sunstreak": "日纹类",
-  "optimizeWorld.stage.failed": "失败 了！:(",
-  "selectWorld.allowCommands.info": "例如 /gamemode、/experience 等 命令"
+  "entity.minecraft.tropical_fish.type.sunstreak": "日纹类"
 }

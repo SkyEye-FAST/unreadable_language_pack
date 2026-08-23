@@ -1,13 +1,15 @@
-"""Transcribe Simplified Chinese into orthographic Hanyu Pinyin."""
+"""Provide the shared Mandarin transcription pipeline for Chinese schemes."""
 
 import re
 import unicodedata
+from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
 
 import jieba
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
+from pypinyin.style import convert as convert_syllable
 from pypinyin_dict.phrase_pinyin_data import cc_cedict, di
 
 from unreadable_language_pack.conversion import capitalize_first_cased
@@ -18,23 +20,26 @@ _FORMAT_CODE_RE = re.compile(r"§[0-9A-FK-ORa-fk-or]")
 _PLACEHOLDER_RE = re.compile(r"%(?:\d+\$)?[A-Za-z%]")
 _ORDINAL_RE = re.compile(r"^第([〇零一二两三四五六七八九十百千万亿]+)(.*)$")
 _PLACEHOLDER_ORDINAL_RE = re.compile(rf"\b([Dd]ì)\s+({_PLACEHOLDER_RE.pattern})")
-_CHINESE_PUNCTUATION = str.maketrans(
-    {
-        "，": ",",
-        "、": ",",
-        "？": "?",
-        "！": "!",
-        "：": ":",
-        "；": ";",
-        "（": "(",
-        "）": ")",
-    }
-)
-_OPENING_PUNCTUATION = frozenset("([<{《“‘【")
-_CLOSING_PUNCTUATION = frozenset(",.;:!?)]}>》”’】、…")
+_PINYIN_PUNCTUATION = {
+    "，": ",",
+    "、": ",",
+    "。": ".",
+    "？": "?",
+    "！": "!",
+    "：": ":",
+    "；": ";",
+    "（": "(",
+    "）": ")",
+}
+_PINYIN_PUNCTUATION_WITH_TRAILING_SPACE = frozenset("，、。？！：；）")
+_OPENING_PUNCTUATION = frozenset("([<{《“‘【（")
+_CLOSING_PUNCTUATION = frozenset(",.;:!?)]}>》”’】、…，。？！：；）")
 _TIGHT_PUNCTUATION = frozenset("—/_+×")
 _SENTENCE_ENDINGS = frozenset(".!?。！？\n")
 _ASPECT_PARTICLES = frozenset({"着", "了", "过"})
+_ORIGINAL_TONE_PINYIN = {"一": "yī", "不": "bù"}
+_STANDALONE_TECHNICAL_RE = re.compile(r"^[\[\]{}<>]+$")
+_COMMAND_RE = re.compile(r"/[A-Za-z0-9_]")
 
 
 @dataclass(frozen=True, slots=True)
@@ -42,6 +47,7 @@ class SegmentedWord:
     """A word produced by the project-configured segmenter."""
 
     text: str
+    syllables: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True, slots=True)
@@ -50,58 +56,142 @@ class _Piece:
     text: str
 
 
+def render_hanyu_pinyin_word(word: SegmentedWord) -> str:
+    """Render one segmented word using Hanyu Pinyin orthography."""
+    ordinal = _ORDINAL_RE.fullmatch(word.text)
+    if ordinal:
+        number, remainder = ordinal.groups()
+        ordinal_end = len(number) + 1
+        number_text = _join_hanyu_pinyin_syllables(word.syllables[1:ordinal_end])
+        ordinal_text = f"{word.syllables[0]}-{number_text}"
+        if remainder:
+            remainder_text = _join_hanyu_pinyin_syllables(word.syllables[ordinal_end:])
+            return f"{ordinal_text} {remainder_text}"
+        return ordinal_text
+
+    return _join_hanyu_pinyin_syllables(word.syllables)
+
+
+def normalize_hanyu_pinyin_punctuation(text: str) -> str:
+    """Convert Chinese prose punctuation without changing ASCII syntax."""
+    output: list[str] = []
+    index = 0
+    while index < len(text):
+        if text.startswith("……", index):
+            output.append("...")
+            index += 2
+            continue
+        if text.startswith("——", index):
+            output.append("—")
+            index += 2
+            continue
+
+        char = text[index]
+        output.append(_PINYIN_PUNCTUATION.get(char, char))
+        if char in _PINYIN_PUNCTUATION_WITH_TRAILING_SPACE and index + 1 < len(text):
+            following = text[index + 1]
+            starts_emoticon = text.startswith(":(", index + 1)
+            if not following.isspace() and (
+                starts_emoticon or following not in _CLOSING_PUNCTUATION
+            ):
+                output.append(" ")
+        index += 1
+    return "".join(output)
+
+
+def finalize_hanyu_pinyin(text: str) -> str:
+    """Apply Hanyu Pinyin rules that depend on the fully rendered text."""
+    return _PLACEHOLDER_ORDINAL_RE.sub(r"\1-\2", text)
+
+
+def _join_hanyu_pinyin_syllables(syllables: tuple[str, ...]) -> str:
+    output: list[str] = []
+    for syllable in syllables:
+        first = unicodedata.normalize("NFD", syllable[:1]).casefold()[:1]
+        if output and first in {"a", "e", "o"} and output[-1][-1:].isalpha():
+            output.append("'")
+        output.append(syllable)
+    return "".join(output)
+
+
 def _load_pronunciation_dictionaries(phrases: StringMap) -> None:
     """Load third-party dictionaries followed by project corrections."""
     cc_cedict.load()
     di.load()
     load_phrases_dict(
-        {word: [[syllable] for syllable in value.split()] for word, value in phrases.items()}
+        {
+            word: [[syllable] for syllable in value.split()]
+            for word, value in phrases.items()
+            if " " not in word
+        }
     )
 
 
 class ChineseSegmenter:
     """Segment Chinese with an isolated jieba tokenizer."""
 
-    def __init__(self, user_dictionary: Path, *, enabled: bool = True) -> None:
+    def __init__(
+        self,
+        user_dictionary: Path,
+        word_splits: StringMap,
+        *,
+        enabled: bool = True,
+    ) -> None:
         """Initialize an isolated tokenizer with a project dictionary."""
         self.enabled = enabled
         self._tokenizer = jieba.Tokenizer()
         self._tokenizer.load_userdict(str(user_dictionary))
-
-    def words(self, text: str) -> list[SegmentedWord]:
-        """Return segmented words."""
-        if not self.enabled:
-            return [SegmentedWord(text)] if text else []
-        return [SegmentedWord(item) for item in self._tokenizer.lcut(text)]
-
-    def strings(self, text: str) -> list[str]:
-        """Return segmented words as plain strings."""
-        if not self.enabled:
-            return text.split()
-        return self._tokenizer.lcut(text)
-
-
-class PinyinTranscriber:
-    """Write Pinyin by word while preserving Minecraft text tokens."""
-
-    def __init__(
-        self,
-        segmenter: ChineseSegmenter,
-        phrase_pronunciations: StringMap,
-        word_splits: StringMap,
-    ) -> None:
-        """Initialize the transcriber with segmentation and orthography data."""
-        _load_pronunciation_dictionaries(phrase_pronunciations)
-        self._segmenter = segmenter
-        self._phrase_pronunciations = phrase_pronunciations
         self._word_splits = {word: tuple(parts.split()) for word, parts in word_splits.items()}
         invalid_splits = [
             word for word, parts in self._word_splits.items() if "".join(parts) != word
         ]
         if invalid_splits:
-            raise ValueError(f"Invalid Pinyin word splits: {', '.join(invalid_splits)}")
+            raise ValueError(f"Invalid Mandarin word splits: {', '.join(invalid_splits)}")
+
+    def words(self, text: str) -> list[SegmentedWord]:
+        """Return segmented words."""
+        if not self.enabled:
+            return [SegmentedWord(text)] if text else []
+        output: list[SegmentedWord] = []
+        for item in self._tokenizer.lcut(text):
+            parts = self._word_splits.get(item, (item,))
+            output.extend(SegmentedWord(part) for part in parts)
+        return output
+
+    def strings(self, text: str) -> list[str]:
+        """Return segmented words as plain strings."""
+        if not self.enabled:
+            return text.split()
+        return [word.text for word in self.words(text)]
+
+
+class MandarinTranscriber:
+    """Render Mandarin by word while preserving Minecraft text tokens."""
+
+    def __init__(
+        self,
+        segmenter: ChineseSegmenter,
+        phrase_pronunciations: StringMap,
+    ) -> None:
+        """Initialize the transcriber with segmentation and orthography data."""
+        _load_pronunciation_dictionaries(phrase_pronunciations)
+        self._segmenter = segmenter
+        self._phrase_pronunciations = {
+            phrase: pronunciation
+            for phrase, pronunciation in phrase_pronunciations.items()
+            if " " not in phrase
+        }
+        invalid_pronunciations = [
+            phrase
+            for phrase, pronunciation in phrase_pronunciations.items()
+            if len(pronunciation.split()) != len(phrase.replace(" ", ""))
+        ]
+        if invalid_pronunciations:
+            raise ValueError(
+                f"Expected one syllable per Han character: {', '.join(invalid_pronunciations)}"
+            )
         self._phrases_by_initial: dict[str, tuple[str, ...]] = {}
-        for phrase in phrase_pronunciations:
+        for phrase in self._phrase_pronunciations:
             if len(phrase) < 2:
                 continue
             self._phrases_by_initial.setdefault(phrase[0], ())
@@ -110,21 +200,51 @@ class PinyinTranscriber:
             initial: tuple(sorted(phrases, key=len, reverse=True))
             for initial, phrases in self._phrases_by_initial.items()
         }
+        self._contexts_by_initial: dict[
+            str, tuple[tuple[tuple[str, ...], tuple[str, ...]], ...]
+        ] = {}
+        for phrase, pronunciation in phrase_pronunciations.items():
+            words = tuple(phrase.split())
+            if len(words) < 2:
+                continue
+            self._contexts_by_initial.setdefault(words[0], ())
+            self._contexts_by_initial[words[0]] += ((words, tuple(pronunciation.split())),)
+        self._contexts_by_initial = {
+            initial: tuple(sorted(contexts, key=lambda item: len(item[0]), reverse=True))
+            for initial, contexts in self._contexts_by_initial.items()
+        }
         self._partition_cache: dict[str, tuple[tuple[str, bool], ...]] = {}
 
-    def transcribe(self, text: str) -> str:
-        """Transcribe the Han characters in text into Hanyu Pinyin."""
+    def transcribe(
+        self,
+        text: str,
+        renderer: Callable[[SegmentedWord], str],
+        *,
+        style: Style,
+        neutral_tone_with_five: bool,
+        v_to_u: bool,
+        capitalize: bool,
+        attach_aspect_particles: bool,
+        lexical_tones: bool,
+        raw_transform: Callable[[str], str] | None = None,
+    ) -> str:
+        """Transcribe Han spans with a scheme-specific word renderer."""
         pieces: list[_Piece] = []
         cursor = 0
         sentence_start = True
-        title_depth = 0
+        title_start = False
+        transform_raw = raw_transform or _preserve_raw
 
         matches = list(_HAN_RE.finditer(text))
         for match_index, match in enumerate(matches):
             raw = text[cursor : match.start()]
             if raw:
-                pieces.append(_Piece("raw", raw.translate(_CHINESE_PUNCTUATION)))
-                sentence_start, title_depth = self._scan_raw(raw, sentence_start, title_depth)
+                pieces.append(_Piece("raw", transform_raw(raw)))
+                sentence_start, title_start = self._scan_raw(
+                    raw,
+                    sentence_start,
+                    title_start,
+                )
 
             next_start = (
                 matches[match_index + 1].start() if match_index + 1 < len(matches) else len(text)
@@ -133,65 +253,163 @@ class PinyinTranscriber:
             clause_ends = not following or any(char in _SENTENCE_ENDINGS for char in following)
             rendered = self._transcribe_han(
                 match.group(),
-                capitalize=sentence_start,
-                capitalize_all=title_depth > 0,
+                renderer,
+                style=style,
+                neutral_tone_with_five=neutral_tone_with_five,
+                v_to_u=v_to_u,
+                capitalize=capitalize and (sentence_start or title_start),
                 clause_ends=clause_ends,
+                attach_aspect_particles=attach_aspect_particles,
+                lexical_tones=lexical_tones,
             )
             pieces.append(_Piece("han", rendered))
             sentence_start = False
+            title_start = False
             cursor = match.end()
 
         tail = text[cursor:]
         if tail:
-            pieces.append(_Piece("raw", tail.translate(_CHINESE_PUNCTUATION)))
+            pieces.append(_Piece("raw", transform_raw(tail)))
 
-        return self._normalize_spacing(self._join_pieces(pieces)).strip()
+        return self._join_pieces(pieces)
 
     @staticmethod
-    def _scan_raw(raw: str, sentence_start: bool, title_depth: int) -> tuple[bool, int]:
+    def _scan_raw(raw: str, sentence_start: bool, title_start: bool) -> tuple[bool, bool]:
         visible = _FORMAT_CODE_RE.sub("", raw)
         for char in visible:
             if char == "《":
-                title_depth += 1
+                title_start = True
+                continue
             elif char == "》":
-                title_depth = max(0, title_depth - 1)
+                title_start = False
 
             if char in _SENTENCE_ENDINGS:
                 sentence_start = True
             elif not char.isspace() and char not in _OPENING_PUNCTUATION:
                 sentence_start = False
-        return sentence_start, title_depth
+                title_start = False
+        return sentence_start, title_start
 
     def _transcribe_han(
         self,
         text: str,
+        renderer: Callable[[SegmentedWord], str],
         *,
+        style: Style,
+        neutral_tone_with_five: bool,
+        v_to_u: bool,
         capitalize: bool,
-        capitalize_all: bool,
         clause_ends: bool,
+        attach_aspect_particles: bool,
+        lexical_tones: bool,
     ) -> str:
         words = self._refine_words(self._segmenter.words(text))
+        syllables: list[str] = []
+        for word in words:
+            word_syllables = lazy_pinyin(
+                word.text,
+                style=style,
+                errors=lambda value: list(value),
+                strict=True,
+                v_to_u=v_to_u,
+                neutral_tone_with_five=neutral_tone_with_five,
+                tone_sandhi=False,
+            )
+            if len(word_syllables) != len(word.text):
+                raise ValueError(f"Expected one syllable per Han character in {word.text!r}")
+            syllables.extend(word_syllables)
+
+        syllables = self._apply_context_pronunciations(
+            text,
+            words,
+            syllables,
+            style=style,
+            neutral_tone_with_five=neutral_tone_with_five,
+        )
+        if lexical_tones:
+            syllables = self._apply_original_tones(text, syllables, style=style)
+        if len(syllables) != len(text):
+            raise ValueError(f"Expected one syllable per Han character in {text!r}")
         output: list[str] = []
+        syllable_index = 0
 
         for index, word in enumerate(words):
-            rendered = self._render_word(word)
-            if capitalize_all or (capitalize and index == 0):
+            end = syllable_index + len(word.text)
+            word = SegmentedWord(word.text, tuple(syllables[syllable_index:end]))
+            syllable_index = end
+            rendered = renderer(word)
+            if capitalize and index == 0:
                 rendered = capitalize_first_cased(rendered)
 
             if index:
                 is_clause_final_le = word.text == "了" and index == len(words) - 1 and clause_ends
-                separator = "" if word.text in _ASPECT_PARTICLES and not is_clause_final_le else " "
+                attach_particle = (
+                    attach_aspect_particles
+                    and word.text in _ASPECT_PARTICLES
+                    and not is_clause_final_le
+                )
+                separator = "" if attach_particle else " "
                 output.append(separator)
             output.append(rendered)
 
         return "".join(output)
 
+    def _apply_context_pronunciations(
+        self,
+        text: str,
+        words: list[SegmentedWord],
+        syllables: list[str],
+        *,
+        style: Style,
+        neutral_tone_with_five: bool,
+    ) -> list[str]:
+        output = syllables.copy()
+        word_index = 0
+        character_index = 0
+        while word_index < len(words):
+            context = next(
+                (
+                    item
+                    for item in self._contexts_by_initial.get(words[word_index].text, ())
+                    if tuple(word.text for word in words[word_index : word_index + len(item[0])])
+                    == item[0]
+                ),
+                None,
+            )
+            if context is None:
+                character_index += len(words[word_index].text)
+                word_index += 1
+                continue
+
+            context_words, pronunciation = context
+            for offset, pinyin in enumerate(pronunciation):
+                converted = convert_syllable(
+                    pinyin,
+                    style,
+                    strict=True,
+                    neutral_tone_with_five=neutral_tone_with_five,
+                    han=text[character_index + offset],
+                )
+                if style == Style.TONE3 and neutral_tone_with_five and converted[-1:] not in "1234":
+                    converted = f"{converted}5"
+                output[character_index + offset] = converted
+            matched_length = sum(len(word) for word in context_words)
+            character_index += matched_length
+            word_index += len(context_words)
+        return output
+
+    @staticmethod
+    def _apply_original_tones(text: str, syllables: list[str], *, style: Style) -> list[str]:
+        """Restore the lexical tones of yi and bu for written transcription."""
+        output = syllables.copy()
+        for index, char in enumerate(text):
+            if pinyin := _ORIGINAL_TONE_PINYIN.get(char):
+                output[index] = convert_syllable(pinyin, style, strict=True, han=char)
+        return output
+
     def _refine_words(self, words: list[SegmentedWord]) -> list[SegmentedWord]:
         refined: list[SegmentedWord] = []
         for word in words:
-            if parts := self._word_splits.get(word.text):
-                refined.extend(SegmentedWord(part) for part in parts)
-                continue
             partition = self._phrase_partition(word.text)
             if (
                 len(partition) > 1
@@ -202,34 +420,6 @@ class PinyinTranscriber:
             else:
                 refined.append(word)
         return refined
-
-    def _render_word(self, word: SegmentedWord) -> str:
-        ordinal = _ORDINAL_RE.fullmatch(word.text)
-        if ordinal:
-            number, remainder = ordinal.groups()
-            ordinal_text = self._join_syllables(self._syllables(f"第{number}"))
-            ordinal_text = ordinal_text.replace("dì", "dì-", 1)
-            if remainder:
-                return f"{ordinal_text} {self._join_syllables(self._syllables(remainder))}"
-            return ordinal_text
-
-        return self._join_syllables(self._syllables(word.text))
-
-    def _syllables(self, word: str) -> list[str]:
-        partition = self._phrase_partition(word)
-        output: list[str] = []
-        for part, _ in partition:
-            output.extend(
-                lazy_pinyin(
-                    part,
-                    style=Style.TONE,
-                    errors=lambda value: list(value),
-                    strict=True,
-                    v_to_u=True,
-                    tone_sandhi=False,
-                )
-            )
-        return output
 
     def _phrase_partition(self, word: str) -> tuple[tuple[str, bool], ...]:
         if word in self._partition_cache:
@@ -268,22 +458,12 @@ class PinyinTranscriber:
         return result
 
     @staticmethod
-    def _join_syllables(syllables: list[str]) -> str:
-        output: list[str] = []
-        for syllable in syllables:
-            first = unicodedata.normalize("NFD", syllable[:1]).casefold()[:1]
-            if output and first in {"a", "e", "o"} and output[-1][-1:].isalpha():
-                output.append("'")
-            output.append(syllable)
-        return "".join(output)
-
-    @staticmethod
     def _join_pieces(pieces: list[_Piece]) -> str:
         output: list[str] = []
         for index, piece in enumerate(pieces):
             if index:
                 left = pieces[index - 1]
-                separator = PinyinTranscriber._piece_separator(left, piece)
+                separator = MandarinTranscriber._piece_separator(left, piece)
                 if separator:
                     output.append(separator)
             output.append(piece.text)
@@ -313,6 +493,11 @@ class PinyinTranscriber:
         if right.kind == "raw" and _PLACEHOLDER_RE.match(raw):
             return " "
 
+        if _is_standalone_technical(raw):
+            return " "
+        if right.kind == "raw" and _COMMAND_RE.match(raw):
+            return " "
+
         left_char = left.text[-1]
         right_char = right.text[0]
         if left_char in _TIGHT_PUNCTUATION or right_char in _TIGHT_PUNCTUATION:
@@ -325,27 +510,10 @@ class PinyinTranscriber:
             return " "
         return ""
 
-    @staticmethod
-    def _normalize_spacing(text: str) -> str:
-        text = text.replace("。", ". ").replace("……", "…").replace("——", "—")
-        text = _PLACEHOLDER_ORDINAL_RE.sub(r"\1-\2", text)
-        text = re.sub(rf"({_PLACEHOLDER_RE.pattern})(?=[(\[])", r"\1 ", text)
-        text = re.sub(r"\. +", ". ", text)
-        text = re.sub(r"[ \t]+([,.;:!?…\)\]\}>》”’】])", r"\1", text)
-        text = re.sub(r"([\(\[\{<《“‘【])[ \t]+", r"\1", text)
-        text = re.sub(r"[ \t]+\n", "\n", text)
-        text = re.sub(r"\n[ \t]+", "\n", text)
 
-        output: list[str] = []
-        for index, char in enumerate(text):
-            output.append(char)
-            if char not in ",.;:!?":
-                continue
-            previous = text[index - 1] if index else ""
-            following = text[index + 1] if index + 1 < len(text) else ""
-            if not following or following.isspace() or following in _CLOSING_PUNCTUATION:
-                continue
-            if char in ".," and previous.isdigit() and following.isdigit():
-                continue
-            output.append(" ")
-        return "".join(output)
+def _preserve_raw(text: str) -> str:
+    return text
+
+
+def _is_standalone_technical(text: str) -> bool:
+    return _STANDALONE_TECHNICAL_RE.fullmatch(text.strip()) is not None

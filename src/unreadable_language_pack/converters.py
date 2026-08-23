@@ -1,17 +1,19 @@
 """Text converters for every generated language scheme."""
 
 import re
-from collections.abc import Mapping
 
-from pypinyin import Style, lazy_pinyin
+from pypinyin import Style
 from romajitable import to_kana
 
-from unreadable_language_pack.conversion import (
-    capitalize_sentences,
-    capitalize_titles,
-    replace_multiple,
+from unreadable_language_pack.conversion import replace_multiple
+from unreadable_language_pack.pinyin import (
+    ChineseSegmenter,
+    MandarinTranscriber,
+    SegmentedWord,
+    finalize_hanyu_pinyin,
+    normalize_hanyu_pinyin_punctuation,
+    render_hanyu_pinyin_word,
 )
-from unreadable_language_pack.pinyin import ChineseSegmenter, PinyinTranscriber
 from unreadable_language_pack.repository import DataRepository
 
 _TONE_TO_IPA = {"1": "˥", "2": "˧˥", "3": "˨˩˦", "4": "˥˩", "5": ""}
@@ -55,19 +57,18 @@ class ChineseConverter:
         repository: DataRepository,
         *,
         auto_segment: bool = True,
-        replacements: Mapping[str, str] | None = None,
     ) -> None:
         """Initialize the converter from project data and segmentation settings."""
         self._repository = repository
-        self._replacements = replacements or repository.replacements("zh")
+        self._split_replacements = repository.replacements("zh")
         self._segmenter = ChineseSegmenter(
             repository.layout.data / "dict.txt",
+            repository.word_splits(),
             enabled=auto_segment,
         )
-        self._pinyin = PinyinTranscriber(
+        self._mandarin = MandarinTranscriber(
             self._segmenter,
             repository.custom_phrases(),
-            repository.pinyin_splits(),
         )
         self._maps = {
             scheme: repository.pinyin_map(scheme)
@@ -95,7 +96,7 @@ class ChineseConverter:
 
     def to_split(self, text: str) -> str:
         """Return segmented Chinese text for manual review."""
-        replacements = self._replacements | {
+        replacements = self._split_replacements | {
             "了.": " 了.",
             "了!": " 了!",
             "了?": " 了?",
@@ -107,55 +108,81 @@ class ChineseConverter:
 
     def to_pinyin(self, text: str) -> str:
         """Transcribe text using the core orthographic rules of GB/T 16159-2012."""
-        return self._pinyin.transcribe(text)
+        result = self._mandarin.transcribe(
+            text,
+            render_hanyu_pinyin_word,
+            style=Style.TONE,
+            neutral_tone_with_five=False,
+            v_to_u=True,
+            capitalize=True,
+            attach_aspect_particles=True,
+            lexical_tones=True,
+            raw_transform=normalize_hanyu_pinyin_punctuation,
+        )
+        return finalize_hanyu_pinyin(result)
 
     def _pinyin_to_other(self, scheme: str, text: str, delimiter: str = "-") -> str:
-        output: list[str] = []
-        segments = self._segmenter.strings(text)
         correspondence = self._maps[scheme]
 
-        for index, segment in enumerate(segments):
-            syllables = lazy_pinyin(
-                segment,
-                style=Style.TONE3,
-                neutral_tone_with_five=True,
-                tone_sandhi=False,
-            )
-            converted = delimiter.join(correspondence.get(item, item) for item in syllables)
-            if index and not (
-                segment == "了"
-                and index + 1 < len(segments)
-                and segments[index + 1] not in {"。", "！", "？", "…"}
-            ):
-                output.append(" ")
-            output.append(converted)
+        def render(word: SegmentedWord) -> str:
+            return delimiter.join(correspondence.get(item, item) for item in word.syllables)
 
-        result = replace_multiple("".join(output), self._replacements)
-        return capitalize_sentences(capitalize_titles(result))
+        result = self._mandarin.transcribe(
+            text,
+            render,
+            style=Style.TONE3,
+            neutral_tone_with_five=True,
+            v_to_u=False,
+            capitalize=True,
+            attach_aspect_particles=True,
+            lexical_tones=True,
+        )
+        return result
 
     def to_ipa(self, text: str) -> str:
         """Transcribe Mandarin into broad IPA notation."""
-        output: list[str] = []
-        for syllable in lazy_pinyin(
+
+        def render(word: SegmentedWord) -> str:
+            output: list[str] = []
+            for syllable in word.syllables:
+                if syllable[-1:] in _TONE_TO_IPA:
+                    output.append(
+                        f"{self._maps['ipa'].get(syllable[:-1], syllable[:-1])}"
+                        f"{_TONE_TO_IPA[syllable[-1]]}"
+                    )
+                else:
+                    output.append(syllable)
+            return " ".join(output)
+
+        return self._mandarin.transcribe(
             text,
+            render,
             style=Style.TONE3,
             neutral_tone_with_five=True,
-            tone_sandhi=False,
-        ):
-            if syllable[-1:] in _TONE_TO_IPA:
-                output.append(
-                    f"{self._maps['ipa'].get(syllable[:-1], syllable[:-1])}"
-                    f"{_TONE_TO_IPA[syllable[-1]]}"
-                )
-            else:
-                output.append(syllable)
-        return " ".join(output)
+            v_to_u=False,
+            capitalize=False,
+            attach_aspect_particles=False,
+            lexical_tones=False,
+        )
 
-    @staticmethod
-    def to_bopomofo(text: str) -> str:
+    def to_bopomofo(self, text: str) -> str:
         """Transcribe Mandarin into Bopomofo."""
-        symbols = lazy_pinyin(text, style=Style.BOPOMOFO, tone_sandhi=False)
-        return " ".join(f"˙{item[:-1]}" if item.endswith("˙") else item for item in symbols)
+
+        def render(word: SegmentedWord) -> str:
+            return " ".join(
+                f"˙{item[:-1]}" if item.endswith("˙") else item for item in word.syllables
+            )
+
+        return self._mandarin.transcribe(
+            text,
+            render,
+            style=Style.BOPOMOFO,
+            neutral_tone_with_five=False,
+            v_to_u=False,
+            capitalize=False,
+            attach_aspect_particles=False,
+            lexical_tones=True,
+        )
 
     def to_wadegiles(self, text: str) -> str:
         """Transcribe Mandarin using Wade-Giles romanization."""
@@ -163,18 +190,22 @@ class ChineseConverter:
 
     def to_romatzyh(self, text: str) -> str:
         """Transcribe Mandarin using Gwoyeu Romatzyh."""
-        output: list[str] = []
-        for segment in self._segmenter.strings(text):
-            syllables = lazy_pinyin(
-                segment.replace("不", "bu"),
-                style=Style.TONE3,
-                neutral_tone_with_five=True,
-                tone_sandhi=False,
-            )
-            converted = [self._maps["romatzyh"].get(item, item) for item in syllables]
-            output.append("".join(self._add_apostrophes(converted, self._gr_values)))
-        result = replace_multiple(" ".join(output), self._replacements)
-        return capitalize_sentences(capitalize_titles(result))
+
+        def render(word: SegmentedWord) -> str:
+            converted = [self._maps["romatzyh"].get(item, item) for item in word.syllables]
+            return "".join(self._add_apostrophes(converted, self._gr_values))
+
+        result = self._mandarin.transcribe(
+            text,
+            render,
+            style=Style.TONE3,
+            neutral_tone_with_five=True,
+            v_to_u=False,
+            capitalize=True,
+            attach_aspect_particles=False,
+            lexical_tones=True,
+        )
+        return result
 
     def to_simp_romatzyh(self, text: str) -> str:
         """Transcribe Mandarin using Simplified Gwoyeu Romatzyh."""
@@ -194,28 +225,57 @@ class ChineseConverter:
 
     def to_katakana(self, text: str) -> str:
         """Transcribe Mandarin pronunciation into katakana."""
-        syllables = lazy_pinyin(text, tone_sandhi=False)
-        return " ".join(self._maps["katakana"].get(item, item) for item in syllables)
+
+        def render(word: SegmentedWord) -> str:
+            return " ".join(self._maps["katakana"].get(item, item) for item in word.syllables)
+
+        return self._mandarin.transcribe(
+            text,
+            render,
+            style=Style.NORMAL,
+            neutral_tone_with_five=False,
+            v_to_u=False,
+            capitalize=False,
+            attach_aspect_particles=False,
+            lexical_tones=False,
+        )
 
     def to_cyrillic(self, text: str) -> str:
         """Transcribe Mandarin into Cyrillic using the Palladius system."""
-        output: list[str] = []
-        for segment in self._segmenter.strings(text):
-            syllables = lazy_pinyin(segment, tone_sandhi=False)
-            converted = [self._maps["cyrillic"].get(item, item) for item in syllables]
-            output.append("".join(self._add_apostrophes(converted, self._cy_values)))
-        result = replace_multiple(" ".join(output), self._replacements)
-        return capitalize_sentences(capitalize_titles(result))
+
+        def render(word: SegmentedWord) -> str:
+            converted = [self._maps["cyrillic"].get(item, item) for item in word.syllables]
+            return "".join(self._add_apostrophes(converted, self._cy_values))
+
+        result = self._mandarin.transcribe(
+            text,
+            render,
+            style=Style.NORMAL,
+            neutral_tone_with_five=False,
+            v_to_u=False,
+            capitalize=True,
+            attach_aspect_particles=False,
+            lexical_tones=False,
+        )
+        return result
 
     def to_xiaojing(self, text: str) -> str:
         """Transcribe Mandarin pronunciation into Xiao'erjing."""
-        output: list[str] = []
-        for segment in self._segmenter.strings(text):
-            syllables = lazy_pinyin(segment, tone_sandhi=False)
-            output.append(
-                "\u200c".join(self._maps["xiaojing"].get(item, item) for item in syllables)
-            )
-        return replace_multiple(" ".join(output), self._replacements)
+
+        def render(word: SegmentedWord) -> str:
+            return "\u200c".join(self._maps["xiaojing"].get(item, item) for item in word.syllables)
+
+        result = self._mandarin.transcribe(
+            text,
+            render,
+            style=Style.NORMAL,
+            neutral_tone_with_five=False,
+            v_to_u=False,
+            capitalize=False,
+            attach_aspect_particles=False,
+            lexical_tones=False,
+        )
+        return result
 
     @staticmethod
     def _add_apostrophes(items: list[str], values: set[str]) -> list[str]:

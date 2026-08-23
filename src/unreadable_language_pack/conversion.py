@@ -1,6 +1,5 @@
 """Shared workflow for converting language dictionaries."""
 
-import re
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from time import perf_counter
@@ -63,36 +62,3 @@ def capitalize_first_cased(text: str) -> str:
         if char.isalpha():
             return f"{text[:index]}{char.upper()}{text[index + 1 :]}"
     return text
-
-
-def capitalize_sentences(text: str) -> str:
-    """Capitalize the first letter of each line and after an ellipsis."""
-
-    def capitalize_ellipsis(segment: str) -> str:
-        parts: list[str] = []
-        for part in segment.split("..."):
-            if not part:
-                parts.append(part)
-            elif part.startswith(" ") and len(part) > 1:
-                parts.append(f" {part[1].upper()}{part[2:]}")
-            else:
-                parts.append(f"{part[0].upper()}{part[1:]}")
-        return "...".join(parts)
-
-    if not text:
-        return text
-    return "\n".join(capitalize_ellipsis(line) for line in text.split("\n"))
-
-
-def capitalize_titles(text: str) -> str:
-    """Capitalize each space-delimited unit inside Chinese title marks."""
-
-    def capitalize_match(match: re.Match[str]) -> str:
-        words = (capitalize_first_cased(word) for word in match.group(1).split())
-        return f"《{' '.join(words)}》"
-
-    return re.sub(
-        r"《(.*?)》",
-        capitalize_match,
-        text,
-    )

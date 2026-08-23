@@ -86,13 +86,13 @@ uv run ruff format --check .
   - 按现行推荐性国家标准 [GB/T 16159-2012《汉语拼音正词法基本规则》](https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=5645BD8DB9D8D73053AD3A2397E15E74)审校；[教育部公开的标准全文](https://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091717604.pdf)可用于核对具体条款。
 
 > [!IMPORTANT]
-> 汉字标音使用 `pypinyin` 和 `pypinyin-dict`，补充 [CC-CEDICT](https://cc-cedict.org/) 数据，并由 `data/phrases.json` 提供项目级词组读音。词典按“基础词典 → CC-CEDICT/di → 项目人工校订”的优先级加载。其他根据发音转写的方案也基于这些数据。
+> 汉字标音使用 `pypinyin` 和 `pypinyin-dict`，补充 [CC-CEDICT](https://cc-cedict.org/) 数据，并由 `data/phrases.json` 提供项目级词组读音。词典按“基础词典 → CC-CEDICT/di → 项目人工校订”的优先级加载。词组键中的空格表示只在相邻分词完全匹配时采用该上下文读音，例如 `结果 的`。所有根据普通话发音转写的方案都使用这份读音数据。
 >
-> 中文分词使用 `jieba` 和 `data/dict.txt`；仅适用于汉语拼音正词法的边界修正在 `data/pinyin_splits.json` 中维护，避免改变其他转写方案。转换管线会再次利用人工词组边界细化多音词，按词连写音节，并在 a、o、e 开头的音节前按需添加隔音符号。
+> 中文分词使用 `jieba` 和 `data/dict.txt`；Minecraft 语料的人工词边界修正在 `data/word_splits.json` 中维护。所有中文派生方案共享读音判定、词边界和 Minecraft 技术单元保护，但不共享汉语拼音的标点、大小写和标调规则。其他方案保留源标点，并分别使用自己的拼写、声调和分隔规则。
 >
-> 正词法实现重点覆盖与 Minecraft 现有语料直接相关的规则：以词为单位分写（5.1—5.5）、动态助词及常见句法边界（6.1.2）、指示词与量词分写（6.1.4）、数词与量词分写和序数连接号（6.1.5）、实际出现的四字成语 2+2 连接号（6.1.12）、隔音符号（6.2）、句首大写（6.3）、轻声不标调和“一”“不”保留原调（6.5），以及拉丁标点（6.6）。Minecraft 格式码（如 `§a`）和格式占位符（如 `%s`、`%1$s`、`%%`）会原样保留。
+> 汉语拼音输出以词为单位分写，按语法和词汇化程度处理常见结构，并处理序数连接号、隔音符号、句首及标题首词大写、轻声不标调和“一”“不”标本调。比如“不是”写作 `bù shì`，而不是记录口语变调的 `bú shì`。Minecraft 格式码、占位符、命令和程序语法会先作为技术单元保护；完整的阅读结论与项目取舍见 [`docs/hanyu-pinyin-orthography.md`](docs/hanyu-pinyin-orthography.md)。
 >
-> 这里的“按国标审校”不等同于形式化合规认证。自动分词无法仅靠上下文可靠判断所有语法关系、专名、成语结构和多音词；项目只维护 Minecraft 实际语言条目需要的词语和修正。发现问题时应优先补充 `data/phrases.json`、`data/dict.txt`、`data/pinyin_splits.json` 或对应语言键的修正数据，而不是加入无关通用词汇或在代码中硬编码语言键。
+> 这里的“按国标审校”不等同于形式化合规认证。自动分词无法仅靠上下文可靠判断所有语法关系、专名、成语结构和多音词；项目只维护 Minecraft 实际语言条目需要的词语和修正。发现问题时应优先补充 `data/phrases.json`、`data/dict.txt`、`data/word_splits.json` 或对应语言键的修正数据，而不是加入无关通用词汇或在代码中硬编码语言键。
 
 #### Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)（[`zh_ipa.json`](output/zh_ipa.json)）
 
