@@ -1,6 +1,6 @@
 # Minecraft难视语言资源包
 
-[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Ruff](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/ruff.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/ruff.yml)
+[![Update resource pack](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/update.yml) [![Checks](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/checks.yml/badge.svg)](https://github.com/SkyEye-FAST/unreadable_language_pack/actions/workflows/checks.yml)
 
 - **[English](README_en.md) | [中文](README.md)**
 
@@ -24,10 +24,19 @@
 
 ### 依赖项
 
-请使用下面的命令安装依赖项：
+项目使用 Python 3.12+ 和 [uv](https://docs.astral.sh/uv/) 管理依赖。克隆仓库（含子模块）后执行：
 
 ```shell
-pip install -r requirements.txt
+uv sync --locked --dev
+uv run language-pack build
+```
+
+运行测试与代码检查：
+
+```shell
+uv run pytest
+uv run ruff check .
+uv run ruff format --check .
 ```
 
 ### 获取语言文件
@@ -36,7 +45,7 @@ pip install -r requirements.txt
 
 ### 资源包
 
-资源包使用[`pack.py`](pack.py)生成。脚本生成的语言文件存储在与脚本同级的`output`文件夹下，同[`pack.mcmeta`](pack.mcmeta)和[`pack.png`](pack.png)一同打包为`unreadable_language_pack.zip`。
+资源包使用 `uv run language-pack build` 生成。语言文件存储在 `output` 文件夹下，并同 [`pack.mcmeta`](pack.mcmeta) 和 [`pack.png`](pack.png) 一起打包为 `unreadable_language_pack.zip`。ZIP 的成员顺序和时间戳固定，相同输入会得到相同归档。
 
 资源包向游戏内添加了15种语言。
 
@@ -74,18 +83,16 @@ pip install -r requirements.txt
 
 - 即“汉语拼音 (中国大陆)”。
 - 选择之后，所有字符串会变为简体中文转写而来的汉语拼音，以词为单位。
-  - 尝试遵循了GB/T 16159-2012的正词法要求。
+  - 按现行推荐性国家标准 [GB/T 16159-2012《汉语拼音正词法基本规则》](https://openstd.samr.gov.cn/bzgk/std/newGbInfo?hcno=5645BD8DB9D8D73053AD3A2397E15E74)审校；[教育部公开的标准全文](https://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091717604.pdf)可用于核对具体条款。
 
 > [!IMPORTANT]
-> 汉字标音使用了库`pypinyin`和`pypinyin_dict`，补充了[cc_cedict.org](https://cc-cedict.org/)的数据，并手动添加了某些词语的读音。原则上，读音以普通话音系为准。其他根据发音转写的方案都基于此项的数据。
+> 汉字标音使用 `pypinyin` 和 `pypinyin-dict`，补充 [CC-CEDICT](https://cc-cedict.org/) 数据，并由 `data/phrases.json` 提供项目级词组读音。词典按“基础词典 → CC-CEDICT/di → 项目人工校订”的优先级加载。其他根据发音转写的方案也基于这些数据。
 >
-> 中文分词使用了库`jieba`，配置了词库并进行了替换修正。
+> 中文分词使用 `jieba` 和 `data/dict.txt`；仅适用于汉语拼音正词法的边界修正在 `data/pinyin_splits.json` 中维护，避免改变其他转写方案。转换管线会再次利用人工词组边界细化多音词，按词连写音节，并在 a、o、e 开头的音节前按需添加隔音符号。
 >
-> 虽然经过处理，但结果仍然无法保证完全符合GB/T 16159-2012的要求。应加连接号的地方尚未有合适的方法满足要求。
+> 正词法实现重点覆盖与 Minecraft 现有语料直接相关的规则：以词为单位分写（5.1—5.5）、动态助词及常见句法边界（6.1.2）、指示词与量词分写（6.1.4）、数词与量词分写和序数连接号（6.1.5）、实际出现的四字成语 2+2 连接号（6.1.12）、隔音符号（6.2）、句首大写（6.3）、轻声不标调和“一”“不”保留原调（6.5），以及拉丁标点（6.6）。Minecraft 格式码（如 `§a`）和格式占位符（如 `%s`、`%1$s`、`%%`）会原样保留。
 >
-> “一”“不”等变调按照GB/T 16159-2012要求不标出。
->
-> **由于没有经过完整的人工审核，不能保证长文本的分词准确性。**
+> 这里的“按国标审校”不等同于形式化合规认证。自动分词无法仅靠上下文可靠判断所有语法关系、专名、成语结构和多音词；项目只维护 Minecraft 实际语言条目需要的词语和修正。发现问题时应优先补充 `data/phrases.json`、`data/dict.txt`、`data/pinyin_splits.json` 或对应语言键的修正数据，而不是加入无关通用词汇或在代码中硬编码语言键。
 
 #### Chinese in IPA (t͡ʂʊŋ˥ kwo˧˥ ta˥˩ lu˥˩)（[`zh_ipa.json`](output/zh_ipa.json)）
 
