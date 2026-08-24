@@ -34,6 +34,7 @@ packages = ["src/unreadable_language_pack"]
 dev = [
     "pytest>=8.3.5",
     "ruff>=0.12.0",
+    "ty>=0.0.74",
 ]
 
 [tool.pytest.ini_options]
