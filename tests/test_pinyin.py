@@ -1,26 +1,26 @@
-from unreadable_language_pack.converters import ChineseConverter
-from unreadable_language_pack.repository import DataRepository
+from unreadable_language_pack.converters import MandarinConverter
+from unreadable_language_pack.repository import LanguageDataRepository
 
 
-def transcribe_entry(
-    repository: DataRepository,
-    converter: ChineseConverter,
+def transcribe_language_entry(
+    repository: LanguageDataRepository,
+    converter: MandarinConverter,
     key: str,
-    method: str = "to_pinyin",
+    method: str = "to_hanyu_pinyin",
 ) -> str:
-    source = repository.language("zh_cn")[key]
-    prepared = converter.preprocess_pronunciation(key, source)
+    source = repository.language_source("zh_cn")[key]
+    prepared = converter.apply_key_specific_pronunciation(key, source)
     return getattr(converter, method)(prepared)
 
 
 def test_minecraft_placeholders_are_preserved(
-    repository: DataRepository,
-    chinese_converter: ChineseConverter,
+    repository: LanguageDataRepository,
+    mandarin_converter: MandarinConverter,
 ) -> None:
     key = "argument.block.property.invalid"
-    result = transcribe_entry(
+    result = transcribe_language_entry(
         repository,
-        chinese_converter,
+        mandarin_converter,
         key,
     )
 
@@ -30,48 +30,52 @@ def test_minecraft_placeholders_are_preserved(
     for method in (
         "to_ipa",
         "to_bopomofo",
-        "to_wadegiles",
-        "to_romatzyh",
-        "to_simp_romatzyh",
-        "to_mps2",
-        "to_tongyong",
-        "to_yale",
+        "to_wade_giles",
+        "to_gwoyeu_romatzyh",
+        "to_simplified_gwoyeu_romatzyh",
+        "to_mandarin_phonetic_symbols_ii",
+        "to_tongyong_pinyin",
+        "to_yale_romanization",
         "to_katakana",
         "to_cyrillic",
-        "to_xiaojing",
+        "to_xiaoerjing",
     ):
-        converted = transcribe_entry(repository, chinese_converter, key, method)
+        converted = transcribe_language_entry(repository, mandarin_converter, key, method)
         assert all(token in converted for token in ("%1$s", "%3$s", "%2$s"))
         assert "% 1 $ s" not in converted
 
-        syntax = transcribe_entry(
+        syntax = transcribe_language_entry(
             repository,
-            chinese_converter,
+            mandarin_converter,
             "argument.block.property.unclosed",
             method,
         )
         assert " ] " in syntax
 
     assert (
-        transcribe_entry(
+        transcribe_language_entry(
             repository,
-            chinese_converter,
+            mandarin_converter,
             "argument.block.property.unclosed",
         )
         == "Fāngkuài shǔxìng yīng yǐ ] jiéshù"
     )
 
-    ordinal = transcribe_entry(repository, chinese_converter, "narrator.position.object_list")
+    ordinal = transcribe_language_entry(
+        repository,
+        mandarin_converter,
+        "narrator.position.object_list",
+    )
     assert "dì-%s xiàng" in ordinal
 
 
 def test_minecraft_multiline_tooltip_keeps_line_breaks(
-    repository: DataRepository,
-    chinese_converter: ChineseConverter,
+    repository: LanguageDataRepository,
+    mandarin_converter: MandarinConverter,
 ) -> None:
-    result = transcribe_entry(
+    result = transcribe_language_entry(
         repository,
-        chinese_converter,
+        mandarin_converter,
         "options.graphics.fancy.tooltip",
     )
 
@@ -80,12 +84,12 @@ def test_minecraft_multiline_tooltip_keeps_line_breaks(
 
 
 def test_key_specific_pronunciation_corrections_are_applied(
-    repository: DataRepository,
-    chinese_converter: ChineseConverter,
+    repository: LanguageDataRepository,
+    mandarin_converter: MandarinConverter,
 ) -> None:
-    meadows = transcribe_entry(
+    meadows = transcribe_language_entry(
         repository,
-        chinese_converter,
+        mandarin_converter,
         "advancements.adventure.play_jukebox_in_meadows.description",
     )
 
@@ -93,43 +97,43 @@ def test_key_specific_pronunciation_corrections_are_applied(
 
     attached_stem = "block.minecraft.attached_melon_stem"
     expected_prefixes = {
-        "to_pinyin": "Jiēguǒ de",
+        "to_hanyu_pinyin": "Jiēguǒ de",
         "to_ipa": "t͡ɕjɛ˥ kwo˨˩˦ tɤ",
         "to_bopomofo": "ㄐㄧㄝ ㄍㄨㄛˇ ˙ㄉㄜ",
-        "to_wadegiles": "Chieh¹-kuo³ te⁵",
-        "to_romatzyh": "Jieguoo .de",
-        "to_simp_romatzyh": "Jieguoo 'de",
-        "to_mps2": "Jiē-guǒ de",
-        "to_tongyong": "Jie-guǒ de̊",
-        "to_yale": "Jyē-gwǒ de",
+        "to_wade_giles": "Chieh¹-kuo³ te⁵",
+        "to_gwoyeu_romatzyh": "Jieguoo .de",
+        "to_simplified_gwoyeu_romatzyh": "Jieguoo 'de",
+        "to_mandarin_phonetic_symbols_ii": "Jiē-guǒ de",
+        "to_tongyong_pinyin": "Jie-guǒ de̊",
+        "to_yale_romanization": "Jyē-gwǒ de",
     }
     for method, prefix in expected_prefixes.items():
-        converted = transcribe_entry(repository, chinese_converter, attached_stem, method)
+        converted = transcribe_language_entry(repository, mandarin_converter, attached_stem, method)
         assert converted.startswith(prefix)
 
     negation = "advancements.adventure.brush_armadillo.title"
     expected_negation = {
-        "to_pinyin": "bù shì",
+        "to_hanyu_pinyin": "bù shì",
         "to_ipa": "pu˥˩ ʂɻ̍˥˩",
         "to_bopomofo": "ㄅㄨˋ ㄕˋ",
-        "to_wadegiles": "pu⁴ shih⁴",
-        "to_romatzyh": "buh shyh",
-        "to_simp_romatzyh": "buh shyh",
-        "to_mps2": "bù shr̀",
-        "to_tongyong": "bù shìh",
-        "to_yale": "bù shr̀",
+        "to_wade_giles": "pu⁴ shih⁴",
+        "to_gwoyeu_romatzyh": "buh shyh",
+        "to_simplified_gwoyeu_romatzyh": "buh shyh",
+        "to_mandarin_phonetic_symbols_ii": "bù shr̀",
+        "to_tongyong_pinyin": "bù shìh",
+        "to_yale_romanization": "bù shr̀",
         "to_katakana": "ブー シー",
         "to_cyrillic": "бу ши",
-        "to_xiaojing": "بُ شِ",
+        "to_xiaoerjing": "بُ شِ",
     }
     for method, fragment in expected_negation.items():
-        converted = transcribe_entry(repository, chinese_converter, negation, method)
+        converted = transcribe_language_entry(repository, mandarin_converter, negation, method)
         assert fragment in converted
 
 
 def test_gb_t_16159_orthography_on_minecraft_entries(
-    repository: DataRepository,
-    chinese_converter: ChineseConverter,
+    repository: LanguageDataRepository,
+    mandarin_converter: MandarinConverter,
 ) -> None:
     expected_fragments = {
         "advancements.adventure.arbalistic.description": "wǔ zhǒng shēngwù",
@@ -149,4 +153,4 @@ def test_gb_t_16159_orthography_on_minecraft_entries(
     }
 
     for key, fragment in expected_fragments.items():
-        assert fragment in transcribe_entry(repository, chinese_converter, key)
+        assert fragment in transcribe_language_entry(repository, mandarin_converter, key)

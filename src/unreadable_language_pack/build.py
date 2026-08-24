@@ -6,14 +6,14 @@ from time import perf_counter
 from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 from unreadable_language_pack.conversion import (
-    ConversionResult,
-    TextPreprocessor,
+    LanguageConversionResult,
+    LanguageEntryPreprocessor,
     TextTransform,
-    convert_language,
+    convert_language_entries,
 )
-from unreadable_language_pack.converters import ChineseConverter, EnglishConverter
+from unreadable_language_pack.converters import EnglishConverter, MandarinConverter
 from unreadable_language_pack.repository import (
-    DataRepository,
+    LanguageDataRepository,
     ProjectLayout,
     format_file_size,
     write_json,
@@ -21,45 +21,69 @@ from unreadable_language_pack.repository import (
 
 
 @dataclass(frozen=True, slots=True)
-class BuildTask:
-    """Configuration for generating one language file."""
+class LanguageFileBuild:
+    """Configuration for generating one language file.
+
+    Attributes:
+        output_name: Base name of the generated language file.
+        source: Source language entries.
+        transform: Transformation applied to each source value.
+        corrections: Corrections for specific language entries.
+        universal_corrections: Corrections shared by all Mandarin schemes.
+        preprocess_entry: Optional preprocessing for each key and value.
+    """
 
     output_name: str
     source: Mapping[str, str]
     transform: TextTransform
-    fixes: Mapping[str, str] | None = None
-    universal_fixes: Mapping[str, str] | None = None
-    preprocess: TextPreprocessor | None = None
+    corrections: Mapping[str, str] | None = None
+    universal_corrections: Mapping[str, str] | None = None
+    preprocess_entry: LanguageEntryPreprocessor | None = None
 
 
-class PackBuilder:
+class ResourcePackBuilder:
     """Orchestrate conversions and create a reproducible resource pack."""
 
     def __init__(self, layout: ProjectLayout) -> None:
-        """Initialize the builder for a project layout."""
-        self.layout = layout
-        self.repository = DataRepository(layout)
+        """Initialize the builder for a project layout.
 
-    def generate_languages(self) -> tuple[list[str], float]:
-        """Generate all language files and return their names and elapsed time."""
+        Args:
+            layout: Filesystem layout of the project.
+        """
+        self.layout = layout
+        self.repository = LanguageDataRepository(layout)
+
+    def generate_language_files(self) -> tuple[list[str], float]:
+        """Generate all language files.
+
+        Returns:
+            The generated output names and elapsed time in seconds.
+        """
         started = perf_counter()
         outputs: list[str] = []
 
-        for task in self._tasks():
-            result = convert_language(
+        for task in self._language_file_builds():
+            result = convert_language_entries(
                 task.source,
                 task.transform,
-                fixes=task.fixes,
-                universal_fixes=task.universal_fixes,
-                preprocess=task.preprocess,
+                corrections=task.corrections,
+                universal_corrections=task.universal_corrections,
+                preprocess_entry=task.preprocess_entry,
             )
-            self._save_result(task.output_name, result)
+            self._write_language_file(task.output_name, result)
             outputs.append(task.output_name)
 
         return outputs, perf_counter() - started
 
-    def create_archive(self, output_names: list[str]) -> tuple[str, float]:
-        """Create a reproducible ZIP with stable member order and timestamps."""
+    def create_resource_pack(self, output_names: list[str]) -> tuple[str, float]:
+        """Create a reproducible ZIP with stable member order and timestamps.
+
+        Args:
+            output_names: Names of the generated language files to include.
+
+        Returns:
+            The human-readable archive size and elapsed time in seconds.
+        """
         started = perf_counter()
         members = [
             (self.layout.root / "pack.mcmeta", "pack.mcmeta"),
@@ -87,86 +111,116 @@ class PackBuilder:
 
     def build(self) -> None:
         """Generate every language file and the final resource-pack archive."""
-        outputs, generation_time = self.generate_languages()
-        print(f"\n语言文件生成完毕，共耗时 {generation_time:.2f} s。")
-        archive_size, archive_time = self.create_archive(outputs)
-        print(f"\n资源包打包完毕，大小 {archive_size}，耗时 {archive_time:.2f} s。")
+        outputs, generation_time = self.generate_language_files()
+        print(f"\nLanguage file generation completed in {generation_time:.2f} s.")
+        archive_size, archive_time = self.create_resource_pack(outputs)
+        print(f"\nResource pack created ({archive_size}) in {archive_time:.2f} s.")
 
-    def generate_fix_data(self) -> None:
-        """Regenerate scheme-specific fixes from the manually segmented source."""
-        converter = ChineseConverter(
+    def generate_correction_data(self) -> None:
+        """Regenerate scheme-specific corrections from the manually segmented source."""
+        converter = MandarinConverter(
             self.repository,
             auto_segment=False,
         )
-        source = self.repository.fixes("source")
+        source = self.repository.corrections("source")
         tasks: tuple[tuple[str, TextTransform], ...] = (
-            ("py", converter.to_pinyin),
-            ("mps2", converter.to_mps2),
-            ("ty", converter.to_tongyong),
-            ("yale", converter.to_yale),
-            ("wg", converter.to_wadegiles),
-            ("gr", converter.to_romatzyh),
-            ("sgr", converter.to_simp_romatzyh),
-            ("cy", converter.to_cyrillic),
-            ("xj", converter.to_xiaojing),
+            ("hanyu_pinyin", converter.to_hanyu_pinyin),
+            (
+                "mandarin_phonetic_symbols_ii",
+                converter.to_mandarin_phonetic_symbols_ii,
+            ),
+            ("tongyong_pinyin", converter.to_tongyong_pinyin),
+            ("yale_romanization", converter.to_yale_romanization),
+            ("wade_giles", converter.to_wade_giles),
+            ("gwoyeu_romatzyh", converter.to_gwoyeu_romatzyh),
+            (
+                "simplified_gwoyeu_romatzyh",
+                converter.to_simplified_gwoyeu_romatzyh,
+            ),
+            ("cyrillic", converter.to_cyrillic),
+            ("xiaoerjing", converter.to_xiaoerjing),
         )
         for scheme, transform in tasks:
-            result = convert_language(source, transform)
-            path = self.layout.data / "fixed" / f"fixed_zh_{scheme}.json"
+            result = convert_language_entries(source, transform)
+            path = self.repository.correction_path(scheme)
             write_json(path, result.data)
-            print(f"已生成修正数据 {path.name}，耗时 {result.elapsed_seconds:.2f} s。")
+            print(f"Generated correction data {path.name} in {result.elapsed_seconds:.2f} s.")
 
-    def _tasks(self) -> tuple[BuildTask, ...]:
-        english_source = self.repository.language("en_us")
-        chinese_source = self.repository.language("zh_cn")
-        universal = self.repository.universal_fixes()
+    def _language_file_builds(self) -> tuple[LanguageFileBuild, ...]:
+        english_source = self.repository.language_source("en_us")
+        mandarin_source = self.repository.language_source("zh_cn")
+        universal = self.repository.universal_corrections()
         english = EnglishConverter(self.repository)
-        chinese = ChineseConverter(self.repository)
-        pronunciation = chinese.preprocess_pronunciation
+        mandarin = MandarinConverter(self.repository)
+        pronunciation = mandarin.apply_key_specific_pronunciation
 
-        def chinese_task(
+        def mandarin_build(
             output_name: str,
             transform: TextTransform,
-            fix_scheme: str | None = None,
-        ) -> BuildTask:
-            return BuildTask(
+            correction_scheme: str | None = None,
+        ) -> LanguageFileBuild:
+            return LanguageFileBuild(
                 output_name,
-                chinese_source,
+                mandarin_source,
                 transform,
-                self.repository.fixes(fix_scheme) if fix_scheme else None,
+                self.repository.corrections(correction_scheme) if correction_scheme else None,
                 universal,
                 pronunciation,
             )
 
         return (
-            BuildTask("en_i7h", english_source, english.to_i7h),
-            BuildTask("ja_kk", english_source, english.to_katakana),
-            BuildTask("ja_my", english_source, english.to_manyogana),
-            BuildTask(
+            LanguageFileBuild("en_i7h", english_source, english.to_numeronym),
+            LanguageFileBuild("ja_kk", english_source, english.to_katakana),
+            LanguageFileBuild("ja_my", english_source, english.to_manyogana),
+            LanguageFileBuild(
                 "zh_split",
-                chinese_source,
-                chinese.to_split,
-                self.repository.fixes("source"),
+                mandarin_source,
+                mandarin.to_split,
+                self.repository.corrections("source"),
                 universal,
             ),
-            chinese_task("zh_py", chinese.to_pinyin, "py"),
-            chinese_task("zh_ipa", chinese.to_ipa),
-            chinese_task("zh_bpmf", chinese.to_bopomofo),
-            chinese_task("zh_wg", chinese.to_wadegiles, "wg"),
-            chinese_task("zh_gr", chinese.to_romatzyh, "gr"),
-            chinese_task("zh_sgr", chinese.to_simp_romatzyh, "sgr"),
-            chinese_task("zh_mps2", chinese.to_mps2, "mps2"),
-            chinese_task("zh_ty", chinese.to_tongyong, "ty"),
-            chinese_task("zh_yale", chinese.to_yale, "yale"),
-            chinese_task("zh_kk", chinese.to_katakana),
-            chinese_task("zh_cy", chinese.to_cyrillic, "cy"),
-            chinese_task("zh_xj", chinese.to_xiaojing, "xj"),
+            mandarin_build("zh_py", mandarin.to_hanyu_pinyin, "hanyu_pinyin"),
+            mandarin_build("zh_ipa", mandarin.to_ipa),
+            mandarin_build("zh_bpmf", mandarin.to_bopomofo),
+            mandarin_build("zh_wg", mandarin.to_wade_giles, "wade_giles"),
+            mandarin_build(
+                "zh_gr",
+                mandarin.to_gwoyeu_romatzyh,
+                "gwoyeu_romatzyh",
+            ),
+            mandarin_build(
+                "zh_sgr",
+                mandarin.to_simplified_gwoyeu_romatzyh,
+                "simplified_gwoyeu_romatzyh",
+            ),
+            mandarin_build(
+                "zh_mps2",
+                mandarin.to_mandarin_phonetic_symbols_ii,
+                "mandarin_phonetic_symbols_ii",
+            ),
+            mandarin_build(
+                "zh_ty",
+                mandarin.to_tongyong_pinyin,
+                "tongyong_pinyin",
+            ),
+            mandarin_build(
+                "zh_yale",
+                mandarin.to_yale_romanization,
+                "yale_romanization",
+            ),
+            mandarin_build("zh_kk", mandarin.to_katakana),
+            mandarin_build("zh_cy", mandarin.to_cyrillic, "cyrillic"),
+            mandarin_build("zh_xj", mandarin.to_xiaoerjing, "xiaoerjing"),
         )
 
-    def _save_result(self, output_name: str, result: ConversionResult) -> None:
+    def _write_language_file(
+        self,
+        output_name: str,
+        result: LanguageConversionResult,
+    ) -> None:
         path = self.layout.output / f"{output_name}.json"
         write_json(path, result.data)
         print(
-            f"已生成语言文件 {path.name}，大小 {format_file_size(path)}，"
-            f"耗时 {result.elapsed_seconds:.2f} s。"
+            f"Generated language file {path.name} ({format_file_size(path)}) "
+            f"in {result.elapsed_seconds:.2f} s."
         )

@@ -6,6 +6,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from functools import cache
 from pathlib import Path
+from typing import cast
 
 import jieba
 from pypinyin import Style, lazy_pinyin, load_phrases_dict
@@ -44,7 +45,12 @@ _COMMAND_RE = re.compile(r"/[A-Za-z0-9_]")
 
 @dataclass(frozen=True, slots=True)
 class SegmentedWord:
-    """A word produced by the project-configured segmenter."""
+    """A word produced by the project-configured segmenter.
+
+    Attributes:
+        text: Source text for the segmented word.
+        syllables: Transcribed syllables aligned with the source characters.
+    """
 
     text: str
     syllables: tuple[str, ...] = ()
@@ -57,7 +63,14 @@ class _Piece:
 
 
 def render_hanyu_pinyin_word(word: SegmentedWord) -> str:
-    """Render one segmented word using Hanyu Pinyin orthography."""
+    """Render one segmented word using Hanyu Pinyin orthography.
+
+    Args:
+        word: Segmented word and its transcribed syllables.
+
+    Returns:
+        The rendered Hanyu Pinyin word.
+    """
     ordinal = _ORDINAL_RE.fullmatch(word.text)
     if ordinal:
         number, remainder = ordinal.groups()
@@ -73,7 +86,14 @@ def render_hanyu_pinyin_word(word: SegmentedWord) -> str:
 
 
 def normalize_hanyu_pinyin_punctuation(text: str) -> str:
-    """Convert Chinese prose punctuation without changing ASCII syntax."""
+    """Convert Chinese prose punctuation without changing ASCII syntax.
+
+    Args:
+        text: Text containing source punctuation.
+
+    Returns:
+        The text with Hanyu Pinyin punctuation and spacing.
+    """
     output: list[str] = []
     index = 0
     while index < len(text):
@@ -100,7 +120,14 @@ def normalize_hanyu_pinyin_punctuation(text: str) -> str:
 
 
 def finalize_hanyu_pinyin(text: str) -> str:
-    """Apply Hanyu Pinyin rules that depend on the fully rendered text."""
+    """Apply Hanyu Pinyin rules that depend on the fully rendered text.
+
+    Args:
+        text: Fully rendered Hanyu Pinyin text.
+
+    Returns:
+        The finalized Hanyu Pinyin text.
+    """
     return _PLACEHOLDER_ORDINAL_RE.sub(r"\1-\2", text)
 
 
@@ -127,39 +154,66 @@ def _load_pronunciation_dictionaries(phrases: StringMap) -> None:
     )
 
 
-class ChineseSegmenter:
+class MandarinSegmenter:
     """Segment Chinese with an isolated jieba tokenizer."""
 
     def __init__(
         self,
         user_dictionary: Path,
-        word_splits: StringMap,
+        word_boundary_corrections: StringMap,
         *,
         enabled: bool = True,
     ) -> None:
-        """Initialize an isolated tokenizer with a project dictionary."""
+        """Initialize an isolated tokenizer with project segmentation data.
+
+        Args:
+            user_dictionary: Path to the jieba user dictionary.
+            word_boundary_corrections: Reviewed word splits for project text.
+            enabled: Whether to use automatic jieba segmentation.
+
+        Raises:
+            ValueError: If a corrected word boundary changes the source text.
+        """
         self.enabled = enabled
         self._tokenizer = jieba.Tokenizer()
         self._tokenizer.load_userdict(str(user_dictionary))
-        self._word_splits = {word: tuple(parts.split()) for word, parts in word_splits.items()}
+        self._word_boundary_corrections = {
+            word: tuple(parts.split()) for word, parts in word_boundary_corrections.items()
+        }
         invalid_splits = [
-            word for word, parts in self._word_splits.items() if "".join(parts) != word
+            word
+            for word, parts in self._word_boundary_corrections.items()
+            if "".join(parts) != word
         ]
         if invalid_splits:
             raise ValueError(f"Invalid Mandarin word splits: {', '.join(invalid_splits)}")
 
     def words(self, text: str) -> list[SegmentedWord]:
-        """Return segmented words."""
+        """Return segmented words.
+
+        Args:
+            text: Mandarin text to segment.
+
+        Returns:
+            The segmented words.
+        """
         if not self.enabled:
             return [SegmentedWord(text)] if text else []
         output: list[SegmentedWord] = []
         for item in self._tokenizer.lcut(text):
-            parts = self._word_splits.get(item, (item,))
+            parts = self._word_boundary_corrections.get(item, (item,))
             output.extend(SegmentedWord(part) for part in parts)
         return output
 
     def strings(self, text: str) -> list[str]:
-        """Return segmented words as plain strings."""
+        """Return segmented words as plain strings.
+
+        Args:
+            text: Mandarin text to segment.
+
+        Returns:
+            The segmented word text.
+        """
         if not self.enabled:
             return text.split()
         return [word.text for word in self.words(text)]
@@ -170,10 +224,18 @@ class MandarinTranscriber:
 
     def __init__(
         self,
-        segmenter: ChineseSegmenter,
+        segmenter: MandarinSegmenter,
         phrase_pronunciations: StringMap,
     ) -> None:
-        """Initialize the transcriber with segmentation and orthography data."""
+        """Initialize the transcriber with segmentation and orthography data.
+
+        Args:
+            segmenter: Project-configured Mandarin word segmenter.
+            phrase_pronunciations: Reviewed pronunciations for words and contexts.
+
+        Raises:
+            ValueError: If a pronunciation does not contain one syllable per Han character.
+        """
         _load_pronunciation_dictionaries(phrase_pronunciations)
         self._segmenter = segmenter
         self._phrase_pronunciations = {
@@ -228,7 +290,22 @@ class MandarinTranscriber:
         lexical_tones: bool,
         raw_transform: Callable[[str], str] | None = None,
     ) -> str:
-        """Transcribe Han spans with a scheme-specific word renderer."""
+        """Transcribe Han spans with a scheme-specific word renderer.
+
+        Args:
+            text: Source text containing Mandarin and Minecraft syntax.
+            renderer: Function that renders one segmented word.
+            style: Pypinyin output style used to produce word syllables.
+            neutral_tone_with_five: Whether tone 5 marks neutral-tone syllables.
+            v_to_u: Whether ``v`` should be converted to ``ü``.
+            capitalize: Whether sentence- and title-initial words are capitalized.
+            attach_aspect_particles: Whether medial aspect particles attach to a word.
+            lexical_tones: Whether to restore the lexical tones of ``一`` and ``不``.
+            raw_transform: Optional transformation for non-Han text spans.
+
+        Returns:
+            The rendered transcription with Minecraft syntax preserved.
+        """
         pieces: list[_Piece] = []
         cursor = 0
         sentence_start = True
@@ -309,7 +386,8 @@ class MandarinTranscriber:
             word_syllables = lazy_pinyin(
                 word.text,
                 style=style,
-                errors=lambda value: list(value),
+                # Pypinyin accepts list[str] here, although its type stub only declares str.
+                errors=cast(Callable[[str], str], _split_untranscribed_characters),
                 strict=True,
                 v_to_u=v_to_u,
                 neutral_tone_with_five=neutral_tone_with_five,
@@ -513,6 +591,10 @@ class MandarinTranscriber:
 
 def _preserve_raw(text: str) -> str:
     return text
+
+
+def _split_untranscribed_characters(text: str) -> list[str]:
+    return list(text)
 
 
 def _is_standalone_technical(text: str) -> bool:

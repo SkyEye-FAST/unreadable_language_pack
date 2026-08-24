@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from unreadable_language_pack.converters import ChineseConverter
-from unreadable_language_pack.repository import DataRepository, ProjectLayout
+from unreadable_language_pack.converters import MandarinConverter
+from unreadable_language_pack.repository import LanguageDataRepository, ProjectLayout
 
 
 @pytest.fixture(scope="session")
@@ -12,10 +12,10 @@ def project_root() -> Path:
 
 
 @pytest.fixture(scope="session")
-def repository(project_root: Path) -> DataRepository:
-    return DataRepository(ProjectLayout.from_root(project_root))
+def repository(project_root: Path) -> LanguageDataRepository:
+    return LanguageDataRepository(ProjectLayout.from_root(project_root))
 
 
 @pytest.fixture(scope="session")
-def chinese_converter(repository: DataRepository) -> ChineseConverter:
-    return ChineseConverter(repository)
+def mandarin_converter(repository: LanguageDataRepository) -> MandarinConverter:
+    return MandarinConverter(repository)
