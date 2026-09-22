@@ -6038,7 +6038,7 @@
   "mco.upload.failed.too_big.description": "选中 的 世界 过大. 最大 允许 大小 为 %s. ",
   "mco.upload.failed.too_big.title": "世界 过大",
   "mco.upload.hardcore": "不 能 上传 极限 模式 世界! ",
-  "mco.upload.percent": "%s %%",
+  "mco.upload.percent": "%s%%",
   "mco.upload.preparing": "正在 准备 你 的 世界 数据",
   "mco.upload.select.world.none": "找 不到 单人 游戏 世界! ",
   "mco.upload.select.world.subtitle": "请 选择 一 个 单人 游戏 世界 来 上传",

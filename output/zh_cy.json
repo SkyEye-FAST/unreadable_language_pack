@@ -6038,7 +6038,7 @@
   "mco.upload.failed.too_big.description": "Сюаньчжун дэ шицзе года。 Цзуйда юньсюй дасяо вэй %s。",
   "mco.upload.failed.too_big.title": "Шицзе года",
   "mco.upload.hardcore": "Бу нэн шанчуань цзисянь моши шицзе！",
-  "mco.upload.percent": "%s %%",
+  "mco.upload.percent": "%s%%",
   "mco.upload.preparing": "Чжэнцзай чжуньбэй ни дэ шицзе шуцзюй",
   "mco.upload.select.world.none": "Чжао будао даньжэнь юси шицзе！",
   "mco.upload.select.world.subtitle": "Цин сюаньцзэ и гэ даньжэнь юси шицзе лай шанчуань",
